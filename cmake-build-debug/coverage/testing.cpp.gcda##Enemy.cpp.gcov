@@ -1,0 +1,787 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Enemy.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 24.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "Enemy.h"
+        -:    6:#include "../../Dungeon/Dungeon.h"
+        -:    7:#include "../Character/Character.h"
+        -:    8:
+        -:    9:
+function _ZN5Enemy6attackER4Unit called 90 returned 63% blocks executed 84%
+       90:   10:void Enemy::attack(Unit &someone) {
+       90:   11:    if (status == Status::dead) throw (std::invalid_argument("Unit is dead"));
+       90:   11-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 89
+        1:   11-block  1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   11-block  2
+call    6 returned 1
+    $$$$$:   11-block  3
+call    7 never executed
+       89:   12:    if (someone.getFaction() == faction) {
+       89:   12-block  0
+call    0 returned 89
+branch  1 taken 1 (fallthrough)
+branch  2 taken 88
+        1:   13:        status = Status::wandering;
+        1:   14:        throw (std::invalid_argument("The same unit"));
+        1:   14-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   14-block  1
+call    4 returned 1
+    $$$$$:   14-block  2
+call    5 never executed
+        -:   15:    }
+       88:   16:    bool flag = false;
+       88:   17:    int dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   // смещения, соответствующие соседям ячейки
+       88:   18:    int dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};
+      488:   19:    for (int i = 0; i < 6; i++) {
+       88:   19-block  0
+      400:   19-block  1
+      488:   19-block  2
+branch  0 taken 445
+branch  1 taken 43 (fallthrough)
+      445:   20:        if (flag) { break; }
+      445:   20-block  0
+branch  0 taken 45 (fallthrough)
+branch  1 taken 400
+       45:   20-block  1
+      400:   21:        int x = coords.second + dx[i];
+      400:   22:        int y = coords.first + dy[i];
+      400:   23:        if (x == someone.getCoords().second && y == someone.getCoords().first) flag = true;
+      400:   23-block  0
+call    0 returned 400
+branch  1 taken 103 (fallthrough)
+branch  2 taken 297
+      103:   23-block  1
+call    3 returned 103
+branch  4 taken 57 (fallthrough)
+branch  5 taken 46
+       57:   23-block  2
+      343:   23-block  3
+      400:   23-block  4
+branch  6 taken 57 (fallthrough)
+branch  7 taken 343
+       57:   23-block  5
+        -:   24:    }
+        -:   25:
+       88:   26:    if (!flag) {
+       88:   26-block  0
+branch  0 taken 31 (fallthrough)
+branch  1 taken 57
+       31:   27:        status = Status::wandering;
+       31:   28:        throw (std::invalid_argument("Unit too far away"));
+       31:   28-block  0
+call    0 returned 31
+call    1 returned 31
+branch  2 taken 31 (fallthrough)
+branch  3 taken 0 (throw)
+       31:   28-block  1
+call    4 returned 31
+    $$$$$:   28-block  2
+call    5 never executed
+        -:   29:    }
+       57:   30:    srand(time(0));
+       57:   30-block  0
+call    0 returned 57
+branch  1 taken 57 (fallthrough)
+branch  2 taken 0 (throw)
+       57:   30-block  1
+call    3 returned 57
+       57:   31:    int damage0 = rand() % (damage.second - damage.first + 1) + damage.first;
+call    0 returned 57
+       57:   32:    status = Status::aggresion;
+       57:   33:    someone.getDamage(damage0);
+call    0 returned 57
+branch  1 taken 57 (fallthrough)
+branch  2 taken 0 (throw)
+       57:   34:}
+       57:   34-block  0
+        -:   35:
+function _ZN5Enemy9getDamageEi called 47 returned 100% blocks executed 100%
+       47:   36:void Enemy::getDamage(int damage) {
+       47:   37:    curHP -= damage;
+       47:   38:    if (curHP <= 0) {
+       47:   38-block  0
+branch  0 taken 8 (fallthrough)
+branch  1 taken 39
+        8:   39:        die();
+        8:   39-block  0
+call    0 returned 8
+        -:   40:    }
+       47:   41:}
+        -:   42:
+        -:   43:
+function _ZN5Enemy3LeeER6MatrixI4CeilESt4pairIiiE called 94 returned 87% blocks executed 78%
+       94:   44:std::vector<std::pair<int, int>> Enemy::Lee(Matrix<Ceil> &matrix, std::pair<int, int> coordTo) {
+       26:   45:    if (coordTo.first == coords.first && coordTo.second == coords.second)
+       26:   45-block  0
+branch  0 taken 12 (fallthrough)
+branch  1 taken 14
+       12:   46:        throw (std::invalid_argument("The same coords"));
+       12:   46-block  0
+call    0 returned 12
+call    1 returned 12
+branch  2 taken 12 (fallthrough)
+branch  3 taken 0 (throw)
+       12:   46-block  1
+call    4 returned 12
+    $$$$$:   46-block  2
+call    5 never executed
+       82:   47:    int W = matrix.cols();         // ширина рабочего поля
+       82:   47-block  0
+call    0 returned 82
+       82:   48:    int H = matrix.rows();         // высота рабочего поля
+call    0 returned 82
+       82:   49:    int WALL = -1;                 // непроходимая ячейка
+       82:   50:    int ax = coords.second;
+       82:   51:    int ay = coords.first;
+       82:   52:    int bx = coordTo.second;
+       82:   53:    int by = coordTo.first;
+       82:   54:    int BLANK = -2;                // свободная непомеченная ячейка
+       82:   55:    int grid[matrix.rows()][matrix.cols()];
+call    0 returned 82
+call    1 returned 82
+     2612:   56:    for (int j = 0; j < matrix.rows(); j++) {
+     2530:   56-block  0
+     2612:   56-block  1
+call    0 returned 2612
+branch  1 taken 2530
+branch  2 taken 82 (fallthrough)
+   198830:   57:        for (int i = 0; i < matrix.cols(); i++) {
+     2530:   57-block  0
+   196300:   57-block  1
+   198830:   57-block  2
+call    0 returned 198830
+branch  1 taken 196300
+branch  2 taken 2530 (fallthrough)
+  196300*:   58:            if (matrix[i][j] == Ceil::wall || matrix[i][j] == Ceil::closeDoor) {
+   196300:   58-block  0
+call    0 returned 196300
+branch  1 taken 196300 (fallthrough)
+branch  2 taken 0 (throw)
+   196300:   58-block  1
+call    3 returned 196300
+branch  4 taken 196300 (fallthrough)
+branch  5 taken 0 (throw)
+   196300:   58-block  2
+branch  6 taken 196300 (fallthrough)
+branch  7 taken 0
+   196300:   58-block  3
+call    8 returned 196300
+branch  9 taken 196300 (fallthrough)
+branch 10 taken 0 (throw)
+   196300:   58-block  4
+call   11 returned 196300
+branch 12 taken 196300 (fallthrough)
+branch 13 taken 0 (throw)
+   196300:   58-block  5
+branch 14 taken 0 (fallthrough)
+branch 15 taken 196300
+    %%%%%:   58-block  6
+   196300:   58-block  7
+   196300:   58-block  8
+branch 16 taken 0 (fallthrough)
+branch 17 taken 196300
+    $$$$$:   58-block  9
+    $$$$$:   58-block 10
+    #####:   59:                grid[i][j] = WALL;
+    %%%%%:   59-block  0
+        -:   60:            } else {
+   196300:   61:                grid[i][j] = BLANK;
+   196300:   61-block  0
+        -:   62:            }
+        -:   63:        }
+        -:   64:    }
+       82:   65:    int dx[4] = {1, 0, -1, 0};   // смещения, соответствующие соседям ячейки
+       82:   66:    int dy[4] = {0, 1, 0, -1};   // справа, снизу, слева и сверху
+        -:   67:    int d, x, y, k;
+        -:   68:    int len;
+       82:   69:    int px[W * H], py[W * H];
+        -:   70:    bool stop;
+        -:   71:
+      82*:   72:    if (grid[ay][ax] == WALL && grid[by][bx] == WALL)
+       82:   72-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 82
+    %%%%%:   72-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   73:        throw std::runtime_error("No way");  // ячейка (ax, ay) или (bx, by) - стена
+    %%%%%:   73-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   73-block  1
+call    4 never executed
+    $$$$$:   73-block  2
+call    5 never executed
+        -:   74:
+        -:   75:    // распространение волны
+       82:   76:    d = 0;
+       82:   77:    grid[ay][ax] = 0;            // стартовая ячейка помечена 0
+       82:   77-block  0
+        -:   78:    do {
+      221:   79:        stop = true;               // предполагаем, что все свободные клетки уже помечены
+     4951:   80:        for (y = 0; y < H; ++y)
+      221:   80-block  0
+     4730:   80-block  1
+     4951:   80-block  2
+branch  0 taken 4730
+branch  1 taken 221 (fallthrough)
+   304030:   81:            for (x = 0; x < W; ++x)
+     4730:   81-block  0
+   299300:   81-block  1
+   304030:   81-block  2
+branch  0 taken 299300
+branch  1 taken 4730 (fallthrough)
+   299300:   82:                if (grid[y][x] == d)                         // ячейка (x, y) помечена числом d
+   299300:   82-block  0
+branch  0 taken 1161 (fallthrough)
+branch  1 taken 298139
+        -:   83:                {
+     5805:   84:                    for (k = 0; k < 4; ++k)                    // проходим по всем непомеченным соседям
+     1161:   84-block  0
+     4644:   84-block  1
+     5805:   84-block  2
+branch  0 taken 4644
+branch  1 taken 1161 (fallthrough)
+        -:   85:                    {
+     4644:   86:                        int iy = y + dy[k], ix = x + dx[k];
+     4644:   87:                        if (iy >= 0 && iy < H && ix >= 0 && ix < W &&
+     4644:   87-block  0
+branch  0 taken 4580 (fallthrough)
+branch  1 taken 64
+     4580:   87-block  1
+branch  2 taken 4580 (fallthrough)
+branch  3 taken 0
+     4580:   87-block  2
+branch  4 taken 4529 (fallthrough)
+branch  5 taken 51
+     4529:   87-block  3
+branch  6 taken 4529 (fallthrough)
+branch  7 taken 0
+     4529:   88:                            grid[iy][ix] == BLANK) {
+     4529:   88-block  0
+branch  0 taken 1848 (fallthrough)
+branch  1 taken 2681
+     1848:   89:                            stop = false;              // найдены непомеченные клетки
+     1848:   90:                            grid[iy][ix] = d + 1;      // распространяем волну
+     1848:   90-block  0
+        -:   91:                        }
+        -:   92:                    }
+        -:   93:                }
+      221:   94:        d++;
+      221:   95:    } while (!stop && grid[by][bx] == BLANK);
+      221:   95-block  0
+branch  0 taken 221 (fallthrough)
+branch  1 taken 0
+      221:   95-block  1
+branch  2 taken 139
+branch  3 taken 82 (fallthrough)
+        -:   96:
+      82*:   97:    if (grid[by][bx] == BLANK) throw (std::runtime_error("No way"));  // путь не найден
+       82:   97-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 82
+    %%%%%:   97-block  1
+call    2 never executed
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   97-block  2
+call    6 never executed
+    $$$$$:   97-block  3
+call    7 never executed
+        -:   98:
+        -:   99:    // восстановление пути
+       82:  100:    len = grid[by][bx];            // длина кратчайшего пути из (ax, ay) в (bx, by)
+       82:  101:    x = bx;
+       82:  102:    y = by;
+       82:  103:    d = len;
+      303:  104:    while (d > 0) {
+       82:  104-block  0
+      303:  104-block  1
+branch  0 taken 221
+branch  1 taken 82 (fallthrough)
+      221:  105:        px[d] = x;
+      221:  106:        py[d] = y;                   // записываем ячейку (x, y) в путь
+      221:  107:        d--;
+      685:  108:        for (k = 0; k < 4; ++k) {
+      221:  108-block  0
+      464:  108-block  1
+      685:  108-block  2
+branch  0 taken 685
+branch  1 taken 0 (fallthrough)
+      685:  109:            int iy = y + dy[k], ix = x + dx[k];
+      685:  110:            if (iy >= 0 && iy < H && ix >= 0 && ix < W &&
+      685:  110-block  0
+branch  0 taken 685 (fallthrough)
+branch  1 taken 0
+      685:  110-block  1
+branch  2 taken 685 (fallthrough)
+branch  3 taken 0
+      685:  110-block  2
+branch  4 taken 685 (fallthrough)
+branch  5 taken 0
+      685:  110-block  3
+branch  6 taken 685 (fallthrough)
+branch  7 taken 0
+      685:  111:                grid[iy][ix] == d) {
+      685:  111-block  0
+branch  0 taken 221 (fallthrough)
+branch  1 taken 464
+      221:  112:                x = x + dx[k];
+      221:  113:                y = y + dy[k];           // переходим в ячейку, которая на 1 ближе к старту
+      221:  114:                break;
+      221:  114-block  0
+        -:  115:            }
+        -:  116:        }
+        -:  117:    }
+       82:  118:    px[0] = ax;
+       82:  119:    py[0] = ay;
+       82:  120:    std::vector<std::pair<int, int>> array;
+      303:  121:    for (int i = 0; i < len; i++) {
+       82:  121-block  0
+      221:  121-block  1
+      303:  121-block  2
+branch  0 taken 221
+branch  1 taken 82 (fallthrough)
+      221:  122:        array.emplace_back(px[i], py[i]);
+      221:  122-block  0
+call    0 returned 221
+branch  1 taken 221 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  123:    }
+      164:  124:    return array;
+       82:  124-block  0
+       82:  124-block  1
+       94:  125:}
+       94:  125-block  0
+branch  0 taken 26 (fallthrough)
+branch  1 taken 68
+    $$$$$:  125-block  1
+call    2 never executed
+        -:  126:
+        -:  127:void
+function _ZN5Enemy4moveER6MatrixI4CeilESt4pairIiiERNSt7__cxx114listIS4_IPS_PS1_ESaISA_EEE called 96 returned 85% blocks executed 80%
+       96:  128:Enemy::move(Matrix<Ceil> &matrix, std::pair<int, int> coordTo, std::list<std::pair<Enemy *, Ceil *>> &listEnemies) {
+        -:  129:
+      190:  130:    if (coordTo.first < 0 || coordTo.second < 0 ||
+       95:  130-block  0
+branch  0 taken 95 (fallthrough)
+branch  1 taken 0
+branch  2 taken 94 (fallthrough)
+branch  3 taken 1
+      286:  131:        coordTo.second >= matrix.cols() ||
+       96:  131-block  0
+branch  0 taken 95 (fallthrough)
+branch  1 taken 1
+       95:  131-block  1
+call    2 returned 95
+branch  3 taken 0 (fallthrough)
+branch  4 taken 94
+        2:  131-block  2
+       94:  131-block  3
+       96:  131-block  4
+branch  5 taken 2 (fallthrough)
+branch  6 taken 94
+       94:  132:        coordTo.first >= matrix.rows())
+       94:  132-block  0
+call    0 returned 94
+        2:  133:        throw std::runtime_error("invalid coords");
+        2:  133-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:  133-block  1
+call    4 returned 2
+    $$$$$:  133-block  2
+call    5 never executed
+        -:  134:
+       94:  135:    if ((coordTo.first - coords.first) * (coordTo.first - coords.first) +
+       94:  136:        (coordTo.second - coords.second) * (coordTo.second - coords.second) > vision * vision * vision) {
+       94:  136-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 94
+    #####:  137:        status = Status::wandering;
+    #####:  138:        throw std::invalid_argument("Error distance");
+    %%%%%:  138-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  138-block  1
+call    4 never executed
+    $$$$$:  138-block  2
+call    5 never executed
+        -:  139:    }
+       94:  140:    std::vector<std::pair<int, int>> ways = Lee(matrix, {coordTo.first, coordTo.second});
+       94:  140-block  0
+call    0 returned 94
+call    1 returned 94
+branch  2 taken 82 (fallthrough)
+branch  3 taken 12 (throw)
+       12:  140-block  1
+       82:  141:    if (ways.size() == 1 || ways.empty()) {
+       82:  141-block  0
+call    0 returned 82
+branch  1 taken 56 (fallthrough)
+branch  2 taken 26
+       56:  141-block  1
+call    3 returned 56
+branch  4 taken 0 (fallthrough)
+branch  5 taken 56
+       26:  141-block  2
+       56:  141-block  3
+       82:  141-block  4
+branch  6 taken 26 (fallthrough)
+branch  7 taken 56
+       26:  142:        return;
+       26:  142-block  0
+        -:  143:    }
+       56:  144:    coords.first = ways[1].first;
+       56:  144-block  0
+call    0 returned 56
+       56:  145:    coords.second = ways[1].second;
+call    0 returned 56
+      769:  146:    for (auto &item: listEnemies) {
+call    0 returned 56
+call    1 returned 56
+      713:  146-block  0
+call    2 returned 713
+      713:  146-block  1
+call    3 returned 713
+      769:  146-block  2
+call    4 returned 769
+branch  5 taken 713
+branch  6 taken 56 (fallthrough)
+      713:  147:        if (item.first == this) {
+branch  0 taken 55 (fallthrough)
+branch  1 taken 658
+       55:  148:            item.second = &matrix[coords.second][coords.first];
+       55:  148-block  0
+call    0 returned 55
+branch  1 taken 55 (fallthrough)
+branch  2 taken 0 (throw)
+       55:  148-block  1
+call    3 returned 55
+branch  4 taken 55 (fallthrough)
+branch  5 taken 0 (throw)
+       55:  148-block  2
+    $$$$$:  148-block  3
+        -:  149:        }
+        -:  150:    }
+        -:  151:
+       82:  152:}
+       56:  152-block  0
+       82:  152-block  1
+call    0 returned 82
+branch  1 taken 56 (fallthrough)
+branch  2 taken 26
+    $$$$$:  152-block  2
+call    3 never executed
+        -:  153:
+        -:  154:
+function _ZN5Enemy10findTargetER7Dungeon called 89 returned 100% blocks executed 100%
+       89:  155:Unit *Enemy::findTarget(Dungeon &dungeon) {
+       89:  156:    std::pair<int, int> nearDist = {INT32_MAX / 10, INT32_MAX / 10};
+       89:  157:    Unit *unit = nullptr;
+       89:  158:    auto enemy = dungeon.getListEnemies().begin();
+       89:  158-block  0
+call    0 returned 89
+call    1 returned 89
+     1100:  159:    for (enemy = dungeon.getListEnemies().begin(); enemy != dungeon.getListEnemies().end(); ++enemy) {
+call    0 returned 89
+call    1 returned 89
+     1011:  159-block  0
+call    2 returned 1011
+     1100:  159-block  1
+call    3 returned 1100
+call    4 returned 1100
+call    5 returned 1100
+branch  6 taken 1011
+branch  7 taken 89 (fallthrough)
+     1011:  160:        if ((enemy->first->getCoords().first - coords.first) * (enemy->first->getCoords().first - coords.first) +
+     1011:  160-block  0
+call    0 returned 1011
+call    1 returned 1011
+call    2 returned 1011
+call    3 returned 1011
+     1011:  161:            (enemy->first->getCoords().second - coords.second) * (enemy->first->getCoords().second - coords.second) <
+call    0 returned 1011
+call    1 returned 1011
+call    2 returned 1011
+call    3 returned 1011
+     1811:  162:            nearDist.first * nearDist.first + nearDist.second * nearDist.second &&
+     1069:  163:            enemy->first->status != Status::dead && enemy->first->faction != faction &&
+branch  0 taken 800 (fallthrough)
+branch  1 taken 211
+      800:  163-block  0
+call    2 returned 800
+branch  3 taken 746 (fallthrough)
+branch  4 taken 54
+      746:  163-block  1
+call    5 returned 746
+branch  6 taken 58 (fallthrough)
+branch  7 taken 688
+       58:  163-block  2
+      953:  163-block  3
+     1011:  163-block  4
+branch  8 taken 58 (fallthrough)
+branch  9 taken 953
+       58:  164:            abs(enemy->first->getCoords().second - coords.second) +
+       58:  164-block  0
+call    0 returned 58
+call    1 returned 58
+       58:  165:            abs(enemy->first->getCoords().first - coords.first) <=
+call    0 returned 58
+call    1 returned 58
+       58:  166:            vision) {
+branch  0 taken 58 (fallthrough)
+branch  1 taken 0
+       58:  167:            nearDist.first = (enemy->first->getCoords().first - coords.first);
+       58:  167-block  0
+call    0 returned 58
+call    1 returned 58
+       58:  168:            nearDist.second = (enemy->first->getCoords().second - coords.second);
+call    0 returned 58
+call    1 returned 58
+       58:  169:            unit = enemy->first;
+call    0 returned 58
+        -:  170:        }
+        -:  171:    }
+       89:  172:    if ((dungeon.getHero().first->getCoords().first - coords.first) *
+       89:  172-block  0
+call    0 returned 89
+call    1 returned 89
+       89:  173:        (dungeon.getHero().first->getCoords().first - coords.first) +
+call    0 returned 89
+call    1 returned 89
+       89:  174:        (dungeon.getHero().first->getCoords().second - coords.second) *
+call    0 returned 89
+call    1 returned 89
+       89:  175:        (dungeon.getHero().first->getCoords().second - coords.second) <
+call    0 returned 89
+call    1 returned 89
+      136:  176:        nearDist.first * nearDist.first + nearDist.second * nearDist.second &&
+       94:  177:        dungeon.getHero().first->getFaction() != faction &&
+       47:  177-block  0
+call    0 returned 47
+call    1 returned 47
+branch  2 taken 47 (fallthrough)
+branch  3 taken 0
+branch  4 taken 44 (fallthrough)
+branch  5 taken 3
+      183:  178:        dungeon.getHero().first->getCharacteristics().getCurHp() > 0 &&
+branch  0 taken 47 (fallthrough)
+branch  1 taken 42
+       47:  178-block  0
+call    2 returned 47
+call    3 returned 47
+call    4 returned 47
+       41:  178-block  1
+       48:  178-block  2
+       89:  178-block  3
+branch  5 taken 41 (fallthrough)
+branch  6 taken 48
+       44:  179:        abs(dungeon.getHero().first->getCoords().second - coords.second) +
+       44:  179-block  0
+call    0 returned 44
+call    1 returned 44
+       44:  180:        abs(dungeon.getHero().first->getCoords().first - coords.first) <= vision) {
+call    0 returned 44
+call    1 returned 44
+branch  2 taken 41 (fallthrough)
+branch  3 taken 3
+       41:  181:        unit = dungeon.getHero().first;
+       41:  181-block  0
+call    0 returned 41
+        -:  182:    }
+        -:  183:
+        -:  184:
+       89:  185:    return unit;
+       89:  185-block  0
+        -:  186:}
+        -:  187:
+        -:  188:
+function _ZN5Enemy11doSomethingER7Dungeon called 98 returned 100% blocks executed 82%
+       98:  189:void Enemy::doSomething(Dungeon &dungeon) {
+       98:  190:    if (status == Status::dead) {
+       98:  190-block  0
+branch  0 taken 22 (fallthrough)
+branch  1 taken 76
+       22:  191:        return;
+       22:  191-block  0
+        -:  192:    }
+       76:  193:    Unit *someone = findTarget(dungeon);
+       76:  193-block  0
+call    0 returned 76
+       76:  194:    if (someone == nullptr) {
+branch  0 taken 4 (fallthrough)
+branch  1 taken 72
+        4:  195:        status = Status::wandering;
+        4:  196:        srand(time(0));
+        4:  196-block  0
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+        4:  196-block  1
+call    3 returned 4
+        4:  197:        int i = rand() % 4;
+call    0 returned 4
+        4:  198:        int dx[4] = {1, 0, -1, 0};   // смещения, соответствующие соседям ячейки
+        4:  199:        int dy[4] = {0, 1, 0, -1};
+        8:  200:        if (coords.first + dy[i] < 0 || coords.second + dx[i] < 0 ||
+        4:  200-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+branch  2 taken 4 (fallthrough)
+branch  3 taken 0
+      12*:  201:            coords.second + dx[i] >= dungeon.getMapLevel().cols() ||
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+        4:  201-block  0
+call    2 returned 4
+call    3 returned 4
+branch  4 taken 0 (fallthrough)
+branch  5 taken 4
+    %%%%%:  201-block  1
+        4:  201-block  2
+        4:  201-block  3
+branch  6 taken 0 (fallthrough)
+branch  7 taken 4
+        4:  202:            coords.first + dy[i] >= dungeon.getMapLevel().rows())
+        4:  202-block  0
+call    0 returned 4
+call    1 returned 4
+    #####:  203:            return;
+    %%%%%:  203-block  0
+        -:  204:        try {
+        4:  205:            move(dungeon.getMapLevel(), {coords.first + dy[i], coords.second + dx[i]}, dungeon.getListEnemies());
+        4:  205-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+call    3 returned 4
+branch  4 taken 4 (fallthrough)
+branch  5 taken 0 (throw)
+        4:  205-block  1
+    $$$$$:  205-block  2
+    $$$$$:  205-block  3
+    $$$$$:  205-block  4
+    =====:  206:        } catch (...) {}
+    $$$$$:  206-block  0
+    $$$$$:  206-block  1
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+        4:  207:        return;
+        4:  207-block  0
+        -:  208:    }
+        -:  209:    try {
+       72:  210:        move(dungeon.getMapLevel(), {someone->getCoords().first, someone->getCoords().second},
+       72:  210-block  0
+call    0 returned 72
+call    1 returned 72
+call    2 returned 72
+call    3 returned 72
+call    4 returned 72
+call    5 returned 72
+branch  6 taken 63 (fallthrough)
+branch  7 taken 9 (throw)
+        9:  210-block  1
+        -:  211:             dungeon.getListEnemies());
+       63:  212:        status = Status::aggresion;
+       63:  212-block  0
+        9:  213:    } catch (...) {}
+        9:  213-block  0
+        9:  213-block  1
+call    0 returned 9
+call    1 returned 9
+        -:  214:    try {
+       72:  215:        attack(*someone);
+       72:  215-block  0
+call    0 returned 72
+branch  1 taken 45 (fallthrough)
+branch  2 taken 27 (throw)
+       45:  216:        status = Status::aggresion;
+       45:  216-block  0
+       27:  217:    } catch (...) {}
+       27:  217-block  0
+       27:  217-block  1
+call    0 returned 27
+        -:  218:}
+        -:  219:
+function _ZN5Enemy14methodAfterDieER7Dungeon called 1447 returned 1% blocks executed 95%
+     1447:  220:void Enemy::methodAfterDie(Dungeon &dungeon) {
+     1447:  221:    if (status != Status::dead) throw (std::invalid_argument("Not dead enemy"));
+     1447:  221-block  0
+branch  0 taken 1430 (fallthrough)
+branch  1 taken 17
+     1430:  221-block  1
+call    2 returned 1430
+call    3 returned 1430
+branch  4 taken 1430 (fallthrough)
+branch  5 taken 0 (throw)
+     1430:  221-block  2
+call    6 returned 0
+    $$$$$:  221-block  3
+call    7 never executed
+       39:  222:    for (auto i = dungeon.getListEnemies().begin(); i != dungeon.getListEnemies().end(); i++) {
+       17:  222-block  0
+call    0 returned 17
+call    1 returned 17
+       22:  222-block  1
+call    2 returned 22
+       39:  222-block  2
+call    3 returned 39
+call    4 returned 39
+call    5 returned 39
+branch  6 taken 39
+branch  7 taken 0 (fallthrough)
+        -:  223:        try {
+       39:  224:            if (i->first == this) {
+       39:  224-block  0
+call    0 returned 39
+branch  1 taken 17 (fallthrough)
+branch  2 taken 22
+       17:  225:                dungeon.getListEnemies().erase(i);
+       17:  225-block  0
+call    0 returned 17
+call    1 returned 17
+call    2 returned 17
+       17:  226:                break;
+        -:  227:            }
+        -:  228:        } catch (...) {}
+        -:  229:    }
+       17:  230:}
+       17:  230-block  0
+        -:  231:
+function _ZNK5Enemy6isHeapEv called 7 returned 100% blocks executed 100%
+        7:  232:bool Enemy::isHeap() const {
+        7:  233:    return heap;
+        7:  233-block  0
+        -:  234:}
+        -:  235:
+function _ZN5Enemy7setHeapEb called 45 returned 100% blocks executed 100%
+       45:  236:void Enemy::setHeap(bool heap) {
+       45:  237:    Enemy::heap = heap;
+       45:  238:}
+        -:  239:
+        -:  240:
+        -:  241:

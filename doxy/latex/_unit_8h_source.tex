@@ -1,0 +1,85 @@
+\doxysection{Unit.\+h}
+\hypertarget{_unit_8h_source}{}\label{_unit_8h_source}\index{Unit/Unit.h@{Unit/Unit.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_UNIT\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ GAMELAB3\_UNIT\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{enum\ class}\ Faction\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ character,}
+\DoxyCodeLine{00015\ \ \ \ \ undead,}
+\DoxyCodeLine{00016\ \ \ \ \ livingEnemy,}
+\DoxyCodeLine{00017\ \ \ \ \ golem,}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_unit}{Unit}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00024\ \ \ \ \ Faction\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}{speed}};}
+\DoxyCodeLine{00026\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}};}
+\DoxyCodeLine{00027\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_unit_a52b26bde273d59962606ea5339bc197c}{Unit}}(Faction\ faction0,\ \textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0)\ :\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}}(faction0),}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}{speed}}(speed0),}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}(damage0),}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}(std::move(}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ coord0))\ \{\};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_unit_aa3e96cc123d3ed298603a04b8c55c139}{die}}()\ =\ 0;}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_unit_a7e7adc5398cc302955317f5ff300a166}{attack}}(\mbox{\hyperlink{class_unit}{Unit}}\ \&someone)\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}{getDamage}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}})\ =\ 0;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00050\ \ \ \ \ Faction\ \mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{getFaction}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}};}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_unit_a634a9ac69a71bc32645af69f8ce23859}{getSpeed}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}{speed}};}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}};}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ std::pair<int,\ int>\ \&\mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{getCoords}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}};}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ \&\mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{setFaction}}(Faction\ faction0)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{Unit::faction}}\ =\ faction0;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ \&\mbox{\hyperlink{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}{setSpeed}}(\textcolor{keywordtype}{int}\ speed0)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}{Unit::speed}}\ =\ speed0;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{setDamage}}(std::pair<int,\ int>\ damage0)\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{Unit::damage}}\ =\ damage0;}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ \&\mbox{\hyperlink{class_unit_a416e6f77ca094db4eebd15da4b8899df}{setCoords}}(\textcolor{keyword}{const}\ std::pair<int,\ int>\ \&coords0)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{Unit::coords}}\ =\ coords0;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_UNIT\_H}}
+
+\end{DoxyCode}

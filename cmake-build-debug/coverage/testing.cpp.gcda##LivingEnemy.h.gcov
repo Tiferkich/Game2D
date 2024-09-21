@@ -1,0 +1,92 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/LivingEnemy/LivingEnemy.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <utility>
+        -:    6:
+        -:    7:
+        -:    8:#ifndef GAMELAB3_LIVINGENEMY_H
+        -:    9:#define GAMELAB3_LIVINGENEMY_H
+        -:   10:
+        -:   11:#include "../Enemy.h"
+        -:   12:
+        -:   13:#define VISION_LIVING 10
+        -:   14:
+        -:   15:/// Живые противники оставляют после своейсмерти
+        -:   16:///пригодное для дальнейшего использования тело
+        -:   17:class LivingEnemy : public Enemy {
+        -:   18:public:
+        -:   19:
+       11:   20:    LivingEnemy(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name, int maxHP,
+       11:   21:                int curHP) : Enemy(
+       11:   22:            Faction::livingEnemy, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering,
+       11:   23:            VISION_LIVING) {};
+------------------
+_ZN11LivingEnemyC1EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii:
+function _ZN11LivingEnemyC1EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii called 7 returned 100% blocks executed 100%
+        7:   20:    LivingEnemy(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name, int maxHP,
+        7:   21:                int curHP) : Enemy(
+        7:   22:            Faction::livingEnemy, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering,
+        7:   23:            VISION_LIVING) {};
+        7:   23-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+call    3 returned 7
+------------------
+_ZN11LivingEnemyC2EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii:
+function _ZN11LivingEnemyC2EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii called 4 returned 100% blocks executed 100%
+        4:   20:    LivingEnemy(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name, int maxHP,
+        4:   21:                int curHP) : Enemy(
+        4:   22:            Faction::livingEnemy, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering,
+        4:   23:            VISION_LIVING) {};
+        4:   23-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+call    3 returned 4
+------------------
+        -:   24:
+function _ZN11LivingEnemyC1EiSt4pairIiiES1_ii called 14 returned 100% blocks executed 73%
+       14:   25:    LivingEnemy(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, int maxHP,
+       14:   26:                int curHP) : Enemy(
+        -:   27:            Faction::livingEnemy, speed0, damage0, coord0, "livingEnemy", maxHP, curHP, Status::wandering,
+       42:   28:            VISION_LIVING) {};
+       14:   28-block  0
+       14:   28-block  1
+call    0 returned 14
+branch  1 taken 14 (fallthrough)
+branch  2 taken 0 (throw)
+       14:   28-block  2
+call    3 returned 14
+call    4 returned 14
+       14:   28-block  3
+    $$$$$:   28-block  4
+        -:   29:
+        -:   30:    /// Метод желательно должен быть перегружен у наследников
+        -:   31:    /// Он удаляет с карты живого врага, и вместо него ставит нежить, которая соответсвует ему
+        -:   32:    /// \param dungeon - Уровень
+        -:   33:    virtual void becomeUndead(Dungeon &dungeon);
+        -:   34:
+        -:   35:    /// Метод после смерти, опять же может быть перегружен, если враг будет умирать как то по-другому
+        -:   36:    /// В данном случае он не удаляет с карты труп врага
+        -:   37:    /// \param dungeon
+        -:   38:    void methodAfterDie(Dungeon &dungeon) override;
+        -:   39:
+        -:   40:    /// Getter
+        -:   41:    /// \return тип
+function _ZN11LivingEnemy7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   42:    Enemies getType() override {
+    #####:   43:        return Enemies::simpleLivingEnemy;
+    %%%%%:   43-block  0
+        -:   44:    }
+        -:   45:
+        -:   46:
+        -:   47:};
+        -:   48:
+        -:   49:
+        -:   50:#endif //GAMELAB3_LIVINGENEMY_H

@@ -1,0 +1,58 @@
+\doxysection{Table\+Skills.\+h}
+\hypertarget{_table_skills_8h_source}{}\label{_table_skills_8h_source}\index{Unit/Character/TableSkills.h@{Unit/Character/TableSkills.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 18.11.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_TABLESKILLS\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_TABLESKILLS\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Skills/Skills.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_table_skills}{TableSkills}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ std::map<std::string,\ Skill\ *>\ skills;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_table_skills_a92c6ff6877a8fa45f51538ef8a33e7cd}{upgradeSkill}}(\textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ skills.find(name);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ skills.end())\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ skills[name]-\/>upgradeLvl();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_table_skills_a9e8f140b2e84f826c0144ad98a743262}{countSkills}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ skills.size();}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_table_skills_a08f1e126e18b09c6b23fbc4f7cce9759}{addSkill}}(\mbox{\hyperlink{class_skill}{Skill}}\ *newSkill,\ \textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ skills.insert(\{name,\ newSkill\});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&\mbox{\hyperlink{class_table_skills_aca9a82b3e4f90c4c29f36b8e2100d6c8}{setSkill}}(\mbox{\hyperlink{class_skill}{Skill}}\ *newSkill,\ \textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ skills.find(name);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ skills.end())\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ skills[name]\ =\ newSkill;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{class_skill}{Skill}}\ *\mbox{\hyperlink{class_table_skills_a6d4403795a991f729b1f29ae7f0c4819}{getSkill}}(\textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ skills.find(name);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ skills.end())\ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}No\ skill"{}}));}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ skills[name];}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_TABLESKILLS\_H}}
+
+\end{DoxyCode}

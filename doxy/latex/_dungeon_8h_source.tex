@@ -1,0 +1,110 @@
+\doxysection{Dungeon.\+h}
+\hypertarget{_dungeon_8h_source}{}\label{_dungeon_8h_source}\index{Dungeon/Dungeon.h@{Dungeon/Dungeon.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_DUNGEON\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ GAMELAB3\_DUNGEON\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../Matrix/Matrix.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Ceil.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../Unit/Enemy/Enemy.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}../Unit/Unit.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}../Unit/Character/Character.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}../Unit/Enemy/Golem/Golem.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ listEnemies;\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ mapLevel;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ wigth;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ height;}
+\DoxyCodeLine{00029\ \ \ \ \ std::pair<Character\ *,\ Ceil\ *>\ hero;}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_dungeon_a0cf92d21326645061910561333372402}{Dungeon}}(std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ list,\ \mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&mapLevel0,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ wight0,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ height0,\ std::pair<Character\ *,\ Ceil\ *>\ hero0)\ :\ listEnemies(std::move(list)),}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mapLevel(mapLevel0),}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wigth(wight0),}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ height(height0),\ hero(std::move(hero0))\ \{\};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dungeon_a1f8f2b7ced0b27587e48843b702eb1e9}{allDoSomething}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \mbox{\hyperlink{class_dungeon_aece2066c19dd3150f1a7b4b0e700e29c}{operator+=}}(std::pair<Enemy\ *,\ Ceil\ *>\ enemy)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ listEnemies.emplace\_back(enemy);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ printEnemies();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ print();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00065\ \ \ \ \ std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ \&\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}()\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ listEnemies;}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mapLevel;}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_dungeon_a2385f0f7826e4811afaf7918a0ede732}{getWigth}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wigth;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_dungeon_a5c48f1ca26b235b893eed64db79d4b60}{getHeight}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ height;}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ std::pair<Character\ *,\ Ceil\ *>\ \&\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}()\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hero;}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dungeon_ab32074a535fad598b8688c975e2bc703}{setHero}}(\textcolor{keyword}{const}\ std::pair<Character\ *,\ Ceil\ *>\ \&hero)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ Dungeon::hero\ =\ hero;}
+\DoxyCodeLine{00099\ \ \ \ \ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&\mbox{\hyperlink{class_dungeon_ae6b7b3b908f66ac77d3f7364aefb89fa}{setListEnemies}}(std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ listEnemies0)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ Dungeon::listEnemies\ =\ std::move(listEnemies0);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&\mbox{\hyperlink{class_dungeon_acc05205408abd0b1fb6ea7c351611bc9}{setMapLevel}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&mapLevel0)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ Dungeon::mapLevel\ =\ std::move(mapLevel0);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&\mbox{\hyperlink{class_dungeon_a9ddb935ade35124ee6ea12eadb23e0ff}{setWigth}}(\textcolor{keywordtype}{int}\ wigth0)\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ Dungeon::wigth\ =\ wigth0;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&\mbox{\hyperlink{class_dungeon_ab717d876de85d35084a8ee9be568d3d7}{setHeight}}(\textcolor{keywordtype}{int}\ height0)\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ Dungeon::height\ =\ height0;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_DUNGEON\_H}}
+
+\end{DoxyCode}

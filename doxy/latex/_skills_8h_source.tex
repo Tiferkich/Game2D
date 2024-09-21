@@ -1,0 +1,42 @@
+\doxysection{Skills.\+h}
+\hypertarget{_skills_8h_source}{}\label{_skills_8h_source}\index{Unit/Character/Skills/Skills.h@{Unit/Character/Skills/Skills.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 18.11.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_SKILLS\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_SKILLS\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_dungeon}{Dungeon}};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_skill}{Skill}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_skill_a2330e244c4617e2de8dd1e5066b63050}{Skill}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}})\ :\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}(0),\ \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}}(\mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}})\ \{\};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a3f888cc18ce857314552614f7a35ec23}{useSkill}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ \textcolor{keywordtype}{int}\ mas[])\ =\ 0;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a58e438fc02ac75cb74035c9ea06397d2}{getSkillLvl}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}};}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_skill}{Skill}}\ \&\mbox{\hyperlink{class_skill_a98f0365e8d5b57e25b2d9dac177706fa}{setSkillLvl}}(\textcolor{keywordtype}{int}\ lvl)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ =\ lvl;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a779f5bc61bf79a167c1c7f8b79af31c9}{upgradeLvl}}()\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ++\mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}};}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_SKILLS\_H}}
+
+\end{DoxyCode}

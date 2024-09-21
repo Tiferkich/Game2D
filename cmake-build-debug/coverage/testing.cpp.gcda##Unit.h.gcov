@@ -1,0 +1,127 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Unit.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <iostream>
+        -:    6:#include <utility>
+        -:    7:
+        -:    8:
+        -:    9:#ifndef GAMELAB3_UNIT_H
+        -:   10:#define GAMELAB3_UNIT_H
+        -:   11:
+        -:   12:///Набор возможных состояний юнита
+        -:   13:enum class Faction {
+        -:   14:    character,///< Юнит сражается за сторону героя
+        -:   15:    undead,///< Фракция нежити
+        -:   16:    livingEnemy,///< Фракция живых существ
+        -:   17:    golem,///<Фракция големов
+        -:   18:};
+        -:   19:
+        -:   20:
+        -:   21:///Абстрактный класс - юнит, от него наследуется Character и Enemy
+        -:   22:class Unit {
+        -:   23:protected:
+        -:   24:    Faction faction;///<Фракция юнита
+        -:   25:    unsigned int speed;///<Скорость юнита (нигде не использовалось, но может быть будет)
+        -:   26:    std::pair<int, int> damage;///< Дамаг юнита, damage.first - минимальный дамаг, damage.second - максимальный дамаг
+        -:   27:    std::pair<int, int> coords;///< Координаты x,y
+        -:   28:public:
+        -:   29:    /// @brief Конструктор
+        -:   30:    /// \param faction0 -  Фракция юнита
+        -:   31:    /// \param speed0  - Скорость юнита
+        -:   32:    /// \param damage0 - Дамаг юнита, damage.first - минимальный дамаг, damage.second - максимальный дамаг
+        -:   33:    /// \param coord0 - Координаты x,y
+function _ZN4UnitC2E7FactioniSt4pairIiiES2_ called 136 returned 100% blocks executed 100%
+      136:   34:    Unit(Faction faction0, int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0) : faction(faction0),
+      136:   35:                                                                                                  speed(speed0),
+      136:   36:                                                                                                  damage(damage0),
+      272:   37:                                                                                                  coords(std::move(
+      136:   38:                                                                                                          coord0)) {};
+      136:   38-block  0
+call    0 returned 136
+        -:   39:    ///Чисто виртуальный метод - смерти
+        -:   40:    virtual void die() = 0;
+        -:   41:    ///Чисто виртуальный метод - атаки кого то
+        -:   42:    virtual void attack(Unit &someone) = 0;
+        -:   43:
+        -:   44:    ///Чисто виртуальный метод - получения урона (это не геттер)
+        -:   45:    virtual void getDamage(int damage) = 0;
+        -:   46:
+        -:   47:
+        -:   48:    /// Getter
+        -:   49:    /// \return - возвращает фракцию юнита
+function _ZNK4Unit10getFactionEv called 222 returned 100% blocks executed 100%
+      222:   50:    Faction getFaction() const {
+      222:   51:        return faction;
+      222:   51-block  0
+        -:   52:    }
+        -:   53:    /// Getter
+        -:   54:    /// \return - возвращает скорость юнита
+        -:   55:
+function _ZNK4Unit8getSpeedEv called 5 returned 100% blocks executed 100%
+        5:   56:    int getSpeed() const {
+        5:   57:        return speed;
+        5:   57-block  0
+        -:   58:    }
+        -:   59:
+        -:   60:    /// Getter
+        -:   61:    /// \return - возвращает урон юнита
+        -:   62:
+function _ZNK4Unit6DamageEv called 18 returned 100% blocks executed 100%
+       18:   63:    std::pair<int, int> Damage() const {
+       18:   64:        return damage;
+       18:   64-block  0
+        -:   65:    }
+        -:   66:
+        -:   67:    /// Getter
+        -:   68:    /// \return - возвращает координаты юнита
+        -:   69:
+function _ZNK4Unit9getCoordsEv called 5742 returned 100% blocks executed 100%
+     5742:   70:    const std::pair<int, int> &getCoords() const {
+     5742:   71:        return coords;
+     5742:   71-block  0
+        -:   72:    }
+        -:   73:
+        -:   74:    /// Setter
+        -:   75:    /// \param faction0 - Фракция
+        -:   76:    /// \return возвращает ссылку на класс для цепного вызова
+        -:   77:
+function _ZN4Unit10setFactionE7Faction called 48 returned 100% blocks executed 100%
+       48:   78:    Unit &setFaction(Faction faction0) {
+       48:   79:        Unit::faction = faction0;
+       48:   80:        return *this;
+       48:   80-block  0
+        -:   81:    }
+        -:   82:    /// Setter
+        -:   83:    /// \param speed0 - Скорость юнита
+        -:   84:    /// \return  возвращает ссылку на класс для цепного вызова
+        -:   85:
+        -:   86:    Unit &setSpeed(int speed0) {
+        -:   87:        Unit::speed = speed0;
+        -:   88:        return *this;
+        -:   89:    }
+        -:   90:    /// Setter
+        -:   91:    /// \param damage0 - урон юнита
+        -:   92:
+        -:   93:    void setDamage(std::pair<int, int> damage0) {
+        -:   94:        Unit::damage = damage0;
+        -:   95:    }
+        -:   96:
+        -:   97:    ///Setter
+        -:   98:    /// \param coords0 - Координаты юнита
+        -:   99:
+function _ZN4Unit9setCoordsERKSt4pairIiiE called 9 returned 100% blocks executed 100%
+        9:  100:    Unit &setCoords(const std::pair<int, int> &coords0) {
+        9:  101:        Unit::coords = coords0;
+        9:  101-block  0
+call    0 returned 9
+        9:  102:        return *this;
+        -:  103:    }
+        -:  104:};
+        -:  105:
+        -:  106:
+        -:  107:#endif //GAMELAB3_UNIT_H

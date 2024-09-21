@@ -1,0 +1,60 @@
+\doxysection{Undead\+Summoner.\+cpp}
+\hypertarget{_undead_summoner_8cpp_source}{}\label{_undead_summoner_8cpp_source}\index{Unit/Enemy/Summoner/UndeadSummoner.cpp@{Unit/Enemy/Summoner/UndeadSummoner.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 26.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}UndeadSummoner.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ STEP\ 4}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_undead_summoner_ae9e95fdd9478c154014b7cb4bbd8efa8}{UndeadSummoner::doSomething}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ ==\ Status::dead)\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00012\ \ \ \ \ \}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ *someone\ =\ \mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{findTarget}}(dungeon);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (someone\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ srand(time(0));}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ rand()\ \%\ 4;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx[4]\ =\ \{1,\ 0,\ -\/1,\ 0\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy[4]\ =\ \{0,\ 1,\ 0,\ -\/1\};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ <\ 0\ ||\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ <\ 0\ ||}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().cols()\ ||}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().rows())}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{coords.first\ +\ dy[i],\ coords.second\ +\ dx[i]\},\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{someone-\/>getCoords().first,\ someone-\/>getCoords().second\},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00034\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_undead_summoner_af89619dd1e778d08c2f8777e2297b2bd}{summon}}(dungeon,\ \{\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first,\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\},\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getLvl()\ /\ 2,\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}});}
+\DoxyCodeLine{00037\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}}(*someone);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00041\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_undead_summoner_af89619dd1e778d08c2f8777e2297b2bd}{UndeadSummoner::summon}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ std::pair<int,\ int>\ coords,\ \textcolor{keywordtype}{int}\ ratio,\ \textcolor{keywordtype}{int}\ newCurHp)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3}{Isummoner::summon}}(dungeon,\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}},\ ratio,\ newCurHp);}
+\DoxyCodeLine{00047\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ throw\ ;}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ item\ =\ -\/-\/dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ count\ <\ 4;\ -\/-\/item,\ ++count)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ item-\/>first-\/>setFaction(\mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}});}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}

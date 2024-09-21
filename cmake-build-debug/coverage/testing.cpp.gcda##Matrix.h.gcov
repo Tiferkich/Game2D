@@ -1,0 +1,546 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Matrix/Matrix.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1:
+        -:    2:
+        -:    3:#ifndef GAMELAB3_MATRIX_H
+        -:    4:#define GAMELAB3_MATRIX_H
+        -:    5:
+        -:    6:#include <iostream>
+        -:    7:#include <vector>
+        -:    8:#include <functional>
+        -:    9:
+        -:   10:
+        -:   11:template<typename T>
+        -:   12:class Matrix {
+        -:   13:public:
+        -:   14:
+function _ZN6MatrixI4CeilEC1Eii called 20 returned 100% blocks executed 68%
+       20:   15:    Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
+      20*:   16:        if (rows < 0 || cols < 0) throw std::invalid_argument("error indexes");
+       20:   16-block  0
+branch  0 taken 20 (fallthrough)
+branch  1 taken 0
+       20:   16-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 20
+    %%%%%:   16-block  2
+call    4 never executed
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:   16-block  3
+call    8 never executed
+    $$$$$:   16-block  4
+call    9 never executed
+      20*:   17:        data = new T *[rows];
+       20:   17-block  0
+branch  0 taken 20 (fallthrough)
+branch  1 taken 0
+       20:   17-block  1
+    %%%%%:   17-block  2
+call    2 never executed
+       20:   17-block  3
+call    3 returned 20
+     1840:   18:        for (int i = 0; i < rows; i++) {
+     1840:   18-block  0
+branch  0 taken 1820
+branch  1 taken 20 (fallthrough)
+    1820*:   19:            data[i] = new T[cols];
+     1820:   19-block  0
+branch  0 taken 1820 (fallthrough)
+branch  1 taken 0
+     1820:   19-block  1
+    %%%%%:   19-block  2
+call    2 never executed
+     1820:   19-block  3
+call    3 returned 1820
+        -:   20:        }
+       20:   21:    }
+       20:   21-block  0
+        -:   22:
+        -:   23:    Matrix(std::vector<std::vector<T>> vector, int rows, int cols) : rows_(rows), cols_(cols) {
+        -:   24:        data = new T *[rows];
+        -:   25:        for (int i = 0; i < rows; i++) {
+        -:   26:            data[i] = new T[cols];
+        -:   27:            for (int j = 0; j < cols; j++) {
+        -:   28:                data[i][j] = vector[i][j];
+        -:   29:            }
+        -:   30:        }
+        -:   31:    }
+        -:   32:
+function _ZN6MatrixI4CeilED1Ev called 99 returned 100% blocks executed 100%
+       99:   33:    ~Matrix() {
+     8819:   34:        for (int i = 0; i < rows_; i++) {
+       99:   34-block  0
+     8720:   34-block  1
+     8819:   34-block  2
+branch  0 taken 8720
+branch  1 taken 99 (fallthrough)
+     8720:   35:            delete[] data[i];
+     8720:   35-block  0
+branch  0 taken 8720 (fallthrough)
+branch  1 taken 0
+     8720:   35-block  1
+call    2 returned 8720
+        -:   36:        }
+       99:   37:        delete[] data;
+       99:   37-block  0
+branch  0 taken 98 (fallthrough)
+branch  1 taken 1
+       98:   37-block  1
+call    2 returned 98
+       99:   38:    }
+        -:   39:
+        -:   40:
+        -:   41:    class Iterator {
+        -:   42:        using iterator_category = std::forward_iterator_tag;
+        -:   43:        using value_type = T;
+        -:   44:        using difference_type = std::ptrdiff_t;
+        -:   45:        using pointer = T *;
+        -:   46:        using reference = T &;
+        -:   47:    public:
+        -:   48:
+function _ZN6MatrixI4CeilE8IteratorC1ERS1_ii called 20 returned 100% blocks executed 100%
+       20:   49:        Iterator(Matrix<value_type> &matrix, int row, int col) : matrix(matrix),
+       20:   50:                                                                 row(row),
+       20:   51:                                                                 col(col), predicateFunc(alwaysTruePredicate) {}
+       20:   51-block  0
+call    0 returned 20
+        -:   52:
+function _ZN6MatrixI4CeilE8IteratorC1ERS1_iiSt8functionIFbRKS0_EE called 20 returned 100% blocks executed 100%
+       20:   53:        Iterator(Matrix<value_type> &matrix, int row, int col, std::function<bool(const T &)> predicateFunc) : matrix(
+        -:   54:                matrix),
+       20:   55:                                                                                                               row(row),
+       20:   56:                                                                                                               col(col),
+       20:   57:                                                                                                               predicateFunc(
+       20:   57-block  0
+call    0 returned 20
+       20:   58:                                                                                                                       predicateFunc) {}
+        -:   59:
+        -:   60:        bool operator==(const Iterator &other) const {
+        -:   61:            return row == other.row && col == other.col;
+        -:   62:        }
+        -:   63:
+function _ZNK6MatrixI4CeilE8IteratorneERKS2_ called 180220 returned 100% blocks executed 100%
+   180220:   64:        bool operator!=(const Iterator &other) const {
+   180220:   65:            return row != other.row || col != other.col;
+   180220:   65-block  0
+branch  0 taken 20 (fallthrough)
+branch  1 taken 180200
+       20:   65-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 20
+   180200:   65-block  2
+       20:   65-block  3
+   180220:   65-block  4
+        -:   66:        }
+        -:   67:
+function _ZN6MatrixI4CeilE8IteratordeEv called 360400 returned 100% blocks executed 100%
+   360400:   68:        reference operator*() {
+   360400:   69:            return matrix.data[row][col];
+   360400:   69-block  0
+        -:   70:        }
+        -:   71:
+function _ZN6MatrixI4CeilE8IteratorppEv called 180200 returned 100% blocks executed 100%
+   180200:   72:        Iterator &operator++() {
+        -:   73:            do {
+        -:   74:
+   180200:   75:                col++;
+   180200:   76:                if (col == matrix.cols_) {
+   180200:   76-block  0
+branch  0 taken 1820 (fallthrough)
+branch  1 taken 178380
+     1820:   77:                    col = 0;
+     1820:   78:                    row++;
+     1820:   78-block  0
+        -:   79:                }
+   180200:   80:                if (col == 0 && row == matrix.rows_) break;
+   180200:   80-block  0
+branch  0 taken 1820 (fallthrough)
+branch  1 taken 178380
+     1820:   80-block  1
+branch  2 taken 20 (fallthrough)
+branch  3 taken 1800
+       20:   80-block  2
+   180180:   81:            } while (!predicateFunc(*(*this)));
+   180180:   81-block  0
+call    0 returned 180180
+call    1 returned 180180
+branch  2 taken 0
+branch  3 taken 180180 (fallthrough)
+   180200:   82:            return *this;
+   180200:   82-block  0
+        -:   83:        }
+        -:   84:
+        -:   85:        Iterator operator++(int) {
+        -:   86:            Iterator temp = *this;
+        -:   87:            ++(*this);
+        -:   88:            return temp;
+        -:   89:        }
+        -:   90:
+        -:   91:    private:
+        -:   92:        Matrix<value_type> &matrix;
+        -:   93:        int row;
+        -:   94:        int col;
+        -:   95:        std::function<bool(const T &)> predicateFunc;
+        -:   96:    };
+        -:   97:
+function _ZN6MatrixI4CeilE5beginESt8functionIFbRKS0_EE called 20 returned 100% blocks executed 67%
+       20:   98:    Iterator begin(std::function<bool(const T &)> predicateFunc = alwaysTruePredicate) {
+       20:   99:        Iterator iter(*this, 0, 0, predicateFunc);
+       20:   99-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:   99-block  1
+call    3 returned 20
+branch  4 taken 20 (fallthrough)
+branch  5 taken 0 (throw)
+       20:   99-block  2
+call    6 returned 20
+    $$$$$:   99-block  3
+call    7 never executed
+    $$$$$:   99-block  4
+call    8 never executed
+       20:  100:        while (!predicateFunc(*iter)) {
+       20:  100-block  0
+call    0 returned 20
+call    1 returned 20
+branch  2 taken 20 (fallthrough)
+branch  3 taken 0 (throw)
+       20:  100-block  1
+branch  4 taken 0
+branch  5 taken 20 (fallthrough)
+    #####:  101:            ++iter;
+    %%%%%:  101-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  102:        }
+       20:  103:        return iter;
+       20:  103-block  0
+       20:  103-block  1
+    =====:  104:    }
+    $$$$$:  104-block  0
+call    0 never executed
+        -:  105:
+        -:  106:
+function _ZN6MatrixI4CeilE3endEv called 20 returned 100% blocks executed 100%
+       20:  107:    Iterator end() {
+       20:  108:        return Iterator(*this, rows_, 0);
+       20:  108-block  0
+call    0 returned 20
+        -:  109:    }
+        -:  110:
+        -:  111:
+        -:  112:private:
+        -:  113:    int rows_ = 0;
+        -:  114:    int cols_ = 0;
+        -:  115:    T **data = NULL;
+        -:  116:
+        -:  117:
+        -:  118:public:
+function _ZN6MatrixI4CeilE19alwaysTruePredicateERKS0_ called 180200 returned 100% blocks executed 100%
+   180200:  119:    static bool alwaysTruePredicate(const T &value) {
+   180200:  120:        return true;
+   180200:  120-block  0
+        -:  121:    }
+        -:  122:
+        -:  123:    friend Iterator;
+        -:  124:
+function _ZN6MatrixI4CeilEC1ERKS1_ called 78 returned 100% blocks executed 87%
+       78:  125:    Matrix(const Matrix &anoter) noexcept: rows_(anoter.rows_), cols_(anoter.cols_) {
+      78*:  126:        data = new T *[rows_];
+       78:  126-block  0
+branch  0 taken 78 (fallthrough)
+branch  1 taken 0
+       78:  126-block  1
+    %%%%%:  126-block  2
+call    2 never executed
+       78:  126-block  3
+call    3 returned 78
+     6978:  127:        for (int i = 0; i < rows_; i++) {
+     6900:  127-block  0
+     6978:  127-block  1
+branch  0 taken 6900
+branch  1 taken 78 (fallthrough)
+    6900*:  128:            data[i] = new T[cols_];
+     6900:  128-block  0
+branch  0 taken 6900 (fallthrough)
+branch  1 taken 0
+     6900:  128-block  1
+    %%%%%:  128-block  2
+call    2 never executed
+     6900:  128-block  3
+call    3 returned 6900
+   687900:  129:            for (int j = 0; j < cols_; j++) {
+   687900:  129-block  0
+branch  0 taken 681000
+branch  1 taken 6900 (fallthrough)
+   681000:  130:                data[i][j] = anoter.data[i][j];
+   681000:  130-block  0
+        -:  131:            }
+        -:  132:        }
+        -:  133:
+       78:  134:    };
+        -:  135:
+function _ZN6MatrixI4CeilEaSERKS1_ called 0 returned 0% blocks executed 0%
+    #####:  136:    Matrix &operator=(const Matrix &anoter) {
+    #####:  137:        if (this != &anoter) {
+    %%%%%:  137-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  138:            for (int i = 0; i < rows_; i++) {
+    %%%%%:  138-block  0
+    %%%%%:  138-block  1
+    %%%%%:  138-block  2
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  139:                delete[] data[i];
+    %%%%%:  139-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  139-block  1
+call    2 never executed
+        -:  140:            }
+    #####:  141:            delete[] data;
+    %%%%%:  141-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  141-block  1
+call    2 never executed
+        -:  142:
+    #####:  143:            rows_ = anoter.rows_;
+    #####:  144:            cols_ = anoter.cols_;
+    #####:  145:            data = new T *[rows_];
+    %%%%%:  145-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  145-block  1
+    %%%%%:  145-block  2
+call    2 never executed
+    %%%%%:  145-block  3
+call    3 never executed
+    #####:  146:            for (int i = 0; i < rows_; i++) {
+    %%%%%:  146-block  0
+    %%%%%:  146-block  1
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  147:                data[i] = new T[cols_];
+    %%%%%:  147-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  147-block  1
+    %%%%%:  147-block  2
+call    2 never executed
+    %%%%%:  147-block  3
+call    3 never executed
+    #####:  148:                for (int j = 0; j < cols_; j++) {
+    %%%%%:  148-block  0
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  149:                    data[i][j] = anoter.data[i][j];
+    %%%%%:  149-block  0
+        -:  150:                }
+        -:  151:            }
+        -:  152:        }
+    #####:  153:        return *this;
+    %%%%%:  153-block  0
+        -:  154:    }
+        -:  155:
+function _ZN6MatrixI4CeilEC1EOS1_ called 1 returned 100% blocks executed 100%
+        1:  156:    Matrix(Matrix &&another) noexcept: rows_(another.rows_), cols_(another.cols_), data(std::move(another.data)) {
+        1:  156-block  0
+call    0 returned 1
+        1:  157:        another.rows_ = 0;
+        1:  158:        another.cols_ = 0;
+        1:  159:        another.data = NULL;
+        1:  160:    }
+        -:  161:
+        -:  162:    Matrix &operator=(Matrix &&another) noexcept {
+        -:  163:        rows_ = another.rows_;
+        -:  164:        cols_ = another.cols_;
+        -:  165:        data = another.data;
+        -:  166:        another.data = NULL;
+        -:  167:        another.rows_ = 0;
+        -:  168:        another.cols_ = 0;
+        -:  169:        return *this;
+        -:  170:    }
+        -:  171:
+        -:  172:    void deleteCol(int indexCol) {
+        -:  173:        if (indexCol > cols_ || indexCol < 0) throw std::runtime_error("Bad index");
+        -:  174:        for (int i = 0; i < rows_; i++) {
+        -:  175:            for (int j = indexCol; j < cols_ - 1; j++) {
+        -:  176:                std::swap(data[i][j], data[i][j + 1]);
+        -:  177:            }
+        -:  178:        }
+        -:  179:        T **newdata = new T *[rows_];
+        -:  180:        for (int i = 0; i < rows_; i++) {
+        -:  181:            newdata[i] = new T[cols_ - 1];
+        -:  182:            for (int j = 0; j < cols_ - 1; j++) {
+        -:  183:                newdata[i][j] = data[i][j];
+        -:  184:            }
+        -:  185:        }
+        -:  186:        for (int i = 0; i < rows_; i++) {
+        -:  187:            delete[] data[i];
+        -:  188:        }
+        -:  189:        delete[] data;
+        -:  190:        data = newdata;
+        -:  191:        --cols_;
+        -:  192:    }
+        -:  193:
+        -:  194:    void deleteRow(int indexRow) {
+        -:  195:        if (indexRow > rows_ || indexRow < 0) throw std::runtime_error("Bad index");
+        -:  196:        for (int i = indexRow; i < rows_ - 1; i++) {
+        -:  197:            std::swap(data[i], data[i + 1]);
+        -:  198:        }
+        -:  199:        T **newdata = new T *[rows_ - 1];
+        -:  200:        for (int i = 0; i < rows_ - 1; i++) {
+        -:  201:            newdata[i] = new T[cols_];
+        -:  202:            for (int j = 0; j < cols_; j++) {
+        -:  203:                newdata[i][j] = data[i][j];
+        -:  204:            }
+        -:  205:        }
+        -:  206:        for (int i = 0; i < rows_; i++) {
+        -:  207:            delete[] data[i];
+        -:  208:        }
+        -:  209:        delete[] data;
+        -:  210:        --rows_;
+        -:  211:        data = newdata;
+        -:  212:    }
+        -:  213:
+        -:  214:    void addRow(int indexRow) {
+        -:  215:        if (indexRow > rows_ || indexRow < 0) throw std::runtime_error("Bad index");
+        -:  216:        T **newData = new T *[rows_ + 1];
+        -:  217:        bool flag = false;
+        -:  218:        for (int i = 0; i < rows_ + 1; i++) {
+        -:  219:            newData[i] = new T[cols_];
+        -:  220:            for (int j = 0; j < cols_; j++) {
+        -:  221:                if (i == indexRow) {
+        -:  222:                    newData[i][j] = 0;
+        -:  223:                    flag = true;
+        -:  224:                    continue;
+        -:  225:                }
+        -:  226:                if (!flag)
+        -:  227:                    newData[i][j] = data[i][j];
+        -:  228:                else
+        -:  229:                    newData[i][j] = data[i - 1][j];
+        -:  230:            }
+        -:  231:        }
+        -:  232:        for (int i = 0; i < rows_; i++) {
+        -:  233:            delete[] data[i];
+        -:  234:        }
+        -:  235:        delete[] data;
+        -:  236:        data = newData;
+        -:  237:        ++rows_;
+        -:  238:    }
+        -:  239:
+        -:  240:    void addCol(int indexCol) {
+        -:  241:        if (indexCol > rows_ || indexCol < 0) throw std::runtime_error("Bad index");
+        -:  242:        T **newData = new T *[rows_];
+        -:  243:        for (int i = 0; i < rows_; i++) {
+        -:  244:            newData[i] = new T[cols_ + 1];
+        -:  245:            bool flag = false;
+        -:  246:            for (int j = 0; j < cols_ + 1; j++) {
+        -:  247:                if (j == indexCol) {
+        -:  248:                    newData[i][j] = 0;
+        -:  249:                    flag = true;
+        -:  250:                    continue;
+        -:  251:                }
+        -:  252:                if (!flag)
+        -:  253:                    newData[i][j] = data[i][j];
+        -:  254:                else
+        -:  255:                    newData[i][j] = data[i][j - 1];
+        -:  256:            }
+        -:  257:        }
+        -:  258:        for (int i = 0; i < rows_; i++) {
+        -:  259:            delete[] data[i];
+        -:  260:        }
+        -:  261:        delete[] data;
+        -:  262:        data = newData;
+        -:  263:        cols_++;
+        -:  264:    }
+        -:  265:
+        -:  266:
+function _ZN6MatrixI4CeilE4rowsEv called 2905 returned 100% blocks executed 100%
+     2905:  267:    int rows() { return rows_; }
+     2905:  267-block  0
+        -:  268:
+function _ZN6MatrixI4CeilE4colsEv called 199124 returned 100% blocks executed 100%
+   199124:  269:    int cols() { return cols_; }
+   199124:  269-block  0
+        -:  270:
+        -:  271:    class Proxy {
+        -:  272:    private:
+        -:  273:        Matrix &parent;
+        -:  274:        int row;
+        -:  275:        friend Matrix;
+        -:  276:
+function _ZN6MatrixI4CeilE5ProxyC1ERS1_i called 392862 returned 100% blocks executed 100%
+   392862:  277:        explicit Proxy(Matrix &parent, int row_) : row(row_), parent(parent) {};
+        -:  278:    public:
+        -:  279:
+function _ZN6MatrixI4CeilE5ProxyixEi called 392862 returned 100% blocks executed 56%
+   392862:  280:        T &operator[](int col) {
+  392862*:  281:            if (0 > col || col >= parent.cols_) throw (std::invalid_argument("Not good col"));
+   392862:  281-block  0
+branch  0 taken 392862 (fallthrough)
+branch  1 taken 0
+   392862:  281-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 392862
+    %%%%%:  281-block  2
+call    4 never executed
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  281-block  3
+call    8 never executed
+    $$$$$:  281-block  4
+call    9 never executed
+   392862:  282:            return parent.data[row][col];
+   392862:  282-block  0
+   392862:  282-block  1
+        -:  283:        }
+        -:  284:
+        -:  285:        const T &operator[](int col) const {
+        -:  286:            if (0 > col || col >= parent.cols_) throw (std::invalid_argument("Not good col"));
+        -:  287:            return parent.data[row][col];
+        -:  288:        }
+        -:  289:    };
+        -:  290:
+        -:  291:    Proxy operator[](int row) const {
+        -:  292:        if (0 > row || row >= rows_) throw (std::invalid_argument("Not good row"));
+        -:  293:        return Proxy(*this, row);
+        -:  294:    }
+        -:  295:
+function _ZN6MatrixI4CeilEixEi called 392862 returned 100% blocks executed 56%
+   392862:  296:    Proxy operator[](int row) {
+  392862*:  297:        if (0 > row || row >= rows_) throw (std::invalid_argument("Not good row"));
+   392862:  297-block  0
+branch  0 taken 392862 (fallthrough)
+branch  1 taken 0
+   392862:  297-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 392862
+    %%%%%:  297-block  2
+call    4 never executed
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  297-block  3
+call    8 never executed
+    $$$$$:  297-block  4
+call    9 never executed
+   392862:  298:        return Proxy(*this, row);
+   392862:  298-block  0
+call    0 returned 392862
+        -:  299:    }
+        -:  300:
+        -:  301:};
+        -:  302:
+        -:  303:
+        -:  304:#endif
+        -:  305:

@@ -1,0 +1,208 @@
+\doxysection{Класс Dungeon}
+\hypertarget{class_dungeon}{}\label{class_dungeon}\index{Dungeon@{Dungeon}}
+
+
+Класс, который описывает поведение уровня игры(подземелья)  
+
+
+
+
+{\ttfamily \#include $<$Dungeon.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_a0cf92d21326645061910561333372402}{Dungeon}} (std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ list, \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&map\+Level0, int wight0, int height0, std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ hero0)
+\item 
+\Hypertarget{class_dungeon_a1f8f2b7ced0b27587e48843b702eb1e9}\label{class_dungeon_a1f8f2b7ced0b27587e48843b702eb1e9} 
+void {\bfseries all\+Do\+Something} ()
+\begin{DoxyCompactList}\small\item\em Основной метод подземелья В ней каждый враг совершает какое-\/либо действие, а также происходит чистка от мертвых врагов \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_dungeon}{Dungeon}} \mbox{\hyperlink{class_dungeon_aece2066c19dd3150f1a7b4b0e700e29c}{operator+=}} (std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ enemy)
+\begin{DoxyCompactList}\small\item\em Вспомогательная перегрузка оператора Нужен для добавления новых существ в данжион \end{DoxyCompactList}\item 
+\Hypertarget{class_dungeon_a7e1c5bc85c69aabf63e1f5ee300571ed}\label{class_dungeon_a7e1c5bc85c69aabf63e1f5ee300571ed} 
+void {\bfseries print\+Enemies} ()
+\item 
+\Hypertarget{class_dungeon_a73ca306d8b6e5ab8b4e6f66c2605ca3e}\label{class_dungeon_a73ca306d8b6e5ab8b4e6f66c2605ca3e} 
+void {\bfseries print} ()
+\item 
+std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ \& \mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{get\+List\+Enemies}} ()
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \& \mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{get\+Map\+Level}} ()
+\item 
+int \mbox{\hyperlink{class_dungeon_a2385f0f7826e4811afaf7918a0ede732}{get\+Wigth}} () const
+\item 
+int \mbox{\hyperlink{class_dungeon_a5c48f1ca26b235b893eed64db79d4b60}{get\+Height}} () const
+\item 
+std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{get\+Hero}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_ab32074a535fad598b8688c975e2bc703}{set\+Hero}} (const std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ \&hero)
+\item 
+\mbox{\hyperlink{class_dungeon}{Dungeon}} \& \mbox{\hyperlink{class_dungeon_ae6b7b3b908f66ac77d3f7364aefb89fa}{set\+List\+Enemies}} (std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ list\+Enemies0)
+\item 
+\mbox{\hyperlink{class_dungeon}{Dungeon}} \& \mbox{\hyperlink{class_dungeon_acc05205408abd0b1fb6ea7c351611bc9}{set\+Map\+Level}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&map\+Level0)
+\item 
+\mbox{\hyperlink{class_dungeon}{Dungeon}} \& \mbox{\hyperlink{class_dungeon_a9ddb935ade35124ee6ea12eadb23e0ff}{set\+Wigth}} (int wigth0)
+\item 
+\mbox{\hyperlink{class_dungeon}{Dungeon}} \& \mbox{\hyperlink{class_dungeon_ab717d876de85d35084a8ee9be568d3d7}{set\+Height}} (int height0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, который описывает поведение уровня игры(подземелья) 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_dungeon_a0cf92d21326645061910561333372402}\label{class_dungeon_a0cf92d21326645061910561333372402} 
+\index{Dungeon@{Dungeon}!Dungeon@{Dungeon}}
+\index{Dungeon@{Dungeon}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{Dungeon()}{Dungeon()}}
+{\footnotesize\ttfamily Dungeon\+::\+Dungeon (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$}]{list,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&}]{map\+Level0,  }\item[{int}]{wight0,  }\item[{int}]{height0,  }\item[{std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$}]{hero0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em list} & список врагов \\
+\hline
+{\em map\+Level0} & карта \\
+\hline
+{\em wight0} & ширина карты \\
+\hline
+{\em height0} & высота карты \\
+\hline
+{\em hero0} & указатель на героя \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_dungeon_a5c48f1ca26b235b893eed64db79d4b60}\label{class_dungeon_a5c48f1ca26b235b893eed64db79d4b60} 
+\index{Dungeon@{Dungeon}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int Dungeon\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+возвращает высоту 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}\label{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4} 
+\index{Dungeon@{Dungeon}!getHero@{getHero}}
+\index{getHero@{getHero}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{getHero()}{getHero()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ \& Dungeon\+::get\+Hero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+возвращает указатель на персонажа 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}\label{class_dungeon_aec925af840ea11f8ab97ac8487f0b236} 
+\index{Dungeon@{Dungeon}!getListEnemies@{getListEnemies}}
+\index{getListEnemies@{getListEnemies}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{getListEnemies()}{getListEnemies()}}
+{\footnotesize\ttfamily std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ \& Dungeon\+::get\+List\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+Список врагов 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}\label{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2} 
+\index{Dungeon@{Dungeon}!getMapLevel@{getMapLevel}}
+\index{getMapLevel@{getMapLevel}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{getMapLevel()}{getMapLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \& Dungeon\+::get\+Map\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+возвращает матрицу уровня 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_a2385f0f7826e4811afaf7918a0ede732}\label{class_dungeon_a2385f0f7826e4811afaf7918a0ede732} 
+\index{Dungeon@{Dungeon}!getWigth@{getWigth}}
+\index{getWigth@{getWigth}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{getWigth()}{getWigth()}}
+{\footnotesize\ttfamily int Dungeon\+::get\+Wigth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+возвращает ширину 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_aece2066c19dd3150f1a7b4b0e700e29c}\label{class_dungeon_aece2066c19dd3150f1a7b4b0e700e29c} 
+\index{Dungeon@{Dungeon}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dungeon}{Dungeon}} Dungeon\+::operator+= (\begin{DoxyParamCaption}\item[{std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$}]{enemy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Вспомогательная перегрузка оператора Нужен для добавления новых существ в данжион 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em enemy} & враг \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_dungeon_ab717d876de85d35084a8ee9be568d3d7}\label{class_dungeon_ab717d876de85d35084a8ee9be568d3d7} 
+\index{Dungeon@{Dungeon}!setHeight@{setHeight}}
+\index{setHeight@{setHeight}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{setHeight()}{setHeight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dungeon}{Dungeon}} \& Dungeon\+::set\+Height (\begin{DoxyParamCaption}\item[{int}]{height0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em height0} & -\/ высота \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на этот же данж, для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_ab32074a535fad598b8688c975e2bc703}\label{class_dungeon_ab32074a535fad598b8688c975e2bc703} 
+\index{Dungeon@{Dungeon}!setHero@{setHero}}
+\index{setHero@{setHero}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{setHero()}{setHero()}}
+{\footnotesize\ttfamily void Dungeon\+::set\+Hero (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{class_character}{Character}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ \&}]{hero }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em hero} & Ссылка на героя \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_dungeon_ae6b7b3b908f66ac77d3f7364aefb89fa}\label{class_dungeon_ae6b7b3b908f66ac77d3f7364aefb89fa} 
+\index{Dungeon@{Dungeon}!setListEnemies@{setListEnemies}}
+\index{setListEnemies@{setListEnemies}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{setListEnemies()}{setListEnemies()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dungeon}{Dungeon}} \& Dungeon\+::set\+List\+Enemies (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$}]{list\+Enemies0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em list\+Enemies0} & Список врагов \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на этот же данж, для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_acc05205408abd0b1fb6ea7c351611bc9}\label{class_dungeon_acc05205408abd0b1fb6ea7c351611bc9} 
+\index{Dungeon@{Dungeon}!setMapLevel@{setMapLevel}}
+\index{setMapLevel@{setMapLevel}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{setMapLevel()}{setMapLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dungeon}{Dungeon}} \& Dungeon\+::set\+Map\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&}]{map\+Level0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em map\+Level0} & -\/ Матрица уровня \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на этот же данж, для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{class_dungeon_a9ddb935ade35124ee6ea12eadb23e0ff}\label{class_dungeon_a9ddb935ade35124ee6ea12eadb23e0ff} 
+\index{Dungeon@{Dungeon}!setWigth@{setWigth}}
+\index{setWigth@{setWigth}!Dungeon@{Dungeon}}
+\doxysubsubsection{\texorpdfstring{setWigth()}{setWigth()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dungeon}{Dungeon}} \& Dungeon\+::set\+Wigth (\begin{DoxyParamCaption}\item[{int}]{wigth0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em wigth0} & -\/ ширина \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на этот же данж, для цепного вызова 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+Dungeon/Dungeon.\+h\item 
+Dungeon/Dungeon.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\doxysection{Necromancy.\+h}
+\hypertarget{_necromancy_8h_source}{}\label{_necromancy_8h_source}\index{Unit/Character/Skills/Necromancy/Necromancy.h@{Unit/Character/Skills/Necromancy/Necromancy.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 18.11.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_NECROMANCY\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_NECROMANCY\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Skills.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../../../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../../../Enemy/LivingEnemy/LivingEnemy.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../../../Enemy/Summoner/LivingSummoner.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_necromancy}{Necromancy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_skill}{Skill}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ checkNear(std::pair<int,\ int>\ coords,\ std::pair<int,\ int>\ anotherCoords)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx[9]\ =\ \{1,\ 0,\ -\/1,\ 0,\ 1,\ 0,\ 1,\ -\/1,\ -\/1\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy[9]\ =\ \{0,\ 1,\ 0,\ -\/1,\ 1,\ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 9;\ i++)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ coords.second\ +\ dx[i];}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ coords.first\ +\ dy[i];}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ ==\ anotherCoords.second\ \&\&\ y\ ==\ anotherCoords.first)\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_necromancy_ad079b96144dd04a0f66894f1868f01e8}{Necromancy}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}})\ :\ \mbox{\hyperlink{class_skill}{Skill}}(\mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}})\ \{\};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_necromancy_a2acd59eddf7180a844882d55c3cfb397}{useSkill}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ \textcolor{keywordtype}{int}\ mas[])\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ ==\ 0)\ \textcolor{keywordflow}{return}\ -\/3;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCountSummons(dungeon)\ ==\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getLvl())\ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().getCurMana()\ <\ \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}}\ *\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}})\ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ *enemy\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ item\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ item++)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item-\/>first-\/>getStatus()\ ==\ Status::dead\ \&\&\ item-\/>first-\/>getFaction()\ ==\ Faction::livingEnemy\ \&\&}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ checkNear(\{dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first,\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second\},}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{item-\/>first-\/>getCoords().first,\ item-\/>first-\/>getCoords().second\})\ \&\&}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>isOpenEnemy(item-\/>first-\/>getName()))\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy\ =\ item-\/>first;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_living_enemy}{LivingEnemy}}\ *\textcolor{keyword}{>}\ (enemy))-\/>becomeUndead(dungeon);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().mana(\mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{manaCost}}\ *\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ /\ 2);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_NECROMANCY\_H}}
+
+\end{DoxyCode}

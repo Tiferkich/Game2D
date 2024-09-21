@@ -1,0 +1,178 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Skills/Necromancy/Necromancy.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 18.11.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_NECROMANCY_H
+        -:    6:#define GAMELAB3_NECROMANCY_H
+        -:    7:
+        -:    8:#include "../Skills.h"
+        -:    9:#include "../../../../Dungeon/Dungeon.h"
+        -:   10:#include "../../../Enemy/LivingEnemy/LivingEnemy.h"
+        -:   11:#include "../../../Enemy/Summoner/LivingSummoner.h"
+        -:   12:#include <iostream>
+        -:   13:
+        -:   14:///Некромантия - заклинание создающее известные некроманту виды нежити (зомби, гуль, упырь, скелет...) в качестве прислужников из
+        -:   15:///поверженных живых врагов затрачивая ману, затраты которой зависят от изученности навыка.
+        -:   16:class Necromancy : public Skill {
+        -:   17:private:
+        -:   18:
+function _ZN10Necromancy9checkNearESt4pairIiiES1_ called 1 returned 100% blocks executed 91%
+        1:   19:    bool checkNear(std::pair<int, int> coords, std::pair<int, int> anotherCoords) {
+        1:   20:        bool flag = false;
+        1:   21:        int dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   // смещения, соответствующие соседям ячейки
+        1:   22:        int dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};
+        9:   23:        for (int i = 0; i < 9; i++) {
+        1:   23-block  0
+        8:   23-block  1
+        9:   23-block  2
+branch  0 taken 9
+branch  1 taken 0 (fallthrough)
+        9:   24:            if (flag) { return true; }
+        9:   24-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 8
+        1:   24-block  1
+        8:   25:            int x = coords.second + dx[i];
+        8:   26:            int y = coords.first + dy[i];
+        8:   27:            if (x == anotherCoords.second && y == anotherCoords.first) flag = true;
+        8:   27-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 6
+        2:   27-block  1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 1
+        1:   27-block  2
+        -:   28:        }
+    #####:   29:        return false;
+    %%%%%:   29-block  0
+        -:   30:    }
+        -:   31:
+        -:   32:public:
+        -:   33:    /// Конструктор
+        -:   34:    /// \param manaCost - мана кост
+function _ZN10NecromancyC1Ei called 2 returned 100% blocks executed 100%
+        2:   35:    Necromancy(int manaCost) : Skill(manaCost) {};
+        2:   35-block  0
+call    0 returned 2
+        -:   36:
+        -:   37:
+        -:   38:    /// Использование некромантии
+        -:   39:    /// \param dungeon - уровень
+        -:   40:    /// \param mas - опции, в данном случае их можно не подавать
+        -:   41:    /// \return 0 успех
+function _ZN10Necromancy8useSkillER7DungeonPi called 5 returned 100% blocks executed 97%
+        5:   42:    int useSkill(Dungeon &dungeon, int mas[]) override {
+        5:   43:        if (skillLvl == 0) return -3;
+        5:   43-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 4
+        1:   43-block  1
+        4:   44:        if (dungeon.getHero().first->getCountSummons(dungeon) == dungeon.getHero().first->getLvl()) return -2;
+        4:   44-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+call    3 returned 4
+branch  4 taken 1 (fallthrough)
+branch  5 taken 3
+        1:   44-block  1
+       3*:   45:        if (dungeon.getHero().first->getCharacteristics().getCurMana() < manaCost * skillLvl) return -2;
+        3:   45-block  0
+call    0 returned 3
+call    1 returned 3
+call    2 returned 3
+branch  3 taken 0 (fallthrough)
+branch  4 taken 3
+    %%%%%:   45-block  1
+        3:   46:        auto item = dungeon.getListEnemies().begin();
+        3:   46-block  0
+call    0 returned 3
+call    1 returned 3
+        3:   47:        Enemy *enemy = nullptr;
+       15:   48:        for (item = dungeon.getListEnemies().begin(); item != dungeon.getListEnemies().end(); item++) {
+call    0 returned 3
+call    1 returned 3
+       12:   48-block  0
+call    2 returned 12
+       15:   48-block  1
+call    3 returned 15
+call    4 returned 15
+call    5 returned 15
+branch  6 taken 12
+branch  7 taken 3 (fallthrough)
+       14:   49:            if (item->first->getStatus() == Status::dead && item->first->getFaction() == Faction::livingEnemy &&
+       12:   49-block  0
+call    0 returned 12
+call    1 returned 12
+        1:   49-block  1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0
+        1:   50:                checkNear({dungeon.getHero().first->getCoords().first, dungeon.getHero().first->getCoords().second},
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+       14:   51:                          {item->first->getCoords().first, item->first->getCoords().second}) &&
+branch  0 taken 1 (fallthrough)
+branch  1 taken 11
+        1:   51-block  0
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   51-block  1
+       11:   51-block  2
+       12:   51-block  3
+branch  9 taken 1 (fallthrough)
+branch 10 taken 11
+        1:   52:                dungeon.getHero().first->isOpenEnemy(item->first->getName())) {
+        1:   52-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+        1:   53:                enemy = item->first;
+        1:   53-block  0
+call    0 returned 1
+        -:   54:            }
+        -:   55:        }
+        3:   56:        if (enemy == nullptr) return -1;
+        3:   56-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 1
+        2:   56-block  1
+       1*:   57:        (dynamic_cast<LivingEnemy *> (enemy))->becomeUndead(dungeon);
+        1:   57-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   57-block  1
+    %%%%%:   57-block  2
+        1:   57-block  3
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   58:        dungeon.getHero().first->getCharacteristics().mana(manaCost * skillLvl / 2);
+        1:   58-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:   59:        return 0;
+        -:   60:    }
+        -:   61:
+        -:   62:};
+        -:   63:
+        -:   64:
+        -:   65:#endif //GAMELAB3_NECROMANCY_H

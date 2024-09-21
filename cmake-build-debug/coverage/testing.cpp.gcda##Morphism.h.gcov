@@ -1,0 +1,470 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Skills/Morphism/Morphism.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 19.11.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_MORPHISM_H
+        -:    6:#define GAMELAB3_MORPHISM_H
+        -:    7:
+        -:    8:#include "../../../../Game/Game.h"
+        -:    9:#include "../Skills.h"
+        -:   10:#include "../../../../Dungeon/Dungeon.h"
+        -:   11:
+        -:   12:
+        -:   13:
+        -:   14:///С помощью морфизма некромант может превратить нежить одного вида в другую (например, гоблин-скелета в гоблин-
+        -:   15:///туля), если ему известно и вид нежити который превращает(скелет), и в который превращает(гуль), при
+        -:   16:///этом затратив на это некоторое количество маны
+        -:   17:class Morphism : public Skill {
+        -:   18:private:
+        -:   19:    int skillRange = 10; ///< Дальность использования скилла
+        -:   20:    /// Метод который определяет - координаты подходят под условие куда смотрит герой или нет
+        -:   21:    /// \param side - сторона куда смотрит персонаж
+        -:   22:    /// \param ax - его x
+        -:   23:    /// \param ay - его y
+        -:   24:    /// \param bx - чужой x
+        -:   25:    /// \param by - чужой y
+        -:   26:    /// \return true - ok, false - not ok
+function _ZN8Morphism5checkE4Moveiiii called 20 returned 100% blocks executed 29%
+       20:   27:    bool check(Move side, int ax, int ay, int bx, int by) {
+       20:   28:        if (side == Move::right) {
+       20:   28-block  0
+branch  0 taken 20 (fallthrough)
+branch  1 taken 0
+       20:   29:            if (ax <= bx) return true;
+       20:   29-block  0
+branch  0 taken 20 (fallthrough)
+branch  1 taken 0
+       20:   29-block  1
+    #####:   30:        } else if (side == Move::left) {
+    %%%%%:   30-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   31:            if (ax >= bx) return true;
+    %%%%%:   31-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   31-block  1
+    #####:   32:        } else if (side == Move::up) {
+    %%%%%:   32-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   33:            if (ay <= by) return true;
+    %%%%%:   33-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   33-block  1
+    #####:   34:        } else if (side == Move::down) { if (ay >= by) return true; }
+    %%%%%:   34-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   34-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:   34-block  2
+    #####:   35:        return false;
+    %%%%%:   35-block  0
+        -:   36:    }
+        -:   37:
+        -:   38:
+        -:   39:public:
+        -:   40:    /// Конструктор
+        -:   41:    /// \param manaCost - мана кост
+function _ZN8MorphismC1Ei called 2 returned 100% blocks executed 100%
+        2:   42:    explicit Morphism(int manaCost) : Skill(manaCost) {};
+        2:   42-block  0
+call    0 returned 2
+        -:   43:
+        -:   44:    ///  Использование скилла
+        -:   45:    /// \param dungeon - уровень
+        -:   46:    /// \param mas - опции
+        -:   47:    /// \return 0 успех
+function _ZN8Morphism8useSkillER7DungeonPi called 6 returned 100% blocks executed 77%
+        6:   48:    int useSkill(Dungeon &dungeon, int mas[]) override {
+        6:   49:        if (skillLvl == 0) return -1;
+        6:   49-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 5
+        1:   49-block  1
+        5:   50:        std::string nameMorph = Game::allTypesEnemies[mas[0]];
+        5:   50-block  0
+call    0 returned 5
+call    1 returned 5
+branch  2 taken 5 (fallthrough)
+branch  3 taken 0 (throw)
+        -:   51:        //if (!dungeon.getHero().first->isOpenEnemy(nameMorph)) return -2;
+       5*:   52:        if (dungeon.getHero().first->getCharacteristics().getCurMana() < manaCost * skillLvl) return -3;
+        5:   52-block  0
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+branch  3 taken 0 (fallthrough)
+branch  4 taken 5
+    %%%%%:   52-block  1
+        5:   53:        Move side = dungeon.getHero().first->getSideLooking();
+        5:   53-block  0
+call    0 returned 5
+call    1 returned 5
+        5:   54:        int y = dungeon.getHero().first->getCoords().first;
+call    0 returned 5
+call    1 returned 5
+        5:   55:        int x = dungeon.getHero().first->getCoords().second;
+call    0 returned 5
+call    1 returned 5
+        5:   56:        Enemy *enemy = nullptr;
+        5:   57:        int h = 10000000;
+        5:   58:        auto item = dungeon.getListEnemies().begin();
+call    0 returned 5
+call    1 returned 5
+       25:   59:        for (item = dungeon.getListEnemies().begin(); item != dungeon.getListEnemies().end(); ++item) {
+call    0 returned 5
+call    1 returned 5
+       20:   59-block  0
+call    2 returned 20
+       25:   59-block  1
+call    3 returned 25
+call    4 returned 25
+call    5 returned 25
+branch  6 taken 20
+branch  7 taken 5 (fallthrough)
+       20:   60:            if (check(side, x, y, item->first->getCoords().second, item->first->getCoords().first) &&
+       20:   60-block  0
+call    0 returned 20
+call    1 returned 20
+call    2 returned 20
+call    3 returned 20
+call    4 returned 20
+       56:   61:                abs(item->first->getCoords().second - x) + abs(item->first->getCoords().first - y) < h &&
+branch  0 taken 20 (fallthrough)
+branch  1 taken 0
+       20:   61-block  0
+call    2 returned 20
+call    3 returned 20
+call    4 returned 20
+call    5 returned 20
+branch  6 taken 18 (fallthrough)
+branch  7 taken 2
+branch  8 taken 18 (fallthrough)
+branch  9 taken 0
+        9:   61-block  1
+       11:   61-block  2
+       20:   61-block  3
+branch 10 taken 9 (fallthrough)
+branch 11 taken 11
+       36:   62:                (item->first->getFaction() == Faction::character || item->first->getFaction() == Faction::undead)) {
+       18:   62-block  0
+call    0 returned 18
+call    1 returned 18
+       18:   62-block  1
+call    2 returned 18
+call    3 returned 18
+branch  4 taken 9 (fallthrough)
+branch  5 taken 9
+        -:   63:                try {
+      16*:   64:                    if (dungeon.getHero().first->isOpenEnemy(dynamic_cast<Undead *>(item->first)->getNameLiving()) &&
+        9:   64-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 9 (fallthrough)
+branch  3 taken 0
+        9:   64-block  1
+    %%%%%:   64-block  2
+        9:   64-block  3
+call    4 returned 9
+call    5 returned 9
+branch  6 taken 7 (fallthrough)
+branch  7 taken 2
+        3:   64-block  4
+        6:   64-block  5
+        9:   64-block  6
+branch  8 taken 3 (fallthrough)
+branch  9 taken 6
+        7:   65:                        item->first->getName() != nameMorph) {
+        7:   65-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+branch  3 taken 3 (fallthrough)
+branch  4 taken 4
+        3:   66:                        h = abs(item->first->getCoords().second - x) + abs(item->first->getCoords().first - y);
+        3:   66-block  0
+call    0 returned 3
+call    1 returned 3
+call    2 returned 3
+call    3 returned 3
+        3:   67:                        enemy = item->first;
+call    0 returned 3
+        -:   68:                    }
+        -:   69:                } catch (...) {
+        -:   70:                    continue;
+        -:   71:                }
+        -:   72:            }
+        -:   73:        }
+        5:   74:        if (enemy == nullptr) return -4;
+        5:   74-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 3
+        2:   74-block  1
+       3*:   75:        if (h > skillRange) return -5;
+        3:   75-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+    %%%%%:   75-block  1
+        -:   76:
+        7:   77:        if (nameMorph == "undead" && dungeon.getHero().first->isOpenEnemy("livingEnemy")) {
+        3:   77-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:   77-block  1
+branch  3 taken 2 (fallthrough)
+branch  4 taken 1
+        2:   77-block  2
+call    5 returned 2
+        2:   77-block  3
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:   77-block  4
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0
+        2:   77-block  5
+        1:   77-block  6
+        3:   77-block  7
+branch 12 taken 2 (fallthrough)
+branch 13 taken 1
+        2:   77-block  8
+call   14 returned 2
+        3:   77-block  9
+branch 15 taken 2 (fallthrough)
+branch 16 taken 1
+        3:   77-block 10
+branch 17 taken 2 (fallthrough)
+branch 18 taken 1
+    $$$$$:   77-block 11
+branch 19 never executed (fallthrough)
+branch 20 never executed
+    $$$$$:   77-block 12
+call   21 never executed
+    $$$$$:   77-block 13
+    $$$$$:   77-block 14
+branch 22 never executed (fallthrough)
+branch 23 never executed
+    $$$$$:   77-block 15
+        4:   78:            dungeon.getListEnemies().push_back(
+        2:   78-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   78-block  1
+        2:   79:                    {new Undead(10, enemy->Damage(), enemy->getCoords(), "undead",
+        2:   79-block  0
+call    0 returned 2
+    $$$$$:   79-block  1
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    $$$$$:   79-block  2
+        -:   80:                                "livingEnemy",
+       10:   81:                                enemy->getMaxHp(), enemy->getCurHp()),
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   81-block  0
+call    3 returned 2
+call    4 returned 2
+        2:   81-block  1
+call    5 returned 2
+branch  6 taken 2 (fallthrough)
+branch  7 taken 0 (throw)
+        2:   81-block  2
+call    8 returned 2
+branch  9 taken 2 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 2
+call   12 returned 2
+        2:   81-block  3
+call   13 returned 2
+    $$$$$:   81-block  4
+call   14 never executed
+    $$$$$:   81-block  5
+    $$$$$:   81-block  6
+    $$$$$:   81-block  7
+call   15 never executed
+    $$$$$:   81-block  8
+    $$$$$:   81-block  9
+    $$$$$:   81-block 10
+call   16 never executed
+        4:   82:                     &(dungeon.getMapLevel()[enemy->getCoords().second][enemy->getCoords().first])});
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+branch  3 taken 2 (fallthrough)
+branch  4 taken 0 (throw)
+        2:   82-block  0
+call    5 returned 2
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:   82-block  1
+call    9 returned 2
+        2:   82-block  2
+call   10 returned 2
+    $$$$$:   82-block  3
+    $$$$$:   82-block  4
+        2:   83:            (--dungeon.getListEnemies().end())->first->setHeap(true);
+        2:   83-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+call    3 returned 2
+call    4 returned 2
+        2:   84:            (--dungeon.getListEnemies().end())->first->setFaction(enemy->getFaction());
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+call    3 returned 2
+call    4 returned 2
+call    5 returned 2
+        2:   85:            enemy->die();
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   86:            enemy->methodAfterDie(dungeon);
+        2:   86-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   87:            dungeon.getHero().first->getCharacteristics().mana(manaCost * skillLvl / 2);
+        2:   87-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+       3*:   88:        } else if (nameMorph == "undeadSummoner" && dungeon.getHero().first->isOpenEnemy("livingSummoner")) {
+        1:   88-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   88-block  1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:   88-block  2
+call    5 returned 1
+        1:   88-block  3
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   88-block  4
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0
+        1:   88-block  5
+    %%%%%:   88-block  6
+        1:   88-block  7
+branch 12 taken 1 (fallthrough)
+branch 13 taken 0
+        1:   88-block  8
+call   14 returned 1
+        1:   88-block  9
+branch 15 taken 1 (fallthrough)
+branch 16 taken 0
+        1:   88-block 10
+branch 17 taken 1 (fallthrough)
+branch 18 taken 0
+    $$$$$:   88-block 11
+branch 19 never executed (fallthrough)
+branch 20 never executed
+    $$$$$:   88-block 12
+call   21 never executed
+    $$$$$:   88-block 13
+    $$$$$:   88-block 14
+branch 22 never executed (fallthrough)
+branch 23 never executed
+    $$$$$:   88-block 15
+        2:   89:            dungeon.getListEnemies().push_back(
+        1:   89-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   89-block  1
+        1:   90:                    {new UndeadSummoner(10, enemy->Damage(), enemy->getCoords(), enemy->getMaxHp(), enemy->getCurHp()),
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   90-block  0
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+call    6 returned 1
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+    $$$$$:   90-block  1
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    $$$$$:   90-block  2
+call   12 never executed
+    $$$$$:   90-block  3
+        1:   91:                     &(dungeon.getMapLevel()[enemy->getCoords().second][enemy->getCoords().first])});
+        1:   91-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   91-block  1
+call    5 returned 1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   91-block  2
+call    9 returned 1
+    $$$$$:   91-block  3
+    $$$$$:   91-block  4
+        1:   92:            (--dungeon.getListEnemies().end())->first->setHeap(true);
+        1:   92-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        1:   93:            (--dungeon.getListEnemies().end())->first->setFaction(enemy->getFaction());
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+        1:   94:            enemy->die();
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   95:            enemy->methodAfterDie(dungeon);
+        1:   95-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   96:            dungeon.getHero().first->getCharacteristics().mana(manaCost * skillLvl / 2);
+        1:   96-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        -:   97:        }
+        -:   98:
+        3:   99:        return 0;
+        3:   99-block  0
+        5:  100:    }
+        5:  100-block  0
+call    0 returned 5
+    $$$$$:  100-block  1
+call    1 never executed
+        -:  101:
+        -:  102:};
+        -:  103:
+        -:  104:
+        -:  105:#endif //GAMELAB3_MORPHISM_H

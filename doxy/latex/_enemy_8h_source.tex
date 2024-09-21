@@ -1,0 +1,131 @@
+\doxysection{Enemy.\+h}
+\hypertarget{_enemy_8h_source}{}\label{_enemy_8h_source}\index{Unit/Enemy/Enemy.h@{Unit/Enemy/Enemy.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 24.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Unit.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../Dungeon/Ceil.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../../Matrix/Matrix.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_ENEMY\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ GAMELAB3\_ENEMY\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}typiesOfEnemies.h"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_dungeon}{Dungeon}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{enum\ class}\ Status\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ wandering,}
+\DoxyCodeLine{00027\ \ \ \ \ aggresion,}
+\DoxyCodeLine{00028\ \ \ \ \ dead}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_enemy}{Enemy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_unit}{Unit}}\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_ac7ae7760709c10b339b9740a9e126e85}{cost}}\ =\ 100;\ }
+\DoxyCodeLine{00035\ \ \ \ \ std::string\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}};\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}};\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}};\ }
+\DoxyCodeLine{00038\ \ \ \ \ Status\ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}}\ =\ 10;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_enemy_af51338b05251c2830dd9a97e40d90bb1}{Enemy}}(Faction\ faction0,\ \textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ std::string\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}},}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}},}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ Status\ status0,\ \textcolor{keywordtype}{int}\ vision0)\ :\ \mbox{\hyperlink{class_unit}{Unit}}(faction0,\ speed0,\ damage0,\ coord0),\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}(std::\mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(\mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}})),\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}}(\mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}}),}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}(\mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}),}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}(status0),\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}}(vision0)\ \{\};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix,\ std::pair<int,\ int>\ coordTo,\ std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ \&listEnemies);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}}(\mbox{\hyperlink{class_unit}{Unit}}\ \&someone)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a920ffcc567b4b8bddd6175a8d91171e4}{getDamage}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{die}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::dead;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}{speed}}\ =\ 0;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}\ =\ 0;}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{virtual}\ Enemies\ \mbox{\hyperlink{class_enemy_a65b8f3367217798c9241481959a595eb}{getType}}()\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Enemies::simpleEnemy;}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_aeed6ab0081ed2a24474707320ac86844}{openCost}}()\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_ac7ae7760709c10b339b9740a9e126e85}{cost}};}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a7233656186248f7725dec7f5cea5c84d}{setHeap}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}});}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ isHeap()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a41f96e23f90b6c54499e4e7286b39b9e}{methodAfterDie}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_aa10e26ff777340eae5270b1ab6be12c7}{doSomething}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_enemy_a63ff6e5c696c7bb78ae7912e26ee1cd1}{getName}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}};}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a4fd1eb1443203e7f7d3ccdc6b339c11b}{getVision}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}};}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a5970616d8efe048e0be00f89e0cd1172}{getMaxHp}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}};}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af409040ad718a0134a9d992226eef73a}{getCurHp}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}};}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00120\ \ \ \ \ Status\ \mbox{\hyperlink{class_enemy_a13547be3136c6dc40b0724e1286f6603}{getStatus}}()\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}};}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ \&\mbox{\hyperlink{class_enemy_a769032af238b32ef8e8a1ca6a1707c65}{setVision}}(\textcolor{keywordtype}{int}\ vision0)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}}\ =\ vision0;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00129\ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ \&\mbox{\hyperlink{class_enemy_a371136205fc2b78e4a22a9ccb2b67fe2}{setName}}(\textcolor{keyword}{const}\ std::string\ \&name0)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{Enemy::name}}\ =\ name0;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ \&\mbox{\hyperlink{class_enemy_a83cdc6d5df41fb4bedc606b0991e90b7}{setMaxHp}}(\textcolor{keywordtype}{int}\ maxHp)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}}\ =\ maxHp;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ \&\mbox{\hyperlink{class_enemy_a86197c5fc02ae5457bb5387aaf20929e}{setCurHp}}(\textcolor{keywordtype}{int}\ curHp)\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}\ =\ curHp;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ \&\mbox{\hyperlink{class_enemy_a2141e60bbc748923ae79e397815b4ff7}{setStatus}}(Status\ status0)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{Enemy::status}}\ =\ status0;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ *\mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{findTarget}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00169\ \ \ \ \ std::vector<std::pair<int,\ int>>\ Lee(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix,\ std::pair<int,\ int>\ coordTo);}
+\DoxyCodeLine{00170\ \};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_ENEMY\_H}}
+
+\end{DoxyCode}

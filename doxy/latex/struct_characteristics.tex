@@ -1,0 +1,174 @@
+\doxysection{Структура Characteristics}
+\hypertarget{struct_characteristics}{}\label{struct_characteristics}\index{Characteristics@{Characteristics}}
+
+
+Структура характеристик персонажа  
+
+
+
+
+{\ttfamily \#include $<$Character.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_characteristics_a99b0e2896849c0dbf95efb2dc208dcac}\label{struct_characteristics_a99b0e2896849c0dbf95efb2dc208dcac} 
+{\bfseries Characteristics} ()
+\begin{DoxyCompactList}\small\item\em Дефолтный конструктор \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_characteristics_a483faafb0bde3494f076d9c8e63a6c59}{Characteristics}} (int max\+HP0, int max\+Mana0)
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_afceffc1db7648d45ffae3e13fa6db7df}{health}} (int hp)
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_a05174559cec0839a7f2c3f99af9c0736}{mana}} (int mana)
+\item 
+int \mbox{\hyperlink{struct_characteristics_ab17e0cd2898b629db45d65795f4d51fe}{get\+Cur\+Hp}} () const
+\item 
+int \mbox{\hyperlink{struct_characteristics_adb078df62807bdeb701a06ce30f00f9b}{get\+Max\+Hp}} () const
+\item 
+int \mbox{\hyperlink{struct_characteristics_adba0526a344ee930f1537ea2fcf52c4c}{get\+Cur\+Mana}} () const
+\item 
+int \mbox{\hyperlink{struct_characteristics_a3453529d6d333bed0642765094a59a70}{get\+Max\+Mana}} () const
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_a7b9ca38e50c5c9c18cc400a0d18c5947}{set\+Cur\+Hp}} (int cur\+Hp0)
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_af5327bc322013b60c87490a6debca63b}{set\+Max\+Hp}} (int max\+Hp0)
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_a42e3eaed7c0f27d695978189820d193d}{set\+Cur\+Mana}} (int cur\+Mana0)
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{struct_characteristics_ae0d5e25f1779a97ba500664373274ec1}{set\+Max\+Mana}} (int max\+Mana0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Структура характеристик персонажа 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{struct_characteristics_a483faafb0bde3494f076d9c8e63a6c59}\label{struct_characteristics_a483faafb0bde3494f076d9c8e63a6c59} 
+\index{Characteristics@{Characteristics}!Characteristics@{Characteristics}}
+\index{Characteristics@{Characteristics}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{Characteristics()}{Characteristics()}}
+{\footnotesize\ttfamily Characteristics\+::\+Characteristics (\begin{DoxyParamCaption}\item[{int}]{max\+HP0,  }\item[{int}]{max\+Mana0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em max\+HP0} & -\/ Хп \\
+\hline
+{\em max\+Mana0} & -\/ Мана \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{struct_characteristics_ab17e0cd2898b629db45d65795f4d51fe}\label{struct_characteristics_ab17e0cd2898b629db45d65795f4d51fe} 
+\index{Characteristics@{Characteristics}!getCurHp@{getCurHp}}
+\index{getCurHp@{getCurHp}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{getCurHp()}{getCurHp()}}
+{\footnotesize\ttfamily int Characteristics\+::get\+Cur\+Hp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Текущее здоровье 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_adba0526a344ee930f1537ea2fcf52c4c}\label{struct_characteristics_adba0526a344ee930f1537ea2fcf52c4c} 
+\index{Characteristics@{Characteristics}!getCurMana@{getCurMana}}
+\index{getCurMana@{getCurMana}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{getCurMana()}{getCurMana()}}
+{\footnotesize\ttfamily int Characteristics\+::get\+Cur\+Mana (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Текущая мана 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_adb078df62807bdeb701a06ce30f00f9b}\label{struct_characteristics_adb078df62807bdeb701a06ce30f00f9b} 
+\index{Characteristics@{Characteristics}!getMaxHp@{getMaxHp}}
+\index{getMaxHp@{getMaxHp}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{getMaxHp()}{getMaxHp()}}
+{\footnotesize\ttfamily int Characteristics\+::get\+Max\+Hp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Максимальное здоровье 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_a3453529d6d333bed0642765094a59a70}\label{struct_characteristics_a3453529d6d333bed0642765094a59a70} 
+\index{Characteristics@{Characteristics}!getMaxMana@{getMaxMana}}
+\index{getMaxMana@{getMaxMana}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{getMaxMana()}{getMaxMana()}}
+{\footnotesize\ttfamily int Characteristics\+::get\+Max\+Mana (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Максимальная мана 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_afceffc1db7648d45ffae3e13fa6db7df}\label{struct_characteristics_afceffc1db7648d45ffae3e13fa6db7df} 
+\index{Characteristics@{Characteristics}!health@{health}}
+\index{health@{health}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{health()}{health()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::health (\begin{DoxyParamCaption}\item[{int}]{hp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Метод лечения персонажа (или нет если подать -\/hp) 
+\begin{DoxyParams}{Аргументы}
+{\em hp} & -\/ Кол-\/во здоровья на которое нужно изменить текущее \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+\texorpdfstring{$\ast$}{*}this -\/ для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_a05174559cec0839a7f2c3f99af9c0736}\label{struct_characteristics_a05174559cec0839a7f2c3f99af9c0736} 
+\index{Characteristics@{Characteristics}!mana@{mana}}
+\index{mana@{mana}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{mana()}{mana()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::mana (\begin{DoxyParamCaption}\item[{int}]{mana }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Метод "{}лечения"{} персонажа (или нет если подать -\/mana) 
+\begin{DoxyParams}{Аргументы}
+{\em mana} & -\/ Кол-\/во маны на которое нужно изменить текущее \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+\texorpdfstring{$\ast$}{*}this -\/ для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{struct_characteristics_a7b9ca38e50c5c9c18cc400a0d18c5947}\label{struct_characteristics_a7b9ca38e50c5c9c18cc400a0d18c5947} 
+\index{Characteristics@{Characteristics}!setCurHp@{setCurHp}}
+\index{setCurHp@{setCurHp}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{setCurHp()}{setCurHp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::set\+Cur\+Hp (\begin{DoxyParamCaption}\item[{int}]{cur\+Hp0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em cur\+Hp0} & -\/ cur\+Hp \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struct_characteristics_a42e3eaed7c0f27d695978189820d193d}\label{struct_characteristics_a42e3eaed7c0f27d695978189820d193d} 
+\index{Characteristics@{Characteristics}!setCurMana@{setCurMana}}
+\index{setCurMana@{setCurMana}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{setCurMana()}{setCurMana()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::set\+Cur\+Mana (\begin{DoxyParamCaption}\item[{int}]{cur\+Mana0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em cur\+Mana0} & -\/ Cur\+Mana \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struct_characteristics_af5327bc322013b60c87490a6debca63b}\label{struct_characteristics_af5327bc322013b60c87490a6debca63b} 
+\index{Characteristics@{Characteristics}!setMaxHp@{setMaxHp}}
+\index{setMaxHp@{setMaxHp}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{setMaxHp()}{setMaxHp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::set\+Max\+Hp (\begin{DoxyParamCaption}\item[{int}]{max\+Hp0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em max\+Hp0} & -\/ max\+Hp \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struct_characteristics_ae0d5e25f1779a97ba500664373274ec1}\label{struct_characteristics_ae0d5e25f1779a97ba500664373274ec1} 
+\index{Characteristics@{Characteristics}!setMaxMana@{setMaxMana}}
+\index{setMaxMana@{setMaxMana}!Characteristics@{Characteristics}}
+\doxysubsubsection{\texorpdfstring{setMaxMana()}{setMaxMana()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Characteristics\+::set\+Max\+Mana (\begin{DoxyParamCaption}\item[{int}]{max\+Mana0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em max\+Mana0} & -\/ Max\+Mana \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов структуры находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Character/Character.\+h\end{DoxyCompactItemize}

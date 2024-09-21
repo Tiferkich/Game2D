@@ -1,0 +1,108 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Undead/Undead.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <iostream>
+        -:    6:#include <utility>
+        -:    7:#include "../Enemy.h"
+        -:    8:
+        -:    9:#ifndef GAMELAB3_UNDEAD_H
+        -:   10:#define GAMELAB3_UNDEAD_H
+        -:   11:
+        -:   12:#define VISION_UNDEAD 10
+        -:   13:
+        -:   14:///Нежить, при смерти очищается с карты, ничего не делая
+        -:   15:class Undead : public Enemy {
+        -:   16:protected:
+        -:   17:    std::string nameLiving;///< Имя при жизни, оно должно соответсвовать какому-то, реально существующему имени
+        -:   18:public:
+       14:   19:    Undead(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   20:           std::string nameLiving0, int maxHP,
+       14:   21:           int curHP) : Enemy(
+       14:   22:            Faction::undead, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering, VISION_UNDEAD),
+       14:   23:                        nameLiving(std::move(nameLiving0)) {};
+------------------
+_ZN6UndeadC1EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_ii:
+function _ZN6UndeadC1EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_ii called 7 returned 100% blocks executed 100%
+        7:   19:    Undead(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   20:           std::string nameLiving0, int maxHP,
+        7:   21:           int curHP) : Enemy(
+        7:   22:            Faction::undead, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering, VISION_UNDEAD),
+        7:   23:                        nameLiving(std::move(nameLiving0)) {};
+        7:   23-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+call    3 returned 7
+call    4 returned 7
+call    5 returned 7
+------------------
+_ZN6UndeadC2EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_ii:
+function _ZN6UndeadC2EiSt4pairIiiES1_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_ii called 7 returned 100% blocks executed 100%
+        7:   19:    Undead(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   20:           std::string nameLiving0, int maxHP,
+        7:   21:           int curHP) : Enemy(
+        7:   22:            Faction::undead, speed0, damage0, coord0, std::move(name), maxHP, curHP, Status::wandering, VISION_UNDEAD),
+        7:   23:                        nameLiving(std::move(nameLiving0)) {};
+        7:   23-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+call    3 returned 7
+call    4 returned 7
+call    5 returned 7
+------------------
+        -:   24:
+function _ZN6UndeadC1EiSt4pairIiiES1_ii called 38 returned 100% blocks executed 60%
+       38:   25:    Undead(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, int maxHP,
+       38:   26:           int curHP) : Enemy(
+        -:   27:            Faction::undead, speed0, damage0, coord0, "undead", maxHP, curHP, Status::wandering, VISION_UNDEAD),
+      190:   28:                        nameLiving("livingEnemy") {};
+       38:   28-block  0
+       38:   28-block  1
+call    0 returned 38
+branch  1 taken 38 (fallthrough)
+branch  2 taken 0 (throw)
+       38:   28-block  2
+call    3 returned 38
+call    4 returned 38
+       38:   28-block  3
+       38:   28-block  4
+call    5 returned 38
+branch  6 taken 38 (fallthrough)
+branch  7 taken 0 (throw)
+       38:   28-block  5
+    $$$$$:   28-block  6
+    $$$$$:   28-block  7
+call    8 never executed
+    $$$$$:   28-block  8
+    $$$$$:   28-block  9
+call    9 never executed
+        -:   29:    /// Getter
+        -:   30:    /// \return получить имя при жизни
+function _ZNK6Undead13getNameLivingB5cxx11Ev called 9 returned 100% blocks executed 100%
+        9:   31:    const std::string &getNameLiving() const {
+        9:   32:        return nameLiving;
+        9:   32-block  0
+        -:   33:    }
+        -:   34:    /// Setter
+        -:   35:    /// \param nameLiving - имя при жизни
+        -:   36:    void setNameLiving(const std::string &nameLiving) {
+        -:   37:        Undead::nameLiving = nameLiving;
+        -:   38:    }
+        -:   39:    /// Getter в итоге нигде не использовался
+        -:   40:    /// \return Вернет фракцию - simpleUndeadEnemy
+function _ZN6Undead7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   41:    Enemies getType() override {
+    #####:   42:        return Enemies::simpleUndeadEnemy;
+    %%%%%:   42-block  0
+        -:   43:    }
+        -:   44:
+        -:   45:};
+        -:   46:
+        -:   47:
+        -:   48:#endif //GAMELAB3_UNDEAD_H

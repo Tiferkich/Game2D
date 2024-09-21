@@ -1,0 +1,218 @@
+\doxysection{Класс Golem}
+\hypertarget{class_golem}{}\label{class_golem}\index{Golem@{Golem}}
+
+
+{\ttfamily \#include $<$Golem.\+h$>$}
+
+Граф наследования\+:Golem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_golem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_golem_a0f6af3e17d7c37f4a6cc1cefcf1d2b39}\label{class_golem_a0f6af3e17d7c37f4a6cc1cefcf1d2b39} 
+{\bfseries Golem} (int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}}, int hit\+Percentage0, Ceil ceil0)
+\item 
+void \mbox{\hyperlink{class_golem_ae42c11205cc3431482a08ef19ae5fece}{get\+Damage}} (int \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}) override
+\item 
+void \mbox{\hyperlink{class_golem_a398a22756301a89ee39c11d878c01f86}{method\+After\+Die}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon) override
+\item 
+int \mbox{\hyperlink{class_golem_a2c27400582114cd045d830a67a8bc1e0}{get\+Hit\+Percentage}} () const
+\item 
+Ceil \mbox{\hyperlink{class_golem_a9fcad872051942b7d116cfe7592a146f}{get\+Ceil}} () const
+\item 
+\mbox{\hyperlink{class_golem}{Golem}} \& \mbox{\hyperlink{class_golem_ab0ed981096ce5147832badde130f0804}{set\+Hit\+Percentage}} (int hit\+Percentage)
+\item 
+\mbox{\hyperlink{class_golem}{Golem}} \& \mbox{\hyperlink{class_golem_ac5fc59c6a152f0674b0e88846059382f}{set\+Ceil}} (Ceil ceil)
+\item 
+Enemies \mbox{\hyperlink{class_golem_aa5bbc9040bf8d8c51f636cf575180442}{get\+Type}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Enemy} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, std\+::string \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}}, int \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{cur\+HP}}, Status status0, int vision0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&matrix, std\+::pair$<$ int, int $>$ coord\+To, std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ \&list\+Enemies)
+\item 
+void \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}} (\mbox{\hyperlink{class_unit}{Unit}} \&someone) override
+\item 
+void \mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{die}} () override
+\begin{DoxyCompactList}\small\item\em Смерть, статус меняется на dead и текущее хп на 0. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_enemy_aeed6ab0081ed2a24474707320ac86844}{open\+Cost}} ()
+\item 
+void {\bfseries set\+Heap} (bool \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}})
+\begin{DoxyCompactList}\small\item\em Установить true или false. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Heap} () const
+\item 
+virtual void \mbox{\hyperlink{class_enemy_aa10e26ff777340eae5270b1ab6be12c7}{do\+Something}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&)
+\item 
+const std\+::string \& \mbox{\hyperlink{class_enemy_a63ff6e5c696c7bb78ae7912e26ee1cd1}{get\+Name}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_a4fd1eb1443203e7f7d3ccdc6b339c11b}{get\+Vision}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_a5970616d8efe048e0be00f89e0cd1172}{get\+Max\+Hp}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_af409040ad718a0134a9d992226eef73a}{get\+Cur\+Hp}} () const
+\item 
+Status \mbox{\hyperlink{class_enemy_a13547be3136c6dc40b0724e1286f6603}{get\+Status}} ()
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a769032af238b32ef8e8a1ca6a1707c65}{set\+Vision}} (int vision0)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a371136205fc2b78e4a22a9ccb2b67fe2}{set\+Name}} (const std\+::string \&name0)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a83cdc6d5df41fb4bedc606b0991e90b7}{set\+Max\+Hp}} (int max\+Hp)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a86197c5fc02ae5457bb5387aaf20929e}{set\+Cur\+Hp}} (int cur\+Hp)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a2141e60bbc748923ae79e397815b4ff7}{set\+Status}} (Status status0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{find\+Target}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_unit_a52b26bde273d59962606ea5339bc197c}{Unit}} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+Faction \mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{get\+Faction}} () const
+\item 
+int \mbox{\hyperlink{class_unit_a634a9ac69a71bc32645af69f8ce23859}{get\+Speed}} () const
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}} () const
+\item 
+const std\+::pair$<$ int, int $>$ \& \mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{get\+Coords}} () const
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{set\+Faction}} (Faction faction0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}{set\+Speed}} (int speed0)
+\item 
+void \mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{set\+Damage}} (std\+::pair$<$ int, int $>$ damage0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a416e6f77ca094db4eebd15da4b8899df}{set\+Coords}} (const std\+::pair$<$ int, int $>$ \&coords0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Дополнительные унаследованные члены}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries cost} = 100
+\begin{DoxyCompactList}\small\item\em Цена изучения врага \end{DoxyCompactList}\item 
+std\+::string {\bfseries name}
+\begin{DoxyCompactList}\small\item\em Имя врага \end{DoxyCompactList}\item 
+int {\bfseries max\+HP}
+\begin{DoxyCompactList}\small\item\em Максимальное здоровье врага \end{DoxyCompactList}\item 
+int {\bfseries cur\+HP}
+\begin{DoxyCompactList}\small\item\em Текущее здоровье \end{DoxyCompactList}\item 
+Status {\bfseries status}
+\begin{DoxyCompactList}\small\item\em Статус врага \end{DoxyCompactList}\item 
+int {\bfseries vision} = 10
+\begin{DoxyCompactList}\small\item\em Зрение врага \end{DoxyCompactList}\item 
+bool {\bfseries heap} = false
+\begin{DoxyCompactList}\small\item\em Создан на куче или нет \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+Faction {\bfseries faction}
+\begin{DoxyCompactList}\small\item\em Фракция юнита \end{DoxyCompactList}\item 
+unsigned int {\bfseries speed}
+\begin{DoxyCompactList}\small\item\em Скорость юнита (нигде не использовалось, но может быть будет) \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries damage}
+\begin{DoxyCompactList}\small\item\em Дамаг юнита, damage.\+first -\/ минимальный дамаг, damage.\+second -\/ максимальный дамаг \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries coords}
+\begin{DoxyCompactList}\small\item\em Координаты x,y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Каждый голем может с некоторой вероятностью проигнорировать урон, а после своей смерти (в зависимости от вида) оставляют либо стену(каменный), либо лаву(огиенный), либо эссенцию(фирный) 
+
+\doxysubsection{Методы}
+\Hypertarget{class_golem_a9fcad872051942b7d116cfe7592a146f}\label{class_golem_a9fcad872051942b7d116cfe7592a146f} 
+\index{Golem@{Golem}!getCeil@{getCeil}}
+\index{getCeil@{getCeil}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{getCeil()}{getCeil()}}
+{\footnotesize\ttfamily Ceil Golem\+::get\+Ceil (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+ceil 
+\end{DoxyReturn}
+\Hypertarget{class_golem_ae42c11205cc3431482a08ef19ae5fece}\label{class_golem_ae42c11205cc3431482a08ef19ae5fece} 
+\index{Golem@{Golem}!getDamage@{getDamage}}
+\index{getDamage@{getDamage}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{getDamage()}{getDamage()}}
+{\footnotesize\ttfamily void Golem\+::get\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Перегруженный метод получения урона, у голема есть шанс заблокировать урон 
+\begin{DoxyParams}{Аргументы}
+{\em damage} & -\/ дамаг \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_enemy_a920ffcc567b4b8bddd6175a8d91171e4}{Enemy}}.
+
+\Hypertarget{class_golem_a2c27400582114cd045d830a67a8bc1e0}\label{class_golem_a2c27400582114cd045d830a67a8bc1e0} 
+\index{Golem@{Golem}!getHitPercentage@{getHitPercentage}}
+\index{getHitPercentage@{getHitPercentage}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{getHitPercentage()}{getHitPercentage()}}
+{\footnotesize\ttfamily int Golem\+::get\+Hit\+Percentage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+hit\+Percentage 
+\end{DoxyReturn}
+\Hypertarget{class_golem_aa5bbc9040bf8d8c51f636cf575180442}\label{class_golem_aa5bbc9040bf8d8c51f636cf575180442} 
+\index{Golem@{Golem}!getType@{getType}}
+\index{getType@{getType}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Enemies Golem\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+simple\+Golem 
+\end{DoxyReturn}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_enemy_a65b8f3367217798c9241481959a595eb}{Enemy}}.
+
+\Hypertarget{class_golem_a398a22756301a89ee39c11d878c01f86}\label{class_golem_a398a22756301a89ee39c11d878c01f86} 
+\index{Golem@{Golem}!methodAfterDie@{methodAfterDie}}
+\index{methodAfterDie@{methodAfterDie}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{methodAfterDie()}{methodAfterDie()}}
+{\footnotesize\ttfamily void Golem\+::method\+After\+Die (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Перегруженный метод \+: "{}После смерти"{}, оставит ячейку по его коордам 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_enemy_a41f96e23f90b6c54499e4e7286b39b9e}{Enemy}}.
+
+\Hypertarget{class_golem_ac5fc59c6a152f0674b0e88846059382f}\label{class_golem_ac5fc59c6a152f0674b0e88846059382f} 
+\index{Golem@{Golem}!setCeil@{setCeil}}
+\index{setCeil@{setCeil}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{setCeil()}{setCeil()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golem}{Golem}} \& Golem\+::set\+Ceil (\begin{DoxyParamCaption}\item[{Ceil}]{ceil }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em ceil} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_golem_ab0ed981096ce5147832badde130f0804}\label{class_golem_ab0ed981096ce5147832badde130f0804} 
+\index{Golem@{Golem}!setHitPercentage@{setHitPercentage}}
+\index{setHitPercentage@{setHitPercentage}!Golem@{Golem}}
+\doxysubsubsection{\texorpdfstring{setHitPercentage()}{setHitPercentage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golem}{Golem}} \& Golem\+::set\+Hit\+Percentage (\begin{DoxyParamCaption}\item[{int}]{hit\+Percentage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em hit\+Percentage} & \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Enemy/\+Golem/Golem.\+h\item 
+Unit/\+Enemy/\+Golem/Golem.\+cpp\end{DoxyCompactItemize}

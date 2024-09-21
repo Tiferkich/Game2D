@@ -1,0 +1,88 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Golem/Golem.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "../../../Dungeon/Ceil.h"
+        -:    6:
+        -:    7:#ifndef GAMELAB3_GOLEM_H
+        -:    8:#define GAMELAB3_GOLEM_H
+        -:    9:
+        -:   10:#include "../Enemy.h"
+        -:   11:
+        -:   12:
+        -:   13:#define VISION_GOLEM 6
+        -:   14:
+        -:   15:
+        -:   16:///Каждый голем может с некоторой
+        -:   17:///вероятностью проигнорировать урон, а после своей смерти (в зависимости от вида) оставляют либо
+        -:   18:///стену(каменный), либо лаву(огиенный), либо эссенцию(фирный)
+        -:   19:class Golem : public Enemy {
+        -:   20:private:
+        -:   21:    int hitPercentage;///< Процент попадания по голему
+        -:   22:    Ceil ceil;///< Ячейка, на которую голем заменит по его коордам
+        -:   23:public:
+function _ZN5GolemC1EiSt4pairIiiES1_ii4Ceil called 21 returned 100% blocks executed 73%
+       21:   24:    Golem(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, int maxHP, int hitPercentage0,
+        -:   25:          Ceil ceil0)
+       21:   26:            : Enemy(Faction::golem, speed0, damage0, coord0, "golem",
+       21:   27:                    maxHP, maxHP, Status::wandering, VISION_GOLEM), hitPercentage(hitPercentage0),
+       63:   28:              ceil(ceil0) {};
+       21:   28-block  0
+       21:   28-block  1
+call    0 returned 21
+branch  1 taken 21 (fallthrough)
+branch  2 taken 0 (throw)
+       21:   28-block  2
+call    3 returned 21
+call    4 returned 21
+       21:   28-block  3
+    $$$$$:   28-block  4
+        -:   29:    /// Перегруженный метод получения урона, у голема есть шанс заблокировать урон
+        -:   30:    /// \param damage - дамаг
+        -:   31:    void getDamage(int damage) override;
+        -:   32:    /// Перегруженный метод : "После смерти", оставит ячейку по его коордам
+        -:   33:    /// \param dungeon - уровень
+        -:   34:    void methodAfterDie(Dungeon &dungeon) override;
+        -:   35:    /// Getter
+        -:   36:    /// \return  hitPercentage
+        -:   37:    int getHitPercentage() const {
+        -:   38:        return hitPercentage;
+        -:   39:    }
+        -:   40:    /// Getter
+        -:   41:    /// \return  ceil
+function _ZNK5Golem7getCeilEv called 1 returned 100% blocks executed 100%
+        1:   42:    Ceil getCeil() const {
+        1:   43:        return ceil;
+        1:   43-block  0
+        -:   44:    }
+        -:   45:    /// Setter
+        -:   46:    /// \param hitPercentage
+function _ZN5Golem16setHitPercentageEi called 1 returned 100% blocks executed 100%
+        1:   47:    Golem &setHitPercentage(int hitPercentage) {
+        1:   48:        Golem::hitPercentage = hitPercentage;
+        1:   49:        return *this;
+        1:   49-block  0
+        -:   50:    }
+        -:   51:    /// Setter
+        -:   52:    /// \param ceil
+        -:   53:    Golem &setCeil(Ceil ceil) {
+        -:   54:        Golem::ceil = ceil;
+        -:   55:        return *this;
+        -:   56:    }
+        -:   57:    /// Getter
+        -:   58:    /// \return simpleGolem
+function _ZN5Golem7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   59:    Enemies getType() override {
+    #####:   60:        return Enemies::simpleGolem;
+    %%%%%:   60-block  0
+        -:   61:    }
+        -:   62:
+        -:   63:
+        -:   64:};
+        -:   65:
+        -:   66:
+        -:   67:#endif //GAMELAB3_GOLEM_H

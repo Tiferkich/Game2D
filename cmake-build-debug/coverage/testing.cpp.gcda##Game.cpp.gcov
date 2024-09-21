@@ -1,0 +1,82 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Game/Game.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "Game.h"
+        -:    6:
+        -:    7:
+        -:    8:std::vector<std::string> Game::allTypesEnemies = {"livingEnemy", "livingSummoner", "undead", "undeadSummoner", "golem"};
+        -:    9:
+        -:   10:std::vector<std::string> Game::allSkills = {"Curse", "Desiccation", "Morphism", "Necromancy"};
+        -:   11:
+        -:   12:///TODO std::array
+function _ZN4Game8makeTickEPi called 6 returned 100% blocks executed 100%
+        6:   13:int Game::makeTick(int options[]) {
+        -:   14:
+        6:   15:    hero.doSomething(options, *this);
+        6:   15-block  0
+call    0 returned 6
+        6:   16:    allMap[curLvl].allDoSomething();
+call    0 returned 6
+call    1 returned 6
+        -:   17:
+        6:   18:    return 0;
+        -:   19:}
+        -:   20:
+        -:   21:
+function _ZN4Game7getHeroEv called 12 returned 100% blocks executed 100%
+       12:   22:Character &Game::getHero() {
+       12:   23:    return hero;
+       12:   23-block  0
+        -:   24:}
+        -:   25:
+function _ZN4Game9getAllMapEv called 9 returned 100% blocks executed 100%
+        9:   26:std::vector<Dungeon> &Game::getAllMap() {
+        9:   27:    return allMap;
+        9:   27-block  0
+        -:   28:}
+        -:   29:
+function _ZN4Game9getCurLvlEv called 0 returned 0% blocks executed 0%
+    #####:   30:unsigned int Game::getCurLvl() {
+    #####:   31:    return curLvl;
+    %%%%%:   31-block  0
+        -:   32:}
+        -:   33:
+        -:   34:
+function _ZNK4Game14getTableSkillsEv called 0 returned 0% blocks executed 0%
+    #####:   35:const TableSkills &Game::getTableSkills() const {
+    #####:   36:    return tableSkills;
+    %%%%%:   36-block  0
+        -:   37:}
+        -:   38:
+function _ZN4Game7setHeroERK9Character called 0 returned 0% blocks executed 0%
+    #####:   39:void Game::setHero(const Character &hero) {
+    #####:   40:    Game::hero = hero;
+    %%%%%:   40-block  0
+call    0 never executed
+    #####:   41:}
+        -:   42:
+        -:   43:
+function _ZN4Game9setCurLvlEj called 0 returned 0% blocks executed 0%
+    #####:   44:void Game::setCurLvl(unsigned int curLvl) {
+    #####:   45:    Game::curLvl = curLvl;
+    #####:   46:}
+        -:   47:
+        -:   48:
+function _ZN4Game14setTableSkillsERK11TableSkills called 0 returned 0% blocks executed 0%
+    #####:   49:void Game::setTableSkills(const TableSkills &tableSkills) {
+    #####:   50:    Game::tableSkills = tableSkills;
+    %%%%%:   50-block  0
+call    0 never executed
+    #####:   51:}
+        -:   52:
+function _ZN4Game9setAllMapERKSt6vectorI7DungeonSaIS1_EE called 1 returned 100% blocks executed 100%
+        1:   53:void Game::setAllMap(const std::vector<Dungeon> &allMap) {
+        1:   54:    Game::allMap = allMap;
+        1:   54-block  0
+call    0 returned 1
+        1:   55:}

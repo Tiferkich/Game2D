@@ -1,0 +1,3641 @@
+        -:    0:Source:C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocator.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Allocators -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2023 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/*
+        -:   26: * Copyright (c) 1996-1997
+        -:   27: * Silicon Graphics Computer Systems, Inc.
+        -:   28: *
+        -:   29: * Permission to use, copy, modify, distribute and sell this software
+        -:   30: * and its documentation for any purpose is hereby granted without fee,
+        -:   31: * provided that the above copyright notice appear in all copies and
+        -:   32: * that both that copyright notice and this permission notice appear
+        -:   33: * in supporting documentation.  Silicon Graphics makes no
+        -:   34: * representations about the suitability of this software for any
+        -:   35: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   36: */
+        -:   37:
+        -:   38:/** @file bits/allocator.h
+        -:   39: *  This is an internal header file, included by other library headers.
+        -:   40: *  Do not attempt to use it directly. @headername{memory}
+        -:   41: */
+        -:   42:
+        -:   43:#ifndef _ALLOCATOR_H
+        -:   44:#define _ALLOCATOR_H 1
+        -:   45:
+        -:   46:#include <bits/c++allocator.h> // Define the base class to std::allocator.
+        -:   47:#include <bits/memoryfwd.h>
+        -:   48:#if __cplusplus >= 201103L
+        -:   49:#include <type_traits>
+        -:   50:#endif
+        -:   51:
+        -:   52:#define __cpp_lib_incomplete_container_elements 201505L
+        -:   53:
+        -:   54:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   55:{
+        -:   56:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   57:
+        -:   58:  /**
+        -:   59:   *  @addtogroup allocators
+        -:   60:   *  @{
+        -:   61:   */
+        -:   62:
+        -:   63:  // Since C++20 the primary template should be used for allocator<void>,
+        -:   64:  // but then it would have a non-trivial default ctor and dtor for C++20,
+        -:   65:  // but trivial for C++98-17, which would be an ABI incompatibility between
+        -:   66:  // different standard dialects. So C++20 still uses the allocator<void>
+        -:   67:  // explicit specialization, with the historical ABI properties, but with
+        -:   68:  // the same members that are present in the primary template.
+        -:   69:
+        -:   70:  /** std::allocator<void> specialization.
+        -:   71:   *
+        -:   72:   * @headerfile memory
+        -:   73:   */
+        -:   74:  template<>
+        -:   75:    class allocator<void>
+        -:   76:    {
+        -:   77:    public:
+        -:   78:      typedef void        value_type;
+        -:   79:      typedef size_t      size_type;
+        -:   80:      typedef ptrdiff_t   difference_type;
+        -:   81:
+        -:   82:#if __cplusplus <= 201703L
+        -:   83:      // These were removed for C++20, allocator_traits does the right thing.
+        -:   84:      typedef void*       pointer;
+        -:   85:      typedef const void* const_pointer;
+        -:   86:
+        -:   87:      template<typename _Tp1>
+        -:   88:	struct rebind
+        -:   89:	{ typedef allocator<_Tp1> other; };
+        -:   90:#endif
+        -:   91:
+        -:   92:#if __cplusplus >= 201103L
+        -:   93:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:   94:      // 2103. std::allocator propagate_on_container_move_assignment
+        -:   95:      using propagate_on_container_move_assignment = true_type;
+        -:   96:
+        -:   97:      using is_always_equal
+        -:   98:	_GLIBCXX20_DEPRECATED_SUGGEST("std::allocator_traits::is_always_equal")
+        -:   99:	= true_type;
+        -:  100:
+        -:  101:#if __cplusplus >= 202002L
+        -:  102:      // As noted above, these members are present for C++20 to provide the
+        -:  103:      // same API as the primary template, but still trivial as in pre-C++20.
+        -:  104:      allocator() = default;
+        -:  105:      ~allocator() = default;
+        -:  106:
+        -:  107:      template<typename _Up>
+        -:  108:	__attribute__((__always_inline__))
+        -:  109:	constexpr
+        -:  110:	allocator(const allocator<_Up>&) noexcept { }
+        -:  111:
+        -:  112:      // No allocate member because it's ill-formed by LWG 3307.
+        -:  113:      // No deallocate member because it would be undefined to call it
+        -:  114:      // with any pointer which wasn't obtained from allocate.
+        -:  115:#endif // C++20
+        -:  116:#endif // C++11
+        -:  117:    };
+        -:  118:
+        -:  119:  /**
+        -:  120:   * @brief  The @a standard allocator, as per C++03 [20.4.1].
+        -:  121:   *
+        -:  122:   *  See https://gcc.gnu.org/onlinedocs/libstdc++/manual/memory.html#std.util.memory.allocator
+        -:  123:   *  for further details.
+        -:  124:   *
+        -:  125:   *  @tparam  _Tp  Type of allocated object.
+        -:  126:   *
+        -:  127:   *  @headerfile memory
+        -:  128:   */
+        -:  129:  template<typename _Tp>
+        -:  130:    class allocator : public __allocator_base<_Tp>
+        -:  131:    {
+        -:  132:    public:
+        -:  133:      typedef _Tp        value_type;
+        -:  134:      typedef size_t     size_type;
+        -:  135:      typedef ptrdiff_t  difference_type;
+        -:  136:
+        -:  137:#if __cplusplus <= 201703L
+        -:  138:      // These were removed for C++20.
+        -:  139:      typedef _Tp*       pointer;
+        -:  140:      typedef const _Tp* const_pointer;
+        -:  141:      typedef _Tp&       reference;
+        -:  142:      typedef const _Tp& const_reference;
+        -:  143:
+        -:  144:      template<typename _Tp1>
+        -:  145:	struct rebind
+        -:  146:	{ typedef allocator<_Tp1> other; };
+        -:  147:#endif
+        -:  148:
+        -:  149:#if __cplusplus >= 201103L
+        -:  150:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  151:      // 2103. std::allocator propagate_on_container_move_assignment
+        -:  152:      using propagate_on_container_move_assignment = true_type;
+        -:  153:
+        -:  154:      using is_always_equal
+        -:  155:	_GLIBCXX20_DEPRECATED_SUGGEST("std::allocator_traits::is_always_equal")
+        -:  156:	= true_type;
+        -:  157:#endif
+        -:  158:
+        -:  159:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  160:      // 3035. std::allocator's constructors should be constexpr
+        -:  161:      __attribute__((__always_inline__))
+        -:  162:      _GLIBCXX20_CONSTEXPR
+    2802*:  163:      allocator() _GLIBCXX_NOTHROW { }
+    %%%%%:  163-block  0
+    %%%%%:  163-block  1
+    %%%%%:  163-block  2
+    %%%%%:  163-block  3
+    %%%%%:  163-block  4
+    %%%%%:  163-block  5
+    %%%%%:  163-block  6
+    %%%%%:  163-block  7
+    %%%%%:  163-block  8
+    %%%%%:  163-block  9
+    %%%%%:  163-block 10
+    %%%%%:  163-block 11
+    %%%%%:  163-block 12
+    %%%%%:  163-block 13
+    %%%%%:  163-block 14
+    %%%%%:  163-block 15
+    %%%%%:  163-block 16
+    %%%%%:  163-block 17
+    %%%%%:  163-block 18
+    %%%%%:  163-block 19
+    %%%%%:  163-block 20
+    %%%%%:  163-block 21
+    %%%%%:  163-block 22
+    %%%%%:  163-block 23
+    %%%%%:  163-block 24
+    %%%%%:  163-block 25
+    %%%%%:  163-block 26
+    %%%%%:  163-block 27
+        3:  163-block 28
+    %%%%%:  163-block 29
+    %%%%%:  163-block 30
+    %%%%%:  163-block 31
+    %%%%%:  163-block 32
+        3:  163-block 33
+        2:  163-block 34
+    %%%%%:  163-block 35
+        1:  163-block 36
+        1:  163-block 37
+        1:  163-block 38
+        1:  163-block 39
+        1:  163-block 40
+        1:  163-block 41
+        1:  163-block 42
+    %%%%%:  163-block 43
+    %%%%%:  163-block 44
+    %%%%%:  163-block 45
+        1:  163-block 46
+    %%%%%:  163-block 47
+    %%%%%:  163-block 48
+    %%%%%:  163-block 49
+    %%%%%:  163-block 50
+    %%%%%:  163-block 51
+    %%%%%:  163-block 52
+    %%%%%:  163-block 53
+    %%%%%:  163-block 54
+        1:  163-block 55
+      185:  163-block 56
+       18:  163-block 57
+       23:  163-block 58
+    %%%%%:  163-block 59
+    %%%%%:  163-block 60
+    %%%%%:  163-block 61
+    %%%%%:  163-block 62
+        1:  163-block 63
+       46:  163-block 64
+        1:  163-block 65
+        1:  163-block 66
+        2:  163-block 67
+        2:  163-block 68
+        1:  163-block 69
+        1:  163-block 70
+        1:  163-block 71
+        1:  163-block 72
+        1:  163-block 73
+        1:  163-block 74
+        2:  163-block 75
+    %%%%%:  163-block 76
+    %%%%%:  163-block 77
+    %%%%%:  163-block 78
+        2:  163-block 79
+        1:  163-block 80
+    %%%%%:  163-block 81
+        1:  163-block 82
+        1:  163-block 83
+        1:  163-block 84
+        3:  163-block 85
+        3:  163-block 86
+        3:  163-block 87
+        2:  163-block 88
+        2:  163-block 89
+        4:  163-block 90
+        1:  163-block 91
+        1:  163-block 92
+        1:  163-block 93
+        1:  163-block 94
+        4:  163-block 95
+        1:  163-block 96
+        1:  163-block 97
+        1:  163-block 98
+        1:  163-block 99
+        1:  163-block 100
+        1:  163-block 101
+        1:  163-block 102
+        4:  163-block 103
+        1:  163-block 104
+        1:  163-block 105
+        1:  163-block 106
+        1:  163-block 107
+        1:  163-block 108
+        1:  163-block 109
+        1:  163-block 110
+        4:  163-block 111
+        1:  163-block 112
+        1:  163-block 113
+        1:  163-block 114
+        1:  163-block 115
+        1:  163-block 116
+        1:  163-block 117
+        1:  163-block 118
+        1:  163-block 119
+        8:  163-block 120
+        8:  163-block 121
+        1:  163-block 122
+        1:  163-block 123
+        1:  163-block 124
+        1:  163-block 125
+        1:  163-block 126
+        1:  163-block 127
+        1:  163-block 128
+        1:  163-block 129
+        1:  163-block 130
+        1:  163-block 131
+        1:  163-block 132
+        1:  163-block 133
+        1:  163-block 134
+        1:  163-block 135
+        1:  163-block 136
+        8:  163-block 137
+        1:  163-block 138
+        8:  163-block 139
+        8:  163-block 140
+        8:  163-block 141
+        8:  163-block 142
+        8:  163-block 143
+       11:  163-block 144
+        4:  163-block 145
+        4:  163-block 146
+        1:  163-block 147
+        4:  163-block 148
+        1:  163-block 149
+        4:  163-block 150
+        1:  163-block 151
+        1:  163-block 152
+       11:  163-block 153
+        1:  163-block 154
+       11:  163-block 155
+       11:  163-block 156
+        1:  163-block 157
+       11:  163-block 158
+        1:  163-block 159
+        1:  163-block 160
+        1:  163-block 161
+        1:  163-block 162
+       11:  163-block 163
+        3:  163-block 164
+        3:  163-block 165
+        3:  163-block 166
+        3:  163-block 167
+        3:  163-block 168
+        3:  163-block 169
+        3:  163-block 170
+        1:  163-block 171
+        3:  163-block 172
+        3:  163-block 173
+        2:  163-block 174
+        2:  163-block 175
+        2:  163-block 176
+        1:  163-block 177
+    %%%%%:  163-block 178
+       15:  163-block 179
+        7:  163-block 180
+        7:  163-block 181
+        4:  163-block 182
+        1:  163-block 183
+        1:  163-block 184
+       38:  163-block 185
+       38:  163-block 186
+       14:  163-block 187
+       21:  163-block 188
+        1:  163-block 189
+        1:  163-block 190
+        1:  163-block 191
+        1:  163-block 192
+        1:  163-block 193
+        1:  163-block 194
+        1:  163-block 195
+        1:  163-block 196
+        1:  163-block 197
+        1:  163-block 198
+        1:  163-block 199
+        1:  163-block 200
+        1:  163-block 201
+        1:  163-block 202
+        1:  163-block 203
+        1:  163-block 204
+        7:  163-block 205
+        7:  163-block 206
+        7:  163-block 207
+    %%%%%:  163-block 208
+    %%%%%:  163-block 209
+       37:  163-block 210
+       37:  163-block 211
+       37:  163-block 212
+       37:  163-block 213
+       37:  163-block 214
+    %%%%%:  163-block 215
+    %%%%%:  163-block 216
+    %%%%%:  163-block 217
+    %%%%%:  163-block 218
+    %%%%%:  163-block 219
+    %%%%%:  163-block 220
+    %%%%%:  163-block 221
+    %%%%%:  163-block 222
+    %%%%%:  163-block 223
+    %%%%%:  163-block 224
+    %%%%%:  163-block 225
+       37:  163-block 226
+       37:  163-block 227
+        7:  163-block 228
+        7:  163-block 229
+        7:  163-block 230
+        7:  163-block 231
+        1:  163-block 232
+        1:  163-block 233
+        1:  163-block 234
+        1:  163-block 235
+    %%%%%:  163-block 236
+    %%%%%:  163-block 237
+    %%%%%:  163-block 238
+       44:  163-block 239
+       44:  163-block 240
+    %%%%%:  163-block 241
+    %%%%%:  163-block 242
+    %%%%%:  163-block 243
+    %%%%%:  163-block 244
+    %%%%%:  163-block 245
+    %%%%%:  163-block 246
+    %%%%%:  163-block 247
+    %%%%%:  163-block 248
+    %%%%%:  163-block 249
+    %%%%%:  163-block 250
+    %%%%%:  163-block 251
+    %%%%%:  163-block 252
+    %%%%%:  163-block 253
+    %%%%%:  163-block 254
+    %%%%%:  163-block 255
+    %%%%%:  163-block 256
+    %%%%%:  163-block 257
+    %%%%%:  163-block 258
+    %%%%%:  163-block 259
+    %%%%%:  163-block 260
+    %%%%%:  163-block 261
+    %%%%%:  163-block 262
+    %%%%%:  163-block 263
+    %%%%%:  163-block 264
+    %%%%%:  163-block 265
+    %%%%%:  163-block 266
+    %%%%%:  163-block 267
+    %%%%%:  163-block 268
+    %%%%%:  163-block 269
+    %%%%%:  163-block 270
+    %%%%%:  163-block 271
+    %%%%%:  163-block 272
+    %%%%%:  163-block 273
+    %%%%%:  163-block 274
+    %%%%%:  163-block 275
+    %%%%%:  163-block 276
+    %%%%%:  163-block 277
+    %%%%%:  163-block 278
+    %%%%%:  163-block 279
+    %%%%%:  163-block 280
+    %%%%%:  163-block 281
+    %%%%%:  163-block 282
+    %%%%%:  163-block 283
+    %%%%%:  163-block 284
+    %%%%%:  163-block 285
+    %%%%%:  163-block 286
+    %%%%%:  163-block 287
+    %%%%%:  163-block 288
+    %%%%%:  163-block 289
+    %%%%%:  163-block 290
+    %%%%%:  163-block 291
+    %%%%%:  163-block 292
+    %%%%%:  163-block 293
+    %%%%%:  163-block 294
+    %%%%%:  163-block 295
+    %%%%%:  163-block 296
+    %%%%%:  163-block 297
+    %%%%%:  163-block 298
+    %%%%%:  163-block 299
+    %%%%%:  163-block 300
+    %%%%%:  163-block 301
+    %%%%%:  163-block 302
+    %%%%%:  163-block 303
+    %%%%%:  163-block 304
+    %%%%%:  163-block 305
+    %%%%%:  163-block 306
+    %%%%%:  163-block 307
+    %%%%%:  163-block 308
+    %%%%%:  163-block 309
+    %%%%%:  163-block 310
+    %%%%%:  163-block 311
+    %%%%%:  163-block 312
+    %%%%%:  163-block 313
+    %%%%%:  163-block 314
+    %%%%%:  163-block 315
+    %%%%%:  163-block 316
+    %%%%%:  163-block 317
+    %%%%%:  163-block 318
+    %%%%%:  163-block 319
+    %%%%%:  163-block 320
+    %%%%%:  163-block 321
+    %%%%%:  163-block 322
+    %%%%%:  163-block 323
+    %%%%%:  163-block 324
+    %%%%%:  163-block 325
+    %%%%%:  163-block 326
+    %%%%%:  163-block 327
+    %%%%%:  163-block 328
+    %%%%%:  163-block 329
+    %%%%%:  163-block 330
+    %%%%%:  163-block 331
+    %%%%%:  163-block 332
+    %%%%%:  163-block 333
+    %%%%%:  163-block 334
+    %%%%%:  163-block 335
+    %%%%%:  163-block 336
+    %%%%%:  163-block 337
+    %%%%%:  163-block 338
+    %%%%%:  163-block 339
+    %%%%%:  163-block 340
+    %%%%%:  163-block 341
+    %%%%%:  163-block 342
+    %%%%%:  163-block 343
+    %%%%%:  163-block 344
+    %%%%%:  163-block 345
+    %%%%%:  163-block 346
+        1:  163-block 347
+    %%%%%:  163-block 348
+        7:  163-block 349
+        2:  163-block 350
+    %%%%%:  163-block 351
+      119:  163-block 352
+    %%%%%:  163-block 353
+    %%%%%:  163-block 354
+    %%%%%:  163-block 355
+      315:  163-block 356
+    $$$$$:  163-block 357
+    %%%%%:  163-block 358
+    %%%%%:  163-block 359
+    %%%%%:  163-block 360
+    %%%%%:  163-block 361
+    %%%%%:  163-block 362
+    %%%%%:  163-block 363
+    %%%%%:  163-block 364
+    %%%%%:  163-block 365
+    %%%%%:  163-block 366
+    %%%%%:  163-block 367
+    %%%%%:  163-block 368
+    $$$$$:  163-block 369
+    $$$$$:  163-block 370
+    $$$$$:  163-block 371
+        1:  163-block 372
+        1:  163-block 373
+        1:  163-block 374
+        1:  163-block 375
+        1:  163-block 376
+        1:  163-block 377
+        1:  163-block 378
+        1:  163-block 379
+        1:  163-block 380
+        1:  163-block 381
+        1:  163-block 382
+        1:  163-block 383
+        1:  163-block 384
+        1:  163-block 385
+        1:  163-block 386
+        1:  163-block 387
+        1:  163-block 388
+        1:  163-block 389
+        1:  163-block 390
+        1:  163-block 391
+        1:  163-block 392
+        1:  163-block 393
+        1:  163-block 394
+        1:  163-block 395
+        1:  163-block 396
+        1:  163-block 397
+        1:  163-block 398
+        1:  163-block 399
+        1:  163-block 400
+        1:  163-block 401
+        1:  163-block 402
+        1:  163-block 403
+        1:  163-block 404
+        1:  163-block 405
+        1:  163-block 406
+        1:  163-block 407
+        1:  163-block 408
+        1:  163-block 409
+        1:  163-block 410
+        1:  163-block 411
+        1:  163-block 412
+        1:  163-block 413
+        1:  163-block 414
+        1:  163-block 415
+        1:  163-block 416
+        1:  163-block 417
+        1:  163-block 418
+        1:  163-block 419
+        1:  163-block 420
+        1:  163-block 421
+        1:  163-block 422
+        1:  163-block 423
+        1:  163-block 424
+        1:  163-block 425
+        1:  163-block 426
+        1:  163-block 427
+        1:  163-block 428
+        1:  163-block 429
+        1:  163-block 430
+        1:  163-block 431
+        1:  163-block 432
+        1:  163-block 433
+        1:  163-block 434
+        1:  163-block 435
+        1:  163-block 436
+        1:  163-block 437
+        1:  163-block 438
+        1:  163-block 439
+        1:  163-block 440
+        1:  163-block 441
+        1:  163-block 442
+        1:  163-block 443
+        1:  163-block 444
+        1:  163-block 445
+        1:  163-block 446
+        1:  163-block 447
+        1:  163-block 448
+        1:  163-block 449
+        1:  163-block 450
+        1:  163-block 451
+        1:  163-block 452
+        1:  163-block 453
+        1:  163-block 454
+        1:  163-block 455
+        1:  163-block 456
+        1:  163-block 457
+        1:  163-block 458
+        1:  163-block 459
+        1:  163-block 460
+        1:  163-block 461
+        1:  163-block 462
+        1:  163-block 463
+        1:  163-block 464
+        1:  163-block 465
+        1:  163-block 466
+        1:  163-block 467
+        1:  163-block 468
+        1:  163-block 469
+        1:  163-block 470
+        1:  163-block 471
+    %%%%%:  163-block 472
+        1:  163-block 473
+        1:  163-block 474
+        1:  163-block 475
+        1:  163-block 476
+    %%%%%:  163-block 477
+    %%%%%:  163-block 478
+    %%%%%:  163-block 479
+    %%%%%:  163-block 480
+    %%%%%:  163-block 481
+        1:  163-block 482
+        1:  163-block 483
+    %%%%%:  163-block 484
+    %%%%%:  163-block 485
+    %%%%%:  163-block 486
+    %%%%%:  163-block 487
+     1104:  163-block 488
+       14:  163-block 489
+        -:  164:
+        -:  165:      __attribute__((__always_inline__))
+        -:  166:      _GLIBCXX20_CONSTEXPR
+        -:  167:      allocator(const allocator& __a) _GLIBCXX_NOTHROW
+   23845*:  168:      : __allocator_base<_Tp>(__a) { }
+    %%%%%:  168-block  0
+    %%%%%:  168-block  1
+    %%%%%:  168-block  2
+    %%%%%:  168-block  3
+    %%%%%:  168-block  4
+    %%%%%:  168-block  5
+    %%%%%:  168-block  6
+    %%%%%:  168-block  7
+    %%%%%:  168-block  8
+    %%%%%:  168-block  9
+    %%%%%:  168-block 10
+    %%%%%:  168-block 11
+    %%%%%:  168-block 12
+    %%%%%:  168-block 13
+    %%%%%:  168-block 14
+    %%%%%:  168-block 15
+    %%%%%:  168-block 16
+    %%%%%:  168-block 17
+    %%%%%:  168-block 18
+    %%%%%:  168-block 19
+    %%%%%:  168-block 20
+    %%%%%:  168-block 21
+    %%%%%:  168-block 22
+    %%%%%:  168-block 23
+    %%%%%:  168-block 24
+    %%%%%:  168-block 25
+    %%%%%:  168-block 26
+       67:  168-block 27
+       67:  168-block 28
+       78:  168-block 29
+    %%%%%:  168-block 30
+    %%%%%:  168-block 31
+        1:  168-block 32
+    %%%%%:  168-block 33
+        2:  168-block 34
+        2:  168-block 35
+        1:  168-block 36
+        2:  168-block 37
+        1:  168-block 38
+        1:  168-block 39
+        1:  168-block 40
+      260:  168-block 41
+       40:  168-block 42
+        1:  168-block 43
+    %%%%%:  168-block 44
+    %%%%%:  168-block 45
+      217:  168-block 46
+    %%%%%:  168-block 47
+    %%%%%:  168-block 48
+        1:  168-block 49
+    %%%%%:  168-block 50
+       66:  168-block 51
+       66:  168-block 52
+    %%%%%:  168-block 53
+    %%%%%:  168-block 54
+    %%%%%:  168-block 55
+    %%%%%:  168-block 56
+       78:  168-block 57
+    %%%%%:  168-block 58
+        1:  168-block 59
+        1:  168-block 60
+        1:  168-block 61
+        1:  168-block 62
+      505:  168-block 63
+      260:  168-block 64
+     1134:  168-block 65
+      217:  168-block 66
+    %%%%%:  168-block 67
+        3:  168-block 68
+     1177:  168-block 69
+       20:  168-block 70
+    %%%%%:  168-block 71
+     7908:  168-block 72
+     1280:  168-block 73
+    10385:  168-block 74
+        -:  169:
+        -:  170:#if __cplusplus >= 201103L
+        -:  171:      // Avoid implicit deprecation.
+        -:  172:      allocator& operator=(const allocator&) = default;
+        -:  173:#endif
+        -:  174:
+        -:  175:      template<typename _Tp1>
+        -:  176:	__attribute__((__always_inline__))
+        -:  177:	_GLIBCXX20_CONSTEXPR
+     175*:  178:	allocator(const allocator<_Tp1>&) _GLIBCXX_NOTHROW { }
+    %%%%%:  178-block  0
+    %%%%%:  178-block  1
+    %%%%%:  178-block  2
+    %%%%%:  178-block  3
+        3:  178-block  4
+        3:  178-block  5
+       11:  178-block  6
+    %%%%%:  178-block  7
+        1:  178-block  8
+       46:  178-block  9
+    %%%%%:  178-block 10
+    %%%%%:  178-block 11
+    %%%%%:  178-block 12
+        1:  178-block 13
+        1:  178-block 14
+        2:  178-block 15
+        1:  178-block 16
+        1:  178-block 17
+    %%%%%:  178-block 18
+    %%%%%:  178-block 19
+        1:  178-block 20
+        1:  178-block 21
+        1:  178-block 22
+        1:  178-block 23
+        1:  178-block 24
+        1:  178-block 25
+        2:  178-block 26
+        1:  178-block 27
+        1:  178-block 28
+        1:  178-block 29
+        1:  178-block 30
+        1:  178-block 31
+        1:  178-block 32
+        2:  178-block 33
+        1:  178-block 34
+    %%%%%:  178-block 35
+    %%%%%:  178-block 36
+    %%%%%:  178-block 37
+    %%%%%:  178-block 38
+    %%%%%:  178-block 39
+    %%%%%:  178-block 40
+        1:  178-block 41
+        2:  178-block 42
+        1:  178-block 43
+        1:  178-block 44
+        1:  178-block 45
+        1:  178-block 46
+        1:  178-block 47
+        1:  178-block 48
+        2:  178-block 49
+        1:  178-block 50
+        1:  178-block 51
+        1:  178-block 52
+        1:  178-block 53
+        1:  178-block 54
+        1:  178-block 55
+    %%%%%:  178-block 56
+    %%%%%:  178-block 57
+        1:  178-block 58
+        1:  178-block 59
+        2:  178-block 60
+        1:  178-block 61
+        1:  178-block 62
+    %%%%%:  178-block 63
+    %%%%%:  178-block 64
+    %%%%%:  178-block 65
+    %%%%%:  178-block 66
+       39:  178-block 67
+        7:  178-block 68
+        1:  178-block 69
+    %%%%%:  178-block 70
+    %%%%%:  178-block 71
+       11:  178-block 72
+        3:  178-block 73
+        3:  178-block 74
+        1:  178-block 75
+        -:  179:
+        -:  180:      __attribute__((__always_inline__))
+        -:  181:#if __cpp_constexpr_dynamic_alloc
+        -:  182:      constexpr
+        -:  183:#endif
+   12523*:  184:      ~allocator() _GLIBCXX_NOTHROW { }
+    $$$$$:  184-block  0
+    $$$$$:  184-block  1
+    $$$$$:  184-block  2
+    $$$$$:  184-block  3
+    $$$$$:  184-block  4
+    %%%%%:  184-block  5
+    $$$$$:  184-block  6
+    %%%%%:  184-block  7
+    $$$$$:  184-block  8
+    %%%%%:  184-block  9
+    $$$$$:  184-block 10
+    $$$$$:  184-block 11
+    %%%%%:  184-block 12
+    $$$$$:  184-block 13
+    $$$$$:  184-block 14
+    %%%%%:  184-block 15
+    $$$$$:  184-block 16
+    %%%%%:  184-block 17
+    $$$$$:  184-block 18
+    %%%%%:  184-block 19
+    $$$$$:  184-block 20
+    %%%%%:  184-block 21
+    $$$$$:  184-block 22
+    %%%%%:  184-block 23
+    $$$$$:  184-block 24
+    %%%%%:  184-block 25
+    $$$$$:  184-block 26
+    %%%%%:  184-block 27
+    $$$$$:  184-block 28
+    %%%%%:  184-block 29
+    $$$$$:  184-block 30
+    %%%%%:  184-block 31
+    $$$$$:  184-block 32
+    %%%%%:  184-block 33
+    $$$$$:  184-block 34
+    %%%%%:  184-block 35
+    $$$$$:  184-block 36
+    %%%%%:  184-block 37
+    $$$$$:  184-block 38
+    %%%%%:  184-block 39
+    $$$$$:  184-block 40
+    %%%%%:  184-block 41
+    %%%%%:  184-block 42
+    $$$$$:  184-block 43
+    $$$$$:  184-block 44
+    $$$$$:  184-block 45
+    %%%%%:  184-block 46
+    $$$$$:  184-block 47
+    $$$$$:  184-block 48
+    %%%%%:  184-block 49
+    $$$$$:  184-block 50
+    %%%%%:  184-block 51
+    $$$$$:  184-block 52
+    $$$$$:  184-block 53
+        3:  184-block 54
+    $$$$$:  184-block 55
+    $$$$$:  184-block 56
+    $$$$$:  184-block 57
+    $$$$$:  184-block 58
+    $$$$$:  184-block 59
+    $$$$$:  184-block 60
+    $$$$$:  184-block 61
+    $$$$$:  184-block 62
+    $$$$$:  184-block 63
+    $$$$$:  184-block 64
+    $$$$$:  184-block 65
+    $$$$$:  184-block 66
+    $$$$$:  184-block 67
+    $$$$$:  184-block 68
+    $$$$$:  184-block 69
+    $$$$$:  184-block 70
+    $$$$$:  184-block 71
+    $$$$$:  184-block 72
+    $$$$$:  184-block 73
+    $$$$$:  184-block 74
+    %%%%%:  184-block 75
+    $$$$$:  184-block 76
+    %%%%%:  184-block 77
+    $$$$$:  184-block 78
+    %%%%%:  184-block 79
+    $$$$$:  184-block 80
+    $$$$$:  184-block 81
+    $$$$$:  184-block 82
+    $$$$$:  184-block 83
+    $$$$$:  184-block 84
+    $$$$$:  184-block 85
+    $$$$$:  184-block 86
+    %%%%%:  184-block 87
+    $$$$$:  184-block 88
+    $$$$$:  184-block 89
+    $$$$$:  184-block 90
+    $$$$$:  184-block 91
+    $$$$$:  184-block 92
+    $$$$$:  184-block 93
+    %%%%%:  184-block 94
+    $$$$$:  184-block 95
+    $$$$$:  184-block 96
+    $$$$$:  184-block 97
+    $$$$$:  184-block 98
+        3:  184-block 99
+    $$$$$:  184-block 100
+        2:  184-block 101
+    $$$$$:  184-block 102
+    %%%%%:  184-block 103
+    $$$$$:  184-block 104
+    %%%%%:  184-block 105
+    %%%%%:  184-block 106
+    $$$$$:  184-block 107
+        1:  184-block 108
+    $$$$$:  184-block 109
+    %%%%%:  184-block 110
+    $$$$$:  184-block 111
+    %%%%%:  184-block 112
+    $$$$$:  184-block 113
+        1:  184-block 114
+    $$$$$:  184-block 115
+       66:  184-block 116
+    $$$$$:  184-block 117
+       66:  184-block 118
+    $$$$$:  184-block 119
+    %%%%%:  184-block 120
+    $$$$$:  184-block 121
+    %%%%%:  184-block 122
+    $$$$$:  184-block 123
+        1:  184-block 124
+    $$$$$:  184-block 125
+    %%%%%:  184-block 126
+    $$$$$:  184-block 127
+    %%%%%:  184-block 128
+    $$$$$:  184-block 129
+        1:  184-block 130
+    $$$$$:  184-block 131
+        1:  184-block 132
+    $$$$$:  184-block 133
+      260:  184-block 134
+    $$$$$:  184-block 135
+     1134:  184-block 136
+    $$$$$:  184-block 137
+    %%%%%:  184-block 138
+    $$$$$:  184-block 139
+    %%%%%:  184-block 140
+    $$$$$:  184-block 141
+      217:  184-block 142
+    $$$$$:  184-block 143
+    %%%%%:  184-block 144
+    $$$$$:  184-block 145
+    %%%%%:  184-block 146
+    $$$$$:  184-block 147
+    %%%%%:  184-block 148
+    $$$$$:  184-block 149
+    $$$$$:  184-block 150
+    $$$$$:  184-block 151
+    $$$$$:  184-block 152
+    $$$$$:  184-block 153
+    $$$$$:  184-block 154
+    $$$$$:  184-block 155
+    $$$$$:  184-block 156
+    $$$$$:  184-block 157
+    $$$$$:  184-block 158
+    $$$$$:  184-block 159
+    $$$$$:  184-block 160
+    $$$$$:  184-block 161
+    $$$$$:  184-block 162
+    $$$$$:  184-block 163
+    $$$$$:  184-block 164
+    $$$$$:  184-block 165
+    $$$$$:  184-block 166
+    $$$$$:  184-block 167
+    $$$$$:  184-block 168
+    $$$$$:  184-block 169
+    $$$$$:  184-block 170
+    $$$$$:  184-block 171
+    $$$$$:  184-block 172
+    $$$$$:  184-block 173
+    $$$$$:  184-block 174
+    $$$$$:  184-block 175
+    $$$$$:  184-block 176
+    $$$$$:  184-block 177
+    $$$$$:  184-block 178
+    $$$$$:  184-block 179
+    $$$$$:  184-block 180
+    $$$$$:  184-block 181
+    $$$$$:  184-block 182
+    $$$$$:  184-block 183
+    $$$$$:  184-block 184
+    $$$$$:  184-block 185
+    $$$$$:  184-block 186
+    $$$$$:  184-block 187
+    $$$$$:  184-block 188
+    $$$$$:  184-block 189
+    $$$$$:  184-block 190
+    $$$$$:  184-block 191
+    $$$$$:  184-block 192
+    $$$$$:  184-block 193
+    $$$$$:  184-block 194
+    $$$$$:  184-block 195
+    $$$$$:  184-block 196
+    $$$$$:  184-block 197
+    $$$$$:  184-block 198
+    $$$$$:  184-block 199
+    $$$$$:  184-block 200
+    $$$$$:  184-block 201
+    $$$$$:  184-block 202
+    $$$$$:  184-block 203
+    $$$$$:  184-block 204
+    $$$$$:  184-block 205
+    $$$$$:  184-block 206
+    $$$$$:  184-block 207
+    $$$$$:  184-block 208
+    $$$$$:  184-block 209
+    $$$$$:  184-block 210
+    $$$$$:  184-block 211
+    $$$$$:  184-block 212
+    $$$$$:  184-block 213
+    $$$$$:  184-block 214
+    $$$$$:  184-block 215
+    $$$$$:  184-block 216
+    $$$$$:  184-block 217
+    $$$$$:  184-block 218
+    $$$$$:  184-block 219
+    $$$$$:  184-block 220
+    $$$$$:  184-block 221
+    $$$$$:  184-block 222
+    $$$$$:  184-block 223
+    $$$$$:  184-block 224
+    $$$$$:  184-block 225
+    $$$$$:  184-block 226
+    $$$$$:  184-block 227
+    $$$$$:  184-block 228
+    $$$$$:  184-block 229
+    $$$$$:  184-block 230
+    $$$$$:  184-block 231
+    $$$$$:  184-block 232
+    $$$$$:  184-block 233
+    $$$$$:  184-block 234
+    $$$$$:  184-block 235
+    $$$$$:  184-block 236
+    $$$$$:  184-block 237
+    $$$$$:  184-block 238
+    $$$$$:  184-block 239
+    $$$$$:  184-block 240
+        2:  184-block 241
+        1:  184-block 242
+    $$$$$:  184-block 243
+    $$$$$:  184-block 244
+    $$$$$:  184-block 245
+    $$$$$:  184-block 246
+    %%%%%:  184-block 247
+    $$$$$:  184-block 248
+       15:  184-block 249
+    $$$$$:  184-block 250
+    $$$$$:  184-block 251
+    $$$$$:  184-block 252
+    $$$$$:  184-block 253
+    $$$$$:  184-block 254
+    $$$$$:  184-block 255
+       38:  184-block 256
+    $$$$$:  184-block 257
+    $$$$$:  184-block 258
+    $$$$$:  184-block 259
+    $$$$$:  184-block 260
+    $$$$$:  184-block 261
+    $$$$$:  184-block 262
+    $$$$$:  184-block 263
+    $$$$$:  184-block 264
+    $$$$$:  184-block 265
+    $$$$$:  184-block 266
+    $$$$$:  184-block 267
+    $$$$$:  184-block 268
+    $$$$$:  184-block 269
+    $$$$$:  184-block 270
+    $$$$$:  184-block 271
+    $$$$$:  184-block 272
+    $$$$$:  184-block 273
+    $$$$$:  184-block 274
+    $$$$$:  184-block 275
+    $$$$$:  184-block 276
+    $$$$$:  184-block 277
+    $$$$$:  184-block 278
+    $$$$$:  184-block 279
+    $$$$$:  184-block 280
+    $$$$$:  184-block 281
+    $$$$$:  184-block 282
+    $$$$$:  184-block 283
+    $$$$$:  184-block 284
+    $$$$$:  184-block 285
+    $$$$$:  184-block 286
+    $$$$$:  184-block 287
+    $$$$$:  184-block 288
+    $$$$$:  184-block 289
+    $$$$$:  184-block 290
+    $$$$$:  184-block 291
+    $$$$$:  184-block 292
+    $$$$$:  184-block 293
+    $$$$$:  184-block 294
+    $$$$$:  184-block 295
+    $$$$$:  184-block 296
+    $$$$$:  184-block 297
+    $$$$$:  184-block 298
+    $$$$$:  184-block 299
+    $$$$$:  184-block 300
+    $$$$$:  184-block 301
+    $$$$$:  184-block 302
+    $$$$$:  184-block 303
+    $$$$$:  184-block 304
+    $$$$$:  184-block 305
+    $$$$$:  184-block 306
+    $$$$$:  184-block 307
+    $$$$$:  184-block 308
+    $$$$$:  184-block 309
+    $$$$$:  184-block 310
+    $$$$$:  184-block 311
+    $$$$$:  184-block 312
+    %%%%%:  184-block 313
+    $$$$$:  184-block 314
+    $$$$$:  184-block 315
+    $$$$$:  184-block 316
+    $$$$$:  184-block 317
+    $$$$$:  184-block 318
+    $$$$$:  184-block 319
+    $$$$$:  184-block 320
+    $$$$$:  184-block 321
+    $$$$$:  184-block 322
+    $$$$$:  184-block 323
+    $$$$$:  184-block 324
+    $$$$$:  184-block 325
+    $$$$$:  184-block 326
+    $$$$$:  184-block 327
+    $$$$$:  184-block 328
+    $$$$$:  184-block 329
+    $$$$$:  184-block 330
+    $$$$$:  184-block 331
+    $$$$$:  184-block 332
+    $$$$$:  184-block 333
+    $$$$$:  184-block 334
+    $$$$$:  184-block 335
+    $$$$$:  184-block 336
+    $$$$$:  184-block 337
+    $$$$$:  184-block 338
+    $$$$$:  184-block 339
+    $$$$$:  184-block 340
+    $$$$$:  184-block 341
+    $$$$$:  184-block 342
+    $$$$$:  184-block 343
+    $$$$$:  184-block 344
+    $$$$$:  184-block 345
+    $$$$$:  184-block 346
+    $$$$$:  184-block 347
+    $$$$$:  184-block 348
+    %%%%%:  184-block 349
+    $$$$$:  184-block 350
+    %%%%%:  184-block 351
+    $$$$$:  184-block 352
+    $$$$$:  184-block 353
+    $$$$$:  184-block 354
+    $$$$$:  184-block 355
+    $$$$$:  184-block 356
+    $$$$$:  184-block 357
+    $$$$$:  184-block 358
+    $$$$$:  184-block 359
+    $$$$$:  184-block 360
+    $$$$$:  184-block 361
+    $$$$$:  184-block 362
+    $$$$$:  184-block 363
+    $$$$$:  184-block 364
+    $$$$$:  184-block 365
+    %%%%%:  184-block 366
+    $$$$$:  184-block 367
+    %%%%%:  184-block 368
+    %%%%%:  184-block 369
+    %%%%%:  184-block 370
+    %%%%%:  184-block 371
+    $$$$$:  184-block 372
+    $$$$$:  184-block 373
+    $$$$$:  184-block 374
+    $$$$$:  184-block 375
+    %%%%%:  184-block 376
+    $$$$$:  184-block 377
+    $$$$$:  184-block 378
+    $$$$$:  184-block 379
+    $$$$$:  184-block 380
+    $$$$$:  184-block 381
+    $$$$$:  184-block 382
+    $$$$$:  184-block 383
+    $$$$$:  184-block 384
+    $$$$$:  184-block 385
+    $$$$$:  184-block 386
+    $$$$$:  184-block 387
+    $$$$$:  184-block 388
+    $$$$$:  184-block 389
+    $$$$$:  184-block 390
+    $$$$$:  184-block 391
+    $$$$$:  184-block 392
+    $$$$$:  184-block 393
+    $$$$$:  184-block 394
+    $$$$$:  184-block 395
+    $$$$$:  184-block 396
+    $$$$$:  184-block 397
+    $$$$$:  184-block 398
+    $$$$$:  184-block 399
+    %%%%%:  184-block 400
+    $$$$$:  184-block 401
+    %%%%%:  184-block 402
+    $$$$$:  184-block 403
+    %%%%%:  184-block 404
+    $$$$$:  184-block 405
+    %%%%%:  184-block 406
+    $$$$$:  184-block 407
+    %%%%%:  184-block 408
+    $$$$$:  184-block 409
+    %%%%%:  184-block 410
+    $$$$$:  184-block 411
+    %%%%%:  184-block 412
+    $$$$$:  184-block 413
+    %%%%%:  184-block 414
+    $$$$$:  184-block 415
+    %%%%%:  184-block 416
+    $$$$$:  184-block 417
+    %%%%%:  184-block 418
+    $$$$$:  184-block 419
+    %%%%%:  184-block 420
+    %%%%%:  184-block 421
+    %%%%%:  184-block 422
+    %%%%%:  184-block 423
+    %%%%%:  184-block 424
+    $$$$$:  184-block 425
+    $$$$$:  184-block 426
+    $$$$$:  184-block 427
+    $$$$$:  184-block 428
+    $$$$$:  184-block 429
+    %%%%%:  184-block 430
+    $$$$$:  184-block 431
+    %%%%%:  184-block 432
+    $$$$$:  184-block 433
+    $$$$$:  184-block 434
+    %%%%%:  184-block 435
+    $$$$$:  184-block 436
+    $$$$$:  184-block 437
+    $$$$$:  184-block 438
+    %%%%%:  184-block 439
+    $$$$$:  184-block 440
+    $$$$$:  184-block 441
+    %%%%%:  184-block 442
+    $$$$$:  184-block 443
+    $$$$$:  184-block 444
+    $$$$$:  184-block 445
+    %%%%%:  184-block 446
+    $$$$$:  184-block 447
+    $$$$$:  184-block 448
+        1:  184-block 449
+    $$$$$:  184-block 450
+    %%%%%:  184-block 451
+    $$$$$:  184-block 452
+    $$$$$:  184-block 453
+    %%%%%:  184-block 454
+    $$$$$:  184-block 455
+    %%%%%:  184-block 456
+    $$$$$:  184-block 457
+    $$$$$:  184-block 458
+    $$$$$:  184-block 459
+    $$$$$:  184-block 460
+    %%%%%:  184-block 461
+    $$$$$:  184-block 462
+    $$$$$:  184-block 463
+    $$$$$:  184-block 464
+    $$$$$:  184-block 465
+    $$$$$:  184-block 466
+    %%%%%:  184-block 467
+    $$$$$:  184-block 468
+    %%%%%:  184-block 469
+    $$$$$:  184-block 470
+    $$$$$:  184-block 471
+    $$$$$:  184-block 472
+    $$$$$:  184-block 473
+    %%%%%:  184-block 474
+    $$$$$:  184-block 475
+    $$$$$:  184-block 476
+    $$$$$:  184-block 477
+    $$$$$:  184-block 478
+    $$$$$:  184-block 479
+    $$$$$:  184-block 480
+    $$$$$:  184-block 481
+    $$$$$:  184-block 482
+    $$$$$:  184-block 483
+    $$$$$:  184-block 484
+    $$$$$:  184-block 485
+    $$$$$:  184-block 486
+    $$$$$:  184-block 487
+    $$$$$:  184-block 488
+    $$$$$:  184-block 489
+    $$$$$:  184-block 490
+    $$$$$:  184-block 491
+    $$$$$:  184-block 492
+    $$$$$:  184-block 493
+    $$$$$:  184-block 494
+    $$$$$:  184-block 495
+    $$$$$:  184-block 496
+    $$$$$:  184-block 497
+    $$$$$:  184-block 498
+    $$$$$:  184-block 499
+    $$$$$:  184-block 500
+    $$$$$:  184-block 501
+    $$$$$:  184-block 502
+    $$$$$:  184-block 503
+    $$$$$:  184-block 504
+    $$$$$:  184-block 505
+    $$$$$:  184-block 506
+    $$$$$:  184-block 507
+    $$$$$:  184-block 508
+    $$$$$:  184-block 509
+    $$$$$:  184-block 510
+    $$$$$:  184-block 511
+    $$$$$:  184-block 512
+    $$$$$:  184-block 513
+    $$$$$:  184-block 514
+    $$$$$:  184-block 515
+    $$$$$:  184-block 516
+    $$$$$:  184-block 517
+    $$$$$:  184-block 518
+    $$$$$:  184-block 519
+    $$$$$:  184-block 520
+    $$$$$:  184-block 521
+    $$$$$:  184-block 522
+    $$$$$:  184-block 523
+    $$$$$:  184-block 524
+    $$$$$:  184-block 525
+    $$$$$:  184-block 526
+    $$$$$:  184-block 527
+    $$$$$:  184-block 528
+    $$$$$:  184-block 529
+    $$$$$:  184-block 530
+    $$$$$:  184-block 531
+    $$$$$:  184-block 532
+    $$$$$:  184-block 533
+    $$$$$:  184-block 534
+    $$$$$:  184-block 535
+    $$$$$:  184-block 536
+    $$$$$:  184-block 537
+    $$$$$:  184-block 538
+    $$$$$:  184-block 539
+    $$$$$:  184-block 540
+    $$$$$:  184-block 541
+    $$$$$:  184-block 542
+    $$$$$:  184-block 543
+    $$$$$:  184-block 544
+    $$$$$:  184-block 545
+    $$$$$:  184-block 546
+    $$$$$:  184-block 547
+    $$$$$:  184-block 548
+    $$$$$:  184-block 549
+    $$$$$:  184-block 550
+    $$$$$:  184-block 551
+    $$$$$:  184-block 552
+    $$$$$:  184-block 553
+    $$$$$:  184-block 554
+    $$$$$:  184-block 555
+    $$$$$:  184-block 556
+    $$$$$:  184-block 557
+    $$$$$:  184-block 558
+    $$$$$:  184-block 559
+    $$$$$:  184-block 560
+    $$$$$:  184-block 561
+    $$$$$:  184-block 562
+    $$$$$:  184-block 563
+    $$$$$:  184-block 564
+    $$$$$:  184-block 565
+    $$$$$:  184-block 566
+    $$$$$:  184-block 567
+    $$$$$:  184-block 568
+    $$$$$:  184-block 569
+    $$$$$:  184-block 570
+    $$$$$:  184-block 571
+    $$$$$:  184-block 572
+    $$$$$:  184-block 573
+    $$$$$:  184-block 574
+    $$$$$:  184-block 575
+    $$$$$:  184-block 576
+    $$$$$:  184-block 577
+    $$$$$:  184-block 578
+    $$$$$:  184-block 579
+    $$$$$:  184-block 580
+    $$$$$:  184-block 581
+    $$$$$:  184-block 582
+    $$$$$:  184-block 583
+    $$$$$:  184-block 584
+    $$$$$:  184-block 585
+    $$$$$:  184-block 586
+    $$$$$:  184-block 587
+    $$$$$:  184-block 588
+    $$$$$:  184-block 589
+    %%%%%:  184-block 590
+    $$$$$:  184-block 591
+    %%%%%:  184-block 592
+    $$$$$:  184-block 593
+        1:  184-block 594
+        1:  184-block 595
+    $$$$$:  184-block 596
+    $$$$$:  184-block 597
+    $$$$$:  184-block 598
+    $$$$$:  184-block 599
+    $$$$$:  184-block 600
+    $$$$$:  184-block 601
+       14:  184-block 602
+    $$$$$:  184-block 603
+        -:  185:
+        -:  186:#if __cplusplus > 201703L
+        -:  187:      [[nodiscard,__gnu__::__always_inline__]]
+        -:  188:      constexpr _Tp*
+        -:  189:      allocate(size_t __n)
+        -:  190:      {
+    3537*:  191:	if (std::__is_constant_evaluated())
+    %%%%%:  191-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  191-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  191-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    %%%%%:  191-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    %%%%%:  191-block  4
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed
+    %%%%%:  191-block  5
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed
+    %%%%%:  191-block  6
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed
+    %%%%%:  191-block  7
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed
+call   27 never executed
+branch 28 never executed (fallthrough)
+branch 29 never executed
+call   30 never executed
+branch 31 never executed (fallthrough)
+branch 32 never executed
+    %%%%%:  191-block  8
+call   33 never executed
+branch 34 never executed (fallthrough)
+branch 35 never executed
+    %%%%%:  191-block  9
+call   36 never executed
+branch 37 never executed (fallthrough)
+branch 38 never executed
+    %%%%%:  191-block 10
+call   39 never executed
+branch 40 never executed (fallthrough)
+branch 41 never executed
+call   42 never executed
+branch 43 never executed (fallthrough)
+branch 44 never executed
+    %%%%%:  191-block 11
+call   45 never executed
+branch 46 never executed (fallthrough)
+branch 47 never executed
+call   48 returned 1
+branch 49 taken 0 (fallthrough)
+branch 50 taken 1
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed
+        1:  191-block 12
+call   54 returned 1
+branch 55 taken 0 (fallthrough)
+branch 56 taken 1
+        2:  191-block 13
+call   57 returned 2
+branch 58 taken 0 (fallthrough)
+branch 59 taken 2
+        1:  191-block 14
+call   60 returned 1
+branch 61 taken 0 (fallthrough)
+branch 62 taken 1
+        1:  191-block 15
+call   63 returned 1
+branch 64 taken 0 (fallthrough)
+branch 65 taken 1
+        1:  191-block 16
+call   66 returned 1
+branch 67 taken 0 (fallthrough)
+branch 68 taken 1
+        1:  191-block 17
+call   69 returned 1
+branch 70 taken 0 (fallthrough)
+branch 71 taken 1
+        1:  191-block 18
+call   72 returned 1
+branch 73 taken 0 (fallthrough)
+branch 74 taken 1
+        1:  191-block 19
+call   75 returned 1
+branch 76 taken 0 (fallthrough)
+branch 77 taken 1
+        2:  191-block 20
+call   78 returned 2
+branch 79 taken 0 (fallthrough)
+branch 80 taken 2
+        1:  191-block 21
+call   81 returned 1
+branch 82 taken 0 (fallthrough)
+branch 83 taken 1
+        1:  191-block 22
+call   84 returned 1
+branch 85 taken 0 (fallthrough)
+branch 86 taken 1
+        1:  191-block 23
+call   87 returned 1
+branch 88 taken 0 (fallthrough)
+branch 89 taken 1
+        1:  191-block 24
+call   90 returned 1
+branch 91 taken 0 (fallthrough)
+branch 92 taken 1
+        1:  191-block 25
+call   93 returned 1
+branch 94 taken 0 (fallthrough)
+branch 95 taken 1
+        1:  191-block 26
+call   96 returned 1
+branch 97 taken 0 (fallthrough)
+branch 98 taken 1
+    %%%%%:  191-block 27
+call   99 never executed
+branch 100 never executed (fallthrough)
+branch 101 never executed
+    %%%%%:  191-block 28
+call   102 never executed
+branch 103 never executed (fallthrough)
+branch 104 never executed
+        1:  191-block 29
+call   105 returned 1
+branch 106 taken 0 (fallthrough)
+branch 107 taken 1
+        1:  191-block 30
+call   108 returned 1
+branch 109 taken 0 (fallthrough)
+branch 110 taken 1
+call   111 returned 7
+branch 112 taken 0 (fallthrough)
+branch 113 taken 7
+call   114 never executed
+branch 115 never executed (fallthrough)
+branch 116 never executed
+        2:  191-block 31
+call   117 returned 2
+branch 118 taken 0 (fallthrough)
+branch 119 taken 2
+        1:  191-block 32
+call   120 returned 1
+branch 121 taken 0 (fallthrough)
+branch 122 taken 1
+        1:  191-block 33
+call   123 returned 1
+branch 124 taken 0 (fallthrough)
+branch 125 taken 1
+call   126 returned 8
+branch 127 taken 0 (fallthrough)
+branch 128 taken 8
+    %%%%%:  191-block 34
+call   129 never executed
+branch 130 never executed (fallthrough)
+branch 131 never executed
+    %%%%%:  191-block 35
+call   132 never executed
+branch 133 never executed (fallthrough)
+branch 134 never executed
+    %%%%%:  191-block 36
+call   135 never executed
+branch 136 never executed (fallthrough)
+branch 137 never executed
+       46:  191-block 37
+call   138 returned 46
+branch 139 taken 0 (fallthrough)
+branch 140 taken 46
+call   141 never executed
+branch 142 never executed (fallthrough)
+branch 143 never executed
+        1:  191-block 38
+call   144 returned 1
+branch 145 taken 0 (fallthrough)
+branch 146 taken 1
+call   147 returned 7
+branch 148 taken 0 (fallthrough)
+branch 149 taken 7
+    %%%%%:  191-block 39
+call   150 never executed
+branch 151 never executed (fallthrough)
+branch 152 never executed
+call   153 returned 4
+branch 154 taken 0 (fallthrough)
+branch 155 taken 4
+call   156 never executed
+branch 157 never executed (fallthrough)
+branch 158 never executed
+       11:  191-block 40
+call   159 returned 11
+branch 160 taken 0 (fallthrough)
+branch 161 taken 11
+        3:  191-block 41
+call   162 returned 3
+branch 163 taken 0 (fallthrough)
+branch 164 taken 3
+        3:  191-block 42
+call   165 returned 3
+branch 166 taken 0 (fallthrough)
+branch 167 taken 3
+      247:  191-block 43
+call   168 returned 247
+branch 169 taken 0 (fallthrough)
+branch 170 taken 247
+    %%%%%:  191-block 44
+call   171 never executed
+branch 172 never executed (fallthrough)
+branch 173 never executed
+    %%%%%:  191-block 45
+call   174 never executed
+branch 175 never executed (fallthrough)
+branch 176 never executed
+    %%%%%:  191-block 46
+call   177 never executed
+branch 178 never executed (fallthrough)
+branch 179 never executed
+    %%%%%:  191-block 47
+call   180 never executed
+branch 181 never executed (fallthrough)
+branch 182 never executed
+    %%%%%:  191-block 48
+call   183 never executed
+branch 184 never executed (fallthrough)
+branch 185 never executed
+    %%%%%:  191-block 49
+call   186 never executed
+branch 187 never executed (fallthrough)
+branch 188 never executed
+        3:  191-block 50
+call   189 returned 3
+branch 190 taken 0 (fallthrough)
+branch 191 taken 3
+    %%%%%:  191-block 51
+call   192 never executed
+branch 193 never executed (fallthrough)
+branch 194 never executed
+        3:  191-block 52
+call   195 returned 3
+branch 196 taken 0 (fallthrough)
+branch 197 taken 3
+        2:  191-block 53
+call   198 returned 2
+branch 199 taken 0 (fallthrough)
+branch 200 taken 2
+call   201 never executed
+branch 202 never executed (fallthrough)
+branch 203 never executed
+call   204 never executed
+branch 205 never executed (fallthrough)
+branch 206 never executed
+    %%%%%:  191-block 54
+call   207 never executed
+branch 208 never executed (fallthrough)
+branch 209 never executed
+    %%%%%:  191-block 55
+call   210 never executed
+branch 211 never executed (fallthrough)
+branch 212 never executed
+        3:  191-block 56
+call   213 returned 3
+branch 214 taken 0 (fallthrough)
+branch 215 taken 3
+      191:  191-block 57
+call   216 returned 191
+branch 217 taken 0 (fallthrough)
+branch 218 taken 191
+    %%%%%:  191-block 58
+call   219 never executed
+branch 220 never executed (fallthrough)
+branch 221 never executed
+    %%%%%:  191-block 59
+call   222 never executed
+branch 223 never executed (fallthrough)
+branch 224 never executed
+    %%%%%:  191-block 60
+call   225 never executed
+branch 226 never executed (fallthrough)
+branch 227 never executed
+    %%%%%:  191-block 61
+call   228 never executed
+branch 229 never executed (fallthrough)
+branch 230 never executed
+       31:  191-block 62
+call   231 returned 31
+branch 232 taken 0 (fallthrough)
+branch 233 taken 31
+        3:  191-block 63
+call   234 returned 3
+branch 235 taken 0 (fallthrough)
+branch 236 taken 3
+    %%%%%:  191-block 64
+call   237 never executed
+branch 238 never executed (fallthrough)
+branch 239 never executed
+        2:  191-block 65
+call   240 returned 2
+branch 241 taken 0 (fallthrough)
+branch 242 taken 2
+    %%%%%:  191-block 66
+call   243 never executed
+branch 244 never executed (fallthrough)
+branch 245 never executed
+    %%%%%:  191-block 67
+call   246 never executed
+branch 247 never executed (fallthrough)
+branch 248 never executed
+    %%%%%:  191-block 68
+call   249 never executed
+branch 250 never executed (fallthrough)
+branch 251 never executed
+    %%%%%:  191-block 69
+call   252 never executed
+branch 253 never executed (fallthrough)
+branch 254 never executed
+       94:  191-block 70
+call   255 returned 94
+branch 256 taken 0 (fallthrough)
+branch 257 taken 94
+        2:  191-block 71
+call   258 returned 2
+branch 259 taken 0 (fallthrough)
+branch 260 taken 2
+    %%%%%:  191-block 72
+call   261 never executed
+branch 262 never executed (fallthrough)
+branch 263 never executed
+      213:  191-block 73
+call   264 returned 213
+branch 265 taken 0 (fallthrough)
+branch 266 taken 213
+    %%%%%:  191-block 74
+call   267 never executed
+branch 268 never executed (fallthrough)
+branch 269 never executed
+call   270 never executed
+branch 271 never executed (fallthrough)
+branch 272 never executed
+call   273 never executed
+branch 274 never executed (fallthrough)
+branch 275 never executed
+        5:  191-block 75
+call   276 returned 5
+branch 277 taken 0 (fallthrough)
+branch 278 taken 5
+    %%%%%:  191-block 76
+call   279 never executed
+branch 280 never executed (fallthrough)
+branch 281 never executed
+    %%%%%:  191-block 77
+call   282 never executed
+branch 283 never executed (fallthrough)
+branch 284 never executed
+    %%%%%:  191-block 78
+call   285 never executed
+branch 286 never executed (fallthrough)
+branch 287 never executed
+    %%%%%:  191-block 79
+call   288 never executed
+branch 289 never executed (fallthrough)
+branch 290 never executed
+    %%%%%:  191-block 80
+call   291 never executed
+branch 292 never executed (fallthrough)
+branch 293 never executed
+     1119:  191-block 81
+call   294 returned 1119
+branch 295 taken 0 (fallthrough)
+branch 296 taken 1119
+call   297 returned 1505
+branch 298 taken 0 (fallthrough)
+branch 299 taken 1505
+        -:  192:	  {
+    #####:  193:	    if (__builtin_mul_overflow(__n, sizeof(_Tp), &__n))
+    %%%%%:  193-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  193-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  193-block  2
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  193-block  3
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    %%%%%:  193-block  4
+branch  8 never executed (fallthrough)
+branch  9 never executed
+    %%%%%:  193-block  5
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    %%%%%:  193-block  6
+branch 12 never executed (fallthrough)
+branch 13 never executed
+    %%%%%:  193-block  7
+branch 14 never executed (fallthrough)
+branch 15 never executed
+    %%%%%:  193-block  8
+branch 16 never executed (fallthrough)
+branch 17 never executed
+    %%%%%:  193-block  9
+branch 18 never executed (fallthrough)
+branch 19 never executed
+    %%%%%:  193-block 10
+branch 20 never executed (fallthrough)
+branch 21 never executed
+    %%%%%:  193-block 11
+branch 22 never executed (fallthrough)
+branch 23 never executed
+    %%%%%:  193-block 12
+branch 24 never executed (fallthrough)
+branch 25 never executed
+    %%%%%:  193-block 13
+branch 26 never executed (fallthrough)
+branch 27 never executed
+    %%%%%:  193-block 14
+branch 28 never executed (fallthrough)
+branch 29 never executed
+    %%%%%:  193-block 15
+branch 30 never executed (fallthrough)
+branch 31 never executed
+    %%%%%:  193-block 16
+branch 32 never executed (fallthrough)
+branch 33 never executed
+    %%%%%:  193-block 17
+branch 34 never executed (fallthrough)
+branch 35 never executed
+    %%%%%:  193-block 18
+branch 36 never executed (fallthrough)
+branch 37 never executed
+    %%%%%:  193-block 19
+branch 38 never executed (fallthrough)
+branch 39 never executed
+    %%%%%:  193-block 20
+branch 40 never executed (fallthrough)
+branch 41 never executed
+    %%%%%:  193-block 21
+branch 42 never executed (fallthrough)
+branch 43 never executed
+    %%%%%:  193-block 22
+branch 44 never executed (fallthrough)
+branch 45 never executed
+    %%%%%:  193-block 23
+branch 46 never executed (fallthrough)
+branch 47 never executed
+    %%%%%:  193-block 24
+branch 48 never executed (fallthrough)
+branch 49 never executed
+    %%%%%:  193-block 25
+branch 50 never executed (fallthrough)
+branch 51 never executed
+    %%%%%:  193-block 26
+branch 52 never executed (fallthrough)
+branch 53 never executed
+    %%%%%:  193-block 27
+branch 54 never executed (fallthrough)
+branch 55 never executed
+    %%%%%:  193-block 28
+branch 56 never executed (fallthrough)
+branch 57 never executed
+    %%%%%:  193-block 29
+branch 58 never executed (fallthrough)
+branch 59 never executed
+    %%%%%:  193-block 30
+branch 60 never executed (fallthrough)
+branch 61 never executed
+    %%%%%:  193-block 31
+branch 62 never executed (fallthrough)
+branch 63 never executed
+    %%%%%:  193-block 32
+branch 64 never executed (fallthrough)
+branch 65 never executed
+    %%%%%:  193-block 33
+branch 66 never executed (fallthrough)
+branch 67 never executed
+    %%%%%:  193-block 34
+branch 68 never executed (fallthrough)
+branch 69 never executed
+    %%%%%:  193-block 35
+branch 70 never executed (fallthrough)
+branch 71 never executed
+    %%%%%:  193-block 36
+branch 72 never executed (fallthrough)
+branch 73 never executed
+    %%%%%:  193-block 37
+branch 74 never executed (fallthrough)
+branch 75 never executed
+    %%%%%:  193-block 38
+branch 76 never executed (fallthrough)
+branch 77 never executed
+    %%%%%:  193-block 39
+branch 78 never executed (fallthrough)
+branch 79 never executed
+    %%%%%:  193-block 40
+branch 80 never executed (fallthrough)
+branch 81 never executed
+    %%%%%:  193-block 41
+branch 82 never executed (fallthrough)
+branch 83 never executed
+    %%%%%:  193-block 42
+branch 84 never executed (fallthrough)
+branch 85 never executed
+    %%%%%:  193-block 43
+branch 86 never executed (fallthrough)
+branch 87 never executed
+    %%%%%:  193-block 44
+branch 88 never executed (fallthrough)
+branch 89 never executed
+    %%%%%:  193-block 45
+branch 90 never executed (fallthrough)
+branch 91 never executed
+    %%%%%:  193-block 46
+branch 92 never executed (fallthrough)
+branch 93 never executed
+    %%%%%:  193-block 47
+branch 94 never executed (fallthrough)
+branch 95 never executed
+    %%%%%:  193-block 48
+branch 96 never executed (fallthrough)
+branch 97 never executed
+    %%%%%:  193-block 49
+branch 98 never executed (fallthrough)
+branch 99 never executed
+    %%%%%:  193-block 50
+branch 100 never executed (fallthrough)
+branch 101 never executed
+    %%%%%:  193-block 51
+branch 102 never executed (fallthrough)
+branch 103 never executed
+    %%%%%:  193-block 52
+branch 104 never executed (fallthrough)
+branch 105 never executed
+    %%%%%:  193-block 53
+branch 106 never executed (fallthrough)
+branch 107 never executed
+    %%%%%:  193-block 54
+branch 108 never executed (fallthrough)
+branch 109 never executed
+    %%%%%:  193-block 55
+branch 110 never executed (fallthrough)
+branch 111 never executed
+    %%%%%:  193-block 56
+branch 112 never executed (fallthrough)
+branch 113 never executed
+    %%%%%:  193-block 57
+branch 114 never executed (fallthrough)
+branch 115 never executed
+    %%%%%:  193-block 58
+branch 116 never executed (fallthrough)
+branch 117 never executed
+    %%%%%:  193-block 59
+branch 118 never executed (fallthrough)
+branch 119 never executed
+    %%%%%:  193-block 60
+branch 120 never executed (fallthrough)
+branch 121 never executed
+    %%%%%:  193-block 61
+branch 122 never executed (fallthrough)
+branch 123 never executed
+    %%%%%:  193-block 62
+branch 124 never executed (fallthrough)
+branch 125 never executed
+    %%%%%:  193-block 63
+branch 126 never executed (fallthrough)
+branch 127 never executed
+    %%%%%:  193-block 64
+branch 128 never executed (fallthrough)
+branch 129 never executed
+    %%%%%:  193-block 65
+branch 130 never executed (fallthrough)
+branch 131 never executed
+    %%%%%:  193-block 66
+branch 132 never executed (fallthrough)
+branch 133 never executed
+    %%%%%:  193-block 67
+branch 134 never executed (fallthrough)
+branch 135 never executed
+    %%%%%:  193-block 68
+branch 136 never executed (fallthrough)
+branch 137 never executed
+    %%%%%:  193-block 69
+branch 138 never executed (fallthrough)
+branch 139 never executed
+    %%%%%:  193-block 70
+branch 140 never executed (fallthrough)
+branch 141 never executed
+    %%%%%:  193-block 71
+branch 142 never executed (fallthrough)
+branch 143 never executed
+    %%%%%:  193-block 72
+branch 144 never executed (fallthrough)
+branch 145 never executed
+    %%%%%:  193-block 73
+branch 146 never executed (fallthrough)
+branch 147 never executed
+    %%%%%:  193-block 74
+branch 148 never executed (fallthrough)
+branch 149 never executed
+    %%%%%:  193-block 75
+branch 150 never executed (fallthrough)
+branch 151 never executed
+    %%%%%:  193-block 76
+branch 152 never executed (fallthrough)
+branch 153 never executed
+    %%%%%:  193-block 77
+branch 154 never executed (fallthrough)
+branch 155 never executed
+    %%%%%:  193-block 78
+branch 156 never executed (fallthrough)
+branch 157 never executed
+    %%%%%:  193-block 79
+branch 158 never executed (fallthrough)
+branch 159 never executed
+    %%%%%:  193-block 80
+branch 160 never executed (fallthrough)
+branch 161 never executed
+    %%%%%:  193-block 81
+branch 162 never executed (fallthrough)
+branch 163 never executed
+    %%%%%:  193-block 82
+branch 164 never executed (fallthrough)
+branch 165 never executed
+    %%%%%:  193-block 83
+branch 166 never executed (fallthrough)
+branch 167 never executed
+    %%%%%:  193-block 84
+branch 168 never executed (fallthrough)
+branch 169 never executed
+    %%%%%:  193-block 85
+branch 170 never executed (fallthrough)
+branch 171 never executed
+    %%%%%:  193-block 86
+branch 172 never executed (fallthrough)
+branch 173 never executed
+    %%%%%:  193-block 87
+branch 174 never executed (fallthrough)
+branch 175 never executed
+    %%%%%:  193-block 88
+branch 176 never executed (fallthrough)
+branch 177 never executed
+    %%%%%:  193-block 89
+branch 178 never executed (fallthrough)
+branch 179 never executed
+    %%%%%:  193-block 90
+branch 180 never executed (fallthrough)
+branch 181 never executed
+    %%%%%:  193-block 91
+branch 182 never executed (fallthrough)
+branch 183 never executed
+    %%%%%:  193-block 92
+branch 184 never executed (fallthrough)
+branch 185 never executed
+    %%%%%:  193-block 93
+branch 186 never executed (fallthrough)
+branch 187 never executed
+    %%%%%:  193-block 94
+branch 188 never executed (fallthrough)
+branch 189 never executed
+    %%%%%:  193-block 95
+branch 190 never executed (fallthrough)
+branch 191 never executed
+    %%%%%:  193-block 96
+branch 192 never executed (fallthrough)
+branch 193 never executed
+    %%%%%:  193-block 97
+branch 194 never executed (fallthrough)
+branch 195 never executed
+    %%%%%:  193-block 98
+branch 196 never executed (fallthrough)
+branch 197 never executed
+    %%%%%:  193-block 99
+branch 198 never executed (fallthrough)
+branch 199 never executed
+    #####:  194:	      std::__throw_bad_array_new_length();
+    %%%%%:  194-block  0
+call    0 never executed
+    %%%%%:  194-block  1
+call    1 never executed
+    %%%%%:  194-block  2
+call    2 never executed
+    %%%%%:  194-block  3
+call    3 never executed
+    %%%%%:  194-block  4
+call    4 never executed
+    %%%%%:  194-block  5
+call    5 never executed
+    %%%%%:  194-block  6
+call    6 never executed
+    %%%%%:  194-block  7
+call    7 never executed
+    %%%%%:  194-block  8
+call    8 never executed
+    %%%%%:  194-block  9
+call    9 never executed
+    %%%%%:  194-block 10
+call   10 never executed
+    %%%%%:  194-block 11
+call   11 never executed
+    %%%%%:  194-block 12
+call   12 never executed
+    %%%%%:  194-block 13
+call   13 never executed
+    %%%%%:  194-block 14
+call   14 never executed
+    %%%%%:  194-block 15
+call   15 never executed
+    %%%%%:  194-block 16
+call   16 never executed
+    %%%%%:  194-block 17
+call   17 never executed
+    %%%%%:  194-block 18
+call   18 never executed
+    %%%%%:  194-block 19
+call   19 never executed
+    %%%%%:  194-block 20
+call   20 never executed
+    %%%%%:  194-block 21
+call   21 never executed
+    %%%%%:  194-block 22
+call   22 never executed
+    %%%%%:  194-block 23
+call   23 never executed
+    %%%%%:  194-block 24
+call   24 never executed
+    %%%%%:  194-block 25
+call   25 never executed
+    %%%%%:  194-block 26
+call   26 never executed
+    %%%%%:  194-block 27
+call   27 never executed
+    %%%%%:  194-block 28
+call   28 never executed
+    %%%%%:  194-block 29
+call   29 never executed
+    %%%%%:  194-block 30
+call   30 never executed
+    %%%%%:  194-block 31
+call   31 never executed
+    %%%%%:  194-block 32
+call   32 never executed
+    %%%%%:  194-block 33
+call   33 never executed
+    %%%%%:  194-block 34
+call   34 never executed
+    %%%%%:  194-block 35
+call   35 never executed
+    %%%%%:  194-block 36
+call   36 never executed
+    %%%%%:  194-block 37
+call   37 never executed
+    %%%%%:  194-block 38
+call   38 never executed
+    %%%%%:  194-block 39
+call   39 never executed
+    %%%%%:  194-block 40
+call   40 never executed
+    %%%%%:  194-block 41
+call   41 never executed
+    %%%%%:  194-block 42
+call   42 never executed
+    %%%%%:  194-block 43
+call   43 never executed
+    %%%%%:  194-block 44
+call   44 never executed
+    %%%%%:  194-block 45
+call   45 never executed
+    %%%%%:  194-block 46
+call   46 never executed
+    %%%%%:  194-block 47
+call   47 never executed
+    %%%%%:  194-block 48
+call   48 never executed
+    %%%%%:  194-block 49
+call   49 never executed
+    %%%%%:  194-block 50
+call   50 never executed
+    %%%%%:  194-block 51
+call   51 never executed
+    %%%%%:  194-block 52
+call   52 never executed
+    %%%%%:  194-block 53
+call   53 never executed
+    %%%%%:  194-block 54
+call   54 never executed
+    %%%%%:  194-block 55
+call   55 never executed
+    %%%%%:  194-block 56
+call   56 never executed
+    %%%%%:  194-block 57
+call   57 never executed
+    %%%%%:  194-block 58
+call   58 never executed
+    %%%%%:  194-block 59
+call   59 never executed
+    %%%%%:  194-block 60
+call   60 never executed
+    %%%%%:  194-block 61
+call   61 never executed
+    %%%%%:  194-block 62
+call   62 never executed
+    %%%%%:  194-block 63
+call   63 never executed
+    %%%%%:  194-block 64
+call   64 never executed
+    %%%%%:  194-block 65
+call   65 never executed
+    %%%%%:  194-block 66
+call   66 never executed
+    %%%%%:  194-block 67
+call   67 never executed
+    %%%%%:  194-block 68
+call   68 never executed
+    %%%%%:  194-block 69
+call   69 never executed
+    %%%%%:  194-block 70
+call   70 never executed
+    %%%%%:  194-block 71
+call   71 never executed
+    %%%%%:  194-block 72
+call   72 never executed
+    %%%%%:  194-block 73
+call   73 never executed
+    %%%%%:  194-block 74
+call   74 never executed
+    %%%%%:  194-block 75
+call   75 never executed
+    %%%%%:  194-block 76
+call   76 never executed
+    %%%%%:  194-block 77
+call   77 never executed
+    %%%%%:  194-block 78
+call   78 never executed
+    %%%%%:  194-block 79
+call   79 never executed
+    %%%%%:  194-block 80
+call   80 never executed
+    %%%%%:  194-block 81
+call   81 never executed
+    %%%%%:  194-block 82
+call   82 never executed
+    %%%%%:  194-block 83
+call   83 never executed
+    %%%%%:  194-block 84
+call   84 never executed
+    %%%%%:  194-block 85
+call   85 never executed
+    %%%%%:  194-block 86
+call   86 never executed
+    %%%%%:  194-block 87
+call   87 never executed
+    %%%%%:  194-block 88
+call   88 never executed
+    %%%%%:  194-block 89
+call   89 never executed
+    %%%%%:  194-block 90
+call   90 never executed
+    %%%%%:  194-block 91
+call   91 never executed
+    %%%%%:  194-block 92
+call   92 never executed
+    %%%%%:  194-block 93
+call   93 never executed
+    %%%%%:  194-block 94
+call   94 never executed
+    %%%%%:  194-block 95
+call   95 never executed
+    %%%%%:  194-block 96
+call   96 never executed
+    %%%%%:  194-block 97
+call   97 never executed
+    %%%%%:  194-block 98
+call   98 never executed
+    %%%%%:  194-block 99
+call   99 never executed
+    #####:  195:	    return static_cast<_Tp*>(::operator new(__n));
+    %%%%%:  195-block  0
+call    0 never executed
+    %%%%%:  195-block  1
+call    1 never executed
+    %%%%%:  195-block  2
+call    2 never executed
+    %%%%%:  195-block  3
+call    3 never executed
+    %%%%%:  195-block  4
+call    4 never executed
+    %%%%%:  195-block  5
+call    5 never executed
+    %%%%%:  195-block  6
+call    6 never executed
+    %%%%%:  195-block  7
+call    7 never executed
+    %%%%%:  195-block  8
+call    8 never executed
+    %%%%%:  195-block  9
+call    9 never executed
+    %%%%%:  195-block 10
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:  195-block 11
+    %%%%%:  195-block 12
+call   13 never executed
+    %%%%%:  195-block 13
+call   14 never executed
+    %%%%%:  195-block 14
+call   15 never executed
+    %%%%%:  195-block 15
+call   16 never executed
+    %%%%%:  195-block 16
+call   17 never executed
+    %%%%%:  195-block 17
+call   18 never executed
+    %%%%%:  195-block 18
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  195-block 19
+    %%%%%:  195-block 20
+call   22 never executed
+    %%%%%:  195-block 21
+call   23 never executed
+    %%%%%:  195-block 22
+call   24 never executed
+    %%%%%:  195-block 23
+call   25 never executed
+    %%%%%:  195-block 24
+call   26 never executed
+    %%%%%:  195-block 25
+call   27 never executed
+    %%%%%:  195-block 26
+call   28 never executed
+    %%%%%:  195-block 27
+call   29 never executed
+    %%%%%:  195-block 28
+call   30 never executed
+    %%%%%:  195-block 29
+call   31 never executed
+    %%%%%:  195-block 30
+call   32 never executed
+    %%%%%:  195-block 31
+call   33 never executed
+    %%%%%:  195-block 32
+call   34 never executed
+    %%%%%:  195-block 33
+call   35 never executed
+    %%%%%:  195-block 34
+call   36 never executed
+    %%%%%:  195-block 35
+call   37 never executed
+    %%%%%:  195-block 36
+call   38 never executed
+    %%%%%:  195-block 37
+call   39 never executed
+    %%%%%:  195-block 38
+call   40 never executed
+    %%%%%:  195-block 39
+call   41 never executed
+    %%%%%:  195-block 40
+call   42 never executed
+    %%%%%:  195-block 41
+call   43 never executed
+    %%%%%:  195-block 42
+call   44 never executed
+    %%%%%:  195-block 43
+call   45 never executed
+    %%%%%:  195-block 44
+call   46 never executed
+    %%%%%:  195-block 45
+call   47 never executed
+    %%%%%:  195-block 46
+call   48 never executed
+    %%%%%:  195-block 47
+call   49 never executed
+    %%%%%:  195-block 48
+call   50 never executed
+    %%%%%:  195-block 49
+call   51 never executed
+    %%%%%:  195-block 50
+call   52 never executed
+    %%%%%:  195-block 51
+call   53 never executed
+    %%%%%:  195-block 52
+call   54 never executed
+    %%%%%:  195-block 53
+call   55 never executed
+    %%%%%:  195-block 54
+call   56 never executed
+    %%%%%:  195-block 55
+call   57 never executed
+    %%%%%:  195-block 56
+call   58 never executed
+    %%%%%:  195-block 57
+call   59 never executed
+    %%%%%:  195-block 58
+call   60 never executed
+    %%%%%:  195-block 59
+call   61 never executed
+    %%%%%:  195-block 60
+call   62 never executed
+    %%%%%:  195-block 61
+call   63 never executed
+    %%%%%:  195-block 62
+call   64 never executed
+    %%%%%:  195-block 63
+call   65 never executed
+    %%%%%:  195-block 64
+call   66 never executed
+    %%%%%:  195-block 65
+call   67 never executed
+    %%%%%:  195-block 66
+call   68 never executed
+    %%%%%:  195-block 67
+call   69 never executed
+    %%%%%:  195-block 68
+call   70 never executed
+    %%%%%:  195-block 69
+call   71 never executed
+    %%%%%:  195-block 70
+call   72 never executed
+branch 73 never executed (fallthrough)
+branch 74 never executed (throw)
+    %%%%%:  195-block 71
+    %%%%%:  195-block 72
+call   75 never executed
+    %%%%%:  195-block 73
+call   76 never executed
+    %%%%%:  195-block 74
+call   77 never executed
+    %%%%%:  195-block 75
+call   78 never executed
+    %%%%%:  195-block 76
+call   79 never executed
+    %%%%%:  195-block 77
+call   80 never executed
+    %%%%%:  195-block 78
+call   81 never executed
+    %%%%%:  195-block 79
+call   82 never executed
+    %%%%%:  195-block 80
+call   83 never executed
+    %%%%%:  195-block 81
+call   84 never executed
+    %%%%%:  195-block 82
+call   85 never executed
+    %%%%%:  195-block 83
+call   86 never executed
+    %%%%%:  195-block 84
+call   87 never executed
+    %%%%%:  195-block 85
+call   88 never executed
+    %%%%%:  195-block 86
+call   89 never executed
+    %%%%%:  195-block 87
+call   90 never executed
+    %%%%%:  195-block 88
+call   91 never executed
+    %%%%%:  195-block 89
+call   92 never executed
+    %%%%%:  195-block 90
+call   93 never executed
+    %%%%%:  195-block 91
+call   94 never executed
+    %%%%%:  195-block 92
+call   95 never executed
+    %%%%%:  195-block 93
+call   96 never executed
+    %%%%%:  195-block 94
+call   97 never executed
+    %%%%%:  195-block 95
+call   98 never executed
+    %%%%%:  195-block 96
+call   99 never executed
+    %%%%%:  195-block 97
+call   100 never executed
+    %%%%%:  195-block 98
+call   101 never executed
+    %%%%%:  195-block 99
+call   102 never executed
+    %%%%%:  195-block 100
+call   103 never executed
+branch 104 never executed (fallthrough)
+branch 105 never executed (throw)
+    %%%%%:  195-block 101
+    %%%%%:  195-block 102
+call   106 never executed
+    %%%%%:  195-block 103
+call   107 never executed
+        -:  196:	  }
+        -:  197:
+    3537*:  198:	return __allocator_base<_Tp>::allocate(__n, 0);
+    %%%%%:  198-block  0
+call    0 never executed
+    %%%%%:  198-block  1
+call    1 never executed
+    %%%%%:  198-block  2
+call    2 never executed
+    %%%%%:  198-block  3
+call    3 never executed
+    %%%%%:  198-block  4
+call    4 never executed
+    %%%%%:  198-block  5
+call    5 never executed
+    %%%%%:  198-block  6
+call    6 never executed
+    %%%%%:  198-block  7
+call    7 never executed
+    %%%%%:  198-block  8
+call    8 never executed
+    %%%%%:  198-block  9
+call    9 never executed
+    %%%%%:  198-block 10
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:  198-block 11
+    %%%%%:  198-block 12
+call   13 never executed
+    %%%%%:  198-block 13
+call   14 never executed
+    %%%%%:  198-block 14
+call   15 never executed
+    %%%%%:  198-block 15
+call   16 never executed
+    %%%%%:  198-block 16
+call   17 never executed
+        1:  198-block 17
+call   18 returned 1
+    %%%%%:  198-block 18
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  198-block 19
+        1:  198-block 20
+call   22 returned 1
+        2:  198-block 21
+call   23 returned 2
+        1:  198-block 22
+call   24 returned 1
+        1:  198-block 23
+call   25 returned 1
+        1:  198-block 24
+call   26 returned 1
+        1:  198-block 25
+call   27 returned 1
+        1:  198-block 26
+call   28 returned 1
+        1:  198-block 27
+call   29 returned 1
+        2:  198-block 28
+call   30 returned 2
+        1:  198-block 29
+call   31 returned 1
+        1:  198-block 30
+call   32 returned 1
+        1:  198-block 31
+call   33 returned 1
+        1:  198-block 32
+call   34 returned 1
+        1:  198-block 33
+call   35 returned 1
+        1:  198-block 34
+call   36 returned 1
+    %%%%%:  198-block 35
+call   37 never executed
+    %%%%%:  198-block 36
+call   38 never executed
+        1:  198-block 37
+call   39 returned 1
+        1:  198-block 38
+call   40 returned 1
+        7:  198-block 39
+call   41 returned 7
+    %%%%%:  198-block 40
+call   42 never executed
+        2:  198-block 41
+call   43 returned 2
+        1:  198-block 42
+call   44 returned 1
+        1:  198-block 43
+call   45 returned 1
+        8:  198-block 44
+call   46 returned 8
+    %%%%%:  198-block 45
+call   47 never executed
+    %%%%%:  198-block 46
+call   48 never executed
+    %%%%%:  198-block 47
+call   49 never executed
+       46:  198-block 48
+call   50 returned 46
+    %%%%%:  198-block 49
+call   51 never executed
+        1:  198-block 50
+call   52 returned 1
+        7:  198-block 51
+call   53 returned 7
+    %%%%%:  198-block 52
+call   54 never executed
+        4:  198-block 53
+call   55 returned 4
+    %%%%%:  198-block 54
+call   56 never executed
+       11:  198-block 55
+call   57 returned 11
+        3:  198-block 56
+call   58 returned 3
+        3:  198-block 57
+call   59 returned 3
+      247:  198-block 58
+call   60 returned 247
+    %%%%%:  198-block 59
+call   61 never executed
+    %%%%%:  198-block 60
+call   62 never executed
+    %%%%%:  198-block 61
+call   63 never executed
+    %%%%%:  198-block 62
+call   64 never executed
+    %%%%%:  198-block 63
+call   65 never executed
+    %%%%%:  198-block 64
+call   66 never executed
+        3:  198-block 65
+call   67 returned 3
+    %%%%%:  198-block 66
+call   68 never executed
+        3:  198-block 67
+call   69 returned 3
+        2:  198-block 68
+call   70 returned 2
+    %%%%%:  198-block 69
+call   71 never executed
+    %%%%%:  198-block 70
+call   72 never executed
+branch 73 never executed (fallthrough)
+branch 74 never executed (throw)
+    %%%%%:  198-block 71
+    %%%%%:  198-block 72
+call   75 never executed
+    %%%%%:  198-block 73
+call   76 never executed
+        3:  198-block 74
+call   77 returned 3
+      191:  198-block 75
+call   78 returned 191
+    %%%%%:  198-block 76
+call   79 never executed
+    %%%%%:  198-block 77
+call   80 never executed
+    %%%%%:  198-block 78
+call   81 never executed
+    %%%%%:  198-block 79
+call   82 never executed
+       31:  198-block 80
+call   83 returned 31
+        3:  198-block 81
+call   84 returned 3
+    %%%%%:  198-block 82
+call   85 never executed
+        2:  198-block 83
+call   86 returned 2
+    %%%%%:  198-block 84
+call   87 never executed
+    %%%%%:  198-block 85
+call   88 never executed
+    %%%%%:  198-block 86
+call   89 never executed
+    %%%%%:  198-block 87
+call   90 never executed
+       94:  198-block 88
+call   91 returned 94
+        2:  198-block 89
+call   92 returned 2
+    %%%%%:  198-block 90
+call   93 never executed
+      213:  198-block 91
+call   94 returned 213
+    %%%%%:  198-block 92
+call   95 never executed
+    %%%%%:  198-block 93
+call   96 never executed
+    %%%%%:  198-block 94
+call   97 never executed
+        5:  198-block 95
+call   98 returned 5
+    %%%%%:  198-block 96
+call   99 never executed
+    %%%%%:  198-block 97
+call   100 never executed
+    %%%%%:  198-block 98
+call   101 never executed
+    %%%%%:  198-block 99
+call   102 never executed
+    %%%%%:  198-block 100
+call   103 never executed
+branch 104 never executed (fallthrough)
+branch 105 never executed (throw)
+    %%%%%:  198-block 101
+     1119:  198-block 102
+call   106 returned 1119
+     1505:  198-block 103
+call   107 returned 1505
+        -:  199:      }
+        -:  200:
+        -:  201:      [[__gnu__::__always_inline__]]
+        -:  202:      constexpr void
+        -:  203:      deallocate(_Tp* __p, size_t __n)
+        -:  204:      {
+    3579*:  205:	if (std::__is_constant_evaluated())
+    %%%%%:  205-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  205-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    %%%%%:  205-block  2
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed
+    %%%%%:  205-block  3
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed
+    %%%%%:  205-block  4
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed
+    %%%%%:  205-block  5
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed
+    %%%%%:  205-block  6
+call   27 never executed
+branch 28 never executed (fallthrough)
+branch 29 never executed
+    %%%%%:  205-block  7
+call   30 never executed
+branch 31 never executed (fallthrough)
+branch 32 never executed
+    %%%%%:  205-block  8
+call   33 never executed
+branch 34 never executed (fallthrough)
+branch 35 never executed
+    %%%%%:  205-block  9
+call   36 never executed
+branch 37 never executed (fallthrough)
+branch 38 never executed
+        1:  205-block 10
+call   39 returned 1
+branch 40 taken 0 (fallthrough)
+branch 41 taken 1
+        2:  205-block 11
+call   42 returned 2
+branch 43 taken 0 (fallthrough)
+branch 44 taken 2
+        1:  205-block 12
+call   45 returned 1
+branch 46 taken 0 (fallthrough)
+branch 47 taken 1
+        1:  205-block 13
+call   48 returned 1
+branch 49 taken 0 (fallthrough)
+branch 50 taken 1
+        1:  205-block 14
+call   51 returned 1
+branch 52 taken 0 (fallthrough)
+branch 53 taken 1
+        1:  205-block 15
+call   54 returned 1
+branch 55 taken 0 (fallthrough)
+branch 56 taken 1
+        1:  205-block 16
+call   57 returned 1
+branch 58 taken 0 (fallthrough)
+branch 59 taken 1
+        1:  205-block 17
+call   60 returned 1
+branch 61 taken 0 (fallthrough)
+branch 62 taken 1
+        2:  205-block 18
+call   63 returned 2
+branch 64 taken 0 (fallthrough)
+branch 65 taken 2
+        1:  205-block 19
+call   66 returned 1
+branch 67 taken 0 (fallthrough)
+branch 68 taken 1
+        1:  205-block 20
+call   69 returned 1
+branch 70 taken 0 (fallthrough)
+branch 71 taken 1
+        1:  205-block 21
+call   72 returned 1
+branch 73 taken 0 (fallthrough)
+branch 74 taken 1
+        1:  205-block 22
+call   75 returned 1
+branch 76 taken 0 (fallthrough)
+branch 77 taken 1
+        1:  205-block 23
+call   78 returned 1
+branch 79 taken 0 (fallthrough)
+branch 80 taken 1
+        1:  205-block 24
+call   81 returned 1
+branch 82 taken 0 (fallthrough)
+branch 83 taken 1
+    %%%%%:  205-block 25
+call   84 never executed
+branch 85 never executed (fallthrough)
+branch 86 never executed
+    %%%%%:  205-block 26
+call   87 never executed
+branch 88 never executed (fallthrough)
+branch 89 never executed
+        1:  205-block 27
+call   90 returned 1
+branch 91 taken 0 (fallthrough)
+branch 92 taken 1
+        1:  205-block 28
+call   93 returned 1
+branch 94 taken 0 (fallthrough)
+branch 95 taken 1
+call   96 never executed
+branch 97 never executed (fallthrough)
+branch 98 never executed
+        2:  205-block 29
+call   99 returned 2
+branch 100 taken 0 (fallthrough)
+branch 101 taken 2
+        1:  205-block 30
+call   102 returned 1
+branch 103 taken 0 (fallthrough)
+branch 104 taken 1
+        1:  205-block 31
+call   105 returned 1
+branch 106 taken 0 (fallthrough)
+branch 107 taken 1
+    %%%%%:  205-block 32
+call   108 never executed
+branch 109 never executed (fallthrough)
+branch 110 never executed
+    %%%%%:  205-block 33
+call   111 never executed
+branch 112 never executed (fallthrough)
+branch 113 never executed
+    %%%%%:  205-block 34
+call   114 never executed
+branch 115 never executed (fallthrough)
+branch 116 never executed
+       46:  205-block 35
+call   117 returned 46
+branch 118 taken 0 (fallthrough)
+branch 119 taken 46
+        1:  205-block 36
+call   120 returned 1
+branch 121 taken 0 (fallthrough)
+branch 122 taken 1
+    %%%%%:  205-block 37
+call   123 never executed
+branch 124 never executed (fallthrough)
+branch 125 never executed
+    %%%%%:  205-block 38
+call   126 never executed
+branch 127 never executed (fallthrough)
+branch 128 never executed
+call   129 never executed
+branch 130 never executed (fallthrough)
+branch 131 never executed
+       11:  205-block 39
+call   132 returned 11
+branch 133 taken 0 (fallthrough)
+branch 134 taken 11
+        3:  205-block 40
+call   135 returned 3
+branch 136 taken 0 (fallthrough)
+branch 137 taken 3
+        3:  205-block 41
+call   138 returned 3
+branch 139 taken 0 (fallthrough)
+branch 140 taken 3
+call   141 returned 8
+branch 142 taken 0 (fallthrough)
+branch 143 taken 8
+    %%%%%:  205-block 42
+call   144 never executed
+branch 145 never executed (fallthrough)
+branch 146 never executed
+call   147 returned 1
+branch 148 taken 0 (fallthrough)
+branch 149 taken 1
+call   150 returned 7
+branch 151 taken 0 (fallthrough)
+branch 152 taken 7
+call   153 never executed
+branch 154 never executed (fallthrough)
+branch 155 never executed
+        3:  205-block 43
+call   156 returned 3
+branch 157 taken 0 (fallthrough)
+branch 158 taken 3
+call   159 returned 7
+branch 160 taken 0 (fallthrough)
+branch 161 taken 7
+call   162 returned 4
+branch 163 taken 0 (fallthrough)
+branch 164 taken 4
+call   165 never executed
+branch 166 never executed (fallthrough)
+branch 167 never executed
+call   168 never executed
+branch 169 never executed (fallthrough)
+branch 170 never executed
+call   171 never executed
+branch 172 never executed (fallthrough)
+branch 173 never executed
+    %%%%%:  205-block 44
+call   174 never executed
+branch 175 never executed (fallthrough)
+branch 176 never executed
+      247:  205-block 45
+call   177 returned 247
+branch 178 taken 0 (fallthrough)
+branch 179 taken 247
+    %%%%%:  205-block 46
+call   180 never executed
+branch 181 never executed (fallthrough)
+branch 182 never executed
+    %%%%%:  205-block 47
+call   183 never executed
+branch 184 never executed (fallthrough)
+branch 185 never executed
+    %%%%%:  205-block 48
+call   186 never executed
+branch 187 never executed (fallthrough)
+branch 188 never executed
+    %%%%%:  205-block 49
+call   189 never executed
+branch 190 never executed (fallthrough)
+branch 191 never executed
+    %%%%%:  205-block 50
+call   192 never executed
+branch 193 never executed (fallthrough)
+branch 194 never executed
+    %%%%%:  205-block 51
+call   195 never executed
+branch 196 never executed (fallthrough)
+branch 197 never executed
+        3:  205-block 52
+call   198 returned 3
+branch 199 taken 0 (fallthrough)
+branch 200 taken 3
+    %%%%%:  205-block 53
+call   201 never executed
+branch 202 never executed (fallthrough)
+branch 203 never executed
+    %%%%%:  205-block 54
+call   204 never executed
+branch 205 never executed (fallthrough)
+branch 206 never executed
+call   207 never executed
+branch 208 never executed (fallthrough)
+branch 209 never executed
+    %%%%%:  205-block 55
+call   210 never executed
+branch 211 never executed (fallthrough)
+branch 212 never executed
+call   213 never executed
+branch 214 never executed (fallthrough)
+branch 215 never executed
+call   216 never executed
+branch 217 never executed (fallthrough)
+branch 218 never executed
+        3:  205-block 56
+call   219 returned 3
+branch 220 taken 0 (fallthrough)
+branch 221 taken 3
+      191:  205-block 57
+call   222 returned 191
+branch 223 taken 0 (fallthrough)
+branch 224 taken 191
+    %%%%%:  205-block 58
+call   225 never executed
+branch 226 never executed (fallthrough)
+branch 227 never executed
+    %%%%%:  205-block 59
+call   228 never executed
+branch 229 never executed (fallthrough)
+branch 230 never executed
+    %%%%%:  205-block 60
+call   231 never executed
+branch 232 never executed (fallthrough)
+branch 233 never executed
+    %%%%%:  205-block 61
+call   234 never executed
+branch 235 never executed (fallthrough)
+branch 236 never executed
+    %%%%%:  205-block 62
+call   237 never executed
+branch 238 never executed (fallthrough)
+branch 239 never executed
+       31:  205-block 63
+call   240 returned 31
+branch 241 taken 0 (fallthrough)
+branch 242 taken 31
+    %%%%%:  205-block 64
+call   243 never executed
+branch 244 never executed (fallthrough)
+branch 245 never executed
+        5:  205-block 65
+call   246 returned 5
+branch 247 taken 0 (fallthrough)
+branch 248 taken 5
+        2:  205-block 66
+call   249 returned 2
+branch 250 taken 0 (fallthrough)
+branch 251 taken 2
+    %%%%%:  205-block 67
+call   252 never executed
+branch 253 never executed (fallthrough)
+branch 254 never executed
+        2:  205-block 68
+call   255 returned 2
+branch 256 taken 0 (fallthrough)
+branch 257 taken 2
+    %%%%%:  205-block 69
+call   258 never executed
+branch 259 never executed (fallthrough)
+branch 260 never executed
+    %%%%%:  205-block 70
+call   261 never executed
+branch 262 never executed (fallthrough)
+branch 263 never executed
+    %%%%%:  205-block 71
+call   264 never executed
+branch 265 never executed (fallthrough)
+branch 266 never executed
+        3:  205-block 72
+call   267 returned 3
+branch 268 taken 0 (fallthrough)
+branch 269 taken 3
+    %%%%%:  205-block 73
+call   270 never executed
+branch 271 never executed (fallthrough)
+branch 272 never executed
+    %%%%%:  205-block 74
+call   273 never executed
+branch 274 never executed (fallthrough)
+branch 275 never executed
+    %%%%%:  205-block 75
+call   276 never executed
+branch 277 never executed (fallthrough)
+branch 278 never executed
+        2:  205-block 76
+call   279 returned 2
+branch 280 taken 0 (fallthrough)
+branch 281 taken 2
+       94:  205-block 77
+call   282 returned 94
+branch 283 taken 0 (fallthrough)
+branch 284 taken 94
+    %%%%%:  205-block 78
+call   285 never executed
+branch 286 never executed (fallthrough)
+branch 287 never executed
+      213:  205-block 79
+call   288 returned 213
+branch 289 taken 0 (fallthrough)
+branch 290 taken 213
+    %%%%%:  205-block 80
+call   291 never executed
+branch 292 never executed (fallthrough)
+branch 293 never executed
+    %%%%%:  205-block 81
+call   294 never executed
+branch 295 never executed (fallthrough)
+branch 296 never executed
+     1117:  205-block 82
+call   297 returned 1117
+branch 298 taken 0 (fallthrough)
+branch 299 taken 1117
+call   300 returned 1549
+branch 301 taken 0 (fallthrough)
+branch 302 taken 1549
+        -:  206:	  {
+    #####:  207:	    ::operator delete(__p);
+    %%%%%:  207-block  0
+call    0 never executed
+    %%%%%:  207-block  1
+call    1 never executed
+    %%%%%:  207-block  2
+call    2 never executed
+    %%%%%:  207-block  3
+call    3 never executed
+    %%%%%:  207-block  4
+call    4 never executed
+    %%%%%:  207-block  5
+call    5 never executed
+    %%%%%:  207-block  6
+call    6 never executed
+    %%%%%:  207-block  7
+call    7 never executed
+    %%%%%:  207-block  8
+call    8 never executed
+    %%%%%:  207-block  9
+call    9 never executed
+    %%%%%:  207-block 10
+call   10 never executed
+    %%%%%:  207-block 11
+call   11 never executed
+    %%%%%:  207-block 12
+call   12 never executed
+    %%%%%:  207-block 13
+call   13 never executed
+    %%%%%:  207-block 14
+call   14 never executed
+    %%%%%:  207-block 15
+call   15 never executed
+    %%%%%:  207-block 16
+call   16 never executed
+    %%%%%:  207-block 17
+call   17 never executed
+    %%%%%:  207-block 18
+call   18 never executed
+    %%%%%:  207-block 19
+call   19 never executed
+    %%%%%:  207-block 20
+call   20 never executed
+    %%%%%:  207-block 21
+call   21 never executed
+    %%%%%:  207-block 22
+call   22 never executed
+    %%%%%:  207-block 23
+call   23 never executed
+    %%%%%:  207-block 24
+call   24 never executed
+    %%%%%:  207-block 25
+call   25 never executed
+    %%%%%:  207-block 26
+call   26 never executed
+    %%%%%:  207-block 27
+call   27 never executed
+    %%%%%:  207-block 28
+call   28 never executed
+    %%%%%:  207-block 29
+call   29 never executed
+    %%%%%:  207-block 30
+call   30 never executed
+    %%%%%:  207-block 31
+call   31 never executed
+    %%%%%:  207-block 32
+call   32 never executed
+    %%%%%:  207-block 33
+call   33 never executed
+    %%%%%:  207-block 34
+call   34 never executed
+    %%%%%:  207-block 35
+call   35 never executed
+    %%%%%:  207-block 36
+call   36 never executed
+    %%%%%:  207-block 37
+call   37 never executed
+    %%%%%:  207-block 38
+call   38 never executed
+    %%%%%:  207-block 39
+call   39 never executed
+    %%%%%:  207-block 40
+call   40 never executed
+    %%%%%:  207-block 41
+call   41 never executed
+    %%%%%:  207-block 42
+call   42 never executed
+    %%%%%:  207-block 43
+call   43 never executed
+    %%%%%:  207-block 44
+call   44 never executed
+    %%%%%:  207-block 45
+call   45 never executed
+    %%%%%:  207-block 46
+call   46 never executed
+    %%%%%:  207-block 47
+call   47 never executed
+    %%%%%:  207-block 48
+call   48 never executed
+    %%%%%:  207-block 49
+call   49 never executed
+    %%%%%:  207-block 50
+call   50 never executed
+    %%%%%:  207-block 51
+call   51 never executed
+    %%%%%:  207-block 52
+call   52 never executed
+    %%%%%:  207-block 53
+call   53 never executed
+    %%%%%:  207-block 54
+call   54 never executed
+    %%%%%:  207-block 55
+call   55 never executed
+    %%%%%:  207-block 56
+call   56 never executed
+    %%%%%:  207-block 57
+call   57 never executed
+    %%%%%:  207-block 58
+call   58 never executed
+    %%%%%:  207-block 59
+call   59 never executed
+    %%%%%:  207-block 60
+call   60 never executed
+    %%%%%:  207-block 61
+call   61 never executed
+    %%%%%:  207-block 62
+call   62 never executed
+    %%%%%:  207-block 63
+call   63 never executed
+    %%%%%:  207-block 64
+call   64 never executed
+    %%%%%:  207-block 65
+call   65 never executed
+    %%%%%:  207-block 66
+call   66 never executed
+    %%%%%:  207-block 67
+call   67 never executed
+    %%%%%:  207-block 68
+call   68 never executed
+    %%%%%:  207-block 69
+call   69 never executed
+    %%%%%:  207-block 70
+call   70 never executed
+    %%%%%:  207-block 71
+call   71 never executed
+    %%%%%:  207-block 72
+call   72 never executed
+    %%%%%:  207-block 73
+call   73 never executed
+    %%%%%:  207-block 74
+call   74 never executed
+    %%%%%:  207-block 75
+call   75 never executed
+    %%%%%:  207-block 76
+call   76 never executed
+    %%%%%:  207-block 77
+call   77 never executed
+    %%%%%:  207-block 78
+call   78 never executed
+    %%%%%:  207-block 79
+call   79 never executed
+    %%%%%:  207-block 80
+call   80 never executed
+    %%%%%:  207-block 81
+call   81 never executed
+    %%%%%:  207-block 82
+call   82 never executed
+    %%%%%:  207-block 83
+call   83 never executed
+    %%%%%:  207-block 84
+call   84 never executed
+    %%%%%:  207-block 85
+call   85 never executed
+    %%%%%:  207-block 86
+call   86 never executed
+    %%%%%:  207-block 87
+call   87 never executed
+    %%%%%:  207-block 88
+call   88 never executed
+    %%%%%:  207-block 89
+call   89 never executed
+    %%%%%:  207-block 90
+call   90 never executed
+    %%%%%:  207-block 91
+call   91 never executed
+    %%%%%:  207-block 92
+call   92 never executed
+    %%%%%:  207-block 93
+call   93 never executed
+    %%%%%:  207-block 94
+call   94 never executed
+    %%%%%:  207-block 95
+call   95 never executed
+    %%%%%:  207-block 96
+call   96 never executed
+    %%%%%:  207-block 97
+call   97 never executed
+    %%%%%:  207-block 98
+call   98 never executed
+    %%%%%:  207-block 99
+call   99 never executed
+    %%%%%:  207-block 100
+call   100 never executed
+    #####:  208:	    return;
+        -:  209:	  }
+    3579*:  210:	__allocator_base<_Tp>::deallocate(__p, __n);
+    %%%%%:  210-block  0
+call    0 never executed
+    %%%%%:  210-block  1
+call    1 never executed
+    %%%%%:  210-block  2
+call    2 never executed
+    %%%%%:  210-block  3
+call    3 never executed
+    %%%%%:  210-block  4
+call    4 never executed
+    %%%%%:  210-block  5
+call    5 never executed
+    %%%%%:  210-block  6
+call    6 never executed
+    %%%%%:  210-block  7
+call    7 never executed
+    %%%%%:  210-block  8
+call    8 never executed
+    %%%%%:  210-block  9
+call    9 never executed
+    %%%%%:  210-block 10
+call   10 never executed
+    %%%%%:  210-block 11
+call   11 never executed
+    %%%%%:  210-block 12
+call   12 never executed
+        1:  210-block 13
+call   13 returned 1
+        2:  210-block 14
+call   14 returned 2
+        1:  210-block 15
+call   15 returned 1
+        1:  210-block 16
+call   16 returned 1
+        1:  210-block 17
+call   17 returned 1
+        1:  210-block 18
+call   18 returned 1
+        1:  210-block 19
+call   19 returned 1
+        1:  210-block 20
+call   20 returned 1
+        2:  210-block 21
+call   21 returned 2
+        1:  210-block 22
+call   22 returned 1
+        1:  210-block 23
+call   23 returned 1
+        1:  210-block 24
+call   24 returned 1
+        1:  210-block 25
+call   25 returned 1
+        1:  210-block 26
+call   26 returned 1
+        1:  210-block 27
+call   27 returned 1
+    %%%%%:  210-block 28
+call   28 never executed
+    %%%%%:  210-block 29
+call   29 never executed
+        1:  210-block 30
+call   30 returned 1
+        1:  210-block 31
+call   31 returned 1
+    %%%%%:  210-block 32
+call   32 never executed
+        2:  210-block 33
+call   33 returned 2
+        1:  210-block 34
+call   34 returned 1
+        1:  210-block 35
+call   35 returned 1
+    %%%%%:  210-block 36
+call   36 never executed
+    %%%%%:  210-block 37
+call   37 never executed
+    %%%%%:  210-block 38
+call   38 never executed
+       46:  210-block 39
+call   39 returned 46
+        1:  210-block 40
+call   40 returned 1
+    %%%%%:  210-block 41
+call   41 never executed
+    %%%%%:  210-block 42
+call   42 never executed
+    %%%%%:  210-block 43
+call   43 never executed
+       11:  210-block 44
+call   44 returned 11
+        3:  210-block 45
+call   45 returned 3
+        3:  210-block 46
+call   46 returned 3
+        8:  210-block 47
+call   47 returned 8
+    %%%%%:  210-block 48
+call   48 never executed
+        1:  210-block 49
+call   49 returned 1
+        7:  210-block 50
+call   50 returned 7
+    %%%%%:  210-block 51
+call   51 never executed
+        3:  210-block 52
+call   52 returned 3
+        7:  210-block 53
+call   53 returned 7
+        4:  210-block 54
+call   54 returned 4
+    %%%%%:  210-block 55
+call   55 never executed
+    %%%%%:  210-block 56
+call   56 never executed
+    %%%%%:  210-block 57
+call   57 never executed
+    %%%%%:  210-block 58
+call   58 never executed
+      247:  210-block 59
+call   59 returned 247
+    %%%%%:  210-block 60
+call   60 never executed
+    %%%%%:  210-block 61
+call   61 never executed
+    %%%%%:  210-block 62
+call   62 never executed
+    %%%%%:  210-block 63
+call   63 never executed
+    %%%%%:  210-block 64
+call   64 never executed
+    %%%%%:  210-block 65
+call   65 never executed
+        3:  210-block 66
+call   66 returned 3
+    %%%%%:  210-block 67
+call   67 never executed
+    %%%%%:  210-block 68
+call   68 never executed
+    %%%%%:  210-block 69
+call   69 never executed
+    %%%%%:  210-block 70
+call   70 never executed
+    %%%%%:  210-block 71
+call   71 never executed
+    %%%%%:  210-block 72
+call   72 never executed
+        3:  210-block 73
+call   73 returned 3
+      191:  210-block 74
+call   74 returned 191
+    %%%%%:  210-block 75
+call   75 never executed
+    %%%%%:  210-block 76
+call   76 never executed
+    %%%%%:  210-block 77
+call   77 never executed
+    %%%%%:  210-block 78
+call   78 never executed
+    %%%%%:  210-block 79
+call   79 never executed
+       31:  210-block 80
+call   80 returned 31
+    %%%%%:  210-block 81
+call   81 never executed
+        5:  210-block 82
+call   82 returned 5
+        2:  210-block 83
+call   83 returned 2
+    %%%%%:  210-block 84
+call   84 never executed
+        2:  210-block 85
+call   85 returned 2
+    %%%%%:  210-block 86
+call   86 never executed
+    %%%%%:  210-block 87
+call   87 never executed
+    %%%%%:  210-block 88
+call   88 never executed
+        3:  210-block 89
+call   89 returned 3
+    %%%%%:  210-block 90
+call   90 never executed
+    %%%%%:  210-block 91
+call   91 never executed
+    %%%%%:  210-block 92
+call   92 never executed
+        2:  210-block 93
+call   93 returned 2
+       94:  210-block 94
+call   94 returned 94
+    %%%%%:  210-block 95
+call   95 never executed
+      213:  210-block 96
+call   96 returned 213
+    %%%%%:  210-block 97
+call   97 never executed
+    %%%%%:  210-block 98
+call   98 never executed
+     1117:  210-block 99
+call   99 returned 1117
+     1549:  210-block 100
+call   100 returned 1549
+        -:  211:      }
+        -:  212:#endif // C++20
+        -:  213:
+        -:  214:      friend __attribute__((__always_inline__)) _GLIBCXX20_CONSTEXPR
+        -:  215:      bool
+        -:  216:      operator==(const allocator&, const allocator&) _GLIBCXX_NOTHROW
+    #####:  217:      { return true; }
+    %%%%%:  217-block  0
+    %%%%%:  217-block  1
+        -:  218:
+        -:  219:#if __cpp_impl_three_way_comparison < 201907L
+        -:  220:      friend __attribute__((__always_inline__)) _GLIBCXX20_CONSTEXPR
+        -:  221:      bool
+        -:  222:      operator!=(const allocator&, const allocator&) _GLIBCXX_NOTHROW
+        -:  223:      { return false; }
+        -:  224:#endif
+        -:  225:
+        -:  226:      // Inherit everything else.
+        -:  227:    };
+        -:  228:
+        -:  229:  /** Equality comparison for std::allocator objects
+        -:  230:   *
+        -:  231:   * @return true, for all std::allocator objects.
+        -:  232:   * @relates std::allocator
+        -:  233:   */
+        -:  234:  template<typename _T1, typename _T2>
+        -:  235:    __attribute__((__always_inline__))
+        -:  236:    inline _GLIBCXX20_CONSTEXPR bool
+        -:  237:    operator==(const allocator<_T1>&, const allocator<_T2>&)
+        -:  238:    _GLIBCXX_NOTHROW
+        -:  239:    { return true; }
+        -:  240:
+        -:  241:#if __cpp_impl_three_way_comparison < 201907L
+        -:  242:  template<typename _T1, typename _T2>
+        -:  243:    __attribute__((__always_inline__))
+        -:  244:    inline _GLIBCXX20_CONSTEXPR bool
+        -:  245:    operator!=(const allocator<_T1>&, const allocator<_T2>&)
+        -:  246:    _GLIBCXX_NOTHROW
+        -:  247:    { return false; }
+        -:  248:#endif
+        -:  249:
+        -:  250:  /// @cond undocumented
+        -:  251:
+        -:  252:  // Invalid allocator<cv T> partial specializations.
+        -:  253:  // allocator_traits::rebind_alloc can be used to form a valid allocator type.
+        -:  254:  template<typename _Tp>
+        -:  255:    class allocator<const _Tp>
+        -:  256:    {
+        -:  257:    public:
+        -:  258:      typedef _Tp value_type;
+        -:  259:      template<typename _Up> allocator(const allocator<_Up>&) { }
+        -:  260:    };
+        -:  261:
+        -:  262:  template<typename _Tp>
+        -:  263:    class allocator<volatile _Tp>
+        -:  264:    {
+        -:  265:    public:
+        -:  266:      typedef _Tp value_type;
+        -:  267:      template<typename _Up> allocator(const allocator<_Up>&) { }
+        -:  268:    };
+        -:  269:
+        -:  270:  template<typename _Tp>
+        -:  271:    class allocator<const volatile _Tp>
+        -:  272:    {
+        -:  273:    public:
+        -:  274:      typedef _Tp value_type;
+        -:  275:      template<typename _Up> allocator(const allocator<_Up>&) { }
+        -:  276:    };
+        -:  277:  /// @endcond
+        -:  278:
+        -:  279:  /// @} group allocator
+        -:  280:
+        -:  281:  // Inhibit implicit instantiations for required instantiations,
+        -:  282:  // which are defined via explicit instantiations elsewhere.
+        -:  283:#if _GLIBCXX_EXTERN_TEMPLATE
+        -:  284:  extern template class allocator<char>;
+        -:  285:  extern template class allocator<wchar_t>;
+        -:  286:#endif
+        -:  287:
+        -:  288:  // Undefine.
+        -:  289:#undef __allocator_base
+        -:  290:
+        -:  291:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  292:} // namespace std
+        -:  293:
+        -:  294:#endif

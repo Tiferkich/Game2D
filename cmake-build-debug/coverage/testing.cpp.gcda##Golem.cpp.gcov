@@ -1,0 +1,87 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Golem/Golem.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "Golem.h"
+        -:    6:#include "../../../Dungeon/Dungeon.h"
+        -:    7:
+function _ZN5Golem9getDamageEi called 14 returned 100% blocks executed 100%
+       14:    8:void Golem::getDamage(int damage) {
+       14:    9:    srand(time(0));
+       14:    9-block  0
+call    0 returned 14
+call    1 returned 14
+       14:   10:    int chance = rand() % 100;
+call    0 returned 14
+       14:   11:    if (chance > hitPercentage) {
+branch  0 taken 13 (fallthrough)
+branch  1 taken 1
+       13:   12:        curHP -= damage;
+       13:   13:        if (curHP <= 0) {
+       13:   13-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 12
+        1:   14:            die();
+        1:   14-block  0
+call    0 returned 1
+        -:   15:        }
+        -:   16:    }
+       14:   17:}
+        -:   18:
+function _ZN5Golem14methodAfterDieER7Dungeon called 428 returned 2% blocks executed 92%
+      428:   19:void Golem::methodAfterDie(Dungeon &dungeon) {
+      428:   20:    if (status != Status::dead) throw (std::invalid_argument("Not dead enemy"));
+      428:   20-block  0
+branch  0 taken 421 (fallthrough)
+branch  1 taken 7
+      421:   20-block  1
+call    2 returned 421
+call    3 returned 421
+branch  4 taken 421 (fallthrough)
+branch  5 taken 0 (throw)
+      421:   20-block  2
+call    6 returned 0
+    $$$$$:   20-block  3
+call    7 never executed
+        7:   21:    dungeon.getMapLevel()[coords.first][coords.second] = ceil;
+        7:   21-block  0
+call    0 returned 7
+call    1 returned 7
+branch  2 taken 7 (fallthrough)
+branch  3 taken 0 (throw)
+        7:   21-block  1
+call    4 returned 7
+branch  5 taken 7 (fallthrough)
+branch  6 taken 0 (throw)
+       17:   22:    for (auto i = dungeon.getListEnemies().begin(); i != dungeon.getListEnemies().end(); i++) {
+        7:   22-block  0
+call    0 returned 7
+call    1 returned 7
+       10:   22-block  1
+call    2 returned 10
+       17:   22-block  2
+call    3 returned 17
+call    4 returned 17
+call    5 returned 17
+branch  6 taken 17
+branch  7 taken 0 (fallthrough)
+       17:   23:        if (i->first == this) {
+       17:   23-block  0
+call    0 returned 17
+branch  1 taken 7 (fallthrough)
+branch  2 taken 10
+        -:   24://            if (i->first->isHeap()) delete i->first;
+        7:   25:            dungeon.getListEnemies().erase(i);
+        7:   25-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+        7:   26:            break;
+        -:   27:        }
+        -:   28:    }
+        7:   29:}
+        7:   29-block  0

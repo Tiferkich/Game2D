@@ -1,0 +1,77 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Summoner/LivingSummoner.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 26.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <utility>
+        -:    6:
+        -:    7:
+        -:    8:#ifndef GAMELAB3_LIVINGSUMMONER_H
+        -:    9:#define GAMELAB3_LIVINGSUMMONER_H
+        -:   10:
+        -:   11:#include "../LivingEnemy/LivingEnemy.h"
+        -:   12:#include "../Undead/Undead.h"
+        -:   13:#include "../../../Dungeon/Dungeon.h"
+        -:   14:#include "Isummoner.h"
+        -:   15:
+        -:   16:///Живой саммонер, наследуется от живого врага  и от саммонера
+        -:   17:class LivingSummoner : public LivingEnemy, public Isummoner {
+        -:   18:private:
+        -:   19:    int cost = 500;///<Цена открытия
+        -:   20:public:
+function _ZN14LivingSummonerC1EiSt4pairIiiES1_i called 4 returned 100% blocks executed 75%
+        4:   21:    LivingSummoner(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, int maxHP) : LivingEnemy(speed0,
+        -:   22:                                                                                                                 damage0,
+        -:   23:                                                                                                                 coord0,
+        -:   24:                                                                                                                 "livingSummoner",
+        -:   25:                                                                                                                 maxHP,
+        -:   26:                                                                                                                 maxHP),
+       12:   27:                                                                                                     Isummoner(maxHP) {};
+        4:   27-block  0
+        4:   27-block  1
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+        4:   27-block  2
+call    3 returned 4
+call    4 returned 4
+        4:   27-block  3
+call    5 returned 4
+    $$$$$:   27-block  4
+        -:   28:    /// Перегруженный метод, превращает живого саммонера в нежить саммонера
+        -:   29:    /// \param dungeon - уровен
+        -:   30:    void becomeUndead(Dungeon &dungeon) override;
+        -:   31:    /// Цена открытия
+        -:   32:    /// \return  cost
+function _ZN14LivingSummoner8openCostEv called 2 returned 100% blocks executed 100%
+        2:   33:    int openCost() override {
+        2:   34:        return cost;
+        2:   34-block  0
+        -:   35:    }
+        -:   36:
+        -:   37:    /// Метод призыва
+        -:   38:    /// \param dungeon - уровент
+        -:   39:    /// \param coords - координаты
+        -:   40:    /// \param ratio - коэф усиления
+        -:   41:    /// \param newCurHp - новое текущее хп, нужно для того чтобы понять, можно ли призывать или нет
+        -:   42:    void summon(Dungeon &dungeon, std::pair<int, int> coords, int ratio, int newCurHp) override;
+        -:   43:
+        -:   44:    ///  Перегруженный метод сделать что то, перегружен он потому что, саммонер умеет призывать
+        -:   45:    /// \param matrix - уровень
+        -:   46:    void doSomething(Dungeon &matrix) override;
+        -:   47:    /// Getter
+        -:   48:    /// \return  livingSummoner
+function _ZN14LivingSummoner7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   49:    Enemies getType() override {
+    #####:   50:        return Enemies::livingSummoner;
+    %%%%%:   50-block  0
+        -:   51:    }
+        -:   52:
+        -:   53:
+        -:   54:};
+        -:   55:
+        -:   56:
+        -:   57:#endif //GAMELAB3_LIVINGSUMMONER_H

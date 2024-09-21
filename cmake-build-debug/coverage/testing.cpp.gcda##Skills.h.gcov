@@ -1,0 +1,58 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Skills/Skills.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 18.11.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_SKILLS_H
+        -:    6:#define GAMELAB3_SKILLS_H
+        -:    7:
+        -:    8:class Dungeon;
+        -:    9:
+        -:   10:
+        -:   11:///Абстрактный класс от которого наследуются все скиллы
+        -:   12:class Skill {
+        -:   13:protected:
+        -:   14:    int skillLvl;///< Уровень скилла
+        -:   15:    int manaCost;///< Мана кост скилла
+        -:   16:public:
+        -:   17:    /// Конструктор
+        -:   18:    /// \param manaCost - Мана кост скилла
+function _ZN5SkillC2Ei called 8 returned 100% blocks executed 100%
+        8:   19:    explicit Skill(int manaCost) : skillLvl(0), manaCost(manaCost) {};
+        -:   20:    /// Чисто виртуальный метод
+        -:   21:    /// \param dungeon - уровень
+        -:   22:    /// \param mas - массив опций
+        -:   23:    /// \return 0 - успех
+        -:   24:    virtual int useSkill(Dungeon &dungeon, int mas[]) = 0;
+        -:   25:
+        -:   26:    /// Getter
+        -:   27:    /// \return - Текущий уровень скилла
+function _ZNK5Skill11getSkillLvlEv called 5 returned 100% blocks executed 100%
+        5:   28:    int getSkillLvl() const {
+        5:   29:        return skillLvl;
+        5:   29-block  0
+        -:   30:    }
+        -:   31:
+        -:   32:    /// Setter
+        -:   33:    /// \param lvl - новый уровень скилла
+        -:   34:    Skill &setSkillLvl(int lvl) {
+        -:   35:        skillLvl = lvl;
+        -:   36:        return *this;
+        -:   37:    }
+        -:   38:
+        -:   39:    /// Прокачать скилл
+        -:   40:    /// \return уровень скилла
+function _ZN5Skill10upgradeLvlEv called 9 returned 100% blocks executed 100%
+        9:   41:    int upgradeLvl() {
+        9:   42:        return ++skillLvl;
+        9:   42-block  0
+        -:   43:    }
+        -:   44:
+        -:   45:
+        -:   46:};
+        -:   47:
+        -:   48:
+        -:   49:#endif //GAMELAB3_SKILLS_H

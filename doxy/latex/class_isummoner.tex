@@ -1,0 +1,113 @@
+\doxysection{Класс Isummoner}
+\hypertarget{class_isummoner}{}\label{class_isummoner}\index{Isummoner@{Isummoner}}
+
+
+Класс от которого наследуются саммонеры  
+
+
+
+
+{\ttfamily \#include $<$Isummoner.\+h$>$}
+
+Граф наследования\+:Isummoner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_isummoner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_isummoner_ab5b47581bc56e4e633688c760c314d78}{Isummoner}} (int cur\+Hp)
+\item 
+bool \mbox{\hyperlink{class_isummoner_a236ff36c6b011a0f8ccecfbb79ec2b99}{check\+Flag}} (int new\+Cur\+Hp)
+\item 
+virtual void \mbox{\hyperlink{class_isummoner_a992201acdd9d781b290c594f0268704b}{generate\+Summons}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, std\+::pair$<$ int, int $>$ coords, int ratio)
+\item 
+virtual void \mbox{\hyperlink{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3}{summon}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, std\+::pair$<$ int, int $>$ coords, int ratio, int new\+Cur\+Hp)
+\item 
+void \mbox{\hyperlink{class_isummoner_a3bbfddef37c4c257ddaf31a0aff57102}{set\+Flag}} (bool flag0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс от которого наследуются саммонеры 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_isummoner_ab5b47581bc56e4e633688c760c314d78}\label{class_isummoner_ab5b47581bc56e4e633688c760c314d78} 
+\index{Isummoner@{Isummoner}!Isummoner@{Isummoner}}
+\index{Isummoner@{Isummoner}!Isummoner@{Isummoner}}
+\doxysubsubsection{\texorpdfstring{Isummoner()}{Isummoner()}}
+{\footnotesize\ttfamily Isummoner\+::\+Isummoner (\begin{DoxyParamCaption}\item[{int}]{cur\+Hp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Конструктор 
+\begin{DoxyParams}{Аргументы}
+{\em cur\+Hp} & сюда подается максимальное здоровье саммонера \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_isummoner_a236ff36c6b011a0f8ccecfbb79ec2b99}\label{class_isummoner_a236ff36c6b011a0f8ccecfbb79ec2b99} 
+\index{Isummoner@{Isummoner}!checkFlag@{checkFlag}}
+\index{checkFlag@{checkFlag}!Isummoner@{Isummoner}}
+\doxysubsubsection{\texorpdfstring{checkFlag()}{checkFlag()}}
+{\footnotesize\ttfamily bool Isummoner\+::check\+Flag (\begin{DoxyParamCaption}\item[{int}]{new\+Cur\+Hp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Проверка на получение дамага 
+\begin{DoxyParams}{Аргументы}
+{\em new\+Cur\+Hp} & -\/ если новое хп меньше старого, то он призывает \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_isummoner_a992201acdd9d781b290c594f0268704b}\label{class_isummoner_a992201acdd9d781b290c594f0268704b} 
+\index{Isummoner@{Isummoner}!generateSummons@{generateSummons}}
+\index{generateSummons@{generateSummons}!Isummoner@{Isummoner}}
+\doxysubsubsection{\texorpdfstring{generateSummons()}{generateSummons()}}
+{\footnotesize\ttfamily virtual void Isummoner\+::generate\+Summons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{std\+::pair$<$ int, int $>$}]{coords,  }\item[{int}]{ratio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Метода, который добавляет врагов на карту 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+{\em coords} & -\/ координаты \\
+\hline
+{\em ratio} & -\/ коэф усиления юнитов \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_isummoner_a3bbfddef37c4c257ddaf31a0aff57102}\label{class_isummoner_a3bbfddef37c4c257ddaf31a0aff57102} 
+\index{Isummoner@{Isummoner}!setFlag@{setFlag}}
+\index{setFlag@{setFlag}!Isummoner@{Isummoner}}
+\doxysubsubsection{\texorpdfstring{setFlag()}{setFlag()}}
+{\footnotesize\ttfamily void Isummoner\+::set\+Flag (\begin{DoxyParamCaption}\item[{bool}]{flag0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em flag0} & Установить флаг, для призыва \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3}\label{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3} 
+\index{Isummoner@{Isummoner}!summon@{summon}}
+\index{summon@{summon}!Isummoner@{Isummoner}}
+\doxysubsubsection{\texorpdfstring{summon()}{summon()}}
+{\footnotesize\ttfamily virtual void Isummoner\+::summon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{std\+::pair$<$ int, int $>$}]{coords,  }\item[{int}]{ratio,  }\item[{int}]{new\+Cur\+Hp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ Уровень \\
+\hline
+{\em coords} & -\/ Координаты призывателя \\
+\hline
+{\em ratio} & -\/ коэф усиления \\
+\hline
+{\em new\+Cur\+Hp} & -\/ новое текущее хп \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяется в \mbox{\hyperlink{class_living_summoner_a54222a70778431d0852424721da8d6c4}{Living\+Summoner}} и \mbox{\hyperlink{class_undead_summoner_af89619dd1e778d08c2f8777e2297b2bd}{Undead\+Summoner}}.
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Enemy/\+Summoner/Isummoner.\+h\end{DoxyCompactItemize}

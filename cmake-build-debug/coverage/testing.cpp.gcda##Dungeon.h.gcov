@@ -1,0 +1,163 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Dungeon/Dungeon.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:#include <list>
+        -:    5:#include <utility>
+        -:    6:#include <vector>
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:
+        -:   10:#ifndef GAMELAB3_DUNGEON_H
+        -:   11:#define GAMELAB3_DUNGEON_H
+        -:   12:
+        -:   13:#include "../Matrix/Matrix.h"
+        -:   14:#include "Ceil.h"
+        -:   15:#include "../Unit/Enemy/Enemy.h"
+        -:   16:#include "../Unit/Unit.h"
+        -:   17:#include "../Unit/Character/Character.h"
+        -:   18:#include "../Unit/Enemy/Golem/Golem.h"
+        -:   19:
+        -:   20:
+        -:   21:///Класс, который описывает поведение уровня игры(подземелья)
+        -:   22:class Dungeon {
+        -:   23:private:
+        -:   24:
+        -:   25:    std::list<std::pair<Enemy *, Ceil *>> listEnemies; ///< Cписок врагов и их местоположение на карте
+        -:   26:    Matrix<Ceil> mapLevel;///< Сам уровень
+        -:   27:    int wigth;///<ширина(X)
+        -:   28:    int height;///<высота(Y)
+        -:   29:    std::pair<Character *, Ceil *> hero;///< Указатель на героя
+        -:   30:public:
+        -:   31:    ///
+        -:   32:    /// \param list список врагов
+        -:   33:    /// \param mapLevel0  карта
+        -:   34:    /// \param wight0 ширина карты
+        -:   35:    /// \param height0 высота карты
+        -:   36:    /// \param hero0 указатель на героя
+function _ZN7DungeonC1ENSt7__cxx114listISt4pairIP5EnemyP4CeilESaIS7_EEER6MatrixIS5_EiiS2_IP9CharacterS6_E called 19 returned 100% blocks executed 100%
+       19:   37:    Dungeon(std::list<std::pair<Enemy *, Ceil *>> list, Matrix<Ceil> &mapLevel0,
+        -:   38:            int wight0,
+       19:   39:            int height0, std::pair<Character *, Ceil *> hero0) : listEnemies(std::move(list)),
+       19:   39-block  0
+call    0 returned 19
+call    1 returned 19
+       19:   40:                                                                 mapLevel(mapLevel0),
+call    0 returned 19
+       19:   41:                                                                 wigth(wight0),
+       19:   42:                                                                 height(height0), hero(std::move(hero0)) {};
+call    0 returned 19
+        -:   43:
+        -:   44:
+        -:   45:    ///@brief Основной метод подземелья
+        -:   46:    ///В ней каждый враг совершает какое-либо действие, а также происходит чистка от мертвых врагов
+        -:   47:    void allDoSomething();
+        -:   48:
+        -:   49:
+        -:   50:    /// \brief Вспомогательная перегрузка оператора
+        -:   51:    /// Нужен для добавления новых существ в данжион
+        -:   52:    /// \param enemy враг
+        -:   53:
+function _ZN7DungeonpLESt4pairIP5EnemyP4CeilE called 55 returned 100% blocks executed 100%
+       55:   54:    Dungeon operator+=(std::pair<Enemy *, Ceil *> enemy) {
+       55:   55:        listEnemies.emplace_back(enemy);
+       55:   55-block  0
+call    0 returned 55
+       55:   56:        return *this;
+call    0 returned 55
+        -:   57:    }
+        -:   58:
+        -:   59:    void printEnemies();
+        -:   60:
+        -:   61:    void print();
+        -:   62:
+        -:   63:    /// Getter
+        -:   64:    /// \return Список врагов
+function _ZN7Dungeon14getListEnemiesB5cxx11Ev called 1789 returned 100% blocks executed 100%
+     1789:   65:    std::list<std::pair<Enemy *, Ceil *>> &getListEnemies() {
+     1789:   66:        return listEnemies;
+     1789:   66-block  0
+        -:   67:    }
+        -:   68:    /// Getter
+        -:   69:    /// \return возвращает матрицу уровня
+        -:   70:
+function _ZN7Dungeon11getMapLevelEv called 261 returned 100% blocks executed 100%
+      261:   71:    Matrix<Ceil> &getMapLevel() {
+      261:   72:        return mapLevel;
+      261:   72-block  0
+        -:   73:    }
+        -:   74:    /// Getter
+        -:   75:    /// \return возвращает  ширину
+        -:   76:
+        -:   77:    int getWigth() const {
+        -:   78:        return wigth;
+        -:   79:    }
+        -:   80:    /// Getter
+        -:   81:    /// \return возвращает  высоту
+        -:   82:
+        -:   83:    int getHeight() const {
+        -:   84:        return height;
+        -:   85:    }
+        -:   86:
+        -:   87:    /// Getter
+        -:   88:    /// \return возвращает  указатель на персонажа
+        -:   89:
+function _ZN7Dungeon7getHeroEv called 666 returned 100% blocks executed 100%
+      666:   90:    std::pair<Character *, Ceil *> &getHero() {
+      666:   91:        return hero;
+      666:   91-block  0
+        -:   92:    }
+        -:   93:
+        -:   94:    /// Setter
+        -:   95:    /// \param hero Ссылка на героя
+        -:   96:
+function _ZN7Dungeon7setHeroERKSt4pairIP9CharacterP4CeilE called 6 returned 100% blocks executed 100%
+        6:   97:    void setHero(const std::pair<Character *, Ceil *> &hero) {
+        6:   98:        Dungeon::hero = hero;
+        6:   98-block  0
+call    0 returned 6
+        6:   99:    };
+        -:  100:
+        -:  101:    /// Setter
+        -:  102:    /// \param listEnemies0 Список врагов
+        -:  103:    /// \return возвращает ссылку на этот же данж, для цепного вызова
+        -:  104:
+        -:  105:    Dungeon &setListEnemies(std::list<std::pair<Enemy *, Ceil *>> listEnemies0) {
+        -:  106:        Dungeon::listEnemies = std::move(listEnemies0);
+        -:  107:        return *this;
+        -:  108:    }
+        -:  109:    /// Setter
+        -:  110:    /// \param mapLevel0 - Матрица уровня
+        -:  111:    /// \return возвращает ссылку на этот же данж, для цепного вызова
+        -:  112:
+        -:  113:    Dungeon &setMapLevel(Matrix<Ceil> &mapLevel0) {
+        -:  114:        Dungeon::mapLevel = std::move(mapLevel0);
+        -:  115:        return *this;
+        -:  116:    }
+        -:  117:
+        -:  118:
+        -:  119:    /// Setter
+        -:  120:    /// \param wigth0 - ширина
+        -:  121:    /// \return  возвращает ссылку на этот же данж, для цепного вызова
+        -:  122:    Dungeon &setWigth(int wigth0) {
+        -:  123:        Dungeon::wigth = wigth0;
+        -:  124:        return *this;
+        -:  125:    }
+        -:  126:
+        -:  127:    /// Setter
+        -:  128:    /// \param height0 - высота
+        -:  129:    /// \return возвращает ссылку на этот же данж, для цепного вызова
+        -:  130:
+        -:  131:    Dungeon &setHeight(int height0) {
+        -:  132:        Dungeon::height = height0;
+        -:  133:        return *this;
+        -:  134:    }
+        -:  135:
+        -:  136:
+        -:  137:};
+        -:  138:
+        -:  139:
+        -:  140:#endif //GAMELAB3_DUNGEON_H

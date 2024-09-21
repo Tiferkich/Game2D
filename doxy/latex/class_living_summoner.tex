@@ -1,0 +1,231 @@
+\doxysection{Класс Living\+Summoner}
+\hypertarget{class_living_summoner}{}\label{class_living_summoner}\index{LivingSummoner@{LivingSummoner}}
+
+
+Живой саммонер, наследуется от живого врага и от саммонера  
+
+
+
+
+{\ttfamily \#include $<$Living\+Summoner.\+h$>$}
+
+Граф наследования\+:Living\+Summoner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_living_summoner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_living_summoner_a7051f419bc80be34a05d4424ecda4bc6}\label{class_living_summoner_a7051f419bc80be34a05d4424ecda4bc6} 
+{\bfseries Living\+Summoner} (int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}})
+\item 
+void \mbox{\hyperlink{class_living_summoner_ab9abab3f3806f7a7d924e603ef77b865}{become\+Undead}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon) override
+\item 
+int \mbox{\hyperlink{class_living_summoner_aa92648802d0f4793840ad5e74446804f}{open\+Cost}} () override
+\item 
+void \mbox{\hyperlink{class_living_summoner_a54222a70778431d0852424721da8d6c4}{summon}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}, int ratio, int new\+Cur\+Hp) override
+\item 
+void \mbox{\hyperlink{class_living_summoner_ac86fa1ab306ea7594a924c186ef41c1f}{do\+Something}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&matrix) override
+\item 
+Enemies \mbox{\hyperlink{class_living_summoner_ade2cb479f5ff93295053d79ebfe1c11f}{get\+Type}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_living_enemy}{Living\+Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Living\+Enemy} (int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, std\+::string \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}}, int \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{cur\+HP}})
+\item 
+{\bfseries Living\+Enemy} (int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}}, int \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{cur\+HP}})
+\item 
+void \mbox{\hyperlink{class_living_enemy_a3adc36837abd92fc4481a057fcb17ae0}{method\+After\+Die}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Enemy} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, std\+::string \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}, int \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{max\+HP}}, int \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{cur\+HP}}, Status status0, int vision0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&matrix, std\+::pair$<$ int, int $>$ coord\+To, std\+::list$<$ std\+::pair$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}, Ceil \texorpdfstring{$\ast$}{*} $>$ $>$ \&list\+Enemies)
+\item 
+void \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}} (\mbox{\hyperlink{class_unit}{Unit}} \&someone) override
+\item 
+void \mbox{\hyperlink{class_enemy_a920ffcc567b4b8bddd6175a8d91171e4}{get\+Damage}} (int \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}) override
+\item 
+void \mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{die}} () override
+\begin{DoxyCompactList}\small\item\em Смерть, статус меняется на dead и текущее хп на 0. \end{DoxyCompactList}\item 
+void {\bfseries set\+Heap} (bool \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}})
+\begin{DoxyCompactList}\small\item\em Установить true или false. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Heap} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{class_enemy_a63ff6e5c696c7bb78ae7912e26ee1cd1}{get\+Name}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_a4fd1eb1443203e7f7d3ccdc6b339c11b}{get\+Vision}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_a5970616d8efe048e0be00f89e0cd1172}{get\+Max\+Hp}} () const
+\item 
+int \mbox{\hyperlink{class_enemy_af409040ad718a0134a9d992226eef73a}{get\+Cur\+Hp}} () const
+\item 
+Status \mbox{\hyperlink{class_enemy_a13547be3136c6dc40b0724e1286f6603}{get\+Status}} ()
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a769032af238b32ef8e8a1ca6a1707c65}{set\+Vision}} (int vision0)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a371136205fc2b78e4a22a9ccb2b67fe2}{set\+Name}} (const std\+::string \&name0)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a83cdc6d5df41fb4bedc606b0991e90b7}{set\+Max\+Hp}} (int max\+Hp)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a86197c5fc02ae5457bb5387aaf20929e}{set\+Cur\+Hp}} (int cur\+Hp)
+\item 
+\mbox{\hyperlink{class_enemy}{Enemy}} \& \mbox{\hyperlink{class_enemy_a2141e60bbc748923ae79e397815b4ff7}{set\+Status}} (Status status0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{find\+Target}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_unit_a52b26bde273d59962606ea5339bc197c}{Unit}} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+Faction \mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{get\+Faction}} () const
+\item 
+int \mbox{\hyperlink{class_unit_a634a9ac69a71bc32645af69f8ce23859}{get\+Speed}} () const
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}} () const
+\item 
+const std\+::pair$<$ int, int $>$ \& \mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{get\+Coords}} () const
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{set\+Faction}} (Faction faction0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}{set\+Speed}} (int speed0)
+\item 
+void \mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{set\+Damage}} (std\+::pair$<$ int, int $>$ damage0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a416e6f77ca094db4eebd15da4b8899df}{set\+Coords}} (const std\+::pair$<$ int, int $>$ \&coords0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_isummoner}{Isummoner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_isummoner_ab5b47581bc56e4e633688c760c314d78}{Isummoner}} (int cur\+Hp)
+\item 
+bool \mbox{\hyperlink{class_isummoner_a236ff36c6b011a0f8ccecfbb79ec2b99}{check\+Flag}} (int new\+Cur\+Hp)
+\item 
+virtual void \mbox{\hyperlink{class_isummoner_a992201acdd9d781b290c594f0268704b}{generate\+Summons}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, std\+::pair$<$ int, int $>$ coords, int ratio)
+\item 
+void \mbox{\hyperlink{class_isummoner_a3bbfddef37c4c257ddaf31a0aff57102}{set\+Flag}} (bool flag0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Дополнительные унаследованные члены}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries cost} = 100
+\begin{DoxyCompactList}\small\item\em Цена изучения врага \end{DoxyCompactList}\item 
+std\+::string {\bfseries name}
+\begin{DoxyCompactList}\small\item\em Имя врага \end{DoxyCompactList}\item 
+int {\bfseries max\+HP}
+\begin{DoxyCompactList}\small\item\em Максимальное здоровье врага \end{DoxyCompactList}\item 
+int {\bfseries cur\+HP}
+\begin{DoxyCompactList}\small\item\em Текущее здоровье \end{DoxyCompactList}\item 
+Status {\bfseries status}
+\begin{DoxyCompactList}\small\item\em Статус врага \end{DoxyCompactList}\item 
+int {\bfseries vision} = 10
+\begin{DoxyCompactList}\small\item\em Зрение врага \end{DoxyCompactList}\item 
+bool {\bfseries heap} = false
+\begin{DoxyCompactList}\small\item\em Создан на куче или нет \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+Faction {\bfseries faction}
+\begin{DoxyCompactList}\small\item\em Фракция юнита \end{DoxyCompactList}\item 
+unsigned int {\bfseries speed}
+\begin{DoxyCompactList}\small\item\em Скорость юнита (нигде не использовалось, но может быть будет) \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries damage}
+\begin{DoxyCompactList}\small\item\em Дамаг юнита, damage.\+first -\/ минимальный дамаг, damage.\+second -\/ максимальный дамаг \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries coords}
+\begin{DoxyCompactList}\small\item\em Координаты x,y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Живой саммонер, наследуется от живого врага и от саммонера 
+
+\doxysubsection{Методы}
+\Hypertarget{class_living_summoner_ab9abab3f3806f7a7d924e603ef77b865}\label{class_living_summoner_ab9abab3f3806f7a7d924e603ef77b865} 
+\index{LivingSummoner@{LivingSummoner}!becomeUndead@{becomeUndead}}
+\index{becomeUndead@{becomeUndead}!LivingSummoner@{LivingSummoner}}
+\doxysubsubsection{\texorpdfstring{becomeUndead()}{becomeUndead()}}
+{\footnotesize\ttfamily void Living\+Summoner\+::become\+Undead (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Перегруженный метод, превращает живого саммонера в нежить саммонера 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровен \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_living_enemy_ae3167aab8f8a934d23698b8178d163f6}{Living\+Enemy}}.
+
+\Hypertarget{class_living_summoner_ac86fa1ab306ea7594a924c186ef41c1f}\label{class_living_summoner_ac86fa1ab306ea7594a924c186ef41c1f} 
+\index{LivingSummoner@{LivingSummoner}!doSomething@{doSomething}}
+\index{doSomething@{doSomething}!LivingSummoner@{LivingSummoner}}
+\doxysubsubsection{\texorpdfstring{doSomething()}{doSomething()}}
+{\footnotesize\ttfamily void Living\+Summoner\+::do\+Something (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Перегруженный метод сделать что то, перегружен он потому что, саммонер умеет призывать 
+\begin{DoxyParams}{Аргументы}
+{\em matrix} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_enemy_aa10e26ff777340eae5270b1ab6be12c7}{Enemy}}.
+
+\Hypertarget{class_living_summoner_ade2cb479f5ff93295053d79ebfe1c11f}\label{class_living_summoner_ade2cb479f5ff93295053d79ebfe1c11f} 
+\index{LivingSummoner@{LivingSummoner}!getType@{getType}}
+\index{getType@{getType}!LivingSummoner@{LivingSummoner}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Enemies Living\+Summoner\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+living\+Summoner 
+\end{DoxyReturn}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_living_enemy_ae296412843b2faeb61308fa9db153289}{Living\+Enemy}}.
+
+\Hypertarget{class_living_summoner_aa92648802d0f4793840ad5e74446804f}\label{class_living_summoner_aa92648802d0f4793840ad5e74446804f} 
+\index{LivingSummoner@{LivingSummoner}!openCost@{openCost}}
+\index{openCost@{openCost}!LivingSummoner@{LivingSummoner}}
+\doxysubsubsection{\texorpdfstring{openCost()}{openCost()}}
+{\footnotesize\ttfamily int Living\+Summoner\+::open\+Cost (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Цена открытия \begin{DoxyReturn}{Возвращает}
+cost 
+\end{DoxyReturn}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_enemy_aeed6ab0081ed2a24474707320ac86844}{Enemy}}.
+
+\Hypertarget{class_living_summoner_a54222a70778431d0852424721da8d6c4}\label{class_living_summoner_a54222a70778431d0852424721da8d6c4} 
+\index{LivingSummoner@{LivingSummoner}!summon@{summon}}
+\index{summon@{summon}!LivingSummoner@{LivingSummoner}}
+\doxysubsubsection{\texorpdfstring{summon()}{summon()}}
+{\footnotesize\ttfamily void Living\+Summoner\+::summon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{std\+::pair$<$ int, int $>$}]{coords,  }\item[{int}]{ratio,  }\item[{int}]{new\+Cur\+Hp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Метод призыва 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровент \\
+\hline
+{\em coords} & -\/ координаты \\
+\hline
+{\em ratio} & -\/ коэф усиления \\
+\hline
+{\em new\+Cur\+Hp} & -\/ новое текущее хп, нужно для того чтобы понять, можно ли призывать или нет \\
+\hline
+\end{DoxyParams}
+
+
+Переопределяет метод предка \mbox{\hyperlink{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3}{Isummoner}}.
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Enemy/\+Summoner/Living\+Summoner.\+h\item 
+Unit/\+Enemy/\+Summoner/Living\+Summoner.\+cpp\end{DoxyCompactItemize}

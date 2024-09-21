@@ -1,0 +1,134 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/LivingEnemy/LivingEnemy.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "LivingEnemy.h"
+        -:    6:#include "../../../Dungeon/Dungeon.h"
+        -:    7:#include "../Undead/Undead.h"
+        -:    8:
+function _ZN11LivingEnemy12becomeUndeadER7Dungeon called 1 returned 100% blocks executed 62%
+        1:    9:void LivingEnemy::becomeUndead(Dungeon &dungeon) {
+       1*:   10:    if (status != Status::dead) return;
+        1:   10-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   10-block  1
+        1:   11:    faction = Faction::undead;
+        2:   12:    dungeon.getListEnemies().push_back(
+        1:   12-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    #####:   13:            {new Undead(10, {damage.first, damage.second}, {coords.second, coords.first}, "undeadSummon",
+    $$$$$:   13-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    $$$$$:   13-block  1
+        -:   14:                        "livingSummon",
+        5:   15:                        maxHP, maxHP), &(dungeon.getMapLevel()[coords.first][coords.second])});
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   15-block  0
+        1:   15-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   15-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   15-block  3
+call    9 returned 1
+call   10 returned 1
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+branch 14 taken 1 (fallthrough)
+branch 15 taken 0 (throw)
+        1:   15-block  4
+call   16 returned 1
+branch 17 taken 1 (fallthrough)
+branch 18 taken 0 (throw)
+        1:   15-block  5
+call   19 returned 1
+        1:   15-block  6
+call   20 returned 1
+        1:   15-block  7
+call   21 returned 1
+    $$$$$:   15-block  8
+    $$$$$:   15-block  9
+    $$$$$:   15-block 10
+    $$$$$:   15-block 11
+    $$$$$:   15-block 12
+call   22 never executed
+    $$$$$:   15-block 13
+    $$$$$:   15-block 14
+    $$$$$:   15-block 15
+call   23 never executed
+    $$$$$:   15-block 16
+    $$$$$:   15-block 17
+    $$$$$:   15-block 18
+call   24 never executed
+        1:   16:    (--dungeon.getListEnemies().end())->first->setHeap(true);
+        1:   16-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        1:   17:    (--dungeon.getListEnemies().end())->first->setFaction(Faction::character);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        1:   18:    this->methodAfterDie(dungeon);
+call    0 returned 1
+        -:   19:}
+        -:   20:
+function _ZN11LivingEnemy14methodAfterDieER7Dungeon called 177 returned 100% blocks executed 100%
+      177:   21:void LivingEnemy::methodAfterDie(Dungeon &dungeon) {
+      177:   22:    if (status == Status::dead && (faction == Faction::character || faction == Faction::undead)) {
+      177:   22-block  0
+branch  0 taken 125 (fallthrough)
+branch  1 taken 52
+      125:   22-block  1
+branch  2 taken 125 (fallthrough)
+branch  3 taken 0
+      125:   22-block  2
+branch  4 taken 4 (fallthrough)
+branch  5 taken 121
+       11:   23:        for (auto i = dungeon.getListEnemies().begin(); i != dungeon.getListEnemies().end(); i++) {
+        4:   23-block  0
+call    0 returned 4
+call    1 returned 4
+        7:   23-block  1
+call    2 returned 7
+       11:   23-block  2
+call    3 returned 11
+call    4 returned 11
+call    5 returned 11
+branch  6 taken 11
+branch  7 taken 0 (fallthrough)
+       11:   24:            if (i->first == this) {
+       11:   24-block  0
+call    0 returned 11
+branch  1 taken 4 (fallthrough)
+branch  2 taken 7
+        -:   25://                if (i->first->isHeap()) delete i->first;
+        4:   26:                dungeon.getListEnemies().erase(i);
+        4:   26-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+        4:   27:                break;
+        -:   28:            }
+        -:   29:        }
+        -:   30:    }
+      177:   31:}

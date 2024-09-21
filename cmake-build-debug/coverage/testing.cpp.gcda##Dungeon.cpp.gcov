@@ -1,0 +1,147 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Dungeon/Dungeon.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "Dungeon.h"
+        -:    6:#include "../Unit/Character/Character.h"
+        -:    7:
+        -:    8:
+function _ZN7Dungeon14allDoSomethingEv called 11 returned 100% blocks executed 88%
+       11:    9:void Dungeon::allDoSomething() {
+      116:   10:    for (auto &i: listEnemies) {
+       11:   10-block  0
+call    0 returned 11
+call    1 returned 11
+      105:   10-block  1
+call    2 returned 105
+      105:   10-block  2
+call    3 returned 105
+      116:   10-block  3
+call    4 returned 116
+branch  5 taken 105
+branch  6 taken 11 (fallthrough)
+        -:   11:        try {
+      105:   12:            i.first->doSomething(*this);
+call    0 returned 105
+branch  1 taken 105 (fallthrough)
+branch  2 taken 0 (throw)
+    =====:   13:        } catch (...) {}
+    $$$$$:   13-block  0
+    $$$$$:   13-block  1
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+        -:   14:    }
+       11:   15:    int size = listEnemies.size();
+       11:   15-block  0
+call    0 returned 11
+      191:   16:    for (int i = 0; i < listEnemies.size() * 2; i++) {
+      180:   16-block  0
+      191:   16-block  1
+call    0 returned 191
+branch  1 taken 180
+branch  2 taken 11 (fallthrough)
+     2202:   17:        for (auto &listEnemie: this->listEnemies) {
+      180:   17-block  0
+call    0 returned 180
+call    1 returned 180
+     2041:   17-block  1
+call    2 returned 2041
+     2022:   17-block  2
+call    3 returned 2022
+     2202:   17-block  3
+call    4 returned 2202
+branch  5 taken 2041
+branch  6 taken 161 (fallthrough)
+        -:   18:            try {
+     2041:   19:                listEnemie.first->methodAfterDie(*this);
+call    0 returned 2041
+branch  1 taken 191 (fallthrough)
+branch  2 taken 1850 (throw)
+      191:   20:                if (size != listEnemies.size()) {
+      191:   20-block  0
+call    0 returned 191
+branch  1 taken 19 (fallthrough)
+branch  2 taken 172
+       19:   21:                    size = listEnemies.size();
+       19:   21-block  0
+call    0 returned 19
+       19:   22:                    break;
+        -:   23:                }
+     1850:   24:            } catch (...) { continue; }
+     1850:   24-block  0
+     1850:   24-block  1
+call    0 returned 1850
+     1850:   24-block  2
+call    1 returned 1850
+branch  2 taken 1850 (fallthrough)
+branch  3 taken 0 (throw)
+        -:   25:
+        -:   26:        }
+        -:   27:    }
+       11:   28:}
+       11:   28-block  0
+        -:   29:
+        -:   30://void Dungeon::print() {
+        -:   31://    for (int i = 0; i < wigth; i++) {
+        -:   32://        std::cout << std::endl;
+        -:   33://        for (int j = 0; j < height; j++) {
+        -:   34://            for (auto &listEnemie: listEnemies) {
+        -:   35://                if (listEnemie.first->getCoords().first == i && listEnemie.first->getCoords().second == j) {
+        -:   36://                    std::cout << listEnemie.first->getName() << " ";
+        -:   37://                    ++j;
+        -:   38://                    break;
+        -:   39://                }
+        -:   40://            }
+        -:   41://            if (hero.first->getCoords().first == i && hero.first->getCoords().second == j) {
+        -:   42://                std::cout << "Hero ";
+        -:   43://                ++j;
+        -:   44://            }
+        -:   45://
+        -:   46://
+        -:   47://            if (j >= height) break;
+        -:   48://            if (mapLevel[i][j] == Ceil::openDoor) {
+        -:   49://                std::cout << "open ";
+        -:   50://                continue;
+        -:   51://            }
+        -:   52://            if (mapLevel[i][j] == Ceil::closeDoor) {
+        -:   53://                std::cout << "close ";
+        -:   54://                continue;
+        -:   55://            }
+        -:   56://            if (mapLevel[i][j] == Ceil::wall) {
+        -:   57://                std::cout << "walls ";
+        -:   58://            }
+        -:   59://            if (mapLevel[i][j] == Ceil::floor) {
+        -:   60://                std::cout << "floor ";
+        -:   61://                continue;
+        -:   62://            }
+        -:   63://            if (mapLevel[i][j] == Ceil::lava) {
+        -:   64://                std::cout << "lava ";
+        -:   65://                continue;
+        -:   66://            }
+        -:   67://            if (mapLevel[i][j] == Ceil::essence) {
+        -:   68://                std::cout << "essen ";
+        -:   69://                continue;
+        -:   70://            }
+        -:   71://        }
+        -:   72://    }
+        -:   73://    std::cout << std::endl;
+        -:   74://
+        -:   75://}
+        -:   76://
+        -:   77://void Dungeon::printEnemies() {
+        -:   78://    for (auto &i: listEnemies) {
+        -:   79://        std::cout << "name: " << i.first->getName() << " " << i.first->getCurHp() << "/" << i.first->getMaxHp()
+        -:   80://                  << std::endl;
+        -:   81://    }
+        -:   82://    std::cout << "character: " << hero.first->getCharacteristics().getCurHp() << "/"
+        -:   83://              << hero.first->getCharacteristics().getMaxHp() << std::endl;
+        -:   84://
+        -:   85://}
+        -:   86:
+        -:   87:

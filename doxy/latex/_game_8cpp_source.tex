@@ -1,0 +1,60 @@
+\doxysection{Game.\+cpp}
+\hypertarget{_game_8cpp_source}{}\label{_game_8cpp_source}\index{Game/Game.cpp@{Game/Game.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Game.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ std::vector<std::string>\ \mbox{\hyperlink{class_game_af5be431806a6d32d062c31730e2962bb}{Game::allTypesEnemies}}\ =\ \{\textcolor{stringliteral}{"{}livingEnemy"{}},\ \textcolor{stringliteral}{"{}livingSummoner"{}},\ \textcolor{stringliteral}{"{}undead"{}},\ \textcolor{stringliteral}{"{}undeadSummoner"{}},\ \textcolor{stringliteral}{"{}golem"{}}\};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ std::vector<std::string>\ \mbox{\hyperlink{class_game_adbde412cffe73323e7df134979c375da}{Game::allSkills}}\ =\ \{\textcolor{stringliteral}{"{}Curse"{}},\ \textcolor{stringliteral}{"{}Desiccation"{}},\ \textcolor{stringliteral}{"{}Morphism"{}},\ \textcolor{stringliteral}{"{}Necromancy"{}}\};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a099aca5812927233bc2551796985e098}{Game::makeTick}}(\textcolor{keywordtype}{int}\ options[])\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ hero.\mbox{\hyperlink{class_character_a8658e96071d009283d40a0b69088bba8}{doSomething}}(options,\ *\textcolor{keyword}{this});}
+\DoxyCodeLine{00016\ \ \ \ \ allMap[curLvl].allDoSomething();}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \mbox{\hyperlink{class_character}{Character}}\ \&\mbox{\hyperlink{class_game_a1a5347f13455e11358a3a297beae7707}{Game::getHero}}()\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ hero;}
+\DoxyCodeLine{00024\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ std::vector<Dungeon>\ \&\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{Game::getAllMap}}()\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ allMap;}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{Game::getCurLvl}}()\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ curLvl;}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&\mbox{\hyperlink{class_game_a50db28e4afe82710ebe4d3b2d8d5e7f7}{Game::getTableSkills}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ tableSkills;}
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a87324468811b6c7519a015e074e870ec}{Game::setHero}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_character}{Character}}\ \&hero)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ Game::hero\ =\ hero;}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a14418510e46b17424f58036aa3a9bd9a}{Game::setCurLvl}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ curLvl)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ Game::curLvl\ =\ curLvl;}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a5eb495329bc3d87ed73823b8747b93a3}{Game::setTableSkills}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&tableSkills)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ Game::tableSkills\ =\ tableSkills;}
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a16f2fdd2fbb15ffcd9b6f266e0d10b65}{Game::setAllMap}}(\textcolor{keyword}{const}\ std::vector<Dungeon>\ \&allMap)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ Game::allMap\ =\ allMap;}
+\DoxyCodeLine{00055\ \}}
+
+\end{DoxyCode}

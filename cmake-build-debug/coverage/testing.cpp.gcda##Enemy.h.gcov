@@ -1,0 +1,221 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Enemy.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 24.10.2023.
+        -:    3://
+        -:    4:#include <iostream>
+        -:    5:#include <utility>
+        -:    6:
+        -:    7:#include "../Unit.h"
+        -:    8:
+        -:    9:#include "../../Dungeon/Ceil.h"
+        -:   10:
+        -:   11:#include "../../Matrix/Matrix.h"
+        -:   12:
+        -:   13:
+        -:   14:#ifndef GAMELAB3_ENEMY_H
+        -:   15:#define GAMELAB3_ENEMY_H
+        -:   16:
+        -:   17:#include <list>
+        -:   18:
+        -:   19:#include "typiesOfEnemies.h"
+        -:   20:
+        -:   21:
+        -:   22:class Dungeon;
+        -:   23:
+        -:   24:/// Набор возможных состояний врага
+        -:   25:enum class Status {
+        -:   26:    wandering,
+        -:   27:    aggresion,
+        -:   28:    dead
+        -:   29:};
+        -:   30:
+        -:   31:///Расширяемый класс - враг
+        -:   32:class Enemy : public Unit {
+        -:   33:protected:
+        -:   34:    int cost = 100; ///< Цена изучения врага
+        -:   35:    std::string name; ///< Имя врага
+        -:   36:    int maxHP; ///< Максимальное здоровье врага
+        -:   37:    int curHP; ///< Текущее здоровье
+        -:   38:    Status status;///< Статус врага
+        -:   39:    int vision = 10;///< Зрение врага
+        -:   40:    bool heap = false;///<	Создан на куче или нет
+        -:   41:public:
+        -:   42:    /// Конструктор
+      113:   43:    Enemy(Faction faction0, int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   44:          int maxHP, int curHP,
+      113:   45:          Status status0, int vision0) : Unit(faction0, speed0, damage0, coord0), name(std::move(name)), maxHP(maxHP),
+      113:   46:                                         curHP(curHP),
+      113:   47:                                         status(status0), vision(vision0) {};
+------------------
+_ZN5EnemyC1E7FactioniSt4pairIiiES2_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii6Statusi:
+function _ZN5EnemyC1E7FactioniSt4pairIiiES2_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii6Statusi called 15 returned 100% blocks executed 100%
+       15:   43:    Enemy(Faction faction0, int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   44:          int maxHP, int curHP,
+       15:   45:          Status status0, int vision0) : Unit(faction0, speed0, damage0, coord0), name(std::move(name)), maxHP(maxHP),
+call    0 returned 15
+       15:   46:                                         curHP(curHP),
+       15:   47:                                         status(status0), vision(vision0) {};
+       15:   47-block  0
+call    0 returned 15
+call    1 returned 15
+------------------
+_ZN5EnemyC2E7FactioniSt4pairIiiES2_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii6Statusi:
+function _ZN5EnemyC2E7FactioniSt4pairIiiES2_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEii6Statusi called 98 returned 100% blocks executed 100%
+       98:   43:    Enemy(Faction faction0, int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, std::string name,
+        -:   44:          int maxHP, int curHP,
+       98:   45:          Status status0, int vision0) : Unit(faction0, speed0, damage0, coord0), name(std::move(name)), maxHP(maxHP),
+call    0 returned 98
+       98:   46:                                         curHP(curHP),
+       98:   47:                                         status(status0), vision(vision0) {};
+       98:   47-block  0
+call    0 returned 98
+call    1 returned 98
+------------------
+        -:   48:
+        -:   49:    /// Метод передвижения врага по карте
+        -:   50:    /// \param matrix - карта
+        -:   51:    /// \param coordTo - куда ему идти
+        -:   52:    /// \param listEnemies - список врагов
+        -:   53:    void move(Matrix<Ceil> &matrix, std::pair<int, int> coordTo, std::list<std::pair<Enemy *, Ceil *>> &listEnemies);
+        -:   54:
+        -:   55:    /// Атакавать кого то
+        -:   56:    /// \param someone - Кто-то
+        -:   57:    void attack(Unit &someone) override;
+        -:   58:
+        -:   59:    /// Получить урон (Это не геттер)
+        -:   60:    /// \param damage - урон
+        -:   61:    void getDamage(int damage) override;
+        -:   62:
+        -:   63:    ///Смерть, статус меняется на dead и текущее хп на 0
+function _ZN5Enemy3dieEv called 44 returned 100% blocks executed 100%
+       44:   64:    void die() override {
+       44:   65:        status = Status::dead;
+       44:   66:        speed = 0;
+       44:   67:        curHP = 0;
+       44:   68:    }
+        -:   69:
+        -:   70:    /// Получить тип
+        -:   71:    /// \return тип
+function _ZN5Enemy7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   72:    virtual Enemies getType() {
+    #####:   73:        return Enemies::simpleEnemy;
+    %%%%%:   73-block  0
+        -:   74:    }
+        -:   75:
+        -:   76:    /// Цена открытия для изучения персонажем
+        -:   77:    /// \return cost
+function _ZN5Enemy8openCostEv called 3 returned 100% blocks executed 100%
+        3:   78:    virtual int openCost() {
+        3:   79:        return cost;
+        3:   79-block  0
+        -:   80:    }
+        -:   81:    ///Установить true или false
+        -:   82:    void setHeap(bool heap);
+        -:   83:
+        -:   84:    bool isHeap() const;
+        -:   85:
+        -:   86:    /// Метод после смерти, он перегружен для големов и живых(големы оставляют на карте что-то, живые оставляют труп), а по дефолту просто удаляет врага
+        -:   87:    /// \param dungeon - уровень
+        -:   88:    virtual void methodAfterDie(Dungeon &dungeon);
+        -:   89:
+        -:   90:    ///Метод сделать - что-то, объединяет все действия врага и выполняет их, если враг делает что то необычное его нужно перегрузить
+        -:   91:    ///Например саммонер призывает врагов, поэтому этот метод в нем перегружен
+        -:   92:    virtual void doSomething(Dungeon &);
+        -:   93:
+        -:   94:    /// Getter
+        -:   95:    /// \return имя
+function _ZNK5Enemy7getNameB5cxx11Ev called 53 returned 100% blocks executed 100%
+       53:   96:    const std::string &getName() const {
+       53:   97:        return name;
+       53:   97-block  0
+        -:   98:    }
+        -:   99:
+        -:  100:    /// Getter
+        -:  101:    /// \return vision
+function _ZNK5Enemy9getVisionEv called 1 returned 100% blocks executed 100%
+        1:  102:    int getVision() const {
+        1:  103:        return vision;
+        1:  103-block  0
+        -:  104:    }
+        -:  105:
+        -:  106:    /// Getter
+        -:  107:    /// \return maxHP
+function _ZNK5Enemy8getMaxHpEv called 21 returned 100% blocks executed 100%
+       21:  108:    int getMaxHp() const {
+       21:  109:        return maxHP;
+       21:  109-block  0
+        -:  110:    }
+        -:  111:
+        -:  112:    /// Getter
+        -:  113:    /// \return curHP
+function _ZNK5Enemy8getCurHpEv called 31 returned 100% blocks executed 100%
+       31:  114:    int getCurHp() const {
+       31:  115:        return curHP;
+       31:  115-block  0
+        -:  116:    }
+        -:  117:
+        -:  118:    /// Getter
+        -:  119:    /// \return status
+function _ZN5Enemy9getStatusEv called 53 returned 100% blocks executed 100%
+       53:  120:    Status getStatus() {
+       53:  121:        return status;
+       53:  121-block  0
+        -:  122:    }
+        -:  123:
+        -:  124:    /// Setter
+        -:  125:    /// \param vision0  - vision
+        -:  126:    Enemy &setVision(int vision0) {
+        -:  127:        vision = vision0;
+        -:  128:        return *this;
+        -:  129:    }
+        -:  130:
+        -:  131:    /// Setter
+        -:  132:    /// \param name0 - name
+        -:  133:    Enemy &setName(const std::string &name0) {
+        -:  134:        Enemy::name = name0;
+        -:  135:        return *this;
+        -:  136:    }
+        -:  137:
+        -:  138:    /// Setter
+        -:  139:    /// \param maxHp - maxHP
+        -:  140:    Enemy &setMaxHp(int maxHp) {
+        -:  141:        maxHP = maxHp;
+        -:  142:        return *this;
+        -:  143:    }
+        -:  144:
+        -:  145:    /// Setter
+        -:  146:    /// \param curHp - curHP
+function _ZN5Enemy8setCurHpEi called 2 returned 100% blocks executed 100%
+        2:  147:    Enemy &setCurHp(int curHp) {
+        2:  148:        curHP = curHp;
+        2:  149:        return *this;
+        2:  149-block  0
+        -:  150:    }
+        -:  151:
+        -:  152:    /// Setter
+        -:  153:    /// \param status0 - status
+function _ZN5Enemy9setStatusE6Status called 3 returned 100% blocks executed 100%
+        3:  154:    Enemy &setStatus(Status status0) {
+        3:  155:        Enemy::status = status0;
+        3:  156:        return *this;
+        3:  156-block  0
+        -:  157:    }
+        -:  158:
+        -:  159:    /// Найти цель, ищет юнита до которого можно добраться
+        -:  160:    /// \param dungeon - уровень
+        -:  161:    /// \return Юнита
+        -:  162:    Unit *findTarget(Dungeon &dungeon);
+        -:  163:    /// Алгоритм Ли, используется для поиска пути до координат
+        -:  164:    /// \param matrix - карта
+        -:  165:    /// \param coordTo - координаты куда нужно идти
+        -:  166:    /// \return возвращает вектор путей
+        -:  167:
+        -:  168:private:
+        -:  169:    std::vector<std::pair<int, int>> Lee(Matrix<Ceil> &matrix, std::pair<int, int> coordTo);
+        -:  170:};
+        -:  171:
+        -:  172:
+        -:  173:#endif //GAMELAB3_ENEMY_H

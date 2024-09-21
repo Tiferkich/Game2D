@@ -1,0 +1,579 @@
+\doxysection{Класс Character}
+\hypertarget{class_character}{}\label{class_character}\index{Character@{Character}}
+
+
+Персонаж, которым мы играем Один из основных классов в игре, наследуется от юнита  
+
+
+
+
+{\ttfamily \#include $<$Character.\+h$>$}
+
+Граф наследования\+:Character\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_character}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_character_a7b2119d19a7be2847b1b09083b835eb5}{Character}} (int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0, \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \texorpdfstring{$\ast$}{*}table\+Skills)
+\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{class_character_ab88794520f036b9d0de4e9799ec3e154}{get\+Open\+Enemies}} () const
+\item 
+std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{class_character_a85c736b8d97c11873ab1bad05e1afb4e}{get\+Open\+Enemies}} ()
+\item 
+int \mbox{\hyperlink{class_character_a8658e96071d009283d40a0b69088bba8}{do\+Something}} (int options\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{class_game}{Game}} \&game)
+\item 
+int \mbox{\hyperlink{class_character_af3fbcdd856ccb818568b90d5f78c7151}{use\+Skill}} (const std\+::string \&name\+Skill, \mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, int mas\mbox{[}$\,$\mbox{]}=\{\})
+\item 
+Ceil \mbox{\hyperlink{class_character_aac492893dec0edc0aed8f0b916be698b}{close}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&matrix)
+\item 
+Ceil \mbox{\hyperlink{class_character_a17824202abf354d08963305cc664e0d9}{open}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&matrix)
+\item 
+\Hypertarget{class_character_af1e0c708e63327ad2d2e4764a3fd84c6}\label{class_character_af1e0c708e63327ad2d2e4764a3fd84c6} 
+void {\bfseries up\+LVL} ()
+\begin{DoxyCompactList}\small\item\em Апнуть уровень \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_character_a70e1e0abb17b38e159aca880063a6ffc}{check\+Near}} (std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}})
+\item 
+void \mbox{\hyperlink{class_character_a54abfd6d6c904cea9bac87794cc56d9c}{increase\+Exp}} (int exp0)
+\item 
+int \mbox{\hyperlink{class_character_aec0638cdc727c3faa587b8d3928c806d}{open\+Enemy}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\item 
+bool \mbox{\hyperlink{class_character_af291f1f87c1b68870c8538b2554a82cc}{is\+Open\+Enemy}} (const std\+::string \&name)
+\item 
+bool \mbox{\hyperlink{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8}{upto\+New\+Dungeon}} (\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&matrix)
+\item 
+int \mbox{\hyperlink{class_character_a670477eff47a03136c92c9600336c765}{attack\+Someone}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\item 
+void \mbox{\hyperlink{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}{attack}} (\mbox{\hyperlink{class_unit}{Unit}} \&someone) override
+\begin{DoxyCompactList}\small\item\em Атака врага \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{move}} (Move side, \mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\item 
+int \mbox{\hyperlink{class_character_a96b87b3bf2c730ad6dac17e6a467e887}{take\+Essense}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\item 
+void \mbox{\hyperlink{class_character_a2c0a3bb0a3dbd4029ac47a22c4d42280}{die}} () override
+\begin{DoxyCompactList}\small\item\em Чисто виртуальный метод -\/ смерти \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_a2cd6d664b55d12acbb3fe3d1688a47f6}{get\+Damage}} (int \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}) override
+\item 
+int \mbox{\hyperlink{class_character_a67c394cc5479e9e091947472c3b63790}{get\+Exp}} () const
+\item 
+int \mbox{\hyperlink{class_character_a675c284d7bfb1fbd8a5bc41cbc964f8a}{get\+Lvl}} () const
+\item 
+\mbox{\hyperlink{struct_characteristics}{Characteristics}} \& \mbox{\hyperlink{class_character_a2aa97f11df51dddefce04eb73f652fd0}{get\+Characteristics}} ()
+\item 
+int \mbox{\hyperlink{class_character_a65c16efc7c1c12cd8bd4eed49ebddf90}{get\+Count\+Essence}} () const
+\item 
+\mbox{\hyperlink{class_character}{Character}} \& \mbox{\hyperlink{class_character_a0cd39cf0c3676f0011bd5c8ac7d47d40}{set\+Exp}} (int exp0)
+\item 
+\mbox{\hyperlink{class_character}{Character}} \& \mbox{\hyperlink{class_character_a69357fb2e96a5074d228308501e28a93}{set\+Lvl}} (int lvl0)
+\item 
+\mbox{\hyperlink{class_character}{Character}} \& \mbox{\hyperlink{class_character_ae83eeb970b8866ff16312176d8863cbf}{set\+Characteristics}} (const \mbox{\hyperlink{struct_characteristics}{Characteristics}} \&characteristics0)
+\item 
+\mbox{\hyperlink{class_character}{Character}} \& \mbox{\hyperlink{class_character_aceba24c364d789a83fa541e731c3b97d}{set\+Count\+Essence}} (int count\+Essence0)
+\item 
+Move \mbox{\hyperlink{class_character_a22bbbbe0c7cb2587790053d1e5412311}{get\+Side\+Looking}} () const
+\item 
+void \mbox{\hyperlink{class_character_aa2fae153d2abd3fa1e395fc0460a38a4}{set\+Side\+Looking}} (Move side\+Looking)
+\item 
+int \mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{get\+Lvl\+Point}} () const
+\item 
+void \mbox{\hyperlink{class_character_ac332a7806f1695769a074377d95b7932}{set\+Lvl\+Point}} (int lvl\+Point)
+\item 
+\mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& \mbox{\hyperlink{class_character_a4bbbcffb71fee079e00f0d3805e5df42}{get\+Table\+Skills}} ()
+\item 
+void \mbox{\hyperlink{class_character_a21ac46254e8afd5637319da6434dafce}{set\+Table\+Skills}} (\mbox{\hyperlink{class_table_skills}{Table\+Skills}} \texorpdfstring{$\ast$}{*}table\+Skills)
+\item 
+int \mbox{\hyperlink{class_character_a4d6ac48873091ba6b4b6ed2e669a2c26}{upgrade\+Skill}} (const std\+::string \&skill\+Name)
+\item 
+bool \mbox{\hyperlink{class_character_a62b2b389188fa2c351205be1f2ed445e}{check}} (int bx, int by)
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_unit_a52b26bde273d59962606ea5339bc197c}{Unit}} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+Faction \mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{get\+Faction}} () const
+\item 
+int \mbox{\hyperlink{class_unit_a634a9ac69a71bc32645af69f8ce23859}{get\+Speed}} () const
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}} () const
+\item 
+const std\+::pair$<$ int, int $>$ \& \mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{get\+Coords}} () const
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{set\+Faction}} (Faction faction0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}{set\+Speed}} (int speed0)
+\item 
+void \mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{set\+Damage}} (std\+::pair$<$ int, int $>$ damage0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a416e6f77ca094db4eebd15da4b8899df}{set\+Coords}} (const std\+::pair$<$ int, int $>$ \&coords0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{class_character_a6e149d65f0e2644e3239b6bac5fef370}{get\+Count\+Summons}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Дополнительные унаследованные члены}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_unit}{Unit}}}
+\begin{DoxyCompactItemize}
+\item 
+Faction {\bfseries faction}
+\begin{DoxyCompactList}\small\item\em Фракция юнита \end{DoxyCompactList}\item 
+unsigned int {\bfseries speed}
+\begin{DoxyCompactList}\small\item\em Скорость юнита (нигде не использовалось, но может быть будет) \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries damage}
+\begin{DoxyCompactList}\small\item\em Дамаг юнита, damage.\+first -\/ минимальный дамаг, damage.\+second -\/ максимальный дамаг \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ {\bfseries coords}
+\begin{DoxyCompactList}\small\item\em Координаты x,y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Персонаж, которым мы играем Один из основных классов в игре, наследуется от юнита 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_character_a7b2119d19a7be2847b1b09083b835eb5}\label{class_character_a7b2119d19a7be2847b1b09083b835eb5} 
+\index{Character@{Character}!Character@{Character}}
+\index{Character@{Character}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{Character()}{Character()}}
+{\footnotesize\ttfamily Character\+::\+Character (\begin{DoxyParamCaption}\item[{int}]{speed0,  }\item[{std\+::pair$<$ int, int $>$}]{damage0,  }\item[{std\+::pair$<$ int, int $>$}]{coord0,  }\item[{\mbox{\hyperlink{class_table_skills}{Table\+Skills}} \texorpdfstring{$\ast$}{*}}]{table\+Skills }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Контруктор для героя 
+\begin{DoxyParams}{Аргументы}
+{\em speed0} & -\/ Скорость \\
+\hline
+{\em damage0} & -\/ Дамаг мин и макс \\
+\hline
+{\em coord0} & -\/ Координаты х и у \\
+\hline
+{\em table\+Skills} & -\/ Указатель на таблицу скиллов \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}\label{class_character_a8a185f65c90577e05cd4ec1f0344f4bb} 
+\index{Character@{Character}!attack@{attack}}
+\index{attack@{attack}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily void Character\+::attack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_unit}{Unit}} \&}]{someone }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Атака врага 
+
+
+
+Замещает \mbox{\hyperlink{class_unit_a7e7adc5398cc302955317f5ff300a166}{Unit}}.
+
+\Hypertarget{class_character_a670477eff47a03136c92c9600336c765}\label{class_character_a670477eff47a03136c92c9600336c765} 
+\index{Character@{Character}!attackSomeone@{attackSomeone}}
+\index{attackSomeone@{attackSomeone}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{attackSomeone()}{attackSomeone()}}
+{\footnotesize\ttfamily int Character\+::attack\+Someone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})}
+
+Поиск ближайшего врага и атака его, вызывает метод \doxylink{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}{attack(\+Unit \&someone)} 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+-\/ 0 успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a62b2b389188fa2c351205be1f2ed445e}\label{class_character_a62b2b389188fa2c351205be1f2ed445e} 
+\index{Character@{Character}!check@{check}}
+\index{check@{check}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily bool Character\+::check (\begin{DoxyParamCaption}\item[{int}]{bx,  }\item[{int}]{by }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Метод который определяет -\/ координаты подходят под условие куда смотрит герой или нет 
+\begin{DoxyParams}{Аргументы}
+{\em bx} & -\/ x \\
+\hline
+{\em by} & -\/ y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+-\/ true -\/ подходят 
+\end{DoxyReturn}
+\Hypertarget{class_character_a70e1e0abb17b38e159aca880063a6ffc}\label{class_character_a70e1e0abb17b38e159aca880063a6ffc} 
+\index{Character@{Character}!checkNear@{checkNear}}
+\index{checkNear@{checkNear}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{checkNear()}{checkNear()}}
+{\footnotesize\ttfamily bool Character\+::check\+Near (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{coords }\end{DoxyParamCaption})}
+
+Метод поиска рядом враг или нет 
+\begin{DoxyParams}{Аргументы}
+{\em coords} & -\/ координаты на проверку \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+false -\/ не рядом, true -\/ рядом 
+\end{DoxyReturn}
+\Hypertarget{class_character_aac492893dec0edc0aed8f0b916be698b}\label{class_character_aac492893dec0edc0aed8f0b916be698b} 
+\index{Character@{Character}!close@{close}}
+\index{close@{close}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily Ceil Character\+::close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+Закрыть дверь на карте 
+\begin{DoxyParams}{Аргументы}
+{\em matrix} & -\/ карта \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+открытая дверь 
+\end{DoxyReturn}
+\Hypertarget{class_character_a2c0a3bb0a3dbd4029ac47a22c4d42280}\label{class_character_a2c0a3bb0a3dbd4029ac47a22c4d42280} 
+\index{Character@{Character}!die@{die}}
+\index{die@{die}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily void Character\+::die (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Чисто виртуальный метод -\/ смерти 
+
+
+
+Замещает \mbox{\hyperlink{class_unit_aa3e96cc123d3ed298603a04b8c55c139}{Unit}}.
+
+\Hypertarget{class_character_a8658e96071d009283d40a0b69088bba8}\label{class_character_a8658e96071d009283d40a0b69088bba8} 
+\index{Character@{Character}!doSomething@{doSomething}}
+\index{doSomething@{doSomething}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{doSomething()}{doSomething()}}
+{\footnotesize\ttfamily int Character\+::do\+Something (\begin{DoxyParamCaption}\item[{int}]{options\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{class_game}{Game}} \&}]{game }\end{DoxyParamCaption})}
+
+Основной метод героя 
+\begin{DoxyParams}{Аргументы}
+{\em options} & -\/ опции, что сделать \\
+\hline
+{\em game} & -\/ ссылка на игру \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a2aa97f11df51dddefce04eb73f652fd0}\label{class_character_a2aa97f11df51dddefce04eb73f652fd0} 
+\index{Character@{Character}!getCharacteristics@{getCharacteristics}}
+\index{getCharacteristics@{getCharacteristics}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getCharacteristics()}{getCharacteristics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_characteristics}{Characteristics}} \& Character\+::get\+Characteristics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+\doxylink{struct_characteristics}{Characteristics} 
+\end{DoxyReturn}
+\Hypertarget{class_character_a65c16efc7c1c12cd8bd4eed49ebddf90}\label{class_character_a65c16efc7c1c12cd8bd4eed49ebddf90} 
+\index{Character@{Character}!getCountEssence@{getCountEssence}}
+\index{getCountEssence@{getCountEssence}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getCountEssence()}{getCountEssence()}}
+{\footnotesize\ttfamily int Character\+::get\+Count\+Essence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+count\+Essence 
+\end{DoxyReturn}
+\Hypertarget{class_character_a6e149d65f0e2644e3239b6bac5fef370}\label{class_character_a6e149d65f0e2644e3239b6bac5fef370} 
+\index{Character@{Character}!getCountSummons@{getCountSummons}}
+\index{getCountSummons@{getCountSummons}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getCountSummons()}{getCountSummons()}}
+{\footnotesize\ttfamily int Character\+::get\+Count\+Summons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Посчитать кол-\/во поднятой нежити 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+-\/ 0 успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a2cd6d664b55d12acbb3fe3d1688a47f6}\label{class_character_a2cd6d664b55d12acbb3fe3d1688a47f6} 
+\index{Character@{Character}!getDamage@{getDamage}}
+\index{getDamage@{getDamage}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getDamage()}{getDamage()}}
+{\footnotesize\ttfamily void Character\+::get\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Получить урон (это не геттер) 
+\begin{DoxyParams}{Аргументы}
+{\em damage} & -\/ урон \\
+\hline
+\end{DoxyParams}
+
+
+Замещает \mbox{\hyperlink{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}{Unit}}.
+
+\Hypertarget{class_character_a67c394cc5479e9e091947472c3b63790}\label{class_character_a67c394cc5479e9e091947472c3b63790} 
+\index{Character@{Character}!getExp@{getExp}}
+\index{getExp@{getExp}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getExp()}{getExp()}}
+{\footnotesize\ttfamily int Character\+::get\+Exp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+exp 
+\end{DoxyReturn}
+\Hypertarget{class_character_a675c284d7bfb1fbd8a5bc41cbc964f8a}\label{class_character_a675c284d7bfb1fbd8a5bc41cbc964f8a} 
+\index{Character@{Character}!getLvl@{getLvl}}
+\index{getLvl@{getLvl}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getLvl()}{getLvl()}}
+{\footnotesize\ttfamily int Character\+::get\+Lvl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+cur\+Lvl 
+\end{DoxyReturn}
+\Hypertarget{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}\label{class_character_aae9661c56d05156fbe76bfe0dcbab6ac} 
+\index{Character@{Character}!getLvlPoint@{getLvlPoint}}
+\index{getLvlPoint@{getLvlPoint}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getLvlPoint()}{getLvlPoint()}}
+{\footnotesize\ttfamily int Character\+::get\+Lvl\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ кол-\/во доступных поинтов улучшения скилла 
+\end{DoxyReturn}
+\Hypertarget{class_character_a85c736b8d97c11873ab1bad05e1afb4e}\label{class_character_a85c736b8d97c11873ab1bad05e1afb4e} 
+\index{Character@{Character}!getOpenEnemies@{getOpenEnemies}}
+\index{getOpenEnemies@{getOpenEnemies}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getOpenEnemies()}{getOpenEnemies()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ \& Character\+::get\+Open\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter \begin{DoxyReturn}{Возвращает}
+Вектор открытых врагов 
+\end{DoxyReturn}
+\Hypertarget{class_character_ab88794520f036b9d0de4e9799ec3e154}\label{class_character_ab88794520f036b9d0de4e9799ec3e154} 
+\index{Character@{Character}!getOpenEnemies@{getOpenEnemies}}
+\index{getOpenEnemies@{getOpenEnemies}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getOpenEnemies()}{getOpenEnemies()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const std\+::vector$<$ std\+::string $>$ \& Character\+::get\+Open\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter \begin{DoxyReturn}{Возвращает}
+Вектор открытых врагов 
+\end{DoxyReturn}
+\Hypertarget{class_character_a22bbbbe0c7cb2587790053d1e5412311}\label{class_character_a22bbbbe0c7cb2587790053d1e5412311} 
+\index{Character@{Character}!getSideLooking@{getSideLooking}}
+\index{getSideLooking@{getSideLooking}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getSideLooking()}{getSideLooking()}}
+{\footnotesize\ttfamily Move Character\+::get\+Side\+Looking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter \begin{DoxyReturn}{Возвращает}
+сторона куда смотрит 
+\end{DoxyReturn}
+\Hypertarget{class_character_a4bbbcffb71fee079e00f0d3805e5df42}\label{class_character_a4bbbcffb71fee079e00f0d3805e5df42} 
+\index{Character@{Character}!getTableSkills@{getTableSkills}}
+\index{getTableSkills@{getTableSkills}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getTableSkills()}{getTableSkills()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& Character\+::get\+Table\+Skills (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Таблица скиллов 
+\end{DoxyReturn}
+\Hypertarget{class_character_a54abfd6d6c904cea9bac87794cc56d9c}\label{class_character_a54abfd6d6c904cea9bac87794cc56d9c} 
+\index{Character@{Character}!increaseExp@{increaseExp}}
+\index{increaseExp@{increaseExp}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{increaseExp()}{increaseExp()}}
+{\footnotesize\ttfamily void Character\+::increase\+Exp (\begin{DoxyParamCaption}\item[{int}]{exp0 }\end{DoxyParamCaption})}
+
+При убийстве врага, вызывается этот метод, учеличивает экспу 
+\begin{DoxyParams}{Аргументы}
+{\em exp0} & -\/ Кол-\/во экспы \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_af291f1f87c1b68870c8538b2554a82cc}\label{class_character_af291f1f87c1b68870c8538b2554a82cc} 
+\index{Character@{Character}!isOpenEnemy@{isOpenEnemy}}
+\index{isOpenEnemy@{isOpenEnemy}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{isOpenEnemy()}{isOpenEnemy()}}
+{\footnotesize\ttfamily bool Character\+::is\+Open\+Enemy (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+
+Проверка открыт ли враг или нет 
+\begin{DoxyParams}{Аргументы}
+{\em name} & -\/ имя врага \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+true -\/ открыт 
+\end{DoxyReturn}
+\Hypertarget{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}\label{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5} 
+\index{Character@{Character}!move@{move}}
+\index{move@{move}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily int Character\+::move (\begin{DoxyParamCaption}\item[{Move}]{side,  }\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})}
+
+Передвинуться по карте 
+\begin{DoxyParams}{Аргументы}
+{\em side} & -\/ куда \\
+\hline
+{\em dungeon} & -\/ карта \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a17824202abf354d08963305cc664e0d9}\label{class_character_a17824202abf354d08963305cc664e0d9} 
+\index{Character@{Character}!open@{open}}
+\index{open@{open}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily Ceil Character\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+Открыть дверь на карте 
+\begin{DoxyParams}{Аргументы}
+{\em matrix} & -\/ карта \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+закрытая дверь 
+\end{DoxyReturn}
+\Hypertarget{class_character_aec0638cdc727c3faa587b8d3928c806d}\label{class_character_aec0638cdc727c3faa587b8d3928c806d} 
+\index{Character@{Character}!openEnemy@{openEnemy}}
+\index{openEnemy@{openEnemy}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{openEnemy()}{openEnemy()}}
+{\footnotesize\ttfamily int Character\+::open\+Enemy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})}
+
+Изучить врага 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_ae83eeb970b8866ff16312176d8863cbf}\label{class_character_ae83eeb970b8866ff16312176d8863cbf} 
+\index{Character@{Character}!setCharacteristics@{setCharacteristics}}
+\index{setCharacteristics@{setCharacteristics}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setCharacteristics()}{setCharacteristics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_character}{Character}} \& Character\+::set\+Characteristics (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_characteristics}{Characteristics}} \&}]{characteristics0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em characteristics0} & -\/ new characteristics \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_aceba24c364d789a83fa541e731c3b97d}\label{class_character_aceba24c364d789a83fa541e731c3b97d} 
+\index{Character@{Character}!setCountEssence@{setCountEssence}}
+\index{setCountEssence@{setCountEssence}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setCountEssence()}{setCountEssence()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_character}{Character}} \& Character\+::set\+Count\+Essence (\begin{DoxyParamCaption}\item[{int}]{count\+Essence0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em count\+Essence0} & -\/ кол-\/во новой эссенции \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_a0cd39cf0c3676f0011bd5c8ac7d47d40}\label{class_character_a0cd39cf0c3676f0011bd5c8ac7d47d40} 
+\index{Character@{Character}!setExp@{setExp}}
+\index{setExp@{setExp}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setExp()}{setExp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_character}{Character}} \& Character\+::set\+Exp (\begin{DoxyParamCaption}\item[{int}]{exp0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em exp0} & -\/new\+Exp \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_a69357fb2e96a5074d228308501e28a93}\label{class_character_a69357fb2e96a5074d228308501e28a93} 
+\index{Character@{Character}!setLvl@{setLvl}}
+\index{setLvl@{setLvl}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setLvl()}{setLvl()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_character}{Character}} \& Character\+::set\+Lvl (\begin{DoxyParamCaption}\item[{int}]{lvl0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em lvl0} & -\/ new\+Lvl \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_ac332a7806f1695769a074377d95b7932}\label{class_character_ac332a7806f1695769a074377d95b7932} 
+\index{Character@{Character}!setLvlPoint@{setLvlPoint}}
+\index{setLvlPoint@{setLvlPoint}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setLvlPoint()}{setLvlPoint()}}
+{\footnotesize\ttfamily void Character\+::set\+Lvl\+Point (\begin{DoxyParamCaption}\item[{int}]{lvl\+Point }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em lvl\+Point} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_aa2fae153d2abd3fa1e395fc0460a38a4}\label{class_character_aa2fae153d2abd3fa1e395fc0460a38a4} 
+\index{Character@{Character}!setSideLooking@{setSideLooking}}
+\index{setSideLooking@{setSideLooking}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setSideLooking()}{setSideLooking()}}
+{\footnotesize\ttfamily void Character\+::set\+Side\+Looking (\begin{DoxyParamCaption}\item[{Move}]{side\+Looking }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em side\+Looking} & -\/ новая сторона куда смотрит \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_a21ac46254e8afd5637319da6434dafce}\label{class_character_a21ac46254e8afd5637319da6434dafce} 
+\index{Character@{Character}!setTableSkills@{setTableSkills}}
+\index{setTableSkills@{setTableSkills}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setTableSkills()}{setTableSkills()}}
+{\footnotesize\ttfamily void Character\+::set\+Table\+Skills (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_table_skills}{Table\+Skills}} \texorpdfstring{$\ast$}{*}}]{table\+Skills }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em table\+Skills} & -\/ Новая таблица скиллов \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_character_a96b87b3bf2c730ad6dac17e6a467e887}\label{class_character_a96b87b3bf2c730ad6dac17e6a467e887} 
+\index{Character@{Character}!takeEssense@{takeEssense}}
+\index{takeEssense@{takeEssense}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{takeEssense()}{takeEssense()}}
+{\footnotesize\ttfamily int Character\+::take\+Essense (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon }\end{DoxyParamCaption})}
+
+Поднять эссенцию 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a4d6ac48873091ba6b4b6ed2e669a2c26}\label{class_character_a4d6ac48873091ba6b4b6ed2e669a2c26} 
+\index{Character@{Character}!upgradeSkill@{upgradeSkill}}
+\index{upgradeSkill@{upgradeSkill}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{upgradeSkill()}{upgradeSkill()}}
+{\footnotesize\ttfamily int Character\+::upgrade\+Skill (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{skill\+Name }\end{DoxyParamCaption})}
+
+Улучшить скилл 
+\begin{DoxyParams}{Аргументы}
+{\em skill\+Name} & -\/ название скилла \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 успех 
+\end{DoxyReturn}
+\Hypertarget{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8}\label{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8} 
+\index{Character@{Character}!uptoNewDungeon@{uptoNewDungeon}}
+\index{uptoNewDungeon@{uptoNewDungeon}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{uptoNewDungeon()}{uptoNewDungeon()}}
+{\footnotesize\ttfamily bool Character\+::upto\+New\+Dungeon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Ceil $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+Подняться или спуститься по лестнице 
+\begin{DoxyParams}{Аргументы}
+{\em matrix} & -\/ карта \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+-\/ true -\/ можно 
+\end{DoxyReturn}
+\Hypertarget{class_character_af3fbcdd856ccb818568b90d5f78c7151}\label{class_character_af3fbcdd856ccb818568b90d5f78c7151} 
+\index{Character@{Character}!useSkill@{useSkill}}
+\index{useSkill@{useSkill}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{useSkill()}{useSkill()}}
+{\footnotesize\ttfamily int Character\+::use\+Skill (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name\+Skill,  }\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{int}]{mas\mbox{[}$\,$\mbox{]} = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+Метод использования скилла 
+\begin{DoxyParams}{Аргументы}
+{\em name\+Skill} & -\/ название скилла \\
+\hline
+{\em dungeon} & -\/ Ссылка на карту \\
+\hline
+{\em mas} & -\/ Массив опций, mas\mbox{[}0\mbox{]} -\/ выбрать какой скилл использовать, дальше иногда есть опции в скиллах \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ успех 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Character/Character.\+h\item 
+Unit/\+Character/Character.\+cpp\end{DoxyCompactItemize}

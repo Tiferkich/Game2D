@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Нектромант: Исходный файл Unit/Enemy/Summoner/LivingSummoner.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Нектромант<span id="projectnumber">&#160;1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_96c43f8ef3c57cc95f6088bfd3e2c715.html">Unit</a></li><li class="navelem"><a class="el" href="dir_7368fd104755435f0d1ee6f962aeaf6b.html">Enemy</a></li><li class="navelem"><a class="el" href="dir_a399b513017d5c64bb0a71c00b812336.html">Summoner</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">LivingSummoner.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by sakhd on 26.10.2023.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;LivingSummoner.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;UndeadSummoner.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define STEP 4</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_living_summoner.html#ac86fa1ab306ea7594a924c186ef41c1f">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_living_summoner.html#ac86fa1ab306ea7594a924c186ef41c1f">LivingSummoner::doSomething</a>(<a class="code hl_class" href="class_dungeon.html">Dungeon</a> &amp;dungeon) {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> == Status::dead) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    }</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="class_unit.html">Unit</a> *someone = <a class="code hl_function" href="class_enemy.html#aa2ec4673f38dda6ad1b5554c144ee2b5">findTarget</a>(dungeon);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (someone == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> = Status::wandering;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        srand(time(0));</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">int</span> i = rand() % 4;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">int</span> dx[4] = {1, 0, -1, 0};   <span class="comment">// смещения, соответствующие соседям ячейки</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">int</span> dy[4] = {0, 1, 0, -1};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.first + dy[i] &lt; 0 || <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.second + dx[i] &lt; 0 ||</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.second + dx[i] &gt;= dungeon.<a class="code hl_function" href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">getMapLevel</a>().cols() ||</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.first + dy[i] &gt;= dungeon.<a class="code hl_function" href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">getMapLevel</a>().rows())</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_function" href="class_enemy.html#aab6078099c0f61b6393016c2c0ef8013">move</a>(dungeon.<a class="code hl_function" href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">getMapLevel</a>(), {coords.first + dy[i], coords.second + dx[i]}, dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>());</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        } <span class="keywordflow">catch</span> (...) {}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_function" href="class_enemy.html#aab6078099c0f61b6393016c2c0ef8013">move</a>(dungeon.<a class="code hl_function" href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">getMapLevel</a>(), {someone-&gt;getCoords().first, someone-&gt;getCoords().second},</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>             dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>());</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> = Status::aggresion;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    } <span class="keywordflow">catch</span> (...) {}</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_function" href="class_living_summoner.html#a54222a70778431d0852424721da8d6c4">summon</a>(dungeon, {<a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.first, <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.second}, dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getLvl() / 2, <a class="code hl_variable" href="class_enemy.html#af0d9d1c4b109028ff714a0caa48a76f3">curHP</a>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    } <span class="keywordflow">catch</span> (...) {}</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="class_enemy.html#a82cd1b8ca915c6dfa7da807884903e73">attack</a>(*someone);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> = Status::aggresion;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    } <span class="keywordflow">catch</span> (...) {}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_living_summoner.html#ab9abab3f3806f7a7d924e603ef77b865">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_living_summoner.html#ab9abab3f3806f7a7d924e603ef77b865">LivingSummoner::becomeUndead</a>(<a class="code hl_class" href="class_dungeon.html">Dungeon</a> &amp;dungeon) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> != Status::dead) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_variable" href="class_unit.html#a71d317028bd80d787cfbd76b8be3196d">faction</a> = Faction::undead;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_variable" href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">status</a> = Status::dead;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().push_back(</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            {<span class="keyword">new</span> <a class="code hl_class" href="class_undead_summoner.html">UndeadSummoner</a>(10, {<a class="code hl_variable" href="class_unit.html#af8f0976f38dcb1c7ba8592261ff2ded0">damage</a>.first, <a class="code hl_variable" href="class_unit.html#af8f0976f38dcb1c7ba8592261ff2ded0">damage</a>.second}, {<a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.first, <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.second}, <a class="code hl_variable" href="class_enemy.html#a990ecf4cbfdae850b51e6fb2b367ad8e">maxHP</a>, <a class="code hl_variable" href="class_enemy.html#a990ecf4cbfdae850b51e6fb2b367ad8e">maxHP</a>),</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>             &amp;dungeon.<a class="code hl_function" href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">getMapLevel</a>()[<a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.first][<a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>.second]});</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    (--dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().end())-&gt;first-&gt;setHeap(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    (--dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().end())-&gt;first-&gt;setFaction(Faction::character);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_function" href="class_living_enemy.html#a3adc36837abd92fc4481a057fcb17ae0">methodAfterDie</a>(dungeon);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_living_summoner.html#a54222a70778431d0852424721da8d6c4">   58</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_living_summoner.html#a54222a70778431d0852424721da8d6c4">LivingSummoner::summon</a>(<a class="code hl_class" href="class_dungeon.html">Dungeon</a> &amp;dungeon, std::pair&lt;int, int&gt; coords, <span class="keywordtype">int</span> ratio, <span class="keywordtype">int</span> newCurHp) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_function" href="class_isummoner.html#a094d127b837e2aed0a9c61d7a2dd68f3">Isummoner::summon</a>(dungeon, <a class="code hl_variable" href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">coords</a>, ratio, newCurHp);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">throw</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> item = --dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().end(); count &lt; 4; --item, ++count) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        item-&gt;first-&gt;setFaction(<a class="code hl_variable" href="class_unit.html#a71d317028bd80d787cfbd76b8be3196d">faction</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="ttc" id="aclass_dungeon_html"><div class="ttname"><a href="class_dungeon.html">Dungeon</a></div><div class="ttdoc">Класс, который описывает поведение уровня игры(подземелья)</div><div class="ttdef"><b>Definition</b> Dungeon.h:22</div></div>
+<div class="ttc" id="aclass_dungeon_html_a9f1ba89786b66b244b1f6619112f60e2"><div class="ttname"><a href="class_dungeon.html#a9f1ba89786b66b244b1f6619112f60e2">Dungeon::getMapLevel</a></div><div class="ttdeci">Matrix&lt; Ceil &gt; &amp; getMapLevel()</div><div class="ttdef"><b>Definition</b> Dungeon.h:71</div></div>
+<div class="ttc" id="aclass_dungeon_html_aaba33be6e4ed7fb8bb27b1d7b3afa5f4"><div class="ttname"><a href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">Dungeon::getHero</a></div><div class="ttdeci">std::pair&lt; Character *, Ceil * &gt; &amp; getHero()</div><div class="ttdef"><b>Definition</b> Dungeon.h:90</div></div>
+<div class="ttc" id="aclass_dungeon_html_aec925af840ea11f8ab97ac8487f0b236"><div class="ttname"><a href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">Dungeon::getListEnemies</a></div><div class="ttdeci">std::list&lt; std::pair&lt; Enemy *, Ceil * &gt; &gt; &amp; getListEnemies()</div><div class="ttdef"><b>Definition</b> Dungeon.h:65</div></div>
+<div class="ttc" id="aclass_enemy_html_a82cd1b8ca915c6dfa7da807884903e73"><div class="ttname"><a href="class_enemy.html#a82cd1b8ca915c6dfa7da807884903e73">Enemy::attack</a></div><div class="ttdeci">void attack(Unit &amp;someone) override</div><div class="ttdef"><b>Definition</b> Enemy.cpp:10</div></div>
+<div class="ttc" id="aclass_enemy_html_a990ecf4cbfdae850b51e6fb2b367ad8e"><div class="ttname"><a href="class_enemy.html#a990ecf4cbfdae850b51e6fb2b367ad8e">Enemy::maxHP</a></div><div class="ttdeci">int maxHP</div><div class="ttdoc">Максимальное здоровье врага</div><div class="ttdef"><b>Definition</b> Enemy.h:36</div></div>
+<div class="ttc" id="aclass_enemy_html_aa2ec4673f38dda6ad1b5554c144ee2b5"><div class="ttname"><a href="class_enemy.html#aa2ec4673f38dda6ad1b5554c144ee2b5">Enemy::findTarget</a></div><div class="ttdeci">Unit * findTarget(Dungeon &amp;dungeon)</div><div class="ttdef"><b>Definition</b> Enemy.cpp:155</div></div>
+<div class="ttc" id="aclass_enemy_html_aab6078099c0f61b6393016c2c0ef8013"><div class="ttname"><a href="class_enemy.html#aab6078099c0f61b6393016c2c0ef8013">Enemy::move</a></div><div class="ttdeci">void move(Matrix&lt; Ceil &gt; &amp;matrix, std::pair&lt; int, int &gt; coordTo, std::list&lt; std::pair&lt; Enemy *, Ceil * &gt; &gt; &amp;listEnemies)</div><div class="ttdef"><b>Definition</b> Enemy.cpp:128</div></div>
+<div class="ttc" id="aclass_enemy_html_af0d9d1c4b109028ff714a0caa48a76f3"><div class="ttname"><a href="class_enemy.html#af0d9d1c4b109028ff714a0caa48a76f3">Enemy::curHP</a></div><div class="ttdeci">int curHP</div><div class="ttdoc">Текущее здоровье</div><div class="ttdef"><b>Definition</b> Enemy.h:37</div></div>
+<div class="ttc" id="aclass_enemy_html_af5feea31ac74cfff2cbbfdb149bcf58f"><div class="ttname"><a href="class_enemy.html#af5feea31ac74cfff2cbbfdb149bcf58f">Enemy::status</a></div><div class="ttdeci">Status status</div><div class="ttdoc">Статус врага</div><div class="ttdef"><b>Definition</b> Enemy.h:38</div></div>
+<div class="ttc" id="aclass_isummoner_html_a094d127b837e2aed0a9c61d7a2dd68f3"><div class="ttname"><a href="class_isummoner.html#a094d127b837e2aed0a9c61d7a2dd68f3">Isummoner::summon</a></div><div class="ttdeci">virtual void summon(Dungeon &amp;dungeon, std::pair&lt; int, int &gt; coords, int ratio, int newCurHp)</div><div class="ttdef"><b>Definition</b> Isummoner.h:89</div></div>
+<div class="ttc" id="aclass_living_enemy_html_a3adc36837abd92fc4481a057fcb17ae0"><div class="ttname"><a href="class_living_enemy.html#a3adc36837abd92fc4481a057fcb17ae0">LivingEnemy::methodAfterDie</a></div><div class="ttdeci">void methodAfterDie(Dungeon &amp;dungeon) override</div><div class="ttdef"><b>Definition</b> LivingEnemy.cpp:21</div></div>
+<div class="ttc" id="aclass_living_summoner_html_a54222a70778431d0852424721da8d6c4"><div class="ttname"><a href="class_living_summoner.html#a54222a70778431d0852424721da8d6c4">LivingSummoner::summon</a></div><div class="ttdeci">void summon(Dungeon &amp;dungeon, std::pair&lt; int, int &gt; coords, int ratio, int newCurHp) override</div><div class="ttdef"><b>Definition</b> LivingSummoner.cpp:58</div></div>
+<div class="ttc" id="aclass_living_summoner_html_ab9abab3f3806f7a7d924e603ef77b865"><div class="ttname"><a href="class_living_summoner.html#ab9abab3f3806f7a7d924e603ef77b865">LivingSummoner::becomeUndead</a></div><div class="ttdeci">void becomeUndead(Dungeon &amp;dungeon) override</div><div class="ttdef"><b>Definition</b> LivingSummoner.cpp:46</div></div>
+<div class="ttc" id="aclass_living_summoner_html_ac86fa1ab306ea7594a924c186ef41c1f"><div class="ttname"><a href="class_living_summoner.html#ac86fa1ab306ea7594a924c186ef41c1f">LivingSummoner::doSomething</a></div><div class="ttdeci">void doSomething(Dungeon &amp;matrix) override</div><div class="ttdef"><b>Definition</b> LivingSummoner.cpp:11</div></div>
+<div class="ttc" id="aclass_undead_summoner_html"><div class="ttname"><a href="class_undead_summoner.html">UndeadSummoner</a></div><div class="ttdef"><b>Definition</b> UndeadSummoner.h:15</div></div>
+<div class="ttc" id="aclass_unit_html"><div class="ttname"><a href="class_unit.html">Unit</a></div><div class="ttdoc">Абстрактный класс - юнит, от него наследуется Character и Enemy.</div><div class="ttdef"><b>Definition</b> Unit.h:22</div></div>
+<div class="ttc" id="aclass_unit_html_a71d317028bd80d787cfbd76b8be3196d"><div class="ttname"><a href="class_unit.html#a71d317028bd80d787cfbd76b8be3196d">Unit::faction</a></div><div class="ttdeci">Faction faction</div><div class="ttdoc">Фракция юнита</div><div class="ttdef"><b>Definition</b> Unit.h:24</div></div>
+<div class="ttc" id="aclass_unit_html_ae6afa7e2fefcd075a199ac3a850583da"><div class="ttname"><a href="class_unit.html#ae6afa7e2fefcd075a199ac3a850583da">Unit::coords</a></div><div class="ttdeci">std::pair&lt; int, int &gt; coords</div><div class="ttdoc">Координаты x,y.</div><div class="ttdef"><b>Definition</b> Unit.h:27</div></div>
+<div class="ttc" id="aclass_unit_html_af8f0976f38dcb1c7ba8592261ff2ded0"><div class="ttname"><a href="class_unit.html#af8f0976f38dcb1c7ba8592261ff2ded0">Unit::damage</a></div><div class="ttdeci">std::pair&lt; int, int &gt; damage</div><div class="ttdoc">Дамаг юнита, damage.first - минимальный дамаг, damage.second - максимальный дамаг</div><div class="ttdef"><b>Definition</b> Unit.h:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

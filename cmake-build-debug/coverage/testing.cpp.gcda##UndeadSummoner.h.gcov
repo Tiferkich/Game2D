@@ -1,0 +1,70 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Summoner/UndeadSummoner.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 26.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <utility>
+        -:    6:
+        -:    7:
+        -:    8:#ifndef GAMELAB3_UNDEADSUMMONER_H
+        -:    9:#define GAMELAB3_UNDEADSUMMONER_H
+        -:   10:
+        -:   11:
+        -:   12:#include "Isummoner.h"
+        -:   13:
+        -:   14:
+        -:   15:class UndeadSummoner : public Isummoner, public Undead {
+        -:   16:public:
+function _ZN14UndeadSummonerC1EiSt4pairIiiES1_ii called 7 returned 100% blocks executed 61%
+        7:   17:    UndeadSummoner(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0,
+        -:   18:                   int maxHP,
+        7:   19:                   int curHP) : Undead(speed0, damage0, coord0, "undeadSummoner",
+        -:   20:                                       "livingSummoner", maxHP,
+       35:   21:                                       curHP), Isummoner(maxHP) {};
+        7:   21-block  0
+call    0 returned 7
+        7:   21-block  1
+call    1 returned 7
+branch  2 taken 7 (fallthrough)
+branch  3 taken 0 (throw)
+        7:   21-block  2
+call    4 returned 7
+branch  5 taken 7 (fallthrough)
+branch  6 taken 0 (throw)
+        7:   21-block  3
+call    7 returned 7
+call    8 returned 7
+        7:   21-block  4
+call    9 returned 7
+        7:   21-block  5
+    $$$$$:   21-block  6
+    $$$$$:   21-block  7
+    $$$$$:   21-block  8
+call   10 never executed
+    $$$$$:   21-block  9
+        -:   22:
+        -:   23:    /// Метод призыва
+        -:   24:    /// \param dungeon - уровент
+        -:   25:    /// \param coords - координаты
+        -:   26:    /// \param ratio - коэф усиления
+        -:   27:    /// \param newCurHp - новое текущее хп, нужно для того чтобы понять, можно ли призывать или нет
+        -:   28:    void summon(Dungeon &dungeon, std::pair<int, int> coords, int ratio, int newCurHp) override;
+        -:   29:
+        -:   30:    ///  Перегруженный метод сделать что то, перегружен он потому что, саммонер умеет призывать
+        -:   31:    /// \param matrix - уровень
+        -:   32:    void doSomething(Dungeon &dungeon) override;
+        -:   33:    /// Getter
+        -:   34:    /// \return  livingSummoner
+function _ZN14UndeadSummoner7getTypeEv called 0 returned 0% blocks executed 0%
+    #####:   35:    Enemies getType() override {
+    #####:   36:        return Enemies::undeadSummoner;
+    %%%%%:   36-block  0
+        -:   37:    }
+        -:   38:
+        -:   39:};
+        -:   40:
+        -:   41:
+        -:   42:#endif //GAMELAB3_UNDEADSUMMONER_H

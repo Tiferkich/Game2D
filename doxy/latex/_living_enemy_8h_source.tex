@@ -1,0 +1,46 @@
+\doxysection{Living\+Enemy.\+h}
+\hypertarget{_living_enemy_8h_source}{}\label{_living_enemy_8h_source}\index{Unit/Enemy/LivingEnemy/LivingEnemy.h@{Unit/Enemy/LivingEnemy/LivingEnemy.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_LIVINGENEMY\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ GAMELAB3\_LIVINGENEMY\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../Enemy.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ VISION\_LIVING\ 10}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_living_enemy}{LivingEnemy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_enemy}{Enemy}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_living_enemy}{LivingEnemy}}(\textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ std::string\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}})\ :\ \mbox{\hyperlink{class_enemy}{Enemy}}(}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ Faction::livingEnemy,\ speed0,\ damage0,\ coord0,\ std::move(\mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}),\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}},\ Status::wandering,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ VISION\_LIVING)\ \{\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_living_enemy}{LivingEnemy}}(\textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}})\ :\ \mbox{\hyperlink{class_enemy}{Enemy}}(}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ Faction::livingEnemy,\ speed0,\ damage0,\ coord0,\ \textcolor{stringliteral}{"{}livingEnemy"{}},\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}},\ Status::wandering,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ VISION\_LIVING)\ \{\};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_living_enemy_ae3167aab8f8a934d23698b8178d163f6}{becomeUndead}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_living_enemy_a3adc36837abd92fc4481a057fcb17ae0}{methodAfterDie}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00042\ \ \ \ \ Enemies\ \mbox{\hyperlink{class_living_enemy_ae296412843b2faeb61308fa9db153289}{getType}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Enemies::simpleLivingEnemy;}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_LIVINGENEMY\_H}}
+
+\end{DoxyCode}

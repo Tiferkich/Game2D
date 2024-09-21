@@ -1,0 +1,222 @@
+\doxysection{Класс Unit}
+\hypertarget{class_unit}{}\label{class_unit}\index{Unit@{Unit}}
+
+
+Абстрактный класс -\/ юнит, от него наследуется \doxylink{class_character}{Character} и \doxylink{class_enemy}{Enemy}.  
+
+
+
+
+{\ttfamily \#include $<$Unit.\+h$>$}
+
+Граф наследования\+:Unit\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_unit}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_unit_a52b26bde273d59962606ea5339bc197c}{Unit}} (Faction faction0, int speed0, std\+::pair$<$ int, int $>$ damage0, std\+::pair$<$ int, int $>$ coord0)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_unit_aa3e96cc123d3ed298603a04b8c55c139}{die}} ()=0
+\begin{DoxyCompactList}\small\item\em Чисто виртуальный метод -\/ смерти \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_unit_a7e7adc5398cc302955317f5ff300a166}{attack}} (\mbox{\hyperlink{class_unit}{Unit}} \&someone)=0
+\begin{DoxyCompactList}\small\item\em Чисто виртуальный метод -\/ атаки кого то \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}{get\+Damage}} (int \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}})=0
+\begin{DoxyCompactList}\small\item\em Чисто виртуальный метод -\/ получения урона (это не геттер) \end{DoxyCompactList}\item 
+Faction \mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{get\+Faction}} () const
+\item 
+int \mbox{\hyperlink{class_unit_a634a9ac69a71bc32645af69f8ce23859}{get\+Speed}} () const
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}} () const
+\item 
+const std\+::pair$<$ int, int $>$ \& \mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{get\+Coords}} () const
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{set\+Faction}} (Faction faction0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}{set\+Speed}} (int speed0)
+\item 
+void \mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{set\+Damage}} (std\+::pair$<$ int, int $>$ damage0)
+\item 
+\mbox{\hyperlink{class_unit}{Unit}} \& \mbox{\hyperlink{class_unit_a416e6f77ca094db4eebd15da4b8899df}{set\+Coords}} (const std\+::pair$<$ int, int $>$ \&coords0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Защищенные данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_unit_a71d317028bd80d787cfbd76b8be3196d}\label{class_unit_a71d317028bd80d787cfbd76b8be3196d} 
+Faction {\bfseries faction}
+\begin{DoxyCompactList}\small\item\em Фракция юнита \end{DoxyCompactList}\item 
+\Hypertarget{class_unit_a43d465eb5cf46d7fce53de1787b25e1a}\label{class_unit_a43d465eb5cf46d7fce53de1787b25e1a} 
+unsigned int {\bfseries speed}
+\begin{DoxyCompactList}\small\item\em Скорость юнита (нигде не использовалось, но может быть будет) \end{DoxyCompactList}\item 
+\Hypertarget{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}\label{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0} 
+std\+::pair$<$ int, int $>$ {\bfseries damage}
+\begin{DoxyCompactList}\small\item\em Дамаг юнита, damage.\+first -\/ минимальный дамаг, damage.\+second -\/ максимальный дамаг \end{DoxyCompactList}\item 
+\Hypertarget{class_unit_ae6afa7e2fefcd075a199ac3a850583da}\label{class_unit_ae6afa7e2fefcd075a199ac3a850583da} 
+std\+::pair$<$ int, int $>$ {\bfseries coords}
+\begin{DoxyCompactList}\small\item\em Координаты x,y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Абстрактный класс -\/ юнит, от него наследуется \doxylink{class_character}{Character} и \doxylink{class_enemy}{Enemy}. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_unit_a52b26bde273d59962606ea5339bc197c}\label{class_unit_a52b26bde273d59962606ea5339bc197c} 
+\index{Unit@{Unit}!Unit@{Unit}}
+\index{Unit@{Unit}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{Unit()}{Unit()}}
+{\footnotesize\ttfamily Unit\+::\+Unit (\begin{DoxyParamCaption}\item[{Faction}]{faction0,  }\item[{int}]{speed0,  }\item[{std\+::pair$<$ int, int $>$}]{damage0,  }\item[{std\+::pair$<$ int, int $>$}]{coord0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Конструктор 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em faction0} & -\/ Фракция юнита \\
+\hline
+{\em speed0} & -\/ Скорость юнита \\
+\hline
+{\em damage0} & -\/ Дамаг юнита, damage.\+first -\/ минимальный дамаг, damage.\+second -\/ максимальный дамаг \\
+\hline
+{\em coord0} & -\/ Координаты x,y \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_unit_a7e7adc5398cc302955317f5ff300a166}\label{class_unit_a7e7adc5398cc302955317f5ff300a166} 
+\index{Unit@{Unit}!attack@{attack}}
+\index{attack@{attack}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily virtual void Unit\+::attack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_unit}{Unit}} \&}]{someone }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Чисто виртуальный метод -\/ атаки кого то 
+
+
+
+Замещается в \mbox{\hyperlink{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}{Character}} и \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{Enemy}}.
+
+\Hypertarget{class_unit_aef7e54106b15766c4fb02506b5696522}\label{class_unit_aef7e54106b15766c4fb02506b5696522} 
+\index{Unit@{Unit}!Damage@{Damage}}
+\index{Damage@{Damage}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{Damage()}{Damage()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ Unit\+::\+Damage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ возвращает урон юнита 
+\end{DoxyReturn}
+\Hypertarget{class_unit_aa3e96cc123d3ed298603a04b8c55c139}\label{class_unit_aa3e96cc123d3ed298603a04b8c55c139} 
+\index{Unit@{Unit}!die@{die}}
+\index{die@{die}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily virtual void Unit\+::die (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Чисто виртуальный метод -\/ смерти 
+
+
+
+Замещается в \mbox{\hyperlink{class_character_a2c0a3bb0a3dbd4029ac47a22c4d42280}{Character}} и \mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{Enemy}}.
+
+\Hypertarget{class_unit_a197100c1fcc005df5127de899f5b8329}\label{class_unit_a197100c1fcc005df5127de899f5b8329} 
+\index{Unit@{Unit}!getCoords@{getCoords}}
+\index{getCoords@{getCoords}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{getCoords()}{getCoords()}}
+{\footnotesize\ttfamily const std\+::pair$<$ int, int $>$ \& Unit\+::get\+Coords (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ возвращает координаты юнита 
+\end{DoxyReturn}
+\Hypertarget{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}\label{class_unit_ace4ab95f51ecc3b7638622795d0e56cb} 
+\index{Unit@{Unit}!getDamage@{getDamage}}
+\index{getDamage@{getDamage}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{getDamage()}{getDamage()}}
+{\footnotesize\ttfamily virtual void Unit\+::get\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Чисто виртуальный метод -\/ получения урона (это не геттер) 
+
+
+
+Замещается в \mbox{\hyperlink{class_character_a2cd6d664b55d12acbb3fe3d1688a47f6}{Character}}, \mbox{\hyperlink{class_enemy_a920ffcc567b4b8bddd6175a8d91171e4}{Enemy}} и \mbox{\hyperlink{class_golem_ae42c11205cc3431482a08ef19ae5fece}{Golem}}.
+
+\Hypertarget{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}\label{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60} 
+\index{Unit@{Unit}!getFaction@{getFaction}}
+\index{getFaction@{getFaction}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{getFaction()}{getFaction()}}
+{\footnotesize\ttfamily Faction Unit\+::get\+Faction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ возвращает фракцию юнита 
+\end{DoxyReturn}
+\Hypertarget{class_unit_a634a9ac69a71bc32645af69f8ce23859}\label{class_unit_a634a9ac69a71bc32645af69f8ce23859} 
+\index{Unit@{Unit}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily int Unit\+::get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ возвращает скорость юнита 
+\end{DoxyReturn}
+\Hypertarget{class_unit_a416e6f77ca094db4eebd15da4b8899df}\label{class_unit_a416e6f77ca094db4eebd15da4b8899df} 
+\index{Unit@{Unit}!setCoords@{setCoords}}
+\index{setCoords@{setCoords}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{setCoords()}{setCoords()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_unit}{Unit}} \& Unit\+::set\+Coords (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ int, int $>$ \&}]{coords0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em coords0} & -\/ Координаты юнита \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_unit_afc7845332045aed17fd03c758d845a6c}\label{class_unit_afc7845332045aed17fd03c758d845a6c} 
+\index{Unit@{Unit}!setDamage@{setDamage}}
+\index{setDamage@{setDamage}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{setDamage()}{setDamage()}}
+{\footnotesize\ttfamily void Unit\+::set\+Damage (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{damage0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em damage0} & -\/ урон юнита \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_unit_a63b073c5c748b7839e51e60085cbae67}\label{class_unit_a63b073c5c748b7839e51e60085cbae67} 
+\index{Unit@{Unit}!setFaction@{setFaction}}
+\index{setFaction@{setFaction}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{setFaction()}{setFaction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_unit}{Unit}} \& Unit\+::set\+Faction (\begin{DoxyParamCaption}\item[{Faction}]{faction0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em faction0} & -\/ Фракция \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на класс для цепного вызова 
+\end{DoxyReturn}
+\Hypertarget{class_unit_a9fb65d7b3f5e029fca0829e47f57734b}\label{class_unit_a9fb65d7b3f5e029fca0829e47f57734b} 
+\index{Unit@{Unit}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!Unit@{Unit}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_unit}{Unit}} \& Unit\+::set\+Speed (\begin{DoxyParamCaption}\item[{int}]{speed0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em speed0} & -\/ Скорость юнита \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку на класс для цепного вызова 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/Unit.\+h\end{DoxyCompactItemize}

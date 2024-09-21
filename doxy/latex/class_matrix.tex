@@ -1,0 +1,77 @@
+\doxysection{Шаблон класса Matrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}
+\hypertarget{class_matrix}{}\label{class_matrix}\index{Matrix$<$ T $>$@{Matrix$<$ T $>$}}
+\doxysubsubsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_matrix_1_1_iterator}{Iterator}}
+\item 
+class \mbox{\hyperlink{class_matrix_1_1_proxy}{Proxy}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_matrix_a2b714de2e3618b0326e7067b3ac06f24}\label{class_matrix_a2b714de2e3618b0326e7067b3ac06f24} 
+{\bfseries Matrix} (int rows, int cols)
+\item 
+\Hypertarget{class_matrix_a86b06ffabbff9183bce4f8781d352c75}\label{class_matrix_a86b06ffabbff9183bce4f8781d352c75} 
+{\bfseries Matrix} (std\+::vector$<$ std\+::vector$<$ T $>$ $>$ vector, int rows, int cols)
+\item 
+\Hypertarget{class_matrix_a612ead8f80cfc22995fb3e2cfffc4e8b}\label{class_matrix_a612ead8f80cfc22995fb3e2cfffc4e8b} 
+\mbox{\hyperlink{class_matrix_1_1_iterator}{Iterator}} {\bfseries begin} (std\+::function$<$ bool(const T \&)$>$ predicate\+Func=always\+True\+Predicate)
+\item 
+\Hypertarget{class_matrix_a90d6f27fc45f29138a8e441630a4a389}\label{class_matrix_a90d6f27fc45f29138a8e441630a4a389} 
+\mbox{\hyperlink{class_matrix_1_1_iterator}{Iterator}} {\bfseries end} ()
+\item 
+\Hypertarget{class_matrix_a7d309e95d5752b61ea94bd286b94c4fa}\label{class_matrix_a7d309e95d5752b61ea94bd286b94c4fa} 
+{\bfseries Matrix} (const \mbox{\hyperlink{class_matrix}{Matrix}} \&anoter) noexcept
+\item 
+\Hypertarget{class_matrix_a2ff04b096120e8b14d18df765076b5a1}\label{class_matrix_a2ff04b096120e8b14d18df765076b5a1} 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_matrix}{Matrix}} \&anoter)
+\item 
+\Hypertarget{class_matrix_a1f45ec8b8a93a97c617aefb4df613669}\label{class_matrix_a1f45ec8b8a93a97c617aefb4df613669} 
+{\bfseries Matrix} (\mbox{\hyperlink{class_matrix}{Matrix}} \&\&another) noexcept
+\item 
+\Hypertarget{class_matrix_a738b77017b014a823e15b48fa412a705}\label{class_matrix_a738b77017b014a823e15b48fa412a705} 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& {\bfseries operator=} (\mbox{\hyperlink{class_matrix}{Matrix}} \&\&another) noexcept
+\item 
+\Hypertarget{class_matrix_a11a4ba007dd9dab88608d1c2f191a59d}\label{class_matrix_a11a4ba007dd9dab88608d1c2f191a59d} 
+void {\bfseries delete\+Col} (int index\+Col)
+\item 
+\Hypertarget{class_matrix_aed96a2b423a5122dafc3b47a05396e4d}\label{class_matrix_aed96a2b423a5122dafc3b47a05396e4d} 
+void {\bfseries delete\+Row} (int index\+Row)
+\item 
+\Hypertarget{class_matrix_a00b707723976708bd4f24cb9645a0692}\label{class_matrix_a00b707723976708bd4f24cb9645a0692} 
+void {\bfseries add\+Row} (int index\+Row)
+\item 
+\Hypertarget{class_matrix_a7518255420cdf194580fdea815b4a42b}\label{class_matrix_a7518255420cdf194580fdea815b4a42b} 
+void {\bfseries add\+Col} (int index\+Col)
+\item 
+\Hypertarget{class_matrix_a403eb286fae3be35078053bdcc6a91bb}\label{class_matrix_a403eb286fae3be35078053bdcc6a91bb} 
+int {\bfseries rows} ()
+\item 
+\Hypertarget{class_matrix_a0be4a33d9683480057f5883125b25b44}\label{class_matrix_a0be4a33d9683480057f5883125b25b44} 
+int {\bfseries cols} ()
+\item 
+\Hypertarget{class_matrix_acd1ce7c693480c15a9e202ee4b206051}\label{class_matrix_acd1ce7c693480c15a9e202ee4b206051} 
+\mbox{\hyperlink{class_matrix_1_1_proxy}{Proxy}} {\bfseries operator\mbox{[}$\,$\mbox{]}} (int row) const
+\item 
+\Hypertarget{class_matrix_a6dd2dfec57ea9fe6d60e8a5c2ea87996}\label{class_matrix_a6dd2dfec57ea9fe6d60e8a5c2ea87996} 
+\mbox{\hyperlink{class_matrix_1_1_proxy}{Proxy}} {\bfseries operator\mbox{[}$\,$\mbox{]}} (int row)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_matrix_a9852e779f7f5312cc6277df40062cc90}\label{class_matrix_a9852e779f7f5312cc6277df40062cc90} 
+static bool {\bfseries always\+True\+Predicate} (const T \&value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_matrix_a645277f38352a6c0966a39a6f3fc0ad6}\label{class_matrix_a645277f38352a6c0966a39a6f3fc0ad6} 
+friend {\bfseries Iterator}
+\end{DoxyCompactItemize}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Matrix/Matrix.\+h\end{DoxyCompactItemize}

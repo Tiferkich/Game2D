@@ -1,0 +1,75 @@
+\doxysection{BOD.\+h}
+\hypertarget{_b_o_d_8h_source}{}\label{_b_o_d_8h_source}\index{Unit/Character/Skills/BOD/BOD.h@{Unit/Character/Skills/BOD/BOD.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 18.11.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_BOD\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_BOD\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Skills.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../../../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_b_o_d}{BOD}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_skill}{Skill}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ skillRange\ =\ 5;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ check(Move\ side,\ \textcolor{keywordtype}{int}\ ax,\ \textcolor{keywordtype}{int}\ ay,\ \textcolor{keywordtype}{int}\ bx,\ \textcolor{keywordtype}{int}\ by)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (side\ ==\ Move::right)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ax\ <=\ bx)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::left)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ax\ >=\ bx)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::up)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ay\ <=\ by)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::down)\ \{\ \textcolor{keywordflow}{if}\ (ay\ >=\ by)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_b_o_d}{BOD}}(\textcolor{keywordtype}{int}\ manaCost)\ :\ \mbox{\hyperlink{class_skill}{Skill}}(manaCost)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ useSkill(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ \textcolor{keywordtype}{int}\ mas[])\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (skillLvl\ ==\ 0)\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().getCurMana()\ <\ manaCost\ *\ skillLvl)\ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ Move\ side\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getSideLooking();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ *enemy\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ h\ =\ 10000000;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ item\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ ++item)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (abs(item-\/>first-\/>getCoords().second\ -\/\ x)\ +\ abs(item-\/>first-\/>getCoords().first\ -\/\ y)\ <\ h\ \&\&}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check(side,\ x,\ y,\ item-\/>first-\/>getCoords().second,\ item-\/>first-\/>getCoords().first)\ \&\&}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ item-\/>first-\/>getStatus()\ !=\ Status::dead\ \&\&}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (item-\/>first-\/>getFaction()\ ==\ Faction::character\ ||\ item-\/>first-\/>getFaction()\ ==\ Faction::undead))\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ abs(item-\/>first-\/>getCoords().second\ -\/\ x)\ +\ abs(item-\/>first-\/>getCoords().first\ -\/\ y);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy\ =\ item-\/>first;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (h\ >\ skillRange)\ \textcolor{keywordflow}{return}\ -\/3;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ -\/4;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy-\/>\mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{getFaction}}()\ ==\ Faction::character)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>setCurHp(enemy-\/>getMaxHp()\ *\ (skillLvl\ +\ 1));}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>setMaxHp(enemy-\/>getMaxHp()\ *\ (skillLvl\ +\ 1));}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{setDamage}}(\{enemy-\/>\mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}}().first\ *\ (skillLvl\ +\ 1),}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}}().second\ *\ (skillLvl\ +\ 1)\});}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy-\/>\mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{getFaction}}()\ ==\ Faction::undead)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>setCurHp(enemy-\/>getMaxHp()\ /\ (skillLvl\ +\ 1));}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>setMaxHp(enemy-\/>getMaxHp()\ /\ (skillLvl\ +\ 1));}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_unit_afc7845332045aed17fd03c758d845a6c}{setDamage}}(\{enemy-\/>\mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}}().first\ /\ (skillLvl\ +\ 1),}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_unit_aef7e54106b15766c4fb02506b5696522}{Damage}}().second\ /\ (skillLvl\ +\ 1)\});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy-\/>getCurHp()\ <=\ 0)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{die}}();}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().mana(-\/1\ *\ manaCost\ *\ skillLvl\ /\ 2);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_BOD\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,56 @@
+\doxysection{Golem.\+h}
+\hypertarget{_golem_8h_source}{}\label{_golem_8h_source}\index{Unit/Enemy/Golem/Golem.h@{Unit/Enemy/Golem/Golem.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../../../Dungeon/Ceil.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_GOLEM\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GAMELAB3\_GOLEM\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../Enemy.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ VISION\_GOLEM\ 6}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_golem}{Golem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_enemy}{Enemy}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ hitPercentage;}
+\DoxyCodeLine{00022\ \ \ \ \ Ceil\ ceil;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_golem}{Golem}}(\textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \textcolor{keywordtype}{int}\ hitPercentage0,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ Ceil\ ceil0)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_enemy}{Enemy}}(Faction::golem,\ speed0,\ damage0,\ coord0,\ \textcolor{stringliteral}{"{}golem"{}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ Status::wandering,\ VISION\_GOLEM),\ hitPercentage(hitPercentage0),}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ceil(ceil0)\ \{\};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_golem_ae42c11205cc3431482a08ef19ae5fece}{getDamage}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_golem_a398a22756301a89ee39c11d878c01f86}{methodAfterDie}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_golem_a2c27400582114cd045d830a67a8bc1e0}{getHitPercentage}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hitPercentage;}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ Ceil\ \mbox{\hyperlink{class_golem_a9fcad872051942b7d116cfe7592a146f}{getCeil}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ceil;}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_golem}{Golem}}\ \&\mbox{\hyperlink{class_golem_ab0ed981096ce5147832badde130f0804}{setHitPercentage}}(\textcolor{keywordtype}{int}\ hitPercentage)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ Golem::hitPercentage\ =\ hitPercentage;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_golem}{Golem}}\ \&\mbox{\hyperlink{class_golem_ac5fc59c6a152f0674b0e88846059382f}{setCeil}}(Ceil\ ceil)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ Golem::ceil\ =\ ceil;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ Enemies\ \mbox{\hyperlink{class_golem_aa5bbc9040bf8d8c51f636cf575180442}{getType}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Enemies::simpleGolem;}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_GOLEM\_H}}
+
+\end{DoxyCode}

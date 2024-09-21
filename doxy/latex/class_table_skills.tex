@@ -1,0 +1,109 @@
+\doxysection{Класс Table\+Skills}
+\hypertarget{class_table_skills}{}\label{class_table_skills}\index{TableSkills@{TableSkills}}
+
+
+Класс -\/ таблица скиллов героя  
+
+
+
+
+{\ttfamily \#include $<$Table\+Skills.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_table_skills_a92c6ff6877a8fa45f51538ef8a33e7cd}{upgrade\+Skill}} (const std\+::string \&name)
+\item 
+int \mbox{\hyperlink{class_table_skills_a9e8f140b2e84f826c0144ad98a743262}{count\+Skills}} () const
+\item 
+int \mbox{\hyperlink{class_table_skills_a08f1e126e18b09c6b23fbc4f7cce9759}{add\+Skill}} (\mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*}new\+Skill, const std\+::string \&name)
+\item 
+\mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& \mbox{\hyperlink{class_table_skills_aca9a82b3e4f90c4c29f36b8e2100d6c8}{set\+Skill}} (\mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*}new\+Skill, const std\+::string \&name)
+\item 
+\mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_table_skills_a6d4403795a991f729b1f29ae7f0c4819}{get\+Skill}} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс -\/ таблица скиллов героя 
+
+\doxysubsection{Методы}
+\Hypertarget{class_table_skills_a08f1e126e18b09c6b23fbc4f7cce9759}\label{class_table_skills_a08f1e126e18b09c6b23fbc4f7cce9759} 
+\index{TableSkills@{TableSkills}!addSkill@{addSkill}}
+\index{addSkill@{addSkill}!TableSkills@{TableSkills}}
+\doxysubsubsection{\texorpdfstring{addSkill()}{addSkill()}}
+{\footnotesize\ttfamily int Table\+Skills\+::add\+Skill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*}}]{new\+Skill,  }\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Метод добавления нового скила 
+\begin{DoxyParams}{Аргументы}
+{\em new\+Skill} & -\/ Указатель на новый скил \\
+\hline
+{\em name} & -\/ Название скила \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ если есть такой скил; -\/1 если его нет 
+\end{DoxyReturn}
+\Hypertarget{class_table_skills_a9e8f140b2e84f826c0144ad98a743262}\label{class_table_skills_a9e8f140b2e84f826c0144ad98a743262} 
+\index{TableSkills@{TableSkills}!countSkills@{countSkills}}
+\index{countSkills@{countSkills}!TableSkills@{TableSkills}}
+\doxysubsubsection{\texorpdfstring{countSkills()}{countSkills()}}
+{\footnotesize\ttfamily int Table\+Skills\+::count\+Skills (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Возвращает}
+-\/ Кол-\/во доступных скилов 
+\end{DoxyReturn}
+\Hypertarget{class_table_skills_a6d4403795a991f729b1f29ae7f0c4819}\label{class_table_skills_a6d4403795a991f729b1f29ae7f0c4819} 
+\index{TableSkills@{TableSkills}!getSkill@{getSkill}}
+\index{getSkill@{getSkill}!TableSkills@{TableSkills}}
+\doxysubsubsection{\texorpdfstring{getSkill()}{getSkill()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*} Table\+Skills\+::get\+Skill (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter 
+\begin{DoxyParams}{Аргументы}
+{\em name} & -\/ Название скилла \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Исключения}
+{\em std\+::invalid\+\_\+argument} & -\/ Если нет такого скила \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Возвращает}
+возвращает его 
+\end{DoxyReturn}
+\Hypertarget{class_table_skills_aca9a82b3e4f90c4c29f36b8e2100d6c8}\label{class_table_skills_aca9a82b3e4f90c4c29f36b8e2100d6c8} 
+\index{TableSkills@{TableSkills}!setSkill@{setSkill}}
+\index{setSkill@{setSkill}!TableSkills@{TableSkills}}
+\doxysubsubsection{\texorpdfstring{setSkill()}{setSkill()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& Table\+Skills\+::set\+Skill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_skill}{Skill}} \texorpdfstring{$\ast$}{*}}]{new\+Skill,  }\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em new\+Skill} & -\/ новый скилл \\
+\hline
+{\em name} & -\/ Название скилла \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+возвращает ссылку самого себя для цепного обращения 
+\end{DoxyReturn}
+\Hypertarget{class_table_skills_a92c6ff6877a8fa45f51538ef8a33e7cd}\label{class_table_skills_a92c6ff6877a8fa45f51538ef8a33e7cd} 
+\index{TableSkills@{TableSkills}!upgradeSkill@{upgradeSkill}}
+\index{upgradeSkill@{upgradeSkill}!TableSkills@{TableSkills}}
+\doxysubsubsection{\texorpdfstring{upgradeSkill()}{upgradeSkill()}}
+{\footnotesize\ttfamily int Table\+Skills\+::upgrade\+Skill (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Метод улучшения выбранного скила 
+\begin{DoxyParams}{Аргументы}
+{\em name} & -\/ Название скила \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ если есть такой скил; -\/1 если его нет 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Character/Table\+Skills.\+h\end{DoxyCompactItemize}

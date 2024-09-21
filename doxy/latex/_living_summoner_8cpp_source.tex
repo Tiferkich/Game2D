@@ -1,0 +1,75 @@
+\doxysection{Living\+Summoner.\+cpp}
+\hypertarget{_living_summoner_8cpp_source}{}\label{_living_summoner_8cpp_source}\index{Unit/Enemy/Summoner/LivingSummoner.cpp@{Unit/Enemy/Summoner/LivingSummoner.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 26.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}LivingSummoner.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}UndeadSummoner.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ STEP\ 4}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_living_summoner_ac86fa1ab306ea7594a924c186ef41c1f}{LivingSummoner::doSomething}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ ==\ Status::dead)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ *someone\ =\ \mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{findTarget}}(dungeon);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (someone\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ srand(time(0));}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ rand()\ \%\ 4;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx[4]\ =\ \{1,\ 0,\ -\/1,\ 0\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy[4]\ =\ \{0,\ 1,\ 0,\ -\/1\};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ <\ 0\ ||\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ <\ 0\ ||}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().cols()\ ||}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().rows())}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{coords.first\ +\ dy[i],\ coords.second\ +\ dx[i]\},\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{someone-\/>getCoords().first,\ someone-\/>getCoords().second\},}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00036\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_living_summoner_a54222a70778431d0852424721da8d6c4}{summon}}(dungeon,\ \{\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first,\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\},\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getLvl()\ /\ 2,\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}});}
+\DoxyCodeLine{00039\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}}(*someone);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00043\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_living_summoner_ab9abab3f3806f7a7d924e603ef77b865}{LivingSummoner::becomeUndead}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ !=\ Status::dead)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}}\ =\ Faction::undead;}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::dead;}
+\DoxyCodeLine{00050\ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().push\_back(}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{keyword}{new}\ \mbox{\hyperlink{class_undead_summoner}{UndeadSummoner}}(10,\ \{\mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first,\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.second\},\ \{\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first,\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\},\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}}),}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \&dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\});}
+\DoxyCodeLine{00053\ \ \ \ \ (-\/-\/dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end())-\/>first-\/>setHeap(\textcolor{keyword}{true});}
+\DoxyCodeLine{00054\ \ \ \ \ (-\/-\/dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end())-\/>first-\/>setFaction(Faction::character);}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{class_living_enemy_a3adc36837abd92fc4481a057fcb17ae0}{methodAfterDie}}(dungeon);}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_living_summoner_a54222a70778431d0852424721da8d6c4}{LivingSummoner::summon}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ std::pair<int,\ int>\ coords,\ \textcolor{keywordtype}{int}\ ratio,\ \textcolor{keywordtype}{int}\ newCurHp)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_isummoner_a094d127b837e2aed0a9c61d7a2dd68f3}{Isummoner::summon}}(dungeon,\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}},\ ratio,\ newCurHp);}
+\DoxyCodeLine{00061\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ item\ =\ -\/-\/dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ count\ <\ 4;\ -\/-\/item,\ ++count)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ item-\/>first-\/>setFaction(\mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}});}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+
+\end{DoxyCode}

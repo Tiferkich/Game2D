@@ -1,0 +1,48 @@
+\doxysection{Desiccation.\+h}
+\hypertarget{_desiccation_8h_source}{}\label{_desiccation_8h_source}\index{Unit/Character/Skills/Desiccation/Desiccation.h@{Unit/Character/Skills/Desiccation/Desiccation.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 18.11.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_DESICCATION\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_DESICCATION\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Skills.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../../../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_desiccation}{Desiccation}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_skill}{Skill}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_desiccation_a9a36c0e30104971b24713140b950d78a}{Desiccation}}()\ :\ \mbox{\hyperlink{class_skill}{Skill}}(0)\ \{\};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_desiccation_adf05461ebf4abc1bb7d7c61e5597ae6e}{useSkill}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ \textcolor{keywordtype}{int}\ mas[])\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ ==\ 0)\ \textcolor{keywordflow}{return}\ -\/3;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ *enemy\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ item\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ ++item)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item-\/>first-\/>getCoords().second\ ==\ x\ \&\&\ item-\/>first-\/>getCoords().first\ ==\ y\ \&\&}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ item-\/>first-\/>getStatus()\ ==\ Status::dead\ \&\&\ item-\/>first-\/>getFaction()\ ==\ Faction::livingEnemy)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy\ =\ item-\/>first;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().getCurHp()\ <}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().getCurMana())\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().health(enemy-\/>\mbox{\hyperlink{class_enemy_a5970616d8efe048e0be00f89e0cd1172}{getMaxHp}}()\ *\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ /\ 2);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().mana(enemy-\/>\mbox{\hyperlink{class_enemy_a5970616d8efe048e0be00f89e0cd1172}{getMaxHp}}()\ *\ \mbox{\hyperlink{class_skill_a3289631b5603b660314d5d449596b252}{skillLvl}}\ /\ 2);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_unit_a63b073c5c748b7839e51e60085cbae67}{setFaction}}(Faction::undead);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ enemy-\/>\mbox{\hyperlink{class_enemy_a41f96e23f90b6c54499e4e7286b39b9e}{methodAfterDie}}(dungeon);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_DESICCATION\_H}}
+
+\end{DoxyCode}

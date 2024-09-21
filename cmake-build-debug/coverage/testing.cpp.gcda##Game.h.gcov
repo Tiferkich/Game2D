@@ -1,0 +1,92 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Game/Game.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_GAME_H
+        -:    6:#define GAMELAB3_GAME_H
+        -:    7:
+        -:    8:#include "../Unit/Character/Character.h"
+        -:    9:#include "../Dungeon/Dungeon.h"
+        -:   10:#include "../Unit/Enemy/LivingEnemy/LivingEnemy.h"
+        -:   11:#include <list>
+        -:   12:#include <utility>
+        -:   13:
+        -:   14:
+        -:   15:///@brief Основной класс, связывающий все в одно целое
+        -:   16:///Основной метод: \code   int makeTick(int options[] = nullptr); \endcode позволяющий сделать один тик в игре
+        -:   17:class Game {
+        -:   18:public:
+        -:   19:    static std::vector<std::string> allTypesEnemies;///< Типы все врагов(при добавлении нового врага, следует сюда добавить его имя,но это необязательно)
+        -:   20:    static std::vector<std::string> allSkills;///< Типы всех скиилов (такая же ситуция, как и с врагами)
+        -:   21:private:
+        -:   22:    Character hero; ///< Объект героя
+        -:   23:    std::vector<Dungeon> allMap; ///< Массив уровней
+        -:   24:    unsigned int curLvl = 0; ///< Текущий уровень
+        -:   25:    TableSkills tableSkills; ///< Таблица скиллов персонажа
+        -:   26:public:
+        -:   27:    ///Дефолтный конструктор
+function _ZN4GameC1Ev called 1 returned 100% blocks executed 100%
+        1:   28:    explicit Game() : curLvl(0), tableSkills(TableSkills()), hero(Character(10, {10, 20}, {5, 5}, &tableSkills)) {}
+        1:   28-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        -:   29:
+        -:   30:    /** Основной метод позволяющий сделать один тик в игре
+        -:   31:     * \param options опции для вызова какого то действия для игрока
+        -:   32:     * \code
+        -:   33:     *switch (options[0]) {
+        -:   34:     *  case 1:
+        -:   35:     *      move(Move::right, game.getAllMap()[getLvlPoint()]);
+        -:   36:     *      break;
+        -:   37:     *  case 2:
+        -:   38:     *      move(Move::left, game.getAllMap()[getLvlPoint()]);
+        -:   39:     *      break;
+        -:   40:     *  case 3:
+        -:   41:     *      move(Move::up, game.getAllMap()[getLvlPoint()]);
+        -:   42:     *      break;
+        -:   43:     * ... И так далее...
+        -:   44:     * \endcode
+        -:   45:     * \return int
+        -:   46:     */
+        -:   47:    int makeTick(int options[] = nullptr);
+        -:   48:
+        -:   49:    /// Setter
+        -:   50:    /// \param allMap все карты в игре
+        -:   51:    void setAllMap(const std::vector<Dungeon> &allMap);
+        -:   52:    /// Getter
+        -:   53:    /// \return get hero
+        -:   54:    Character &getHero();
+        -:   55:    /// Getter
+        -:   56:    /// \return get all map
+        -:   57:    std::vector<Dungeon> &getAllMap();
+        -:   58:
+        -:   59:    /// Getter
+        -:   60:    /// \return get cur lvl
+        -:   61:    unsigned int getCurLvl();
+        -:   62:
+        -:   63:    /// Getter
+        -:   64:    /// \return getTable of skills
+        -:   65:    const TableSkills &getTableSkills() const;
+        -:   66:
+        -:   67:    /// Setter
+        -:   68:    /// \param hero set Hero
+        -:   69:    void setHero(const Character &hero);
+        -:   70:    /// Setter
+        -:   71:    /// \param curLvl set cur lvl
+        -:   72:    void setCurLvl(unsigned int curLvl);
+        -:   73:    /// Setter
+        -:   74:    /// \param tableSkills set table skills
+        -:   75:    void setTableSkills(const TableSkills &tableSkills);
+        -:   76:
+        -:   77:
+        -:   78:};
+        -:   79:
+        -:   80:
+        -:   81:#endif //GAMELAB3_GAME_H

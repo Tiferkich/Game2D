@@ -1,0 +1,83 @@
+\doxysection{Класс Morphism}
+\hypertarget{class_morphism}{}\label{class_morphism}\index{Morphism@{Morphism}}
+
+
+{\ttfamily \#include $<$Morphism.\+h$>$}
+
+Граф наследования\+:Morphism\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_morphism}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_morphism_a272c8c8a0097a31ead334982e6ea7bda}{Morphism}} (int \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{mana\+Cost}})
+\item 
+int \mbox{\hyperlink{class_morphism_a4e19f748bb9c5c593205c7aa071fa7fc}{use\+Skill}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, int mas\mbox{[}$\,$\mbox{]}) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_skill}{Skill}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_skill_a2330e244c4617e2de8dd1e5066b63050}{Skill}} (int \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{mana\+Cost}})
+\item 
+int \mbox{\hyperlink{class_skill_a58e438fc02ac75cb74035c9ea06397d2}{get\+Skill\+Lvl}} () const
+\item 
+\mbox{\hyperlink{class_skill}{Skill}} \& \mbox{\hyperlink{class_skill_a98f0365e8d5b57e25b2d9dac177706fa}{set\+Skill\+Lvl}} (int lvl)
+\item 
+int \mbox{\hyperlink{class_skill_a779f5bc61bf79a167c1c7f8b79af31c9}{upgrade\+Lvl}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Дополнительные унаследованные члены}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_skill}{Skill}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries skill\+Lvl}
+\begin{DoxyCompactList}\small\item\em Уровень скилла \end{DoxyCompactList}\item 
+int {\bfseries mana\+Cost}
+\begin{DoxyCompactList}\small\item\em Мана кост скилла \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+С помощью морфизма некромант может превратить нежить одного вида в другую (например, гоблин-\/скелета в гоблин-\/ туля), если ему известно и вид нежити который превращает(скелет), и в который превращает(гуль), при этом затратив на это некоторое количество маны 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_morphism_a272c8c8a0097a31ead334982e6ea7bda}\label{class_morphism_a272c8c8a0097a31ead334982e6ea7bda} 
+\index{Morphism@{Morphism}!Morphism@{Morphism}}
+\index{Morphism@{Morphism}!Morphism@{Morphism}}
+\doxysubsubsection{\texorpdfstring{Morphism()}{Morphism()}}
+{\footnotesize\ttfamily Morphism\+::\+Morphism (\begin{DoxyParamCaption}\item[{int}]{mana\+Cost }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Конструктор 
+\begin{DoxyParams}{Аргументы}
+{\em mana\+Cost} & -\/ мана кост \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_morphism_a4e19f748bb9c5c593205c7aa071fa7fc}\label{class_morphism_a4e19f748bb9c5c593205c7aa071fa7fc} 
+\index{Morphism@{Morphism}!useSkill@{useSkill}}
+\index{useSkill@{useSkill}!Morphism@{Morphism}}
+\doxysubsubsection{\texorpdfstring{useSkill()}{useSkill()}}
+{\footnotesize\ttfamily int Morphism\+::use\+Skill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{int}]{mas\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Использование скилла 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+{\em mas} & -\/ опции \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 успех 
+\end{DoxyReturn}
+
+
+Замещает \mbox{\hyperlink{class_skill_a3f888cc18ce857314552614f7a35ec23}{Skill}}.
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Character/\+Skills/\+Morphism/Morphism.\+h\end{DoxyCompactItemize}

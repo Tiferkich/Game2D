@@ -1,0 +1,407 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Character.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:
+        -:    6:#ifndef GAMELAB3_CHARACTER_H
+        -:    7:#define GAMELAB3_CHARACTER_H
+        -:    8:
+        -:    9:#include "../Unit.h"
+        -:   10:#include "../Enemy/Enemy.h"
+        -:   11:#include "../../Dungeon/Ceil.h"
+        -:   12:#include "../../Matrix/Matrix.h"
+        -:   13:#include <map>
+        -:   14:#include <list>
+        -:   15:#include <iostream>
+        -:   16:#include "TableSkills.h"
+        -:   17:
+        -:   18:
+        -:   19:#define EXPERIENCE_COEFFICIENT 100
+        -:   20:#define TAKE_ESSENCE 50
+        -:   21:
+        -:   22:class Enemy;
+        -:   23:
+        -:   24:///Структура характеристик персонажа
+        -:   25:struct Characteristics {
+        -:   26:private:
+        -:   27:    int curHP;///< Текущее здоровье
+        -:   28:    int maxHp;///< Максимальное здоровье
+        -:   29:    int curMana;///< Текущая мана
+        -:   30:    int maxMana;///< Максимальная мана
+        -:   31:public:
+        -:   32:    ///Дефолтный конструктор
+function _ZN15CharacteristicsC1Ev called 23 returned 100% blocks executed 100%
+       23:   33:    Characteristics() : curHP(100), maxHp(100), curMana(100), maxMana(100) {};
+        -:   34:
+        -:   35:    /// \param maxHP0 - Хп
+        -:   36:    /// \param maxMana0 - Мана
+        -:   37:    [[maybe_unused]] Characteristics(int maxHP0, int maxMana0) : curHP(maxHP0), maxHp(maxHP0), curMana(maxMana0),
+        -:   38:                                                                 maxMana(maxMana0) {};
+        -:   39:
+        -:   40:    /// Метод лечения персонажа (или нет если подать -hp)
+        -:   41:    /// \param hp - Кол-во здоровья на которое нужно изменить текущее
+        -:   42:    /// \return *this - для цепного вызова
+function _ZN15Characteristics6healthEi called 16 returned 100% blocks executed 83%
+       16:   43:    Characteristics &health(int hp) {
+       16:   44:        curHP = (curHP + hp);
+       16:   45:        if (curHP < 0) curHP = 0;
+       16:   45-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 14
+        2:   45-block  1
+      16*:   46:        if (curHP > maxHp) curHP = maxHp;
+       16:   46-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 16
+    %%%%%:   46-block  1
+       16:   47:        return *this;
+       16:   47-block  0
+        -:   48:    }
+        -:   49:    /// Метод "лечения" персонажа (или нет если подать -mana)
+        -:   50:    /// \param mana - Кол-во маны на которое нужно изменить текущее
+        -:   51:    /// \return *this - для цепного вызова
+        -:   52:
+function _ZN15Characteristics4manaEi called 6 returned 100% blocks executed 75%
+        6:   53:    Characteristics &mana(int mana) {
+        6:   54:        curMana = (curMana + mana);
+       6*:   55:        if (curMana < 0) curMana = 0;
+        6:   55-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 6
+    %%%%%:   55-block  1
+        6:   56:        return *this;
+        6:   56-block  0
+        -:   57:    }
+        -:   58:
+        -:   59:    /// Getter
+        -:   60:    /// \return - Текущее здоровье
+function _ZNK15Characteristics8getCurHpEv called 77 returned 100% blocks executed 100%
+       77:   61:    int getCurHp() const {
+       77:   62:        return curHP;
+       77:   62-block  0
+        -:   63:    }
+        -:   64:    /// Getter
+        -:   65:    /// \return - Максимальное здоровье
+        -:   66:
+function _ZNK15Characteristics8getMaxHpEv called 3 returned 100% blocks executed 100%
+        3:   67:    int getMaxHp() const {
+        3:   68:        return maxHp;
+        3:   68-block  0
+        -:   69:    }
+        -:   70:    /// Getter
+        -:   71:    /// \return - Текущая мана
+function _ZNK15Characteristics10getCurManaEv called 14 returned 100% blocks executed 100%
+       14:   72:    int getCurMana() const {
+       14:   73:        return curMana;
+       14:   73-block  0
+        -:   74:    }
+        -:   75:
+        -:   76:    /// Getter
+        -:   77:    /// \return - Максимальная мана
+function _ZNK15Characteristics10getMaxManaEv called 3 returned 100% blocks executed 100%
+        3:   78:    int getMaxMana() const {
+        3:   79:        return maxMana;
+        3:   79-block  0
+        -:   80:    }
+        -:   81:    /// Setter
+        -:   82:    /// \param curHp0 - curHp
+function _ZN15Characteristics8setCurHpEi called 3 returned 100% blocks executed 100%
+        3:   83:    Characteristics &setCurHp(int curHp0) {
+        3:   84:        curHP = curHp0;
+        3:   85:        return *this;
+        3:   85-block  0
+        -:   86:    }
+        -:   87:    /// Setter
+        -:   88:    /// \param maxHp0 - maxHp
+        -:   89:
+function _ZN15Characteristics8setMaxHpEi called 1 returned 100% blocks executed 100%
+        1:   90:    Characteristics &setMaxHp(int maxHp0) {
+        1:   91:        Characteristics::maxHp = maxHp0;
+        1:   92:        return *this;
+        1:   92-block  0
+        -:   93:    }
+        -:   94:    /// Setter
+        -:   95:    /// \param curMana0 - CurMana
+function _ZN15Characteristics10setCurManaEi called 1 returned 100% blocks executed 100%
+        1:   96:    Characteristics &setCurMana(int curMana0) {
+        1:   97:        Characteristics::curMana = curMana0;
+        1:   98:        return *this;
+        1:   98-block  0
+        -:   99:    }
+        -:  100:
+        -:  101:    /// Setter
+        -:  102:    /// \param maxMana0 - MaxMana
+function _ZN15Characteristics10setMaxManaEi called 1 returned 100% blocks executed 100%
+        1:  103:    Characteristics &setMaxMana(int maxMana0) {
+        1:  104:        Characteristics::maxMana = maxMana0;
+        1:  105:        return *this;
+        1:  105-block  0
+        -:  106:    }
+        -:  107:
+        -:  108:};
+        -:  109:
+        -:  110:
+        -:  111:///Набор возможных состояний персонажа (Куда он смотрит)
+        -:  112:enum class Move {
+        -:  113:    right,
+        -:  114:    left,
+        -:  115:    up,
+        -:  116:    down,
+        -:  117:};
+        -:  118:
+        -:  119:class Game;
+        -:  120:
+        -:  121:///@brief Персонаж, которым мы играем
+        -:  122:///Один из основных классов в игре, наследуется от юнита
+        -:  123:class Character : public Unit {
+        -:  124:private:
+        -:  125:    int exp; ///<Кол-во экспы
+        -:  126:    int lvl;///< Текущий уровень персонажа
+        -:  127:    Characteristics characteristics;///< Его хар-ки
+        -:  128:    TableSkills *tableSkills = nullptr;///< Указатель на таблицу скиллов
+        -:  129:    int countEssence;///< Кол-во собранной эссенции
+        -:  130:    Move sideLooking;///< Сторона куда смотрит персонаж
+        -:  131:    int lvlPoint = 0;///< Кол-во доступных поинтов прокчки скилла
+        -:  132:    std::vector<std::string> openEnemies;///< Вектор открытых персонажей
+        -:  133:public:
+        -:  134:    /// Контруктор для героя
+        -:  135:    /// \param speed0 - Скорость
+        -:  136:    /// \param damage0 - Дамаг мин и макс
+        -:  137:    /// \param coord0 - Координаты х и у
+        -:  138:    /// \param tableSkills - Указатель на таблицу скиллов
+function _ZN9CharacterC1EiSt4pairIiiES1_P11TableSkills called 23 returned 100% blocks executed 100%
+       23:  139:    Character(int speed0, std::pair<int, int> damage0, std::pair<int, int> coord0, TableSkills *tableSkills) : Unit(
+        -:  140:            Faction::character, speed0,
+        -:  141:            damage0, coord0),
+       23:  142:                                                                                                               exp(0),
+       23:  143:                                                                                                               lvl(1),
+       23:  144:                                                                                                               countEssence(
+        -:  145:                                                                                                                       0),
+       23:  146:                                                                                                               sideLooking(
+        -:  147:                                                                                                                       Move::right),
+       23:  148:                                                                                                               tableSkills(
+       23:  149:                                                                                                                       tableSkills) {};
+       23:  149-block  0
+call    0 returned 23
+call    1 returned 23
+call    2 returned 23
+        -:  150:    /// Getter
+        -:  151:    /// \return Вектор открытых врагов
+        -:  152:    const std::vector<std::string> &getOpenEnemies() const;
+        -:  153:    /// Getter
+        -:  154:    /// \return Вектор открытых врагов
+        -:  155:    std::vector<std::string> &getOpenEnemies();
+        -:  156:
+        -:  157:    /// Основной метод героя
+        -:  158:    /// \param options - опции, что сделать
+        -:  159:    /// \param game - ссылка на игру
+        -:  160:    /// \return 0 - успех
+        -:  161:    int doSomething(int options[], Game &game);
+        -:  162:    /// Метод использования скилла
+        -:  163:    /// \param nameSkill - название скилла
+        -:  164:    /// \param dungeon - Ссылка на карту
+        -:  165:    /// \param mas - Массив опций, mas[0] - выбрать какой скилл использовать, дальше иногда есть опции в скиллах
+        -:  166:    /// \return 0 - успех
+        -:  167:    int useSkill(const std::string &nameSkill, Dungeon &dungeon, int mas[] = {});
+        -:  168:    /// Закрыть дверь на карте
+        -:  169:    /// \param matrix - карта
+        -:  170:    /// \return открытая дверь
+        -:  171:    Ceil close(Matrix<Ceil> &matrix);
+        -:  172:    /// Открыть дверь на карте
+        -:  173:    /// \param matrix - карта
+        -:  174:    /// \return закрытая дверь
+        -:  175:    Ceil open(Matrix<Ceil> &matrix);
+        -:  176:    ///Апнуть уровень
+        -:  177:    void upLVL();
+        -:  178:
+        -:  179:    /// Метод поиска рядом враг или нет
+        -:  180:    /// \param coords  - координаты на проверку
+        -:  181:    /// \return false - не рядом, true - рядом
+        -:  182:    bool checkNear(std::pair<int, int> coords);
+        -:  183:
+        -:  184:
+        -:  185:    /// При убийстве врага, вызывается этот метод, учеличивает экспу
+        -:  186:    /// \param exp0 - Кол-во экспы
+        -:  187:    void increaseExp(int exp0);
+        -:  188:
+        -:  189:    ///  Посчитать кол-во поднятой нежити
+        -:  190:    /// \param dungeon - уровень
+        -:  191:    /// \return - 0 успех
+        -:  192:    static int getCountSummons(Dungeon &dungeon);
+        -:  193:    ///  Изучить врага
+        -:  194:    /// \param dungeon - уровень
+        -:  195:    /// \return 0 успех
+        -:  196:    int openEnemy(Dungeon &dungeon);
+        -:  197:    /// Проверка открыт ли враг или нет
+        -:  198:    /// \param name - имя врага
+        -:  199:    /// \return true - открыт
+        -:  200:    bool isOpenEnemy(const std::string &name);
+        -:  201:    /// Подняться или спуститься по лестнице
+        -:  202:    /// \param matrix - карта
+        -:  203:    /// \return  - true - можно
+        -:  204:    bool uptoNewDungeon(Matrix<Ceil> &matrix);
+        -:  205:
+        -:  206:    /// Поиск ближайшего врага и атака его, вызывает метод attack(Unit &someone)
+        -:  207:    /// \param dungeon - уровень
+        -:  208:    /// \return  - 0 успех
+        -:  209:    int attackSomeone(Dungeon &dungeon);
+        -:  210:    /// Атака врага
+        -:  211:    void attack(Unit &someone) override;
+        -:  212:    /// Передвинуться по карте
+        -:  213:    /// \param side - куда
+        -:  214:    /// \param dungeon - карта
+        -:  215:    /// \return 0 - успех
+        -:  216:    int move(Move side, Dungeon &dungeon);
+        -:  217:    /// Поднять эссенцию
+        -:  218:    /// \param dungeon  - уровень
+        -:  219:    /// \return 0 успех
+        -:  220:    int takeEssense(Dungeon &dungeon);
+        -:  221:
+function _ZN9Character3dieEv called 2 returned 100% blocks executed 100%
+        2:  222:    void die() override {};
+        -:  223:
+        -:  224:    /// Получить урон (это не геттер)
+        -:  225:    /// \param damage - урон
+        -:  226:    void getDamage(int damage) override;
+        -:  227:
+        -:  228:    /// Getter
+        -:  229:    /// \return exp
+function _ZNK9Character6getExpEv called 4 returned 100% blocks executed 100%
+        4:  230:    int getExp() const {
+        4:  231:        return exp;
+        4:  231-block  0
+        -:  232:    }
+        -:  233:
+        -:  234:    /// Getter
+        -:  235:    /// \return curLvl
+function _ZNK9Character6getLvlEv called 17 returned 100% blocks executed 100%
+       17:  236:    int getLvl() const {
+       17:  237:        return lvl;
+       17:  237-block  0
+        -:  238:    }
+        -:  239:
+        -:  240:    /// Getter
+        -:  241:    /// \return Characteristics
+function _ZN9Character18getCharacteristicsEv called 91 returned 100% blocks executed 100%
+       91:  242:    Characteristics &getCharacteristics() {
+       91:  243:        return characteristics;
+       91:  243-block  0
+        -:  244:    }
+        -:  245:
+        -:  246:    /// Getter
+        -:  247:    /// \return countEssence
+function _ZNK9Character15getCountEssenceEv called 3 returned 100% blocks executed 100%
+        3:  248:    int getCountEssence() const {
+        3:  249:        return countEssence;
+        3:  249-block  0
+        -:  250:    }
+        -:  251:
+        -:  252:    /// Setter
+        -:  253:    /// \param exp0 -newExp
+        -:  254:    Character &setExp(int exp0) {
+        -:  255:        Character::exp = exp0;
+        -:  256:        return *this;
+        -:  257:    }
+        -:  258:
+        -:  259:    /// Setter
+        -:  260:    /// \param lvl0 - newLvl
+        -:  261:
+        -:  262:    Character &setLvl(int lvl0) {
+        -:  263:        Character::lvl = lvl0;
+        -:  264:        return *this;
+        -:  265:    }
+        -:  266:
+        -:  267:    /// Setter
+        -:  268:    /// \param characteristics0 - new characteristics
+        -:  269:    Character &setCharacteristics(const Characteristics &characteristics0) {
+        -:  270:        Character::characteristics = characteristics0;
+        -:  271:        return *this;
+        -:  272:    }
+        -:  273:
+        -:  274:    /// Setter
+        -:  275:    /// \param countEssence0 - кол-во новой эссенции
+function _ZN9Character15setCountEssenceEi called 4 returned 100% blocks executed 100%
+        4:  276:    Character &setCountEssence(int countEssence0) {
+        4:  277:        Character::countEssence = countEssence0;
+        4:  278:        return *this;
+        4:  278-block  0
+        -:  279:    }
+        -:  280:    /// Getter
+        -:  281:    /// \return сторона куда смотрит
+        -:  282:
+        -:  283:    Move getSideLooking() const;
+        -:  284:
+        -:  285:
+        -:  286:    /// Setter
+        -:  287:    /// \param sideLooking - новая сторона куда смотрит
+        -:  288:    void setSideLooking(Move sideLooking);
+        -:  289:    /// Getter
+        -:  290:    /// \return - кол-во доступных поинтов улучшения скилла
+        -:  291:    int getLvlPoint() const;
+        -:  292:
+        -:  293:    /// Setter
+        -:  294:    /// \param lvlPoint
+        -:  295:    void setLvlPoint(int lvlPoint);
+        -:  296:
+        -:  297:    /// Getter
+        -:  298:    /// \return - Таблица скиллов
+        -:  299:    TableSkills &getTableSkills();
+        -:  300:    /// Setter
+        -:  301:    /// \param tableSkills - Новая таблица скиллов
+        -:  302:    void setTableSkills(TableSkills *tableSkills);
+        -:  303:    /// Улучшить скилл
+        -:  304:    /// \param skillName - название скилла
+        -:  305:    /// \return 0 успех
+        -:  306:    int upgradeSkill(const std::string &skillName);
+        -:  307:    /// Метод который определяет - координаты подходят под условие куда смотрит герой или нет
+        -:  308:    /// \param bx - x
+        -:  309:    /// \param by - y
+        -:  310:    /// \return - true - подходят
+function _ZN9Character5checkEii called 7 returned 100% blocks executed 29%
+        7:  311:    bool check(int bx, int by) {
+        7:  312:        if (sideLooking == Move::right) {
+        7:  312-block  0
+branch  0 taken 7 (fallthrough)
+branch  1 taken 0
+        7:  313:            if (coords.first <= bx) return true;
+        7:  313-block  0
+branch  0 taken 7 (fallthrough)
+branch  1 taken 0
+        7:  313-block  1
+    #####:  314:        } else if (sideLooking == Move::left) {
+    %%%%%:  314-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  315:            if (coords.first >= bx) return true;
+    %%%%%:  315-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  315-block  1
+    #####:  316:        } else if (sideLooking == Move::up) {
+    %%%%%:  316-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  317:            if (coords.second >= by) return true;
+    %%%%%:  317-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  317-block  1
+    #####:  318:        } else if (sideLooking == Move::down) { if (coords.second <= by) return true; }
+    %%%%%:  318-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  318-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  318-block  2
+    #####:  319:        return false;
+    %%%%%:  319-block  0
+        -:  320:    }
+        -:  321:};
+        -:  322:
+        -:  323:
+        -:  324:#endif //GAMELAB3_CHARACTER_H

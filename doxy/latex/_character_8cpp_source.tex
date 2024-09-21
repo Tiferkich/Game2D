@@ -1,0 +1,295 @@
+\doxysection{Character.\+cpp}
+\hypertarget{_character_8cpp_source}{}\label{_character_8cpp_source}\index{Unit/Character/Character.cpp@{Unit/Character/Character.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Character.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Enemy/Undead/Undead.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Enemy/Summoner/UndeadSummoner.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../Game/Game.cpp"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a4d6ac48873091ba6b4b6ed2e669a2c26}{Character::upgradeSkill}}(\textcolor{keyword}{const}\ std::string\ \&skillName)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{if}\ (lvlPoint\ ==\ 0)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ lvlPoint\ -\/=\ 1;}
+\DoxyCodeLine{00017\ \ \ \ \ tableSkills-\/>\mbox{\hyperlink{class_table_skills_a92c6ff6877a8fa45f51538ef8a33e7cd}{upgradeSkill}}(skillName);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_a54abfd6d6c904cea9bac87794cc56d9c}{Character::increaseExp}}(\textcolor{keywordtype}{int}\ exp0)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ exp\ +=\ exp0;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (exp\ >=\ EXPERIENCE\_COEFFICIENT\ *\ lvl)\ \mbox{\hyperlink{class_character_af1e0c708e63327ad2d2e4764a3fd84c6}{upLVL}}();}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}{Character::attack}}(\mbox{\hyperlink{class_unit}{Unit}}\ \&someone)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_enemy}{Enemy}}\ *\textcolor{keyword}{>}\ (\&someone)-\/>getStatus()\ ==\ Status::dead)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}Unit\ is\ dead"{}}));}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_character_a70e1e0abb17b38e159aca880063a6ffc}{checkNear}}(someone.\mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{getCoords}}()))\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}Unit\ too\ far\ away"{}}));}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ damage0\ =\ rand()\ \%\ (\mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.second\ -\/\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first\ +\ 1)\ +\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first;}
+\DoxyCodeLine{00036\ \ \ \ \ someone.\mbox{\hyperlink{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}{getDamage}}(damage0);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_enemy}{Enemy}}\ *\textcolor{keyword}{>}\ (\&someone)-\/>getStatus()\ ==\ Status::dead)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a54abfd6d6c904cea9bac87794cc56d9c}{increaseExp}}(\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_enemy}{Enemy}}\ *\textcolor{keyword}{>}\ (\&someone)-\/>getMaxHp()\ /\ 2);}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_af1e0c708e63327ad2d2e4764a3fd84c6}{Character::upLVL}}()\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ exp\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ lvl\ +=\ 1;}
+\DoxyCodeLine{00044\ \ \ \ \ lvlPoint\ +=\ 1;}
+\DoxyCodeLine{00045\ \ \ \ \ characteristics.\mbox{\hyperlink{struct_characteristics_af5327bc322013b60c87490a6debca63b}{setMaxHp}}(characteristics.\mbox{\hyperlink{struct_characteristics_adb078df62807bdeb701a06ce30f00f9b}{getMaxHp}}()\ +\ 50);}
+\DoxyCodeLine{00046\ \ \ \ \ characteristics.\mbox{\hyperlink{struct_characteristics_ae0d5e25f1779a97ba500664373274ec1}{setMaxMana}}(characteristics.\mbox{\hyperlink{struct_characteristics_a3453529d6d333bed0642765094a59a70}{getMaxMana}}()\ +\ 50);}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first\ +=\ 5;}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.second\ +=\ 5;}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_a2cd6d664b55d12acbb3fe3d1688a47f6}{Character::getDamage}}(\textcolor{keywordtype}{int}\ damage)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ characteristics.\mbox{\hyperlink{struct_characteristics_afceffc1db7648d45ffae3e13fa6db7df}{health}}(-\/1\ *\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (characteristics.\mbox{\hyperlink{struct_characteristics_ab17e0cd2898b629db45d65795f4d51fe}{getCurHp}}()\ <=\ 0)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a2c0a3bb0a3dbd4029ac47a22c4d42280}{die}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a96b87b3bf2c730ad6dac17e6a467e887}{Character::takeEssense}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ !=\ Ceil::essence)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00061\ \ \ \ \ countEssence\ +=\ TAKE\_ESSENCE;}
+\DoxyCodeLine{00062\ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ =\ Ceil::floor;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{Character::move}}(Move\ side,\ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ sideLooking\ =\ side;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (side\ ==\ Move::down\ \&\&\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ -\/\ 1][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ !=\ Ceil::wall\ \&\&}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ -\/\ 1][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ !=\ Ceil::closeDoor)\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ -\/-\/\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first;}
+\DoxyCodeLine{00072\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::up\ \&\&\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ 1][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ !=\ Ceil::wall\ \&\&}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ 1][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\ !=\ Ceil::closeDoor)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first;}
+\DoxyCodeLine{00075\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::right\ \&\&\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ 1]\ !=\ Ceil::wall\ \&\&}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ 1]\ !=\ Ceil::closeDoor)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second;}
+\DoxyCodeLine{00078\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (side\ ==\ Move::left\ \&\&\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ -\/\ 1]\ !=\ Ceil::wall\ \&\&}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ -\/\ 1]\ !=\ Ceil::closeDoor)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ -\/-\/\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second;}
+\DoxyCodeLine{00081\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_ab32074a535fad598b8688c975e2bc703}{setHero}}(\{\textcolor{keyword}{this},\ \&dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}()[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second]\});}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00086\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ Ceil\ \mbox{\hyperlink{class_character_aac492893dec0edc0aed8f0b916be698b}{Character::close}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ dx[9]\ =\ \{1,\ 0,\ -\/1,\ 0,\ 1,\ 0,\ 1,\ -\/1,\ -\/1\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{int}\ dy[9]\ =\ \{0,\ 1,\ 0,\ -\/1,\ 1,\ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{int}\ x,\ y;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 6;\ i++)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ x\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i];}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ y\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i];}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matrix[y][x]\ ==\ Ceil::openDoor)\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{if}\ (!flag)\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}No\ open\ door"{}});}
+\DoxyCodeLine{00101\ \ \ \ \ matrix[y][x]\ =\ Ceil::closeDoor;}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{return}\ Ceil::openDoor;}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ Ceil\ \mbox{\hyperlink{class_character_a17824202abf354d08963305cc664e0d9}{Character::open}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{int}\ dx[9]\ =\ \{1,\ 0,\ -\/1,\ 0,\ 1,\ 0,\ 1,\ -\/1,\ -\/1\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{int}\ dy[9]\ =\ \{0,\ 1,\ 0,\ -\/1,\ 1,\ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{int}\ x,\ y;}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 6;\ i++)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ x\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i];}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ y\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i];}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matrix[y][x]\ ==\ Ceil::closeDoor)\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ (!flag)\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}No\ close\ door"{}});}
+\DoxyCodeLine{00118\ \ \ \ \ matrix[y][x]\ =\ Ceil::openDoor;}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{return}\ Ceil::closeDoor;}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_character_a70e1e0abb17b38e159aca880063a6ffc}{Character::checkNear}}(std::pair<int,\ int>\ anotherCoords)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{int}\ dx[9]\ =\ \{1,\ 0,\ -\/1,\ 0,\ 1,\ 0,\ 1,\ -\/1,\ -\/1\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{int}\ dy[9]\ =\ \{0,\ 1,\ 0,\ -\/1,\ 1,\ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 9;\ i++)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i];}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i];}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ ==\ anotherCoords.second\ \&\&\ y\ ==\ anotherCoords.first)\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{Character::getLvlPoint}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordflow}{return}\ lvlPoint;}
+\DoxyCodeLine{00138\ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_ac332a7806f1695769a074377d95b7932}{Character::setLvlPoint}}(\textcolor{keywordtype}{int}\ lvlPoint)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ Character::lvlPoint\ =\ lvlPoint;}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ Move\ \mbox{\hyperlink{class_character_a22bbbbe0c7cb2587790053d1e5412311}{Character::getSideLooking}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ sideLooking;}
+\DoxyCodeLine{00146\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_aa2fae153d2abd3fa1e395fc0460a38a4}{Character::setSideLooking}}(Move\ sideLooking)\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ Character::sideLooking\ =\ sideLooking;}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_af3fbcdd856ccb818568b90d5f78c7151}{Character::useSkill}}(\textcolor{keyword}{const}\ std::string\ \&nameSkill,\ \mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon,\ \textcolor{keywordtype}{int}\ mas[])\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ tableSkills-\/>\mbox{\hyperlink{class_table_skills_a6d4403795a991f729b1f29ae7f0c4819}{getSkill}}(nameSkill)-\/>\mbox{\hyperlink{class_skill_a3f888cc18ce857314552614f7a35ec23}{useSkill}}(dungeon,\ mas);}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&\mbox{\hyperlink{class_character_a4bbbcffb71fee079e00f0d3805e5df42}{Character::getTableSkills}}()\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{return}\ *tableSkills;}
+\DoxyCodeLine{00159\ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_character_a21ac46254e8afd5637319da6434dafce}{Character::setTableSkills}}(\mbox{\hyperlink{class_table_skills}{TableSkills}}\ *tableSkills)\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ Character::tableSkills\ =\ tableSkills;}
+\DoxyCodeLine{00163\ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a6e149d65f0e2644e3239b6bac5fef370}{Character::getCountSummons}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&item:\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}())\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item.first-\/>getFaction()\ ==\ Faction::character)\ ++counter;}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{return}\ counter;}
+\DoxyCodeLine{00171\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_aec0638cdc727c3faa587b8d3928c806d}{Character::openEnemy}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{if}\ (countEssence\ ==\ 0)\ \textcolor{keywordflow}{return}\ -\/3;}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ *enemy\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{for}\ (item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ item\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ item++)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item-\/>first-\/>getStatus()\ ==\ Status::dead\ \&\&\ item-\/>first-\/>getFaction()\ ==\ Faction::livingEnemy\ \&\&}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a70e1e0abb17b38e159aca880063a6ffc}{checkNear}}(item-\/>first-\/>getCoords())\ \&\&\ !\mbox{\hyperlink{class_character_af291f1f87c1b68870c8538b2554a82cc}{isOpenEnemy}}(item-\/>first-\/>getName()))\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ enemy\ =\ item-\/>first;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy-\/>\mbox{\hyperlink{class_enemy_aeed6ab0081ed2a24474707320ac86844}{openCost}}()\ >\ countEssence)\ \textcolor{keywordflow}{return}\ -\/2;}
+\DoxyCodeLine{00185\ \ \ \ \ openEnemies.emplace\_back(enemy-\/>\mbox{\hyperlink{class_enemy_a63ff6e5c696c7bb78ae7912e26ee1cd1}{getName}}());}
+\DoxyCodeLine{00186\ \ \ \ \ countEssence\ -\/=\ enemy-\/>\mbox{\hyperlink{class_enemy_aeed6ab0081ed2a24474707320ac86844}{openCost}}();}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00188\ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_character_af291f1f87c1b68870c8538b2554a82cc}{Character::isOpenEnemy}}(\textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&item:\ openEnemies)\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item\ ==\ name)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00195\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keyword}{const}\ std::vector<std::string>\ \&\mbox{\hyperlink{class_character_ab88794520f036b9d0de4e9799ec3e154}{Character::getOpenEnemies}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordflow}{return}\ openEnemies;}
+\DoxyCodeLine{00199\ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ std::vector<std::string>\ \&\mbox{\hyperlink{class_character_ab88794520f036b9d0de4e9799ec3e154}{Character::getOpenEnemies}}()\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordflow}{return}\ openEnemies;}
+\DoxyCodeLine{00203\ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a8658e96071d009283d40a0b69088bba8}{Character::doSomething}}(\textcolor{keywordtype}{int}\ options[],\ \mbox{\hyperlink{class_game}{Game}}\ \&game)\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{if}\ (options\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{switch}\ (options[0])\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{move}}(Move::right,\ game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{move}}(Move::left,\ game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{move}}(Move::up,\ game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a3dc28e62b5513be4b8c0c67d2d3a44c5}{move}}(Move::down,\ game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5:}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a17824202abf354d08963305cc664e0d9}{open}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()].getMapLevel());}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 6:}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_aac492893dec0edc0aed8f0b916be698b}{close}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()].getMapLevel());}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 7:}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a96b87b3bf2c730ad6dac17e6a467e887}{takeEssense}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 8:}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8}{uptoNewDungeon}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()].getMapLevel()))}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game.\mbox{\hyperlink{class_game_a14418510e46b17424f58036aa3a9bd9a}{setCurLvl}}(game.\mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{getCurLvl}}()\ +\ 1);}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 9:}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (game.\mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{getCurLvl}}()\ ==\ 0)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8}{uptoNewDungeon}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()].getMapLevel()))}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game.\mbox{\hyperlink{class_game_a14418510e46b17424f58036aa3a9bd9a}{setCurLvl}}(game.\mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{getCurLvl}}()\ -\/\ 1);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 10:\ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ forMorphism[]\ =\ \{options[2]\};}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_af3fbcdd856ccb818568b90d5f78c7151}{useSkill}}(\mbox{\hyperlink{class_game_adbde412cffe73323e7df134979c375da}{Game::allSkills}}[options[1]],\ game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()],\ forMorphism);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 11:}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a4d6ac48873091ba6b4b6ed2e669a2c26}{upgradeSkill}}(\mbox{\hyperlink{class_game_adbde412cffe73323e7df134979c375da}{Game::allSkills}}[options[1]]);}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 12:}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_character_a670477eff47a03136c92c9600336c765}{attackSomeone}}(game.\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}()[\mbox{\hyperlink{class_character_aae9661c56d05156fbe76bfe0dcbab6ac}{getLvlPoint}}()]);}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00260\ \}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_character_a2bccf6c7af32fc3a472f5792d8f4a8f8}{Character::uptoNewDungeon}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix)\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (matrix[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first]\ ==\ Ceil::ladder)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00265\ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_character_a670477eff47a03136c92c9600336c765}{Character::attackSomeone}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{class_enemy}{Enemy}}\ *enemy\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{for}\ (item\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ item\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ ++item)\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_character_a62b2b389188fa2c351205be1f2ed445e}{check}}(item-\/>first-\/>getCoords().second,}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ item-\/>first-\/>getCoords().first)\ \&\&}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ item-\/>first-\/>getStatus()\ !=\ Status::dead\ \&\&\ \mbox{\hyperlink{class_character_a70e1e0abb17b38e159aca880063a6ffc}{checkNear}}(item-\/>first-\/>getCoords()))\ \{}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ enemy\ =\ item-\/>first;}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{if}\ (enemy\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{class_character_a8a185f65c90577e05cd4ec1f0344f4bb}{attack}}(*enemy);}
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00283\ \}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ }
+
+\end{DoxyCode}

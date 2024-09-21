@@ -1,0 +1,974 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Character.cpp
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 23.10.2023.
+        -:    3://
+        -:    4:
+        -:    5:#include "Character.h"
+        -:    6:#include "../../Dungeon/Dungeon.h"
+        -:    7:#include "../Enemy/Undead/Undead.h"
+        -:    8:#include "../Enemy/Summoner/UndeadSummoner.h"
+        -:    9:#include "../../Game/Game.cpp"
+        -:   10:
+        -:   11:
+function _ZN9Character12upgradeSkillERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 2 returned 100% blocks executed 100%
+        2:   12:int Character::upgradeSkill(const std::string &skillName) {
+        2:   13:    if (lvlPoint == 0) {
+        2:   13-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   14:        return -1;
+        1:   14-block  0
+        -:   15:    }
+        1:   16:    lvlPoint -= 1;
+        1:   17:    tableSkills->upgradeSkill(skillName);
+        1:   17-block  0
+call    0 returned 1
+        1:   18:    return 0;
+        -:   19:}
+        -:   20:
+        -:   21:
+function _ZN9Character11increaseExpEi called 2 returned 100% blocks executed 67%
+        2:   22:void Character::increaseExp(int exp0) {
+        2:   23:    exp += exp0;
+       2*:   24:    if (exp >= EXPERIENCE_COEFFICIENT * lvl) upLVL();
+        2:   24-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    %%%%%:   24-block  1
+call    2 never executed
+        2:   25:}
+        -:   26:
+        -:   27:
+function _ZN9Character6attackER4Unit called 7 returned 71% blocks executed 81%
+        7:   28:void Character::attack(Unit &someone) {
+       7*:   29:    if (dynamic_cast<Enemy *> (&someone)->getStatus() == Status::dead) {
+        7:   29-block  0
+branch  0 taken 7 (fallthrough)
+branch  1 taken 0
+        7:   29-block  1
+    %%%%%:   29-block  2
+        7:   29-block  3
+call    2 returned 7
+branch  3 taken 1 (fallthrough)
+branch  4 taken 6
+        1:   30:        throw (std::invalid_argument("Unit is dead"));
+        1:   30-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   30-block  1
+call    4 returned 0
+    $$$$$:   30-block  2
+call    5 never executed
+        -:   31:    }
+        6:   32:    if (!checkNear(someone.getCoords())) {
+        6:   32-block  0
+call    0 returned 6
+call    1 returned 6
+branch  2 taken 1 (fallthrough)
+branch  3 taken 5
+        1:   33:        throw (std::invalid_argument("Unit too far away"));
+        1:   33-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   33-block  1
+call    4 returned 0
+    $$$$$:   33-block  2
+call    5 never executed
+        -:   34:    }
+        5:   35:    int damage0 = rand() % (damage.second - damage.first + 1) + damage.first;
+        5:   35-block  0
+call    0 returned 5
+        5:   36:    someone.getDamage(damage0);
+call    0 returned 5
+       5*:   37:    if (dynamic_cast<Enemy *> (&someone)->getStatus() == Status::dead)
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   37-block  0
+    %%%%%:   37-block  1
+        5:   37-block  2
+call    2 returned 5
+branch  3 taken 2 (fallthrough)
+branch  4 taken 3
+       2*:   38:        increaseExp(dynamic_cast<Enemy *> (&someone)->getMaxHp() / 2);
+        2:   38-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   38-block  1
+    %%%%%:   38-block  2
+        2:   38-block  3
+call    2 returned 2
+call    3 returned 2
+        5:   39:}
+        5:   39-block  0
+        -:   40:
+function _ZN9Character5upLVLEv called 1 returned 100% blocks executed 100%
+        1:   41:void Character::upLVL() {
+        1:   42:    exp = 0;
+        1:   43:    lvl += 1;
+        1:   44:    lvlPoint += 1;
+        1:   45:    characteristics.setMaxHp(characteristics.getMaxHp() + 50);
+        1:   45-block  0
+call    0 returned 1
+call    1 returned 1
+        1:   46:    characteristics.setMaxMana(characteristics.getMaxMana() + 50);
+call    0 returned 1
+call    1 returned 1
+        1:   47:    damage.first += 5;
+        1:   48:    damage.second += 5;
+        1:   49:}
+        -:   50:
+function _ZN9Character9getDamageEi called 15 returned 100% blocks executed 100%
+       15:   51:void Character::getDamage(int damage) {
+       15:   52:    characteristics.health(-1 * damage);
+       15:   52-block  0
+call    0 returned 15
+       15:   53:    if (characteristics.getCurHp() <= 0) {
+call    0 returned 15
+branch  1 taken 2 (fallthrough)
+branch  2 taken 13
+        2:   54:        die();
+        2:   54-block  0
+call    0 returned 2
+        -:   55:    }
+       15:   56:}
+        -:   57:
+function _ZN9Character11takeEssenseER7Dungeon called 2 returned 100% blocks executed 92%
+        2:   58:int Character::takeEssense(Dungeon &dungeon) {
+        2:   59:    if (dungeon.getMapLevel()[coords.first][coords.second] != Ceil::essence)
+        2:   59-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:   59-block  1
+call    4 returned 2
+branch  5 taken 2 (fallthrough)
+branch  6 taken 0 (throw)
+        2:   59-block  2
+branch  7 taken 1 (fallthrough)
+branch  8 taken 1
+    $$$$$:   59-block  3
+call    9 never executed
+        1:   60:        return -1;
+        1:   60-block  0
+        1:   61:    countEssence += TAKE_ESSENCE;
+        1:   62:    dungeon.getMapLevel()[coords.first][coords.second] = Ceil::floor;
+        1:   62-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   62-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   63:    return 0;
+        1:   63-block  0
+        -:   64:}
+        -:   65:
+        -:   66:
+function _ZN9Character4moveE4MoveR7Dungeon called 8 returned 100% blocks executed 85%
+        8:   67:int Character::move(Move side, Dungeon &dungeon) {
+        8:   68:    sideLooking = side;
+        9:   69:    if (side == Move::down && dungeon.getMapLevel()[coords.first - 1][coords.second] != Ceil::wall &&
+        8:   69-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 7
+        1:   69-block  1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   69-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   69-block  3
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0
+        1:   69-block  4
+        7:   69-block  5
+    $$$$$:   69-block  6
+call   11 never executed
+        9:   70:        dungeon.getMapLevel()[coords.first - 1][coords.second] != Ceil::closeDoor) {
+        1:   70-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   70-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   70-block  2
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        8:   70-block  3
+branch  9 taken 1 (fallthrough)
+branch 10 taken 7
+    $$$$$:   70-block  4
+        1:   71:        --coords.first;
+        1:   71-block  0
+       10:   72:    } else if (side == Move::up && dungeon.getMapLevel()[coords.first + 1][coords.second] != Ceil::wall &&
+        7:   72-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 3
+        4:   72-block  1
+call    2 returned 4
+call    3 returned 4
+branch  4 taken 4 (fallthrough)
+branch  5 taken 0 (throw)
+        4:   72-block  2
+call    6 returned 4
+branch  7 taken 4 (fallthrough)
+branch  8 taken 0 (throw)
+        4:   72-block  3
+branch  9 taken 3 (fallthrough)
+branch 10 taken 1
+        2:   72-block  4
+        5:   72-block  5
+    $$$$$:   72-block  6
+call   11 never executed
+       10:   73:               dungeon.getMapLevel()[coords.first + 1][coords.second] != Ceil::closeDoor) {
+        3:   73-block  0
+call    0 returned 3
+call    1 returned 3
+branch  2 taken 3 (fallthrough)
+branch  3 taken 0 (throw)
+        3:   73-block  1
+call    4 returned 3
+branch  5 taken 3 (fallthrough)
+branch  6 taken 0 (throw)
+        3:   73-block  2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 1
+        7:   73-block  3
+branch  9 taken 2 (fallthrough)
+branch 10 taken 5
+    $$$$$:   73-block  4
+        2:   74:        ++coords.first;
+        2:   74-block  0
+        7:   75:    } else if (side == Move::right && dungeon.getMapLevel()[coords.first][coords.second + 1] != Ceil::wall &&
+        5:   75-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 3
+        2:   75-block  1
+call    2 returned 2
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:   75-block  2
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:   75-block  3
+branch  9 taken 2 (fallthrough)
+branch 10 taken 0
+        2:   75-block  4
+        3:   75-block  5
+    $$$$$:   75-block  6
+call   11 never executed
+        7:   76:               dungeon.getMapLevel()[coords.first][coords.second + 1] != Ceil::closeDoor) {
+        2:   76-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:   76-block  1
+call    4 returned 2
+branch  5 taken 2 (fallthrough)
+branch  6 taken 0 (throw)
+        2:   76-block  2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0
+        5:   76-block  3
+branch  9 taken 2 (fallthrough)
+branch 10 taken 3
+    $$$$$:   76-block  4
+        2:   77:        ++coords.second;
+        2:   77-block  0
+        4:   78:    } else if (side == Move::left && dungeon.getMapLevel()[coords.first][coords.second - 1] != Ceil::wall &&
+        3:   78-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   78-block  1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   78-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   78-block  3
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0
+        1:   78-block  4
+        2:   78-block  5
+    $$$$$:   78-block  6
+call   11 never executed
+        4:   79:               dungeon.getMapLevel()[coords.first][coords.second - 1] != Ceil::closeDoor) {
+        1:   79-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   79-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   79-block  2
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        3:   79-block  3
+branch  9 taken 1 (fallthrough)
+branch 10 taken 2
+    $$$$$:   79-block  4
+        1:   80:        --coords.second;
+        1:   80-block  0
+        -:   81:    } else {
+        2:   82:        return -1;
+        2:   82-block  0
+        -:   83:    }
+        6:   84:    dungeon.setHero({this, &dungeon.getMapLevel()[coords.first][coords.second]});
+        6:   84-block  0
+call    0 returned 6
+call    1 returned 6
+branch  2 taken 6 (fallthrough)
+branch  3 taken 0 (throw)
+        6:   84-block  1
+call    4 returned 6
+branch  5 taken 6 (fallthrough)
+branch  6 taken 0 (throw)
+        6:   84-block  2
+call    7 returned 6
+call    8 returned 6
+    $$$$$:   84-block  3
+    $$$$$:   84-block  4
+    $$$$$:   84-block  5
+        6:   85:    return 0;
+        -:   86:}
+        -:   87:
+        -:   88:
+function _ZN9Character5closeER6MatrixI4CeilE called 3 returned 33% blocks executed 82%
+        3:   89:Ceil Character::close(Matrix<Ceil> &matrix) {
+        3:   90:    bool flag = false;
+        3:   91:    int dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   // смещения, соответствующие соседям ячейки
+        3:   92:    int dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};
+        -:   93:    int x, y;
+       20:   94:    for (int i = 0; i < 6; i++) {
+        3:   94-block  0
+       17:   94-block  1
+       20:   94-block  2
+branch  0 taken 18
+branch  1 taken 2 (fallthrough)
+       18:   95:        if (flag) { break; }
+       18:   95-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 17
+        1:   95-block  1
+       17:   96:        x = coords.second + dx[i];
+       17:   97:        y = coords.first + dy[i];
+       17:   98:        if (matrix[y][x] == Ceil::openDoor) flag = true;
+       17:   98-block  0
+call    0 returned 17
+branch  1 taken 17 (fallthrough)
+branch  2 taken 0 (throw)
+       17:   98-block  1
+call    3 returned 17
+branch  4 taken 17 (fallthrough)
+branch  5 taken 0 (throw)
+       17:   98-block  2
+branch  6 taken 1 (fallthrough)
+branch  7 taken 16
+        1:   98-block  3
+    $$$$$:   98-block  4
+        -:   99:    }
+        3:  100:    if (!flag) throw std::invalid_argument("No open door");
+        3:  100-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 1
+        2:  100-block  1
+call    2 returned 2
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  100-block  2
+call    6 returned 2
+    $$$$$:  100-block  3
+call    7 never executed
+        1:  101:    matrix[y][x] = Ceil::closeDoor;
+        1:  101-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  101-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:  101-block  2
+        1:  102:    return Ceil::openDoor;
+        1:  102-block  0
+        1:  102-block  1
+        -:  103:}
+        -:  104:
+        -:  105:
+function _ZN9Character4openER6MatrixI4CeilE called 4 returned 50% blocks executed 82%
+        4:  106:Ceil Character::open(Matrix<Ceil> &matrix) {
+        4:  107:    bool flag = false;
+        4:  108:    int dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   // смещения, соответствующие соседям ячейки
+        4:  109:    int dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};
+        -:  110:    int x, y;
+       23:  111:    for (int i = 0; i < 6; i++) {
+        4:  111-block  0
+       19:  111-block  1
+       23:  111-block  2
+branch  0 taken 21
+branch  1 taken 2 (fallthrough)
+       21:  112:        if (flag) { break; }
+       21:  112-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 19
+        2:  112-block  1
+       19:  113:        x = coords.second + dx[i];
+       19:  114:        y = coords.first + dy[i];
+       19:  115:        if (matrix[y][x] == Ceil::closeDoor) flag = true;
+       19:  115-block  0
+call    0 returned 19
+branch  1 taken 19 (fallthrough)
+branch  2 taken 0 (throw)
+       19:  115-block  1
+call    3 returned 19
+branch  4 taken 19 (fallthrough)
+branch  5 taken 0 (throw)
+       19:  115-block  2
+branch  6 taken 2 (fallthrough)
+branch  7 taken 17
+        2:  115-block  3
+    $$$$$:  115-block  4
+        -:  116:    }
+        4:  117:    if (!flag) throw std::invalid_argument("No close door");
+        4:  117-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 2
+        2:  117-block  1
+call    2 returned 2
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  117-block  2
+call    6 returned 2
+    $$$$$:  117-block  3
+call    7 never executed
+        2:  118:    matrix[y][x] = Ceil::openDoor;
+        2:  118-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  118-block  1
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:  118-block  2
+        2:  119:    return Ceil::closeDoor;
+        2:  119-block  0
+        2:  119-block  1
+        -:  120:}
+        -:  121:
+        -:  122:
+function _ZN9Character9checkNearESt4pairIiiE called 18 returned 100% blocks executed 100%
+       18:  123:bool Character::checkNear(std::pair<int, int> anotherCoords) {
+       18:  124:    bool flag = false;
+       18:  125:    int dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   // смещения, соответствующие соседям ячейки
+       18:  126:    int dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};
+      122:  127:    for (int i = 0; i < 9; i++) {
+       18:  127-block  0
+      104:  127-block  1
+      122:  127-block  2
+branch  0 taken 120
+branch  1 taken 2 (fallthrough)
+      120:  128:        if (flag) { return true; }
+      120:  128-block  0
+branch  0 taken 16 (fallthrough)
+branch  1 taken 104
+       16:  128-block  1
+      104:  129:        int x = coords.second + dx[i];
+      104:  130:        int y = coords.first + dy[i];
+      104:  131:        if (x == anotherCoords.second && y == anotherCoords.first) flag = true;
+      104:  131-block  0
+branch  0 taken 35 (fallthrough)
+branch  1 taken 69
+       35:  131-block  1
+branch  2 taken 16 (fallthrough)
+branch  3 taken 19
+       16:  131-block  2
+        -:  132:    }
+        2:  133:    return false;
+        2:  133-block  0
+        -:  134:}
+        -:  135:
+function _ZNK9Character11getLvlPointEv called 2 returned 100% blocks executed 100%
+        2:  136:int Character::getLvlPoint() const {
+        2:  137:    return lvlPoint;
+        2:  137-block  0
+        -:  138:}
+        -:  139:
+function _ZN9Character11setLvlPointEi called 0 returned 0% blocks executed 0%
+    #####:  140:void Character::setLvlPoint(int lvlPoint) {
+    #####:  141:    Character::lvlPoint = lvlPoint;
+    #####:  142:}
+        -:  143:
+function _ZNK9Character14getSideLookingEv called 8 returned 100% blocks executed 100%
+        8:  144:Move Character::getSideLooking() const {
+        8:  145:    return sideLooking;
+        8:  145-block  0
+        -:  146:}
+        -:  147:
+function _ZN9Character14setSideLookingE4Move called 1 returned 100% blocks executed 100%
+        1:  148:void Character::setSideLooking(Move sideLooking) {
+        1:  149:    Character::sideLooking = sideLooking;
+        1:  150:}
+        -:  151:
+function _ZN9Character8useSkillERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEER7DungeonPi called 18 returned 100% blocks executed 100%
+       18:  152:int Character::useSkill(const std::string &nameSkill, Dungeon &dungeon, int mas[]) {
+       18:  153:    tableSkills->getSkill(nameSkill)->useSkill(dungeon, mas);
+       18:  153-block  0
+call    0 returned 18
+call    1 returned 18
+       18:  154:    return 0;
+        -:  155:}
+        -:  156:
+function _ZN9Character14getTableSkillsEv called 22 returned 100% blocks executed 100%
+       22:  157:TableSkills &Character::getTableSkills() {
+       22:  158:    return *tableSkills;
+       22:  158-block  0
+        -:  159:}
+        -:  160:
+function _ZN9Character14setTableSkillsEP11TableSkills called 0 returned 0% blocks executed 0%
+    #####:  161:void Character::setTableSkills(TableSkills *tableSkills) {
+    #####:  162:    Character::tableSkills = tableSkills;
+    #####:  163:}
+        -:  164:
+function _ZN9Character15getCountSummonsER7Dungeon called 4 returned 100% blocks executed 100%
+        4:  165:int Character::getCountSummons(Dungeon &dungeon) {
+        4:  166:    int counter = 0;
+       20:  167:    for (auto &item: dungeon.getListEnemies()) {
+        4:  167-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+       16:  167-block  1
+call    3 returned 16
+       16:  167-block  2
+call    4 returned 16
+       20:  167-block  3
+call    5 returned 20
+branch  6 taken 16
+branch  7 taken 4 (fallthrough)
+       16:  168:        if (item.first->getFaction() == Faction::character) ++counter;
+call    0 returned 16
+branch  1 taken 1 (fallthrough)
+branch  2 taken 15
+        1:  168-block  0
+        -:  169:    }
+        4:  170:    return counter;
+        4:  170-block  0
+        -:  171:}
+        -:  172:
+function _ZN9Character9openEnemyER7Dungeon called 8 returned 100% blocks executed 100%
+        8:  173:int Character::openEnemy(Dungeon &dungeon) {
+        8:  174:    if (countEssence == 0) return -3;
+        8:  174-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 7
+        1:  174-block  1
+        7:  175:    auto item = dungeon.getListEnemies().begin();
+        7:  175-block  0
+call    0 returned 7
+call    1 returned 7
+        7:  176:    Enemy *enemy = nullptr;
+       16:  177:    for (item = dungeon.getListEnemies().begin(); item != dungeon.getListEnemies().end(); item++) {
+call    0 returned 7
+call    1 returned 7
+        9:  177-block  0
+call    2 returned 9
+       16:  177-block  1
+call    3 returned 16
+call    4 returned 16
+call    5 returned 16
+branch  6 taken 9
+branch  7 taken 7 (fallthrough)
+       25:  178:        if (item->first->getStatus() == Status::dead && item->first->getFaction() == Faction::livingEnemy &&
+        9:  178-block  0
+call    0 returned 9
+call    1 returned 9
+        8:  178-block  1
+call    2 returned 8
+call    3 returned 8
+branch  4 taken 8 (fallthrough)
+branch  5 taken 0
+branch  6 taken 8 (fallthrough)
+branch  7 taken 0
+       25:  179:            checkNear(item->first->getCoords()) && !isOpenEnemy(item->first->getName())) {
+branch  0 taken 8 (fallthrough)
+branch  1 taken 1
+        8:  179-block  0
+call    2 returned 8
+call    3 returned 8
+call    4 returned 8
+        8:  179-block  1
+call    5 returned 8
+call    6 returned 8
+call    7 returned 8
+branch  8 taken 3 (fallthrough)
+branch  9 taken 5
+        3:  179-block  2
+        6:  179-block  3
+        9:  179-block  4
+branch 10 taken 3 (fallthrough)
+branch 11 taken 6
+        3:  180:            enemy = item->first;
+        3:  180-block  0
+call    0 returned 3
+        -:  181:        }
+        -:  182:    }
+        7:  183:    if (enemy == nullptr) return -1;
+        7:  183-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 3
+        4:  183-block  1
+        3:  184:    if (enemy->openCost() > countEssence) return -2;
+        3:  184-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  184-block  1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 2
+        1:  184-block  2
+        2:  185:    openEnemies.emplace_back(enemy->getName());
+        2:  185-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:  186:    countEssence -= enemy->openCost();
+        2:  186-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  187:    return 0;
+        2:  187-block  0
+        -:  188:}
+        -:  189:
+function _ZN9Character11isOpenEnemyERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 21 returned 100% blocks executed 100%
+       21:  190:bool Character::isOpenEnemy(const std::string &name) {
+       29:  191:    for (auto &item: openEnemies) {
+       21:  191-block  0
+call    0 returned 21
+call    1 returned 21
+       24:  191-block  1
+call    2 returned 24
+        8:  191-block  2
+call    3 returned 8
+       29:  191-block  3
+call    4 returned 29
+branch  5 taken 24
+branch  6 taken 5 (fallthrough)
+       24:  192:        if (item == name) return true;
+call    0 returned 24
+branch  1 taken 16 (fallthrough)
+branch  2 taken 8
+       16:  192-block  0
+       16:  192-block  1
+        -:  193:    }
+        5:  194:    return false;
+        5:  194-block  0
+        -:  195:}
+        -:  196:
+function _ZNK9Character14getOpenEnemiesB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:  197:const std::vector<std::string> &Character::getOpenEnemies() const {
+    #####:  198:    return openEnemies;
+    %%%%%:  198-block  0
+        -:  199:}
+        -:  200:
+function _ZN9Character14getOpenEnemiesB5cxx11Ev called 12 returned 100% blocks executed 100%
+       12:  201:std::vector<std::string> &Character::getOpenEnemies() {
+       12:  202:    return openEnemies;
+       12:  202-block  0
+        -:  203:}
+        -:  204:
+        -:  205:
+function _ZN9Character11doSomethingEPiR4Game called 6 returned 100% blocks executed 13%
+        6:  206:int Character::doSomething(int options[], Game &game) {
+        6:  207:    if (options == nullptr) return -1;
+        6:  207-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 1
+        5:  207-block  1
+        1:  208:    switch (options[0]) {
+        1:  208-block  0
+branch  0 taken 1
+branch  1 taken 0
+branch  2 taken 0
+branch  3 taken 0
+branch  4 taken 0
+branch  5 taken 0
+branch  6 taken 0
+branch  7 taken 0
+branch  8 taken 0
+branch  9 taken 0
+branch 10 taken 0
+branch 11 taken 0
+branch 12 taken 0
+        1:  209:        case 1:
+        1:  210:            move(Move::right, game.getAllMap()[getLvlPoint()]);
+        1:  210-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+        1:  211:            break;
+    #####:  212:        case 2:
+    #####:  213:            move(Move::left, game.getAllMap()[getLvlPoint()]);
+    %%%%%:  213-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  214:            break;
+    #####:  215:        case 3:
+    #####:  216:            move(Move::up, game.getAllMap()[getLvlPoint()]);
+    %%%%%:  216-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  217:            break;
+    #####:  218:        case 4:
+    #####:  219:            move(Move::down, game.getAllMap()[getLvlPoint()]);
+    %%%%%:  219-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  220:            break;
+    #####:  221:        case 5:
+        -:  222:            try {
+    #####:  223:                open(game.getAllMap()[getLvlPoint()].getMapLevel());
+    %%%%%:  223-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    #####:  224:                break;
+    %%%%%:  224-block  0
+    =====:  225:            } catch (...) {
+    $$$$$:  225-block  0
+    $$$$$:  225-block  1
+call    0 never executed
+    =====:  226:                break;
+    =====:  227:            }
+    $$$$$:  227-block  0
+call    0 never executed
+    #####:  228:        case 6:
+        -:  229:            try {
+    #####:  230:                close(game.getAllMap()[getLvlPoint()].getMapLevel());
+    %%%%%:  230-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    #####:  231:                break;
+    %%%%%:  231-block  0
+    =====:  232:            } catch (...) {
+    $$$$$:  232-block  0
+    $$$$$:  232-block  1
+call    0 never executed
+    =====:  233:                break;
+    =====:  234:            }
+    $$$$$:  234-block  0
+call    0 never executed
+    #####:  235:        case 7:
+    #####:  236:            takeEssense(game.getAllMap()[getLvlPoint()]);
+    %%%%%:  236-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  237:            break;
+    #####:  238:        case 8:
+    #####:  239:            if (uptoNewDungeon(game.getAllMap()[getLvlPoint()].getMapLevel()))
+    %%%%%:  239-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    #####:  240:                game.setCurLvl(game.getCurLvl() + 1);
+    %%%%%:  240-block  0
+call    0 never executed
+call    1 never executed
+    #####:  241:            break;
+    %%%%%:  241-block  0
+    #####:  242:        case 9:
+    #####:  243:            if (game.getCurLvl() == 0) break;
+    %%%%%:  243-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  243-block  1
+    #####:  244:            if (uptoNewDungeon(game.getAllMap()[getLvlPoint()].getMapLevel()))
+    %%%%%:  244-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    #####:  245:                game.setCurLvl(game.getCurLvl() - 1);
+    %%%%%:  245-block  0
+call    0 never executed
+call    1 never executed
+    #####:  246:            break;
+    %%%%%:  246-block  0
+    #####:  247:        case 10: {
+    #####:  248:            int forMorphism[] = {options[2]};
+    #####:  249:            useSkill(Game::allSkills[options[1]], game.getAllMap()[getLvlPoint()], forMorphism);
+    %%%%%:  249-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    #####:  250:            break;
+    %%%%%:  250-block  0
+        -:  251:        }
+    #####:  252:        case 11:
+    #####:  253:            upgradeSkill(Game::allSkills[options[1]]);
+    %%%%%:  253-block  0
+call    0 never executed
+call    1 never executed
+    #####:  254:            break;
+    #####:  255:        case 12:
+    #####:  256:            attackSomeone(game.getAllMap()[getLvlPoint()]);
+    %%%%%:  256-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  257:            break;
+        -:  258:    }
+        1:  259:    return 0;
+        1:  259-block  0
+        -:  260:}
+        -:  261:
+function _ZN9Character14uptoNewDungeonER6MatrixI4CeilE called 0 returned 0% blocks executed 0%
+    #####:  262:bool Character::uptoNewDungeon(Matrix<Ceil> &matrix) {
+    #####:  263:    if (matrix[coords.second][coords.first] == Ceil::ladder) return true;
+    %%%%%:  263-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  263-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  263-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    %%%%%:  263-block  3
+    #####:  264:    return false;
+    %%%%%:  264-block  0
+        -:  265:}
+        -:  266:
+        -:  267:
+function _ZN9Character13attackSomeoneER7Dungeon called 6 returned 100% blocks executed 100%
+        6:  268:int Character::attackSomeone(Dungeon &dungeon) {
+        6:  269:    Enemy *enemy = nullptr;
+        6:  270:    auto item = dungeon.getListEnemies().begin();
+        6:  270-block  0
+call    0 returned 6
+call    1 returned 6
+       13:  271:    for (item = dungeon.getListEnemies().begin(); item != dungeon.getListEnemies().end(); ++item) {
+call    0 returned 6
+call    1 returned 6
+        7:  271-block  0
+call    2 returned 7
+       13:  271-block  1
+call    3 returned 13
+call    4 returned 13
+call    5 returned 13
+branch  6 taken 7
+branch  7 taken 6 (fallthrough)
+        7:  272:        if (check(item->first->getCoords().second,
+call    0 returned 7
+call    1 returned 7
+       14:  273:                  item->first->getCoords().first) &&
+        7:  273-block  0
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+branch  3 taken 4 (fallthrough)
+branch  4 taken 3
+       14:  274:            item->first->getStatus() != Status::dead && checkNear(item->first->getCoords())) {
+branch  0 taken 7 (fallthrough)
+branch  1 taken 0
+        7:  274-block  0
+call    2 returned 7
+call    3 returned 7
+        4:  274-block  1
+call    4 returned 4
+call    5 returned 4
+call    6 returned 4
+branch  7 taken 3 (fallthrough)
+branch  8 taken 1
+        3:  274-block  2
+        4:  274-block  3
+        7:  274-block  4
+branch  9 taken 3 (fallthrough)
+branch 10 taken 4
+        3:  275:            enemy = item->first;
+        3:  275-block  0
+call    0 returned 3
+        -:  276:        }
+        -:  277:    }
+        6:  278:    if (enemy == nullptr) {
+        6:  278-block  0
+branch  0 taken 3 (fallthrough)
+branch  1 taken 3
+        3:  279:        return -1;
+        3:  279-block  0
+        -:  280:    }
+        3:  281:    attack(*enemy);
+        3:  281-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  282:    return 0;
+        3:  282-block  0
+        -:  283:}
+        -:  284:
+        -:  285:
+        -:  286:
+        -:  287:
+        -:  288:
+        -:  289:

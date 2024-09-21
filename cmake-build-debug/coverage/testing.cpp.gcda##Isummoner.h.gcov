@@ -1,0 +1,398 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Enemy/Summoner/Isummoner.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 24.10.2023.
+        -:    3://
+        -:    4:#include <iostream>
+        -:    5:#include <utility>
+        -:    6:#include <vector>
+        -:    7:
+        -:    8:#ifndef GAMELAB3_ISUMMONER_H
+        -:    9:#define GAMELAB3_ISUMMONER_H
+        -:   10:
+        -:   11:#include "../Enemy.h"
+        -:   12:#include "../Undead/Undead.h"
+        -:   13:#include "../LivingEnemy/LivingEnemy.h"
+        -:   14:#include "../../../Dungeon/Dungeon.h"
+        -:   15:
+        -:   16:///Класс от которого наследуются саммонеры
+        -:   17:class Isummoner {
+        -:   18:private:
+        -:   19:    int curHp;///< Его прошлое здоровье
+        -:   20:    bool flag = false; ///< Если true, то может призвать
+        -:   21:    /// Проверяет есть ли рядом стена или нет
+        -:   22:    /// \param matrix - карта
+        -:   23:    /// \param coords - координаты, где саммонер стоит
+        -:   24:    /// \return true если есть стены или дверь
+function _ZN9Isummoner9checkNearER6MatrixI4CeilESt4pairIiiE called 0 returned 0% blocks executed 0%
+    #####:   25:    bool checkNear(Matrix<Ceil> &matrix, std::pair<int, int> coords) {
+    #####:   26:        bool flag0 = false;
+    #####:   27:        int dx[6] = {1, 0, -1, 0, 1, 0};   // смещения, соответствующие соседям ячейки
+    #####:   28:        int dy[6] = {0, 1, 0, -1, 1, 0};
+        -:   29:        int x, y;
+    #####:   30:        for (int i = 0; i < 6; i++) {
+    %%%%%:   30-block  0
+    %%%%%:   30-block  1
+    %%%%%:   30-block  2
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:   31:            if (flag0) { break; }
+    %%%%%:   31-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   31-block  1
+    #####:   32:            x = coords.second + dx[i];
+    #####:   33:            y = coords.first + dy[i];
+    #####:   34:            if (matrix[y][x] == Ceil::closeDoor || matrix[y][x] == Ceil::wall) flag0 = true;
+    %%%%%:   34-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   34-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   34-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    %%%%%:   34-block  3
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:   34-block  4
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   34-block  5
+branch 14 never executed (fallthrough)
+branch 15 never executed
+    %%%%%:   34-block  6
+    %%%%%:   34-block  7
+    %%%%%:   34-block  8
+branch 16 never executed (fallthrough)
+branch 17 never executed
+    %%%%%:   34-block  9
+    $$$$$:   34-block 10
+    $$$$$:   34-block 11
+        -:   35:        }
+    #####:   36:        return flag0;
+    %%%%%:   36-block  0
+    %%%%%:   36-block  1
+        -:   37:    }
+        -:   38:
+        -:   39:
+        -:   40:public:
+        -:   41:    /// Конструктор
+        -:   42:    /// \param curHp сюда подается максимальное здоровье саммонера
+function _ZN9IsummonerC2Ei called 11 returned 100% blocks executed 100%
+       11:   43:    explicit Isummoner(int curHp) : curHp(curHp) {};
+        -:   44:
+        -:   45:    /// Проверка на получение дамага
+        -:   46:    /// \param newCurHp - если новое хп меньше старого, то он призывает
+function _ZN9Isummoner9checkFlagEi called 21 returned 100% blocks executed 100%
+       21:   47:    bool checkFlag(int newCurHp) {
+       21:   48:        if (curHp > newCurHp) {
+       21:   48-block  0
+branch  0 taken 10 (fallthrough)
+branch  1 taken 11
+       10:   49:            curHp = newCurHp;
+       10:   50:            return true;
+       10:   50-block  0
+        -:   51:        }
+       11:   52:        return false;
+       11:   52-block  0
+        -:   53:    }
+        -:   54:
+        -:   55:    ///  Метода, который добавляет врагов на карту
+        -:   56:    /// \param dungeon - уровень
+        -:   57:    /// \param coords - координаты
+        -:   58:    /// \param ratio - коэф усиления юнитов
+function _ZN9Isummoner15generateSummonsER7DungeonSt4pairIiiEi called 10 returned 100% blocks executed 58%
+       10:   59:    virtual void generateSummons(Dungeon &dungeon, std::pair<int, int> coords, int ratio) {
+       10:   60:        if (ratio < 1) {
+       10:   60-block  0
+branch  0 taken 6 (fallthrough)
+branch  1 taken 4
+        6:   61:            ratio = 1;
+        6:   61-block  0
+        -:   62:        }
+        -:   63:
+       20:   64:        dungeon.getListEnemies().push_back(
+       10:   64-block  0
+call    0 returned 10
+call    1 returned 10
+branch  2 taken 10 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   64-block  1
+call    4 never executed
+    #####:   65:                {new Golem(10, {10 * ratio, 15 * ratio}, {coords.second - 1, coords.first}, 50 * ratio,
+    $$$$$:   65-block  0
+    $$$$$:   65-block  1
+    $$$$$:   65-block  2
+    $$$$$:   65-block  3
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    $$$$$:   65-block  4
+       10:   66:                           25, Ceil::essence), &(dungeon.getMapLevel()[coords.first - 1][coords.second])});
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:   66-block  0
+call    3 returned 10
+call    4 returned 10
+call    5 returned 10
+branch  6 taken 10 (fallthrough)
+branch  7 taken 0 (throw)
+       10:   66-block  1
+call    8 returned 10
+call    9 returned 10
+branch 10 taken 10 (fallthrough)
+branch 11 taken 0 (throw)
+       10:   66-block  2
+call   12 returned 10
+branch 13 taken 10 (fallthrough)
+branch 14 taken 0 (throw)
+       10:   66-block  3
+call   15 returned 10
+    $$$$$:   66-block  4
+    $$$$$:   66-block  5
+    $$$$$:   66-block  6
+    $$$$$:   66-block  7
+    $$$$$:   66-block  8
+call   16 never executed
+       10:   67:        (--dungeon.getListEnemies().end())->first->setHeap(true);
+       10:   67-block  0
+call    0 returned 10
+call    1 returned 10
+call    2 returned 10
+call    3 returned 10
+call    4 returned 10
+        -:   68:
+       20:   69:        dungeon.getListEnemies().push_back(
+call    0 returned 10
+call    1 returned 10
+branch  2 taken 10 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   69-block  0
+call    4 never executed
+    #####:   70:                {new Undead(10, {3 * ratio, 5 * ratio}, {coords.second + 1, coords.first},
+    $$$$$:   70-block  0
+    $$$$$:   70-block  1
+    $$$$$:   70-block  2
+    $$$$$:   70-block  3
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    $$$$$:   70-block  4
+       10:   71:                            20 * ratio, 20 * ratio), &(dungeon.getMapLevel()[coords.first + 1][coords.second])});
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:   71-block  0
+call    3 returned 10
+call    4 returned 10
+call    5 returned 10
+branch  6 taken 10 (fallthrough)
+branch  7 taken 0 (throw)
+       10:   71-block  1
+call    8 returned 10
+call    9 returned 10
+branch 10 taken 10 (fallthrough)
+branch 11 taken 0 (throw)
+       10:   71-block  2
+call   12 returned 10
+branch 13 taken 10 (fallthrough)
+branch 14 taken 0 (throw)
+       10:   71-block  3
+call   15 returned 10
+    $$$$$:   71-block  4
+    $$$$$:   71-block  5
+    $$$$$:   71-block  6
+    $$$$$:   71-block  7
+    $$$$$:   71-block  8
+call   16 never executed
+       10:   72:        (--dungeon.getListEnemies().end())->first->setHeap(true);
+       10:   72-block  0
+call    0 returned 10
+call    1 returned 10
+call    2 returned 10
+call    3 returned 10
+call    4 returned 10
+        -:   73:
+       20:   74:        dungeon.getListEnemies().push_back(
+call    0 returned 10
+call    1 returned 10
+branch  2 taken 10 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   74-block  0
+call    4 never executed
+    #####:   75:                {new Undead(10, {3 * ratio, 5 * ratio}, {coords.second, coords.first + 1},
+    $$$$$:   75-block  0
+    $$$$$:   75-block  1
+    $$$$$:   75-block  2
+    $$$$$:   75-block  3
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    $$$$$:   75-block  4
+       10:   76:                            20 * ratio, 20 * ratio), &(dungeon.getMapLevel()[coords.first][coords.second + 1])});
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:   76-block  0
+call    3 returned 10
+call    4 returned 10
+call    5 returned 10
+branch  6 taken 10 (fallthrough)
+branch  7 taken 0 (throw)
+       10:   76-block  1
+call    8 returned 10
+call    9 returned 10
+branch 10 taken 10 (fallthrough)
+branch 11 taken 0 (throw)
+       10:   76-block  2
+call   12 returned 10
+branch 13 taken 10 (fallthrough)
+branch 14 taken 0 (throw)
+       10:   76-block  3
+call   15 returned 10
+    $$$$$:   76-block  4
+    $$$$$:   76-block  5
+    $$$$$:   76-block  6
+    $$$$$:   76-block  7
+    $$$$$:   76-block  8
+call   16 never executed
+       10:   77:        (--dungeon.getListEnemies().end())->first->setHeap(true);
+       10:   77-block  0
+call    0 returned 10
+call    1 returned 10
+call    2 returned 10
+call    3 returned 10
+call    4 returned 10
+        -:   78:
+       20:   79:        dungeon.getListEnemies().push_back(
+call    0 returned 10
+call    1 returned 10
+branch  2 taken 10 (fallthrough)
+branch  3 taken 0 (throw)
+    #####:   80:                {new Undead(10, {3 * ratio, 5 * ratio}, {coords.second, coords.first - 1},
+    $$$$$:   80-block  0
+    $$$$$:   80-block  1
+    $$$$$:   80-block  2
+    $$$$$:   80-block  3
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    $$$$$:   80-block  4
+       10:   81:                            20 * ratio, 20 * ratio), &(dungeon.getMapLevel()[coords.first][coords.second - 1])});
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:   81-block  0
+call    3 returned 10
+call    4 returned 10
+call    5 returned 10
+branch  6 taken 10 (fallthrough)
+branch  7 taken 0 (throw)
+       10:   81-block  1
+call    8 returned 10
+call    9 returned 10
+branch 10 taken 10 (fallthrough)
+branch 11 taken 0 (throw)
+       10:   81-block  2
+call   12 returned 10
+branch 13 taken 10 (fallthrough)
+branch 14 taken 0 (throw)
+       10:   81-block  3
+call   15 returned 10
+    $$$$$:   81-block  4
+    $$$$$:   81-block  5
+    $$$$$:   81-block  6
+    $$$$$:   81-block  7
+    $$$$$:   81-block  8
+call   16 never executed
+       10:   82:        (--dungeon.getListEnemies().end())->first->setHeap(true);
+       10:   82-block  0
+call    0 returned 10
+call    1 returned 10
+call    2 returned 10
+call    3 returned 10
+call    4 returned 10
+       10:   83:    };
+        -:   84:
+        -:   85:    /// \param dungeon - Уровень
+        -:   86:    /// \param coords - Координаты призывателя
+        -:   87:    /// \param ratio - коэф усиления
+        -:   88:    /// \param newCurHp - новое текущее хп
+function _ZN9Isummoner6summonER7DungeonSt4pairIiiEii called 21 returned 48% blocks executed 64%
+       21:   89:    virtual void summon(Dungeon &dungeon, std::pair<int, int> coords, int ratio, int newCurHp) {
+       21:   90:        if (!checkFlag(newCurHp)) {
+       21:   90-block  0
+call    0 returned 21
+branch  1 taken 11 (fallthrough)
+branch  2 taken 10
+       11:   91:            throw std::invalid_argument("Cannot summon");
+       11:   91-block  0
+call    0 returned 11
+call    1 returned 11
+branch  2 taken 11 (fallthrough)
+branch  3 taken 0 (throw)
+       11:   91-block  1
+call    4 returned 0
+    $$$$$:   91-block  2
+call    5 never executed
+        -:   92:        }
+       20:   93:        if ((coords.first + 1 > dungeon.getMapLevel().rows() || coords.second + 1 > dungeon.getMapLevel().cols() ||
+       10:   93-block  0
+call    0 returned 10
+call    1 returned 10
+       10:   93-block  1
+call    2 returned 10
+call    3 returned 10
+branch  4 taken 10 (fallthrough)
+branch  5 taken 0
+      20*:   94:             coords.second - 1 < 0 || coords.first - 1 < 0) && checkNear(dungeon.getMapLevel(), coords))
+branch  0 taken 10 (fallthrough)
+branch  1 taken 0
+       10:   94-block  0
+branch  2 taken 10 (fallthrough)
+branch  3 taken 0
+       10:   94-block  1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 10
+    %%%%%:   94-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed
+    %%%%%:   94-block  3
+       10:   94-block  4
+       10:   94-block  5
+branch 10 taken 0 (fallthrough)
+branch 11 taken 10
+    #####:   95:            throw std::invalid_argument("Bad coords");
+    %%%%%:   95-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   95-block  1
+call    4 never executed
+    $$$$$:   95-block  2
+call    5 never executed
+       10:   96:        generateSummons(dungeon, coords, ratio);
+       10:   96-block  0
+call    0 returned 10
+        -:   97:
+       10:   98:    }
+        -:   99:
+        -:  100:    /// Setter
+        -:  101:    /// \param flag0 Установить флаг, для призыва
+        -:  102:    void setFlag(bool flag0) {
+        -:  103:        flag = flag0;
+        -:  104:        return;
+        -:  105:    }
+        -:  106:
+        -:  107:};
+        -:  108:
+        -:  109:
+        -:  110:#endif //GAMELAB3_ISUMMONER_H

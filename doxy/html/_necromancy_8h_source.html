@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Нектромант: Исходный файл Unit/Character/Skills/Necromancy/Necromancy.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Нектромант<span id="projectnumber">&#160;1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_96c43f8ef3c57cc95f6088bfd3e2c715.html">Unit</a></li><li class="navelem"><a class="el" href="dir_6565f9c7c0af3b253dd29b78552a744a.html">Character</a></li><li class="navelem"><a class="el" href="dir_2a6c74b218ab9acd4a5411f7c3cac41a.html">Skills</a></li><li class="navelem"><a class="el" href="dir_b8a0478b9bbd43adf2d00d2f234742cf.html">Necromancy</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Necromancy.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by sakhd on 18.11.2023.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef GAMELAB3_NECROMANCY_H</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define GAMELAB3_NECROMANCY_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../Skills.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../../../../Dungeon/Dungeon.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;../../../Enemy/LivingEnemy/LivingEnemy.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../../../Enemy/Summoner/LivingSummoner.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_necromancy.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_necromancy.html">Necromancy</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_skill.html">Skill</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">bool</span> checkNear(std::pair&lt;int, int&gt; coords, std::pair&lt;int, int&gt; anotherCoords) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">bool</span> flag = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">int</span> dx[9] = {1, 0, -1, 0, 1, 0, 1, -1, -1};   <span class="comment">// смещения, соответствующие соседям ячейки</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">int</span> dy[9] = {0, 1, 0, -1, 1, 0, -1, -1, 1};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 9; i++) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">if</span> (flag) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordtype">int</span> x = coords.second + dx[i];</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keywordtype">int</span> y = coords.first + dy[i];</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">if</span> (x == anotherCoords.second &amp;&amp; y == anotherCoords.first) flag = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_necromancy.html#ad079b96144dd04a0f66894f1868f01e8">   35</a></span>    <a class="code hl_function" href="class_necromancy.html#ad079b96144dd04a0f66894f1868f01e8">Necromancy</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="class_skill.html#a8ce91c1120a6e8cef5ee1aa2e785380d">manaCost</a>) : <a class="code hl_class" href="class_skill.html">Skill</a>(<a class="code hl_variable" href="class_skill.html#a8ce91c1120a6e8cef5ee1aa2e785380d">manaCost</a>) {};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_necromancy.html#a2acd59eddf7180a844882d55c3cfb397">   42</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_necromancy.html#a2acd59eddf7180a844882d55c3cfb397">useSkill</a>(<a class="code hl_class" href="class_dungeon.html">Dungeon</a> &amp;dungeon, <span class="keywordtype">int</span> mas[])<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_skill.html#a3289631b5603b660314d5d449596b252">skillLvl</a> == 0) <span class="keywordflow">return</span> -3;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getCountSummons(dungeon) == dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getLvl()) <span class="keywordflow">return</span> -2;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> (dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getCharacteristics().getCurMana() &lt; <a class="code hl_variable" href="class_skill.html#a8ce91c1120a6e8cef5ee1aa2e785380d">manaCost</a> * <a class="code hl_variable" href="class_skill.html#a3289631b5603b660314d5d449596b252">skillLvl</a>) <span class="keywordflow">return</span> -2;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">auto</span> item = dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().begin();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="class_enemy.html">Enemy</a> *enemy = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">for</span> (item = dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().begin(); item != dungeon.<a class="code hl_function" href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">getListEnemies</a>().end(); item++) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">if</span> (item-&gt;first-&gt;getStatus() == Status::dead &amp;&amp; item-&gt;first-&gt;getFaction() == Faction::livingEnemy &amp;&amp;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                checkNear({dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getCoords().first, dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getCoords().second},</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                          {item-&gt;first-&gt;getCoords().first, item-&gt;first-&gt;getCoords().second}) &amp;&amp;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;isOpenEnemy(item-&gt;first-&gt;getName())) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                enemy = item-&gt;first;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (enemy == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        (<span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_living_enemy.html">LivingEnemy</a> *<span class="keyword">&gt;</span> (enemy))-&gt;becomeUndead(dungeon);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        dungeon.<a class="code hl_function" href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">getHero</a>().first-&gt;getCharacteristics().mana(<a class="code hl_variable" href="class_skill.html#a8ce91c1120a6e8cef5ee1aa2e785380d">manaCost</a> * <a class="code hl_variable" href="class_skill.html#a3289631b5603b660314d5d449596b252">skillLvl</a> / 2);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif </span><span class="comment">//GAMELAB3_NECROMANCY_H</span></div>
+<div class="ttc" id="aclass_dungeon_html"><div class="ttname"><a href="class_dungeon.html">Dungeon</a></div><div class="ttdoc">Класс, который описывает поведение уровня игры(подземелья)</div><div class="ttdef"><b>Definition</b> Dungeon.h:22</div></div>
+<div class="ttc" id="aclass_dungeon_html_aaba33be6e4ed7fb8bb27b1d7b3afa5f4"><div class="ttname"><a href="class_dungeon.html#aaba33be6e4ed7fb8bb27b1d7b3afa5f4">Dungeon::getHero</a></div><div class="ttdeci">std::pair&lt; Character *, Ceil * &gt; &amp; getHero()</div><div class="ttdef"><b>Definition</b> Dungeon.h:90</div></div>
+<div class="ttc" id="aclass_dungeon_html_aec925af840ea11f8ab97ac8487f0b236"><div class="ttname"><a href="class_dungeon.html#aec925af840ea11f8ab97ac8487f0b236">Dungeon::getListEnemies</a></div><div class="ttdeci">std::list&lt; std::pair&lt; Enemy *, Ceil * &gt; &gt; &amp; getListEnemies()</div><div class="ttdef"><b>Definition</b> Dungeon.h:65</div></div>
+<div class="ttc" id="aclass_enemy_html"><div class="ttname"><a href="class_enemy.html">Enemy</a></div><div class="ttdoc">Расширяемый класс - враг</div><div class="ttdef"><b>Definition</b> Enemy.h:32</div></div>
+<div class="ttc" id="aclass_living_enemy_html"><div class="ttname"><a href="class_living_enemy.html">LivingEnemy</a></div><div class="ttdef"><b>Definition</b> LivingEnemy.h:17</div></div>
+<div class="ttc" id="aclass_necromancy_html"><div class="ttname"><a href="class_necromancy.html">Necromancy</a></div><div class="ttdef"><b>Definition</b> Necromancy.h:16</div></div>
+<div class="ttc" id="aclass_necromancy_html_a2acd59eddf7180a844882d55c3cfb397"><div class="ttname"><a href="class_necromancy.html#a2acd59eddf7180a844882d55c3cfb397">Necromancy::useSkill</a></div><div class="ttdeci">int useSkill(Dungeon &amp;dungeon, int mas[]) override</div><div class="ttdef"><b>Definition</b> Necromancy.h:42</div></div>
+<div class="ttc" id="aclass_necromancy_html_ad079b96144dd04a0f66894f1868f01e8"><div class="ttname"><a href="class_necromancy.html#ad079b96144dd04a0f66894f1868f01e8">Necromancy::Necromancy</a></div><div class="ttdeci">Necromancy(int manaCost)</div><div class="ttdef"><b>Definition</b> Necromancy.h:35</div></div>
+<div class="ttc" id="aclass_skill_html"><div class="ttname"><a href="class_skill.html">Skill</a></div><div class="ttdoc">Абстрактный класс от которого наследуются все скиллы</div><div class="ttdef"><b>Definition</b> Skills.h:12</div></div>
+<div class="ttc" id="aclass_skill_html_a3289631b5603b660314d5d449596b252"><div class="ttname"><a href="class_skill.html#a3289631b5603b660314d5d449596b252">Skill::skillLvl</a></div><div class="ttdeci">int skillLvl</div><div class="ttdoc">Уровень скилла</div><div class="ttdef"><b>Definition</b> Skills.h:14</div></div>
+<div class="ttc" id="aclass_skill_html_a8ce91c1120a6e8cef5ee1aa2e785380d"><div class="ttname"><a href="class_skill.html#a8ce91c1120a6e8cef5ee1aa2e785380d">Skill::manaCost</a></div><div class="ttdeci">int manaCost</div><div class="ttdoc">Мана кост скилла</div><div class="ttdef"><b>Definition</b> Skills.h:15</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

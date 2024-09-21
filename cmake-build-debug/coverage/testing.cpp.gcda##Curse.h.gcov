@@ -1,0 +1,194 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/Skills/Curse/Curse.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 18.11.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_CURSE_H
+        -:    6:#define GAMELAB3_CURSE_H
+        -:    7:
+        -:    8:#include "../Skills.h"
+        -:    9:#include "../../../../Dungeon/Dungeon.h"
+        -:   10:
+        -:   11:///Проклятие предназначено для нанесения дистанционного магического урона
+        -:   12:///по врагам, размер которого зависит от изученности навыка.
+        -:   13:class Curse : public Skill {
+        -:   14:private:
+        -:   15:    int skillRange = 6;///< Дальность скилла
+        -:   16:    /// Метод который определяет - координаты подходят под условие куда смотрит герой или нет
+        -:   17:    /// \param side - сторона куда смотрит персонаж
+        -:   18:    /// \param ax - его x
+        -:   19:    /// \param ay - его y
+        -:   20:    /// \param bx - чужой x
+        -:   21:    /// \param by - чужой y
+        -:   22:    /// \return true - ok, false - not ok
+function _ZN5Curse5checkE4Moveiiii called 6 returned 100% blocks executed 57%
+        6:   23:    bool check(Move side, int ax, int ay, int bx, int by) {
+        6:   24:        if (side == Move::right) {
+        6:   24-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 4
+        2:   25:            if (ax <= bx) return true;
+        2:   25-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   25-block  1
+        4:   26:        } else if (side == Move::left) {
+        4:   26-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   27:            if (ax >= bx) return true;
+    %%%%%:   27-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   27-block  1
+        4:   28:        } else if (side == Move::up) {
+        4:   28-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+       4*:   29:            if (ay >= by) return true;
+        4:   29-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    %%%%%:   29-block  1
+    #####:   30:        } else if (side == Move::down) { if (ay <= by) return true; }
+    %%%%%:   30-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   30-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:   30-block  2
+        4:   31:        return false;
+        4:   31-block  0
+        -:   32:    }
+        -:   33:
+        -:   34:public:
+        -:   35:    /// Конструктор
+        -:   36:    /// \param manaCost
+function _ZN5CurseC1Ei called 2 returned 100% blocks executed 100%
+        2:   37:    explicit Curse(int manaCost) : Skill(manaCost) {};
+        2:   37-block  0
+call    0 returned 2
+        -:   38:
+        -:   39:    /// Использовать скилл
+        -:   40:    /// \param dungeon - уровень
+        -:   41:    /// \param mas - опции
+        -:   42:    /// \return 0 успех
+function _ZN5Curse8useSkillER7DungeonPi called 2 returned 100% blocks executed 95%
+        2:   43:    int useSkill(Dungeon &dungeon, int mas[]) override {
+       2*:   44:        if (skillLvl == 0) return -1;
+        2:   44-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    %%%%%:   44-block  1
+       2*:   45:        if (dungeon.getHero().first->getCharacteristics().getCurMana() < manaCost * skillLvl) return -2;
+        2:   45-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+branch  3 taken 0 (fallthrough)
+branch  4 taken 2
+    %%%%%:   45-block  1
+        2:   46:        Move side = dungeon.getHero().first->getSideLooking();
+        2:   46-block  0
+call    0 returned 2
+call    1 returned 2
+        2:   47:        int y = dungeon.getHero().first->getCoords().first;
+call    0 returned 2
+call    1 returned 2
+        2:   48:        int x = dungeon.getHero().first->getCoords().second;
+call    0 returned 2
+call    1 returned 2
+        2:   49:        Enemy *enemy = nullptr;
+        2:   50:        int h = 1000000000;
+        2:   51:        auto item = dungeon.getListEnemies().begin();
+call    0 returned 2
+call    1 returned 2
+       10:   52:        for (item = dungeon.getListEnemies().begin(); item != dungeon.getListEnemies().end(); ++item) {
+call    0 returned 2
+call    1 returned 2
+        8:   52-block  0
+call    2 returned 8
+       10:   52-block  1
+call    3 returned 10
+call    4 returned 10
+call    5 returned 10
+branch  6 taken 8
+branch  7 taken 2 (fallthrough)
+       14:   53:            if (abs(item->first->getCoords().second - x) + abs(item->first->getCoords().first - y) < h &&
+        8:   53-block  0
+call    0 returned 8
+call    1 returned 8
+call    2 returned 8
+call    3 returned 8
+branch  4 taken 2 (fallthrough)
+branch  5 taken 4
+       14:   54:                check(side, x, y, item->first->getCoords().second, item->first->getCoords().first) &&
+branch  0 taken 6 (fallthrough)
+branch  1 taken 2
+        6:   54-block  0
+call    2 returned 6
+call    3 returned 6
+call    4 returned 6
+call    5 returned 6
+call    6 returned 6
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0
+        2:   54-block  1
+        6:   54-block  2
+        8:   54-block  3
+branch  9 taken 2 (fallthrough)
+branch 10 taken 6
+        2:   55:                item->first->getStatus() != Status::dead) {
+        2:   55-block  0
+call    0 returned 2
+call    1 returned 2
+        2:   56:                h = abs(item->first->getCoords().second - x) + abs(item->first->getCoords().first - y);
+        2:   56-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+call    3 returned 2
+        2:   57:                enemy = item->first;
+call    0 returned 2
+        -:   58:            }
+        -:   59:        }
+        2:   60:        if (h > skillRange) return -3;
+        2:   60-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   60-block  1
+       1*:   61:        if (enemy == nullptr) return -4;
+        1:   61-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:   61-block  1
+        1:   62:        dungeon.getHero().first->getCharacteristics().mana(-1 * manaCost * skillLvl / 2);
+        1:   62-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        2:   63:        enemy->getDamage(
+        1:   64:                (rand() % (dungeon.getHero().first->Damage().second - dungeon.getHero().first->Damage().first + 1) +
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        1:   65:                 dungeon.getHero().first->Damage().first) * skillLvl);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   66:        return 0;
+        1:   66-block  0
+        -:   67:    }
+        -:   68:
+        -:   69:};
+        -:   70:
+        -:   71:
+        -:   72:#endif //GAMELAB3_CURSE_H

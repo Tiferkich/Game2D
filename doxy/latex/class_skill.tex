@@ -1,0 +1,113 @@
+\doxysection{Класс Skill}
+\hypertarget{class_skill}{}\label{class_skill}\index{Skill@{Skill}}
+
+
+Абстрактный класс от которого наследуются все скиллы  
+
+
+
+
+{\ttfamily \#include $<$Skills.\+h$>$}
+
+Граф наследования\+:Skill\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_skill}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_skill_a2330e244c4617e2de8dd1e5066b63050}{Skill}} (int \mbox{\hyperlink{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}{mana\+Cost}})
+\item 
+virtual int \mbox{\hyperlink{class_skill_a3f888cc18ce857314552614f7a35ec23}{use\+Skill}} (\mbox{\hyperlink{class_dungeon}{Dungeon}} \&dungeon, int mas\mbox{[}$\,$\mbox{]})=0
+\item 
+int \mbox{\hyperlink{class_skill_a58e438fc02ac75cb74035c9ea06397d2}{get\+Skill\+Lvl}} () const
+\item 
+\mbox{\hyperlink{class_skill}{Skill}} \& \mbox{\hyperlink{class_skill_a98f0365e8d5b57e25b2d9dac177706fa}{set\+Skill\+Lvl}} (int lvl)
+\item 
+int \mbox{\hyperlink{class_skill_a779f5bc61bf79a167c1c7f8b79af31c9}{upgrade\+Lvl}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Защищенные данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_skill_a3289631b5603b660314d5d449596b252}\label{class_skill_a3289631b5603b660314d5d449596b252} 
+int {\bfseries skill\+Lvl}
+\begin{DoxyCompactList}\small\item\em Уровень скилла \end{DoxyCompactList}\item 
+\Hypertarget{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d}\label{class_skill_a8ce91c1120a6e8cef5ee1aa2e785380d} 
+int {\bfseries mana\+Cost}
+\begin{DoxyCompactList}\small\item\em Мана кост скилла \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Абстрактный класс от которого наследуются все скиллы 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_skill_a2330e244c4617e2de8dd1e5066b63050}\label{class_skill_a2330e244c4617e2de8dd1e5066b63050} 
+\index{Skill@{Skill}!Skill@{Skill}}
+\index{Skill@{Skill}!Skill@{Skill}}
+\doxysubsubsection{\texorpdfstring{Skill()}{Skill()}}
+{\footnotesize\ttfamily Skill\+::\+Skill (\begin{DoxyParamCaption}\item[{int}]{mana\+Cost }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Конструктор 
+\begin{DoxyParams}{Аргументы}
+{\em mana\+Cost} & -\/ Мана кост скилла \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_skill_a58e438fc02ac75cb74035c9ea06397d2}\label{class_skill_a58e438fc02ac75cb74035c9ea06397d2} 
+\index{Skill@{Skill}!getSkillLvl@{getSkillLvl}}
+\index{getSkillLvl@{getSkillLvl}!Skill@{Skill}}
+\doxysubsubsection{\texorpdfstring{getSkillLvl()}{getSkillLvl()}}
+{\footnotesize\ttfamily int Skill\+::get\+Skill\+Lvl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter \begin{DoxyReturn}{Возвращает}
+-\/ Текущий уровень скилла 
+\end{DoxyReturn}
+\Hypertarget{class_skill_a98f0365e8d5b57e25b2d9dac177706fa}\label{class_skill_a98f0365e8d5b57e25b2d9dac177706fa} 
+\index{Skill@{Skill}!setSkillLvl@{setSkillLvl}}
+\index{setSkillLvl@{setSkillLvl}!Skill@{Skill}}
+\doxysubsubsection{\texorpdfstring{setSkillLvl()}{setSkillLvl()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_skill}{Skill}} \& Skill\+::set\+Skill\+Lvl (\begin{DoxyParamCaption}\item[{int}]{lvl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em lvl} & -\/ новый уровень скилла \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_skill_a779f5bc61bf79a167c1c7f8b79af31c9}\label{class_skill_a779f5bc61bf79a167c1c7f8b79af31c9} 
+\index{Skill@{Skill}!upgradeLvl@{upgradeLvl}}
+\index{upgradeLvl@{upgradeLvl}!Skill@{Skill}}
+\doxysubsubsection{\texorpdfstring{upgradeLvl()}{upgradeLvl()}}
+{\footnotesize\ttfamily int Skill\+::upgrade\+Lvl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Прокачать скилл \begin{DoxyReturn}{Возвращает}
+уровень скилла 
+\end{DoxyReturn}
+\Hypertarget{class_skill_a3f888cc18ce857314552614f7a35ec23}\label{class_skill_a3f888cc18ce857314552614f7a35ec23} 
+\index{Skill@{Skill}!useSkill@{useSkill}}
+\index{useSkill@{useSkill}!Skill@{Skill}}
+\doxysubsubsection{\texorpdfstring{useSkill()}{useSkill()}}
+{\footnotesize\ttfamily virtual int Skill\+::use\+Skill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon}{Dungeon}} \&}]{dungeon,  }\item[{int}]{mas\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Чисто виртуальный метод 
+\begin{DoxyParams}{Аргументы}
+{\em dungeon} & -\/ уровень \\
+\hline
+{\em mas} & -\/ массив опций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+0 -\/ успех 
+\end{DoxyReturn}
+
+
+Замещается в \mbox{\hyperlink{class_curse_abf66c74e0523d6270eb173231ea695fa}{Curse}}, \mbox{\hyperlink{class_desiccation_adf05461ebf4abc1bb7d7c61e5597ae6e}{Desiccation}}, \mbox{\hyperlink{class_morphism_a4e19f748bb9c5c593205c7aa071fa7fc}{Morphism}} и \mbox{\hyperlink{class_necromancy_a2acd59eddf7180a844882d55c3cfb397}{Necromancy}}.
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Unit/\+Character/\+Skills/Skills.\+h\end{DoxyCompactItemize}

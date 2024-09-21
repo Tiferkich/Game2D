@@ -1,0 +1,51 @@
+\doxysection{Game.\+h}
+\hypertarget{_game_8h_source}{}\label{_game_8h_source}\index{Game/Game.h@{Game/Game.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_GAME\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GAMELAB3\_GAME\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Unit/Character/Character.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../Unit/Enemy/LivingEnemy/LivingEnemy.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game}{Game}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{class_game_af5be431806a6d32d062c31730e2962bb}{allTypesEnemies}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{class_game_adbde412cffe73323e7df134979c375da}{allSkills}};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_character}{Character}}\ hero;\ }
+\DoxyCodeLine{00023\ \ \ \ \ std::vector<Dungeon>\ allMap;\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ curLvl\ =\ 0;\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ tableSkills;\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}}()\ :\ curLvl(0),\ tableSkills(\mbox{\hyperlink{class_table_skills}{TableSkills}}()),\ hero(\mbox{\hyperlink{class_character}{Character}}(10,\ \{10,\ 20\},\ \{5,\ 5\},\ \&tableSkills))\ \{\}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a099aca5812927233bc2551796985e098}{makeTick}}(\textcolor{keywordtype}{int}\ options[]\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a16f2fdd2fbb15ffcd9b6f266e0d10b65}{setAllMap}}(\textcolor{keyword}{const}\ std::vector<Dungeon>\ \&allMap);}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_character}{Character}}\ \&\mbox{\hyperlink{class_game_a1a5347f13455e11358a3a297beae7707}{getHero}}();}
+\DoxyCodeLine{00057\ \ \ \ \ std::vector<Dungeon>\ \&\mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{getAllMap}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{getCurLvl}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&\mbox{\hyperlink{class_game_a50db28e4afe82710ebe4d3b2d8d5e7f7}{getTableSkills}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a87324468811b6c7519a015e074e870ec}{setHero}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_character}{Character}}\ \&hero);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a14418510e46b17424f58036aa3a9bd9a}{setCurLvl}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ curLvl);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a5eb495329bc3d87ed73823b8747b93a3}{setTableSkills}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_table_skills}{TableSkills}}\ \&tableSkills);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_GAME\_H}}
+
+\end{DoxyCode}

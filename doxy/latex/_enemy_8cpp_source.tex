@@ -1,0 +1,247 @@
+\doxysection{Enemy.\+cpp}
+\hypertarget{_enemy_8cpp_source}{}\label{_enemy_8cpp_source}\index{Unit/Enemy/Enemy.cpp@{Unit/Enemy/Enemy.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 24.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Enemy.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../../Dungeon/Dungeon.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Character/Character.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{Enemy::attack}}(\mbox{\hyperlink{class_unit}{Unit}}\ \&someone)\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ ==\ Status::dead)\ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}Unit\ is\ dead"{}}));}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (someone.\mbox{\hyperlink{class_unit_a34b363b0e3f4bbfcfc650ffd9087de60}{getFaction}}()\ ==\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}})\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}The\ same\ unit"{}}));}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ dx[9]\ =\ \{1,\ 0,\ -\/1,\ 0,\ 1,\ 0,\ 1,\ -\/1,\ -\/1\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ dy[9]\ =\ \{0,\ 1,\ 0,\ -\/1,\ 1,\ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 6;\ i++)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i];}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i];}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ ==\ someone.\mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{getCoords}}().second\ \&\&\ y\ ==\ someone.\mbox{\hyperlink{class_unit_a197100c1fcc005df5127de899f5b8329}{getCoords}}().first)\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (!flag)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}Unit\ too\ far\ away"{}}));}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ srand(time(0));}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ damage0\ =\ rand()\ \%\ (\mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.second\ -\/\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first\ +\ 1)\ +\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}}.first;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00033\ \ \ \ \ someone.\mbox{\hyperlink{class_unit_ace4ab95f51ecc3b7638622795d0e56cb}{getDamage}}(damage0);}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a920ffcc567b4b8bddd6175a8d91171e4}{Enemy::getDamage}}(\textcolor{keywordtype}{int}\ damage)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}\ -\/=\ \mbox{\hyperlink{class_unit_af8f0976f38dcb1c7ba8592261ff2ded0}{damage}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}}\ <=\ 0)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_afad764b00a84735def86b410b4695a98}{die}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ std::vector<std::pair<int,\ int>>\ Enemy::Lee(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix,\ std::pair<int,\ int>\ coordTo)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (coordTo.first\ ==\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ \&\&\ coordTo.second\ ==\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}The\ same\ coords"{}}));}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ W\ =\ matrix.cols();\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ширина\ рабочего\ поля}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ H\ =\ matrix.rows();\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ высота\ рабочего\ поля}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ WALL\ =\ -\/1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ непроходимая\ ячейка}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ ax\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ ay\ =\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ bx\ =\ coordTo.second;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ by\ =\ coordTo.first;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{int}\ BLANK\ =\ -\/2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ свободная\ непомеченная\ ячейка}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ grid[matrix.rows()][matrix.cols()];}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ matrix.rows();\ j++)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ matrix.cols();\ i++)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matrix[i][j]\ ==\ Ceil::wall\ ||\ matrix[i][j]\ ==\ Ceil::closeDoor)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[i][j]\ =\ WALL;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[i][j]\ =\ BLANK;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ dx[4]\ =\ \{1,\ 0,\ -\/1,\ 0\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{int}\ dy[4]\ =\ \{0,\ 1,\ 0,\ -\/1\};\ \ \ \textcolor{comment}{//\ справа,\ снизу,\ слева\ и\ сверху}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ d,\ x,\ y,\ k;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ len;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{int}\ px[W\ *\ H],\ py[W\ *\ H];}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ stop;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (grid[ay][ax]\ ==\ WALL\ \&\&\ grid[by][bx]\ ==\ WALL)}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}No\ way"{}});\ \ \textcolor{comment}{//\ ячейка\ (ax,\ ay)\ или\ (bx,\ by)\ -\/\ стена}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ распространение\ волны}}
+\DoxyCodeLine{00076\ \ \ \ \ d\ =\ 0;}
+\DoxyCodeLine{00077\ \ \ \ \ grid[ay][ax]\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ стартовая\ ячейка\ помечена\ 0}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ stop\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ предполагаем,\ что\ все\ свободные\ клетки\ уже\ помечены}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 0;\ y\ <\ H;\ ++y)}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ 0;\ x\ <\ W;\ ++x)}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (grid[y][x]\ ==\ d)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ячейка\ (x,\ y)\ помечена\ числом\ d}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ 4;\ ++k)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ проходим\ по\ всем\ непомеченным\ соседям}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ iy\ =\ y\ +\ dy[k],\ ix\ =\ x\ +\ dx[k];}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (iy\ >=\ 0\ \&\&\ iy\ <\ H\ \&\&\ ix\ >=\ 0\ \&\&\ ix\ <\ W\ \&\&}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[iy][ix]\ ==\ BLANK)\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stop\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ найдены\ непомеченные\ клетки}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[iy][ix]\ =\ d\ +\ 1;\ \ \ \ \ \ \textcolor{comment}{//\ распространяем\ волну}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ d++;}
+\DoxyCodeLine{00095\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (!stop\ \&\&\ grid[by][bx]\ ==\ BLANK);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (grid[by][bx]\ ==\ BLANK)\ \textcolor{keywordflow}{throw}\ (std::runtime\_error(\textcolor{stringliteral}{"{}No\ way"{}}));\ \ \textcolor{comment}{//\ путь\ не\ найден}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ восстановление\ пути}}
+\DoxyCodeLine{00100\ \ \ \ \ len\ =\ grid[by][bx];\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ длина\ кратчайшего\ пути\ из\ (ax,\ ay)\ в\ (bx,\ by)}}
+\DoxyCodeLine{00101\ \ \ \ \ x\ =\ bx;}
+\DoxyCodeLine{00102\ \ \ \ \ y\ =\ by;}
+\DoxyCodeLine{00103\ \ \ \ \ d\ =\ len;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{while}\ (d\ >\ 0)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ px[d]\ =\ x;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ py[d]\ =\ y;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ записываем\ ячейку\ (x,\ y)\ в\ путь}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ d-\/-\/;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ 4;\ ++k)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ iy\ =\ y\ +\ dy[k],\ ix\ =\ x\ +\ dx[k];}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (iy\ >=\ 0\ \&\&\ iy\ <\ H\ \&\&\ ix\ >=\ 0\ \&\&\ ix\ <\ W\ \&\&}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[iy][ix]\ ==\ d)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ x\ +\ dx[k];}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ y\ +\ dy[k];\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ переходим\ в\ ячейку,\ которая\ на\ 1\ ближе\ к\ старту}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ px[0]\ =\ ax;}
+\DoxyCodeLine{00119\ \ \ \ \ py[0]\ =\ ay;}
+\DoxyCodeLine{00120\ \ \ \ \ std::vector<std::pair<int,\ int>>\ array;}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ len;\ i++)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ array.emplace\_back(px[i],\ py[i]);}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ array;}
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00128\ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{Enemy::move}}(\mbox{\hyperlink{class_matrix}{Matrix<Ceil>}}\ \&matrix,\ std::pair<int,\ int>\ coordTo,\ std::list<std::pair<Enemy\ *,\ Ceil\ *>>\ \&listEnemies)\ \{}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{if}\ (coordTo.first\ <\ 0\ ||\ coordTo.second\ <\ 0\ ||}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ coordTo.second\ >=\ matrix.cols()\ ||}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ coordTo.first\ >=\ matrix.rows())}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}invalid\ coords"{}});}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{if}\ ((coordTo.first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ *\ (coordTo.first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ +}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ (coordTo.second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ *\ (coordTo.second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ >\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}}\ *\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}}\ *\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}})\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Error\ distance"{}});}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \ \ \ \ std::vector<std::pair<int,\ int>>\ ways\ =\ Lee(matrix,\ \{coordTo.first,\ coordTo.second\});}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (ways.size()\ ==\ 1\ ||\ ways.empty())\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ =\ ways[1].first;}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ =\ ways[1].second;}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&item:\ listEnemies)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item.first\ ==\ \textcolor{keyword}{this})\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ item.second\ =\ \&matrix[\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second][\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first];}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \mbox{\hyperlink{class_unit}{Unit}}\ *\mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{Enemy::findTarget}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ std::pair<int,\ int>\ nearDist\ =\ \{INT32\_MAX\ /\ 10,\ INT32\_MAX\ /\ 10\};}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ *unit\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{auto}\ enemy\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{for}\ (enemy\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ enemy\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ ++enemy)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((enemy-\/>first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ *\ (enemy-\/>first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ +}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ (enemy-\/>first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ *\ (enemy-\/>first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ <}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ nearDist.first\ *\ nearDist.first\ +\ nearDist.second\ *\ nearDist.second\ \&\&}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>first-\/>status\ !=\ Status::dead\ \&\&\ enemy-\/>first-\/>faction\ !=\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}}\ \&\&}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ abs(enemy-\/>first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ +}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ abs(enemy-\/>first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ <=}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}})\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ nearDist.first\ =\ (enemy-\/>first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ nearDist.second\ =\ (enemy-\/>first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ unit\ =\ enemy-\/>first;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordflow}{if}\ ((dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ *}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ +}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ *}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ (dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ <}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ nearDist.first\ *\ nearDist.first\ +\ nearDist.second\ *\ nearDist.second\ \&\&}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getFaction()\ !=\ \mbox{\hyperlink{class_unit_a71d317028bd80d787cfbd76b8be3196d}{faction}}\ \&\&}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCharacteristics().getCurHp()\ >\ 0\ \&\&}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ abs(dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().second\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second)\ +}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ abs(dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first-\/>getCoords().first\ -\/\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first)\ <=\ \mbox{\hyperlink{class_enemy_a372566837cc83e7b0fa6f0837beb2d43}{vision}})\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ unit\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aaba33be6e4ed7fb8bb27b1d7b3afa5f4}{getHero}}().first;}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{return}\ unit;}
+\DoxyCodeLine{00186\ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_aa10e26ff777340eae5270b1ab6be12c7}{Enemy::doSomething}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ ==\ Status::dead)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00192\ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{class_unit}{Unit}}\ *someone\ =\ \mbox{\hyperlink{class_enemy_aa2ec4673f38dda6ad1b5554c144ee2b5}{findTarget}}(dungeon);}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (someone\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::wandering;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ srand(time(0));}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ rand()\ \%\ 4;}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx[4]\ =\ \{1,\ 0,\ -\/1,\ 0\};\ \ \ \textcolor{comment}{//\ смещения,\ соответствующие\ соседям\ ячейки}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy[4]\ =\ \{0,\ 1,\ 0,\ -\/1\};}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ <\ 0\ ||\ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ <\ 0\ ||}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.second\ +\ dx[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().cols()\ ||}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_ae6afa7e2fefcd075a199ac3a850583da}{coords}}.first\ +\ dy[i]\ >=\ dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}().rows())}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{coords.first\ +\ dy[i],\ coords.second\ +\ dx[i]\},\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(dungeon.\mbox{\hyperlink{class_dungeon_a9f1ba89786b66b244b1f6619112f60e2}{getMapLevel}}(),\ \{someone-\/>getCoords().first,\ someone-\/>getCoords().second\},}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}());}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00213\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_a82cd1b8ca915c6dfa7da807884903e73}{attack}}(*someone);}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ =\ Status::aggresion;}
+\DoxyCodeLine{00217\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00218\ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a41f96e23f90b6c54499e4e7286b39b9e}{Enemy::methodAfterDie}}(\mbox{\hyperlink{class_dungeon}{Dungeon}}\ \&dungeon)\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_enemy_af5feea31ac74cfff2cbbfdb149bcf58f}{status}}\ !=\ Status::dead)\ \textcolor{keywordflow}{throw}\ (std::invalid\_argument(\textcolor{stringliteral}{"{}Not\ dead\ enemy"{}}));}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().begin();\ i\ !=\ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().end();\ i++)\ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i-\/>first\ ==\ \textcolor{keyword}{this})\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dungeon.\mbox{\hyperlink{class_dungeon_aec925af840ea11f8ab97ac8487f0b236}{getListEnemies}}().erase(i);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{\}}
+\DoxyCodeLine{00229\ \ \ \ \ \}}
+\DoxyCodeLine{00230\ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \textcolor{keywordtype}{bool}\ Enemy::isHeap()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}};}
+\DoxyCodeLine{00234\ \}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_a7233656186248f7725dec7f5cea5c84d}{Enemy::setHeap}}(\textcolor{keywordtype}{bool}\ heap)\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{Enemy::heap}}\ =\ \mbox{\hyperlink{class_enemy_a2c46953c30b907bb6e9ef551495e33a0}{heap}};}
+\DoxyCodeLine{00238\ \}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ }
+
+\end{DoxyCode}

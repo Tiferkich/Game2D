@@ -1,0 +1,47 @@
+\doxysection{Undead.\+h}
+\hypertarget{_undead_8h_source}{}\label{_undead_8h_source}\index{Unit/Enemy/Undead/Undead.h@{Unit/Enemy/Undead/Undead.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ sakhd\ on\ 23.10.2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Enemy.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ GAMELAB3\_UNDEAD\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ GAMELAB3\_UNDEAD\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ VISION\_UNDEAD\ 10}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_undead}{Undead}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_enemy}{Enemy}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00017\ \ \ \ \ std::string\ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_undead}{Undead}}(\textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ std::string\ \mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ std::string\ nameLiving0,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}})\ :\ \mbox{\hyperlink{class_enemy}{Enemy}}(}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ Faction::undead,\ speed0,\ damage0,\ coord0,\ std::\mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(\mbox{\hyperlink{class_enemy_a62b43d24fa5a537d45bdba46a4e2559b}{name}}),\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}},\ Status::wandering,\ VISION\_UNDEAD),}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}}(std::\mbox{\hyperlink{class_enemy_aab6078099c0f61b6393016c2c0ef8013}{move}}(nameLiving0))\ \{\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_undead}{Undead}}(\textcolor{keywordtype}{int}\ speed0,\ std::pair<int,\ int>\ damage0,\ std::pair<int,\ int>\ coord0,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}})\ :\ \mbox{\hyperlink{class_enemy}{Enemy}}(}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ Faction::undead,\ speed0,\ damage0,\ coord0,\ \textcolor{stringliteral}{"{}undead"{}},\ \mbox{\hyperlink{class_enemy_a990ecf4cbfdae850b51e6fb2b367ad8e}{maxHP}},\ \mbox{\hyperlink{class_enemy_af0d9d1c4b109028ff714a0caa48a76f3}{curHP}},\ Status::wandering,\ VISION\_UNDEAD),}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}}(\textcolor{stringliteral}{"{}livingEnemy"{}})\ \{\};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_undead_a78eff531fa9b16f6c8999fffd62c1b74}{getNameLiving}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}};}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_undead_a5e922f56f1545d08ace1c5db574c743d}{setNameLiving}}(\textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}})\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{Undead::nameLiving}}\ =\ \mbox{\hyperlink{class_undead_adadbf56fe013f7ef9eeda3c07fbf2389}{nameLiving}};}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ Enemies\ \mbox{\hyperlink{class_undead_a308abba132b50e9fbc45d6059a4cae23}{getType}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Enemies::simpleUndeadEnemy;}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GAMELAB3\_UNDEAD\_H}}
+
+\end{DoxyCode}

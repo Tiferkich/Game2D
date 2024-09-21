@@ -1,0 +1,176 @@
+\doxysection{Класс Game}
+\hypertarget{class_game}{}\label{class_game}\index{Game@{Game}}
+
+
+Основной класс, связывающий все в одно целое Основной метод\+:  
+
+
+
+
+{\ttfamily \#include $<$Game.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_ad59df6562a58a614fda24622d3715b65}\label{class_game_ad59df6562a58a614fda24622d3715b65} 
+{\bfseries Game} ()
+\begin{DoxyCompactList}\small\item\em Дефолтный конструктор \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_a099aca5812927233bc2551796985e098}{make\+Tick}} (int options\mbox{[}$\,$\mbox{]}=nullptr)
+\begin{DoxyCompactList}\small\item\em TODO std\+::array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a16f2fdd2fbb15ffcd9b6f266e0d10b65}{set\+All\+Map}} (const std\+::vector$<$ \mbox{\hyperlink{class_dungeon}{Dungeon}} $>$ \&all\+Map)
+\item 
+\mbox{\hyperlink{class_character}{Character}} \& \mbox{\hyperlink{class_game_a1a5347f13455e11358a3a297beae7707}{get\+Hero}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_dungeon}{Dungeon}} $>$ \& \mbox{\hyperlink{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}{get\+All\+Map}} ()
+\item 
+unsigned int \mbox{\hyperlink{class_game_a3252e13fb193f9c1f219d814ef82ddfd}{get\+Cur\+Lvl}} ()
+\item 
+const \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& \mbox{\hyperlink{class_game_a50db28e4afe82710ebe4d3b2d8d5e7f7}{get\+Table\+Skills}} () const
+\item 
+void \mbox{\hyperlink{class_game_a87324468811b6c7519a015e074e870ec}{set\+Hero}} (const \mbox{\hyperlink{class_character}{Character}} \&hero)
+\item 
+void \mbox{\hyperlink{class_game_a14418510e46b17424f58036aa3a9bd9a}{set\+Cur\+Lvl}} (unsigned int cur\+Lvl)
+\item 
+void \mbox{\hyperlink{class_game_a5eb495329bc3d87ed73823b8747b93a3}{set\+Table\+Skills}} (const \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \&table\+Skills)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Статические открытые данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_af5be431806a6d32d062c31730e2962bb}\label{class_game_af5be431806a6d32d062c31730e2962bb} 
+static std\+::vector$<$ std\+::string $>$ {\bfseries all\+Types\+Enemies} = \{"{}living\+Enemy"{}, "{}living\+Summoner"{}, "{}undead"{}, "{}undead\+Summoner"{}, "{}golem"{}\}
+\begin{DoxyCompactList}\small\item\em Типы все врагов(при добавлении нового врага, следует сюда добавить его имя,но это необязательно) \end{DoxyCompactList}\item 
+\Hypertarget{class_game_adbde412cffe73323e7df134979c375da}\label{class_game_adbde412cffe73323e7df134979c375da} 
+static std\+::vector$<$ std\+::string $>$ {\bfseries all\+Skills} = \{"{}Curse"{}, "{}Desiccation"{}, "{}Morphism"{}, "{}Necromancy"{}\}
+\begin{DoxyCompactList}\small\item\em Типы всех скиилов (такая же ситуция, как и с врагами) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Основной класс, связывающий все в одно целое Основной метод\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a099aca5812927233bc2551796985e098}{makeTick}}(\textcolor{keywordtype}{int}\ options[]\ =\ \textcolor{keyword}{nullptr});\ }
+
+\end{DoxyCode}
+ позволяющий сделать один тик в игре 
+
+\doxysubsection{Методы}
+\Hypertarget{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948}\label{class_game_a6d0f1f68cbfe138c4d1b8e8e0c18d948} 
+\index{Game@{Game}!getAllMap@{getAllMap}}
+\index{getAllMap@{getAllMap}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getAllMap()}{getAllMap()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_dungeon}{Dungeon}} $>$ \& Game\+::get\+All\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter \begin{DoxyReturn}{Возвращает}
+get all map 
+\end{DoxyReturn}
+\Hypertarget{class_game_a3252e13fb193f9c1f219d814ef82ddfd}\label{class_game_a3252e13fb193f9c1f219d814ef82ddfd} 
+\index{Game@{Game}!getCurLvl@{getCurLvl}}
+\index{getCurLvl@{getCurLvl}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getCurLvl()}{getCurLvl()}}
+{\footnotesize\ttfamily unsigned int Game\+::get\+Cur\+Lvl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter \begin{DoxyReturn}{Возвращает}
+get cur lvl 
+\end{DoxyReturn}
+\Hypertarget{class_game_a1a5347f13455e11358a3a297beae7707}\label{class_game_a1a5347f13455e11358a3a297beae7707} 
+\index{Game@{Game}!getHero@{getHero}}
+\index{getHero@{getHero}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getHero()}{getHero()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_character}{Character}} \& Game\+::get\+Hero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter \begin{DoxyReturn}{Возвращает}
+get hero 
+\end{DoxyReturn}
+\Hypertarget{class_game_a50db28e4afe82710ebe4d3b2d8d5e7f7}\label{class_game_a50db28e4afe82710ebe4d3b2d8d5e7f7} 
+\index{Game@{Game}!getTableSkills@{getTableSkills}}
+\index{getTableSkills@{getTableSkills}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getTableSkills()}{getTableSkills()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \& Game\+::get\+Table\+Skills (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter \begin{DoxyReturn}{Возвращает}
+get\+Table of skills 
+\end{DoxyReturn}
+\Hypertarget{class_game_a099aca5812927233bc2551796985e098}\label{class_game_a099aca5812927233bc2551796985e098} 
+\index{Game@{Game}!makeTick@{makeTick}}
+\index{makeTick@{makeTick}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{makeTick()}{makeTick()}}
+{\footnotesize\ttfamily int Game\+::make\+Tick (\begin{DoxyParamCaption}\item[{int}]{options\mbox{[}$\,$\mbox{]} = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+TODO std\+::array. 
+
+Основной метод позволяющий сделать один тик в игре 
+\begin{DoxyParams}{Аргументы}
+{\em options} & опции для вызова какого то действия для игрока 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{*\textcolor{keywordflow}{switch}\ (options[0])\ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\ \ \ \ \ \ \ move(Move::right,\ game.getAllMap()[getLvlPoint()]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\ \ \ \ \ \ \ move(Move::left,\ game.getAllMap()[getLvlPoint()]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\ \ \ \ \ \ \ move(Move::up,\ game.getAllMap()[getLvlPoint()]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ ...\ И\ так\ далее...}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+int 
+\end{DoxyReturn}
+\Hypertarget{class_game_a16f2fdd2fbb15ffcd9b6f266e0d10b65}\label{class_game_a16f2fdd2fbb15ffcd9b6f266e0d10b65} 
+\index{Game@{Game}!setAllMap@{setAllMap}}
+\index{setAllMap@{setAllMap}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setAllMap()}{setAllMap()}}
+{\footnotesize\ttfamily void Game\+::set\+All\+Map (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_dungeon}{Dungeon}} $>$ \&}]{all\+Map }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em all\+Map} & все карты в игре \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_a14418510e46b17424f58036aa3a9bd9a}\label{class_game_a14418510e46b17424f58036aa3a9bd9a} 
+\index{Game@{Game}!setCurLvl@{setCurLvl}}
+\index{setCurLvl@{setCurLvl}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setCurLvl()}{setCurLvl()}}
+{\footnotesize\ttfamily void Game\+::set\+Cur\+Lvl (\begin{DoxyParamCaption}\item[{unsigned int}]{cur\+Lvl }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em cur\+Lvl} & set cur lvl \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_a87324468811b6c7519a015e074e870ec}\label{class_game_a87324468811b6c7519a015e074e870ec} 
+\index{Game@{Game}!setHero@{setHero}}
+\index{setHero@{setHero}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setHero()}{setHero()}}
+{\footnotesize\ttfamily void Game\+::set\+Hero (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_character}{Character}} \&}]{hero }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em hero} & set Hero \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_a5eb495329bc3d87ed73823b8747b93a3}\label{class_game_a5eb495329bc3d87ed73823b8747b93a3} 
+\index{Game@{Game}!setTableSkills@{setTableSkills}}
+\index{setTableSkills@{setTableSkills}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setTableSkills()}{setTableSkills()}}
+{\footnotesize\ttfamily void Game\+::set\+Table\+Skills (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_table_skills}{Table\+Skills}} \&}]{table\+Skills }\end{DoxyParamCaption})}
+
+Setter 
+\begin{DoxyParams}{Аргументы}
+{\em table\+Skills} & set table skills \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+Game/Game.\+h\item 
+Game/Game.\+cpp\end{DoxyCompactItemize}

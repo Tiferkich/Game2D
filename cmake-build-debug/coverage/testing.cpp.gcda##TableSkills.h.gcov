@@ -1,0 +1,133 @@
+        -:    0:Source:C:/Users/sakhd/CLionProjects/gameLab3/Unit/Character/TableSkills.h
+        -:    0:Graph:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcno
+        -:    0:Data:C:\Users\sakhd\CLionProjects\gameLab3\cmake-build-debug\Tests\CMakeFiles\tests.dir\testing.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by sakhd on 18.11.2023.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef GAMELAB3_TABLESKILLS_H
+        -:    6:#define GAMELAB3_TABLESKILLS_H
+        -:    7:
+        -:    8:#include <iostream>
+        -:    9:#include <map>
+        -:   10:
+        -:   11:#include "Skills/Skills.h"
+        -:   12:
+        -:   13:
+        -:   14:///Класс - таблица скиллов героя
+        -:   15:class TableSkills {
+        -:   16:private:
+        -:   17:    std::map<std::string, Skill *> skills;///< Таблица скиллов
+        -:   18:
+        -:   19:public:
+        -:   20:    /// Метод улучшения выбранного скила
+        -:   21:    /// \param name - Название скила
+        -:   22:    /// \return 0 - если есть такой скил; -1 если его нет
+function _ZN11TableSkills12upgradeSkillERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 9 returned 100% blocks executed 91%
+        9:   23:    int upgradeSkill(const std::string &name) {
+        9:   24:        auto it = skills.find(name);
+        9:   24-block  0
+call    0 returned 9
+branch  1 taken 9 (fallthrough)
+branch  2 taken 0 (throw)
+       9*:   25:        if (it == skills.end()) return -1;
+        9:   25-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 0 (fallthrough)
+branch  3 taken 9
+    %%%%%:   25-block  1
+        9:   26:        skills[name]->upgradeLvl();
+        9:   26-block  0
+call    0 returned 9
+branch  1 taken 9 (fallthrough)
+branch  2 taken 0 (throw)
+        9:   26-block  1
+call    3 returned 9
+        9:   27:        return 0;
+        -:   28:    }
+        -:   29:
+        -:   30:    /// \return - Кол-во доступных скилов
+function _ZNK11TableSkills11countSkillsEv called 1 returned 100% blocks executed 100%
+        1:   31:    int countSkills() const {
+        1:   32:        return skills.size();
+        1:   32-block  0
+call    0 returned 1
+        -:   33:    }
+        -:   34:
+        -:   35:    /// Метод добавления нового скила
+        -:   36:    /// \param newSkill - Указатель на новый скил
+        -:   37:    /// \param name - Название скила
+        -:   38:    /// \return 0 - если есть такой скил; -1 если его нет
+        -:   39:
+function _ZN11TableSkills8addSkillEP5SkillRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 8 returned 100% blocks executed 67%
+        8:   40:    int addSkill(Skill *newSkill, const std::string &name) {
+        8:   41:        skills.insert({name, newSkill});
+        8:   41-block  0
+call    0 returned 8
+branch  1 taken 8 (fallthrough)
+branch  2 taken 0 (throw)
+        8:   41-block  1
+call    3 returned 8
+branch  4 taken 8 (fallthrough)
+branch  5 taken 0 (throw)
+        8:   41-block  2
+call    6 returned 8
+    $$$$$:   41-block  3
+call    7 never executed
+    $$$$$:   41-block  4
+        8:   42:        return 0;
+        8:   42-block  0
+        -:   43:    }
+        -:   44:    ///  Setter
+        -:   45:    /// \param newSkill - новый скилл
+        -:   46:    /// \param name  - Название скилла
+        -:   47:    /// \return возвращает ссылку самого себя для цепного обращения
+        -:   48:    TableSkills &setSkill(Skill *newSkill, const std::string &name) {
+        -:   49:        auto it = skills.find(name);
+        -:   50:        if (it == skills.end()) return *this;
+        -:   51:        skills[name] = newSkill;
+        -:   52:        return *this;
+        -:   53:    }
+        -:   54:
+        -:   55:    /// Getter
+        -:   56:    /// \param name - Название скилла
+        -:   57:    /// \throw std::invalid_argument - Если нет такого скила
+        -:   58:    /// \return возвращает его
+function _ZN11TableSkills8getSkillERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 23 returned 100% blocks executed 64%
+       23:   59:    Skill *getSkill(const std::string &name) {
+       23:   60:        auto it = skills.find(name);
+       23:   60-block  0
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+      23*:   61:        if (it == skills.end()) throw (std::invalid_argument("No skill"));
+       23:   61-block  0
+call    0 returned 23
+call    1 returned 23
+branch  2 taken 0 (fallthrough)
+branch  3 taken 23
+    %%%%%:   61-block  1
+call    4 never executed
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:   61-block  2
+call    8 never executed
+    $$$$$:   61-block  3
+call    9 never executed
+       46:   62:        return skills[name];
+       23:   62-block  0
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+       23:   62-block  1
+       23:   62-block  2
+        -:   63:    }
+        -:   64:
+        -:   65:
+        -:   66:};
+        -:   67:
+        -:   68:
+        -:   69:#endif //GAMELAB3_TABLESKILLS_H
